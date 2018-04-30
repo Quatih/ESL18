@@ -1,0 +1,10 @@
+
+
+entity testbench is
+
+end testbench;
+
+
+architecture tb of testbench is
+end tb;
+

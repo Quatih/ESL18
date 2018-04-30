@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable>
+  <columns>
+   <connections preferredWidth="127" />
+   <irq preferredWidth="34" />
+  </columns>
+ </systemtable>
+ <clocktable>
+  <columns>
+   <clockname preferredWidth="409" />
+   <clocksource preferredWidth="409" />
+   <frequency preferredWidth="389" />
+  </columns>
+ </clocktable>
+ <window width="1700" height="1042" x="504" y="529" />
+ <library
+   expandedCategories="Library/Microcontroller Peripherals,Library/Peripherals/Microcontroller Peripherals,Library/Peripherals,Library/Merlin Components,Library,Project" />
+ <generation synthesis="VHDL" />
+</preferences>
