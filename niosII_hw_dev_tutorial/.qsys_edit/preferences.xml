@@ -9,13 +9,13 @@
  </systemtable>
  <clocktable>
   <columns>
-   <clockname preferredWidth="409" />
-   <clocksource preferredWidth="409" />
-   <frequency preferredWidth="389" />
+   <clockname preferredWidth="253" />
+   <clocksource preferredWidth="253" />
+   <frequency preferredWidth="234" />
   </columns>
  </clocktable>
- <window width="1700" height="1042" x="504" y="529" />
+ <window width="1100" height="800" x="504" y="529" />
  <library
    expandedCategories="Library/Microcontroller Peripherals,Library/Peripherals/Microcontroller Peripherals,Library/Peripherals,Library/Merlin Components,Library,Project" />
- <generation synthesis="VHDL" />
+ <generation synthesis="VHDL" path="_PROJECT_NAME_" />
 </preferences>

@@ -14,17 +14,17 @@ entity esl_demonstrator is
 
 	-- GPIO_0, GPIO_0 connect to GPIO Default
 	GPIO_0		: inout std_logic_vector(31 downto 0);
-	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
+	GPIO_0_IN	: in    std_logic_vector(1 downto 0);
 
 	);
-end esl_demonstrator;
+end entity;
 
 
 architecture behavior of esl_demonstrator is
-	signal enable			: std_logic := '1';
+	signal enable		: std_logic := '1';
 	signal mem        	: std_logic_vector(31 downto 0);
 begin
-	encoder : entity work.QuadratureDecoder
+	encoder : entity work.QuadratureEncoder
 		port map (
 			clk => clk,
 			reset => reset,

@@ -55,7 +55,7 @@ architecture behavior of esl_bus_demo is
 		 clk        : in  std_logic;
 		 rst        : in  std_logic;
 		 input	    : in  std_logic_vector(DATA_WIDTH-1 downto 0);
-       cnt_enable : in std_logic;
+		cnt_enable : in std_logic;
 		 output     : out std_logic_vector(DATA_WIDTH-1 downto 0)
 	  );
 	end component;
