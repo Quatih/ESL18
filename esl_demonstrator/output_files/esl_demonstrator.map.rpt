@@ -1,6 +1,6 @@
 Analysis & Synthesis report for esl_demonstrator
-Mon May  7 13:39:40 2018
-Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Thu May 17 14:00:19 2018
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
 ---------------------
@@ -16,10 +16,12 @@ Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
   8. Registers Removed During Synthesis
   9. Removed Registers Triggering Further Register Optimizations
  10. General Register Statistics
- 11. Parameter Settings for User Entity Instance: QuadratureDecoder:encoder
- 12. Port Connectivity Checks: "QuadratureDecoder:encoder"
- 13. Elapsed Time Per Partition
- 14. Analysis & Synthesis Messages
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |esl_demonstrator
+ 12. Parameter Settings for User Entity Instance: QuadratureDecoder:encoder
+ 13. Port Connectivity Checks: "QuadratureDecoder:encoder"
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
+ 16. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -45,8 +47,8 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon May  7 13:39:40 2018      ;
-; Quartus II 32-bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Analysis & Synthesis Status        ; Successful - Thu May 17 14:00:19 2018      ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; esl_demonstrator                           ;
 ; Top-level Entity Name              ; esl_demonstrator                           ;
 ; Family                             ; Cyclone IV E                               ;
@@ -54,7 +56,7 @@ applicable agreement for further details.
 ;     Total combinational functions  ; 0                                          ;
 ;     Dedicated logic registers      ; 0                                          ;
 ; Total registers                    ; 0                                          ;
-; Total pins                         ; 50                                         ;
+; Total pins                         ; 82                                         ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 0                                          ;
 ; Embedded Multiplier 9-bit elements ; 0                                          ;
@@ -154,55 +156,55 @@ applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-8         ;   0.0%      ;
+;     Processors 2-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                   ;
-+--------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path           ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                  ; Library ;
-+--------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
-; ip/QuadratureDecoder/QuadratureDecoder.vhd ; yes             ; User VHDL File  ; /home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/QuadratureDecoder.vhd ;         ;
-; ip/QuadratureDecoder/esl_demonstrator.vhd  ; yes             ; User VHDL File  ; /home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/esl_demonstrator.vhd  ;         ;
-+--------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                          ;
++-----------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------+----------+
+; File Name with User-Entered Path                    ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                               ; Library  ;
++-----------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------+----------+
+; Quad_Dec/synthesis/submodules/esl_demonstrator.vhd  ; yes             ; User VHDL File  ; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/Quad_Dec/synthesis/submodules/esl_demonstrator.vhd  ; Quad_Dec ;
+; Quad_Dec/synthesis/submodules/QuadratureDecoder.vhd ; yes             ; User VHDL File  ; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/Quad_Dec/synthesis/submodules/QuadratureDecoder.vhd ; Quad_Dec ;
++-----------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------+----------+
 
 
-+----------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                    ;
-+---------------------------------------------+------------------+
-; Resource                                    ; Usage            ;
-+---------------------------------------------+------------------+
-;                                             ;                  ;
-; Total combinational functions               ; 0                ;
-; Logic element usage by number of LUT inputs ;                  ;
-;     -- 4 input functions                    ; 0                ;
-;     -- 3 input functions                    ; 0                ;
-;     -- <=2 input functions                  ; 0                ;
-;                                             ;                  ;
-; Logic elements by mode                      ;                  ;
-;     -- normal mode                          ; 0                ;
-;     -- arithmetic mode                      ; 0                ;
-;                                             ;                  ;
-; Total registers                             ; 0                ;
-;     -- Dedicated logic registers            ; 0                ;
-;     -- I/O registers                        ; 0                ;
-;                                             ;                  ;
-; I/O pins                                    ; 50               ;
-; Embedded Multiplier 9-bit elements          ; 0                ;
-; Maximum fan-out node                        ; GPIO_0[0]~output ;
-; Maximum fan-out                             ; 1                ;
-; Total fan-out                               ; 82               ;
-; Average fan-out                             ; 0.62             ;
-+---------------------------------------------+------------------+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+;                                             ;       ;
+; Total combinational functions               ; 0     ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- <=2 input functions                  ; 0     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 0     ;
+;     -- arithmetic mode                      ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 0     ;
+;     -- Dedicated logic registers            ; 0     ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 82    ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; reset ;
+; Maximum fan-out                             ; 1     ;
+; Total fan-out                               ; 82    ;
+; Average fan-out                             ; 0.50  ;
++---------------------------------------------+-------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -210,7 +212,7 @@ applicable agreement for further details.
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |esl_demonstrator          ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 50   ; 0            ; |esl_demonstrator   ; work         ;
+; |esl_demonstrator          ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 82   ; 0            ; |esl_demonstrator   ; quad_dec     ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -252,30 +254,112 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; QuadratureDecoder:encoder|GPIO_0[3]~reg0  ; Stuck at GND due to stuck port data_in ;
 ; QuadratureDecoder:encoder|GPIO_0[2]~reg0  ; Stuck at GND due to stuck port data_in ;
 ; QuadratureDecoder:encoder|GPIO_0[1]~reg0  ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 32    ;                                        ;
+; slave_readdata[0]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[1]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[2]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[3]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[4]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[5]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[6]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[7]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[8]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[9]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[10]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[11]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[12]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[13]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[14]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[15]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[16]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[17]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[18]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[19]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[20]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[21]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[22]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[23]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[24]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[25]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[26]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[27]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[28]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[29]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[30]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; slave_readdata[31]~reg0                   ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 64    ;                                        ;
 +-------------------------------------------+----------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                       ;
-+-------------------------------------------+---------------------------+-------------------------------------------+
-; Register name                             ; Reason for Removal        ; Registers Removed due to This Register    ;
-+-------------------------------------------+---------------------------+-------------------------------------------+
-; QuadratureDecoder:encoder|GPIO_0[31]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[12]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-; QuadratureDecoder:encoder|GPIO_0[29]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[13]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-; QuadratureDecoder:encoder|GPIO_0[27]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[14]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-; QuadratureDecoder:encoder|GPIO_0[25]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[15]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-; QuadratureDecoder:encoder|GPIO_0[23]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[16]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-; QuadratureDecoder:encoder|GPIO_0[21]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[17]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-; QuadratureDecoder:encoder|GPIO_0[19]~reg0 ; Stuck at GND              ; QuadratureDecoder:encoder|GPIO_0[18]~reg0 ;
-;                                           ; due to stuck port data_in ;                                           ;
-+-------------------------------------------+---------------------------+-------------------------------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                    ;
++-------------------------------------------+---------------------------+----------------------------------------+
+; Register name                             ; Reason for Removal        ; Registers Removed due to This Register ;
++-------------------------------------------+---------------------------+----------------------------------------+
+; QuadratureDecoder:encoder|GPIO_0[0]~reg0  ; Stuck at GND              ; slave_readdata[0]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[31]~reg0 ; Stuck at GND              ; slave_readdata[31]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[30]~reg0 ; Stuck at GND              ; slave_readdata[30]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[29]~reg0 ; Stuck at GND              ; slave_readdata[29]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[28]~reg0 ; Stuck at GND              ; slave_readdata[28]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[27]~reg0 ; Stuck at GND              ; slave_readdata[27]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[26]~reg0 ; Stuck at GND              ; slave_readdata[26]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[25]~reg0 ; Stuck at GND              ; slave_readdata[25]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[24]~reg0 ; Stuck at GND              ; slave_readdata[24]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[23]~reg0 ; Stuck at GND              ; slave_readdata[23]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[22]~reg0 ; Stuck at GND              ; slave_readdata[22]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[21]~reg0 ; Stuck at GND              ; slave_readdata[21]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[20]~reg0 ; Stuck at GND              ; slave_readdata[20]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[19]~reg0 ; Stuck at GND              ; slave_readdata[19]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[18]~reg0 ; Stuck at GND              ; slave_readdata[18]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[17]~reg0 ; Stuck at GND              ; slave_readdata[17]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[16]~reg0 ; Stuck at GND              ; slave_readdata[16]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[15]~reg0 ; Stuck at GND              ; slave_readdata[15]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[14]~reg0 ; Stuck at GND              ; slave_readdata[14]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[13]~reg0 ; Stuck at GND              ; slave_readdata[13]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[12]~reg0 ; Stuck at GND              ; slave_readdata[12]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[11]~reg0 ; Stuck at GND              ; slave_readdata[11]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[10]~reg0 ; Stuck at GND              ; slave_readdata[10]~reg0                ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[9]~reg0  ; Stuck at GND              ; slave_readdata[9]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[8]~reg0  ; Stuck at GND              ; slave_readdata[8]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[7]~reg0  ; Stuck at GND              ; slave_readdata[7]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[6]~reg0  ; Stuck at GND              ; slave_readdata[6]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[5]~reg0  ; Stuck at GND              ; slave_readdata[5]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[4]~reg0  ; Stuck at GND              ; slave_readdata[4]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[3]~reg0  ; Stuck at GND              ; slave_readdata[3]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[2]~reg0  ; Stuck at GND              ; slave_readdata[2]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
+; QuadratureDecoder:encoder|GPIO_0[1]~reg0  ; Stuck at GND              ; slave_readdata[1]~reg0                 ;
+;                                           ; due to stuck port data_in ;                                        ;
++-------------------------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -291,6 +375,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |esl_demonstrator ;
++----------------+-------+---------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                    ;
++----------------+-------+---------------------------------------------------------+
+; DATA_WIDTH     ; 32    ; Signed Integer                                          ;
++----------------+-------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +------------------------------------------------------------------------+
@@ -325,20 +419,143 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 32-bit Analysis & Synthesis
+Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Mon May  7 13:39:38 2018
+    Info: Processing started: Thu May 17 14:00:16 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off esl_demonstrator -c esl_demonstrator
-Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
-Info (12021): Found 2 design units, including 1 entities, in source file ip/QuadratureDecoder/QuadratureDecoder.vhd
-    Info (12022): Found design unit 1: QuadratureDecoder-behavior
-    Info (12023): Found entity 1: QuadratureDecoder
-Info (12021): Found 2 design units, including 1 entities, in source file ip/QuadratureDecoder/esl_demonstrator.vhd
+Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/quad_dec.v
+    Info (12023): Found entity 1: Quad_Dec
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_reset_controller.v
+    Info (12023): Found entity 1: altera_reset_controller
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_reset_synchronizer.v
+    Info (12023): Found entity 1: altera_reset_synchronizer
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_irq_mapper.sv
+    Info (12023): Found entity 1: Quad_Dec_irq_mapper
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0.v
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0
+Info (12021): Found 2 design units, including 2 entities, in source file quad_dec/synthesis/submodules/altera_merlin_arbitrator.sv
+    Info (12023): Found entity 1: altera_merlin_arbitrator
+    Info (12023): Found entity 2: altera_merlin_arb_adder
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_rsp_xbar_mux_001.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_rsp_xbar_mux.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_rsp_xbar_mux
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_rsp_xbar_demux_002.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_rsp_xbar_demux.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_rsp_xbar_demux
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_cmd_xbar_mux_002.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_cmd_xbar_mux.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_cmd_xbar_mux
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_cmd_xbar_demux_001.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_cmd_xbar_demux.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_cmd_xbar_demux
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_merlin_traffic_limiter.sv
+    Info (12023): Found entity 1: altera_merlin_traffic_limiter
+Info (12021): Found 2 design units, including 2 entities, in source file quad_dec/synthesis/submodules/altera_merlin_reorder_memory.sv
+    Info (12023): Found entity 1: altera_merlin_reorder_memory
+    Info (12023): Found entity 2: memory_pointer_controller
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_avalon_sc_fifo.v
+    Info (12023): Found entity 1: altera_avalon_sc_fifo
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_avalon_st_pipeline_base.v
+    Info (12023): Found entity 1: altera_avalon_st_pipeline_base
+Info (12021): Found 2 design units, including 2 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_id_router_002.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_id_router_002_default_decode
+    Info (12023): Found entity 2: Quad_Dec_mm_interconnect_0_id_router_002
+Info (12021): Found 2 design units, including 2 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_id_router.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_id_router_default_decode
+    Info (12023): Found entity 2: Quad_Dec_mm_interconnect_0_id_router
+Info (12021): Found 2 design units, including 2 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_addr_router_001.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_addr_router_001_default_decode
+    Info (12023): Found entity 2: Quad_Dec_mm_interconnect_0_addr_router_001
+Info (12021): Found 2 design units, including 2 entities, in source file quad_dec/synthesis/submodules/quad_dec_mm_interconnect_0_addr_router.sv
+    Info (12023): Found entity 1: Quad_Dec_mm_interconnect_0_addr_router_default_decode
+    Info (12023): Found entity 2: Quad_Dec_mm_interconnect_0_addr_router
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_merlin_slave_agent.sv
+    Info (12023): Found entity 1: altera_merlin_slave_agent
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+    Info (12023): Found entity 1: altera_merlin_burst_uncompressor
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_merlin_master_agent.sv
+    Info (12023): Found entity 1: altera_merlin_master_agent
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_merlin_slave_translator.sv
+    Info (12023): Found entity 1: altera_merlin_slave_translator
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/altera_merlin_master_translator.sv
+    Info (12023): Found entity 1: altera_merlin_master_translator
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_sysid.v
+    Info (12023): Found entity 1: Quad_Dec_sysid
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_sys_clk_timer.v
+    Info (12023): Found entity 1: Quad_Dec_sys_clk_timer
+Info (12021): Found 5 design units, including 5 entities, in source file quad_dec/synthesis/submodules/quad_dec_jtag_uart.v
+    Info (12023): Found entity 1: Quad_Dec_jtag_uart_sim_scfifo_w
+    Info (12023): Found entity 2: Quad_Dec_jtag_uart_scfifo_w
+    Info (12023): Found entity 3: Quad_Dec_jtag_uart_sim_scfifo_r
+    Info (12023): Found entity 4: Quad_Dec_jtag_uart_scfifo_r
+    Info (12023): Found entity 5: Quad_Dec_jtag_uart
+Info (12021): Found 23 design units, including 23 entities, in source file quad_dec/synthesis/submodules/quad_dec_cpu.v
+    Info (12023): Found entity 1: Quad_Dec_cpu_ic_data_module
+    Info (12023): Found entity 2: Quad_Dec_cpu_ic_tag_module
+    Info (12023): Found entity 3: Quad_Dec_cpu_register_bank_a_module
+    Info (12023): Found entity 4: Quad_Dec_cpu_register_bank_b_module
+    Info (12023): Found entity 5: Quad_Dec_cpu_nios2_oci_debug
+    Info (12023): Found entity 6: Quad_Dec_cpu_ociram_sp_ram_module
+    Info (12023): Found entity 7: Quad_Dec_cpu_nios2_ocimem
+    Info (12023): Found entity 8: Quad_Dec_cpu_nios2_avalon_reg
+    Info (12023): Found entity 9: Quad_Dec_cpu_nios2_oci_break
+    Info (12023): Found entity 10: Quad_Dec_cpu_nios2_oci_xbrk
+    Info (12023): Found entity 11: Quad_Dec_cpu_nios2_oci_dbrk
+    Info (12023): Found entity 12: Quad_Dec_cpu_nios2_oci_itrace
+    Info (12023): Found entity 13: Quad_Dec_cpu_nios2_oci_td_mode
+    Info (12023): Found entity 14: Quad_Dec_cpu_nios2_oci_dtrace
+    Info (12023): Found entity 15: Quad_Dec_cpu_nios2_oci_compute_input_tm_cnt
+    Info (12023): Found entity 16: Quad_Dec_cpu_nios2_oci_fifo_wrptr_inc
+    Info (12023): Found entity 17: Quad_Dec_cpu_nios2_oci_fifo_cnt_inc
+    Info (12023): Found entity 18: Quad_Dec_cpu_nios2_oci_fifo
+    Info (12023): Found entity 19: Quad_Dec_cpu_nios2_oci_pib
+    Info (12023): Found entity 20: Quad_Dec_cpu_nios2_oci_im
+    Info (12023): Found entity 21: Quad_Dec_cpu_nios2_performance_monitors
+    Info (12023): Found entity 22: Quad_Dec_cpu_nios2_oci
+    Info (12023): Found entity 23: Quad_Dec_cpu
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_cpu_jtag_debug_module_sysclk.v
+    Info (12023): Found entity 1: Quad_Dec_cpu_jtag_debug_module_sysclk
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_cpu_jtag_debug_module_tck.v
+    Info (12023): Found entity 1: Quad_Dec_cpu_jtag_debug_module_tck
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_cpu_jtag_debug_module_wrapper.v
+    Info (12023): Found entity 1: Quad_Dec_cpu_jtag_debug_module_wrapper
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_cpu_oci_test_bench.v
+    Info (12023): Found entity 1: Quad_Dec_cpu_oci_test_bench
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_cpu_test_bench.v
+    Info (12023): Found entity 1: Quad_Dec_cpu_test_bench
+Info (12021): Found 1 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quad_dec_onchip_mem.v
+    Info (12023): Found entity 1: Quad_Dec_onchip_mem
+Info (12021): Found 2 design units, including 1 entities, in source file quad_dec/synthesis/submodules/esl_demonstrator.vhd
     Info (12022): Found design unit 1: esl_demonstrator-behavior
     Info (12023): Found entity 1: esl_demonstrator
+Info (12021): Found 2 design units, including 1 entities, in source file quad_dec/synthesis/submodules/quadraturedecoder.vhd
+    Info (12022): Found design unit 1: QuadratureDecoder-behavior
+    Info (12023): Found entity 1: QuadratureDecoder
+Info (12021): Found 2 design units, including 1 entities, in source file ip/quadraturedecoder/quadraturedecoder.vhd
+    Info (12022): Found design unit 1: QuadratureDecoder-behavior
+    Info (12023): Found entity 1: QuadratureDecoder
+Info (12021): Found 2 design units, including 1 entities, in source file ip/quadraturedecoder/esl_demonstrator.vhd
+    Info (12022): Found design unit 1: esl_demonstrator_entity-behavior
+    Info (12023): Found entity 1: esl_demonstrator_entity
+Info (12021): Found 1 design units, including 1 entities, in source file esl_as4.bdf
+    Info (12023): Found entity 1: esl_as4
+Info (12021): Found 2 design units, including 1 entities, in source file pwm.vhd
+    Info (12022): Found design unit 1: PWM-behavior
+    Info (12023): Found entity 1: PWM
+Info (12021): Found 2 design units, including 1 entities, in source file testbenchpwm.vhd
+    Info (12022): Found design unit 1: testbench_pwm-tb
+    Info (12023): Found entity 1: testbench_pwm
+Warning (10037): Verilog HDL or VHDL warning at Quad_Dec_cpu.v(1798): conditional expression evaluates to a constant
+Warning (10037): Verilog HDL or VHDL warning at Quad_Dec_cpu.v(1800): conditional expression evaluates to a constant
+Warning (10037): Verilog HDL or VHDL warning at Quad_Dec_cpu.v(1956): conditional expression evaluates to a constant
+Warning (10037): Verilog HDL or VHDL warning at Quad_Dec_cpu.v(2780): conditional expression evaluates to a constant
 Info (12127): Elaborating entity "esl_demonstrator" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at esl_demonstrator.vhd(10): used implicit default value for signal "LED" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10540): VHDL Signal Declaration warning at esl_demonstrator.vhd(24): used explicit default value for signal "enable" because signal was never assigned a value
+Warning (10540): VHDL Signal Declaration warning at esl_demonstrator.vhd(27): used explicit default value for signal "enable" because signal was never assigned a value
 Info (12128): Elaborating entity "QuadratureDecoder" for hierarchy "QuadratureDecoder:encoder"
 Warning (10492): VHDL Process Statement warning at QuadratureDecoder.vhd(27): signal "enable" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at QuadratureDecoder.vhd(27): signal "GPIO_0_IN_old" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
@@ -377,69 +594,218 @@ Info (10041): Inferred latch for "counter[28]" at QuadratureDecoder.vhd(24)
 Info (10041): Inferred latch for "counter[29]" at QuadratureDecoder.vhd(24)
 Info (10041): Inferred latch for "counter[30]" at QuadratureDecoder.vhd(24)
 Info (10041): Inferred latch for "counter[31]" at QuadratureDecoder.vhd(24)
-Warning (13032): The following tri-state nodes are fed by constants
-    Warning (13033): The pin "GPIO_0[31]" is fed by GND
-    Warning (13033): The pin "GPIO_0[30]" is fed by GND
-    Warning (13033): The pin "GPIO_0[29]" is fed by GND
-    Warning (13033): The pin "GPIO_0[28]" is fed by GND
-    Warning (13033): The pin "GPIO_0[27]" is fed by GND
-    Warning (13033): The pin "GPIO_0[26]" is fed by GND
-    Warning (13033): The pin "GPIO_0[25]" is fed by GND
-    Warning (13033): The pin "GPIO_0[24]" is fed by GND
-    Warning (13033): The pin "GPIO_0[23]" is fed by GND
-    Warning (13033): The pin "GPIO_0[22]" is fed by GND
-    Warning (13033): The pin "GPIO_0[21]" is fed by GND
-    Warning (13033): The pin "GPIO_0[20]" is fed by GND
-    Warning (13033): The pin "GPIO_0[19]" is fed by GND
-    Warning (13033): The pin "GPIO_0[18]" is fed by GND
-    Warning (13033): The pin "GPIO_0[17]" is fed by GND
-    Warning (13033): The pin "GPIO_0[16]" is fed by GND
-    Warning (13033): The pin "GPIO_0[15]" is fed by GND
-    Warning (13033): The pin "GPIO_0[14]" is fed by GND
-    Warning (13033): The pin "GPIO_0[13]" is fed by GND
-    Warning (13033): The pin "GPIO_0[12]" is fed by GND
-    Warning (13033): The pin "GPIO_0[11]" is fed by GND
-    Warning (13033): The pin "GPIO_0[10]" is fed by GND
-    Warning (13033): The pin "GPIO_0[9]" is fed by GND
-    Warning (13033): The pin "GPIO_0[8]" is fed by GND
-    Warning (13033): The pin "GPIO_0[7]" is fed by GND
-    Warning (13033): The pin "GPIO_0[6]" is fed by GND
-    Warning (13033): The pin "GPIO_0[5]" is fed by GND
-    Warning (13033): The pin "GPIO_0[4]" is fed by GND
-    Warning (13033): The pin "GPIO_0[3]" is fed by GND
-    Warning (13033): The pin "GPIO_0[2]" is fed by GND
-    Warning (13033): The pin "GPIO_0[1]" is fed by GND
-    Warning (13033): The pin "GPIO_0[0]" is fed by GND
+Warning (12189): OpenCore Simulation-Only Evaluation feature is turned on for all cores in the design
+    Warning (12191): Some cores in this design do not support the OpenCore Plus Hardware Evaluation feature
+        Warning (12192): "Nios II Processor (6AF7_00A2)" does not support the OpenCore Plus Hardware Evaluation feature
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED[0]" is stuck at GND
-    Warning (13410): Pin "LED[1]" is stuck at GND
-    Warning (13410): Pin "LED[2]" is stuck at GND
-    Warning (13410): Pin "LED[3]" is stuck at GND
-    Warning (13410): Pin "LED[4]" is stuck at GND
-    Warning (13410): Pin "LED[5]" is stuck at GND
-    Warning (13410): Pin "LED[6]" is stuck at GND
-    Warning (13410): Pin "LED[7]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[0]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[1]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[2]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[3]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[4]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[5]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[6]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[7]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[8]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[9]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[10]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[11]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[12]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[13]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[14]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[15]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[16]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[17]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[18]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[19]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[20]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[21]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[22]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[23]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[24]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[25]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[26]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[27]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[28]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[29]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[30]" is stuck at GND
+    Warning (13410): Pin "slave_readdata[31]" is stuck at GND
+Warning (20013): Ignored assignments for entity "Quad_Dec" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME Qsys -entity Quad_Dec -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name SLD_INFO "QSYS_NAME Quad_Dec HAS_SOPCINFO 1 GENERATION_ID 1525701563" -entity Quad_Dec -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_cpu" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_nios2_qsys -entity Quad_Dec_cpu -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_cpu -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_cpu -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_irq_mapper" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_irq_mapper -entity Quad_Dec_irq_mapper -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_irq_mapper -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_irq_mapper -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_jtag_uart" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_avalon_jtag_uart -entity Quad_Dec_jtag_uart -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_jtag_uart -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_jtag_uart -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_interconnect_wrapper -entity Quad_Dec_mm_interconnect_0 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_addr_router" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_router -entity Quad_Dec_mm_interconnect_0_addr_router -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_addr_router -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_addr_router -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_addr_router_001" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_router -entity Quad_Dec_mm_interconnect_0_addr_router_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_addr_router_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_addr_router_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_cmd_xbar_demux" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_demultiplexer -entity Quad_Dec_mm_interconnect_0_cmd_xbar_demux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_cmd_xbar_demux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_cmd_xbar_demux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_demultiplexer -entity Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_cmd_xbar_mux" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_multiplexer -entity Quad_Dec_mm_interconnect_0_cmd_xbar_mux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_cmd_xbar_mux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_cmd_xbar_mux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_multiplexer -entity Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_id_router" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_router -entity Quad_Dec_mm_interconnect_0_id_router -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_id_router -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_id_router -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_id_router_002" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_router -entity Quad_Dec_mm_interconnect_0_id_router_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_id_router_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_id_router_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_rsp_xbar_demux" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_demultiplexer -entity Quad_Dec_mm_interconnect_0_rsp_xbar_demux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_rsp_xbar_demux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_rsp_xbar_demux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_demultiplexer -entity Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_rsp_xbar_mux" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_multiplexer -entity Quad_Dec_mm_interconnect_0_rsp_xbar_mux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_rsp_xbar_mux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_rsp_xbar_mux -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_multiplexer -entity Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001 -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_onchip_mem" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_avalon_onchip_memory2 -entity Quad_Dec_onchip_mem -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_onchip_mem -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_onchip_mem -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_sys_clk_timer" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_avalon_timer -entity Quad_Dec_sys_clk_timer -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_sys_clk_timer -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_sys_clk_timer -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "Quad_Dec_sysid" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_avalon_sysid_qsys -entity Quad_Dec_sysid -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity Quad_Dec_sysid -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity Quad_Dec_sysid -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_avalon_sc_fifo" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_avalon_sc_fifo -entity altera_avalon_sc_fifo -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_avalon_sc_fifo -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_avalon_sc_fifo -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_merlin_master_agent" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_master_agent -entity altera_merlin_master_agent -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_merlin_master_agent -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_merlin_master_agent -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_merlin_master_translator" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_master_translator -entity altera_merlin_master_translator -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_merlin_master_translator -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_merlin_master_translator -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_merlin_slave_agent" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_slave_agent -entity altera_merlin_slave_agent -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_merlin_slave_agent -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_merlin_slave_agent -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_merlin_slave_translator" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_slave_translator -entity altera_merlin_slave_translator -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_merlin_slave_translator -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_merlin_slave_translator -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_merlin_traffic_limiter" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_merlin_traffic_limiter -entity altera_merlin_traffic_limiter -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_merlin_traffic_limiter -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_merlin_traffic_limiter -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Warning (20013): Ignored assignments for entity "altera_reset_controller" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_NAME altera_reset_controller -entity altera_reset_controller -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_VERSION 13.1 -entity altera_reset_controller -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+    Warning (20014): Assignment for entity set_global_assignment -name IP_TOOL_ENV Qsys -entity altera_reset_controller -qip Quad_Dec/synthesis/Quad_Dec.qip -library Quad_Dec was ignored
+Info (144001): Generated suppressed messages file C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/output_files/esl_demonstrator.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 10 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk"
+Warning (21074): Design contains 50 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "reset"
-    Warning (15610): No output dependent on input pin "KEY[0]"
-    Warning (15610): No output dependent on input pin "KEY[1]"
-    Warning (15610): No output dependent on input pin "SW[0]"
-    Warning (15610): No output dependent on input pin "SW[1]"
-    Warning (15610): No output dependent on input pin "SW[2]"
-    Warning (15610): No output dependent on input pin "SW[3]"
-    Warning (15610): No output dependent on input pin "GPIO_0_IN[0]"
-    Warning (15610): No output dependent on input pin "GPIO_0_IN[1]"
-Info (21057): Implemented 50 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 10 input pins
-    Info (21059): Implemented 8 output pins
-    Info (21060): Implemented 32 bidirectional pins
-Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 60 warnings
-    Info: Peak virtual memory: 399 megabytes
-    Info: Processing ended: Mon May  7 13:39:40 2018
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:02
+    Warning (15610): No output dependent on input pin "slave_address[0]"
+    Warning (15610): No output dependent on input pin "slave_address[1]"
+    Warning (15610): No output dependent on input pin "slave_address[2]"
+    Warning (15610): No output dependent on input pin "slave_address[3]"
+    Warning (15610): No output dependent on input pin "slave_address[4]"
+    Warning (15610): No output dependent on input pin "slave_address[5]"
+    Warning (15610): No output dependent on input pin "slave_address[6]"
+    Warning (15610): No output dependent on input pin "slave_address[7]"
+    Warning (15610): No output dependent on input pin "slave_write"
+    Warning (15610): No output dependent on input pin "slave_writedata[0]"
+    Warning (15610): No output dependent on input pin "slave_writedata[1]"
+    Warning (15610): No output dependent on input pin "slave_writedata[2]"
+    Warning (15610): No output dependent on input pin "slave_writedata[3]"
+    Warning (15610): No output dependent on input pin "slave_writedata[4]"
+    Warning (15610): No output dependent on input pin "slave_writedata[5]"
+    Warning (15610): No output dependent on input pin "slave_writedata[6]"
+    Warning (15610): No output dependent on input pin "slave_writedata[7]"
+    Warning (15610): No output dependent on input pin "slave_writedata[8]"
+    Warning (15610): No output dependent on input pin "slave_writedata[9]"
+    Warning (15610): No output dependent on input pin "slave_writedata[10]"
+    Warning (15610): No output dependent on input pin "slave_writedata[11]"
+    Warning (15610): No output dependent on input pin "slave_writedata[12]"
+    Warning (15610): No output dependent on input pin "slave_writedata[13]"
+    Warning (15610): No output dependent on input pin "slave_writedata[14]"
+    Warning (15610): No output dependent on input pin "slave_writedata[15]"
+    Warning (15610): No output dependent on input pin "slave_writedata[16]"
+    Warning (15610): No output dependent on input pin "slave_writedata[17]"
+    Warning (15610): No output dependent on input pin "slave_writedata[18]"
+    Warning (15610): No output dependent on input pin "slave_writedata[19]"
+    Warning (15610): No output dependent on input pin "slave_writedata[20]"
+    Warning (15610): No output dependent on input pin "slave_writedata[21]"
+    Warning (15610): No output dependent on input pin "slave_writedata[22]"
+    Warning (15610): No output dependent on input pin "slave_writedata[23]"
+    Warning (15610): No output dependent on input pin "slave_writedata[24]"
+    Warning (15610): No output dependent on input pin "slave_writedata[25]"
+    Warning (15610): No output dependent on input pin "slave_writedata[26]"
+    Warning (15610): No output dependent on input pin "slave_writedata[27]"
+    Warning (15610): No output dependent on input pin "slave_writedata[28]"
+    Warning (15610): No output dependent on input pin "slave_writedata[29]"
+    Warning (15610): No output dependent on input pin "slave_writedata[30]"
+    Warning (15610): No output dependent on input pin "slave_writedata[31]"
+    Warning (15610): No output dependent on input pin "slave_byteenable[0]"
+    Warning (15610): No output dependent on input pin "slave_byteenable[1]"
+    Warning (15610): No output dependent on input pin "slave_byteenable[2]"
+    Warning (15610): No output dependent on input pin "slave_byteenable[3]"
+    Warning (15610): No output dependent on input pin "inputs[0]"
+    Warning (15610): No output dependent on input pin "inputs[1]"
+    Warning (15610): No output dependent on input pin "clk"
+    Warning (15610): No output dependent on input pin "slave_read"
+Info (21057): Implemented 82 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 50 input pins
+    Info (21059): Implemented 32 output pins
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 206 warnings
+    Info: Peak virtual memory: 593 megabytes
+    Info: Processing ended: Thu May 17 14:00:19 2018
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:03
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/output_files/esl_demonstrator.map.smsg.
 
 

@@ -52,8 +52,20 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulati
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VHDL_FILE ip/QuadratureDecoder/QuadratureDecoder.vhd
-set_global_assignment -name VHDL_FILE ip/QuadratureDecoder/esl_demonstrator.vhd
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name QIP_FILE Quad_Dec/synthesis/Quad_Dec.qip
+set_global_assignment -name VHDL_FILE ip/QuadratureDecoder/QuadratureDecoder.vhd
+set_global_assignment -name VHDL_FILE ip/QuadratureDecoder/esl_demonstrator.vhd
+set_global_assignment -name BDF_FILE esl_as4.bdf
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_location_assignment PIN_E1 -to inputs[1]
+set_location_assignment PIN_J15 -to inputs[0]
+set_location_assignment PIN_M1 -to reset
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to inputs[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to inputs[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
+set_location_assignment PIN_R8 -to clk
+set_global_assignment -name VHDL_FILE PWM.vhd
+set_global_assignment -name VHDL_FILE testbenchpwm.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

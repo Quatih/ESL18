@@ -1,6 +1,6 @@
 Assembler report for esl_demonstrator
-Mon May  7 13:39:54 2018
-Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Thu May 17 11:36:36 2018
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
 ---------------------
@@ -10,7 +10,7 @@ Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: esl_demonstrator.sof
+  5. Assembler Device Options: C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/output_files/esl_demonstrator.sof
   6. Assembler Messages
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon May  7 13:39:54 2018 ;
+; Assembler Status      ; Successful - Thu May 17 11:36:36 2018 ;
 ; Revision Name         ; esl_demonstrator                      ;
 ; Top-level Entity Name ; esl_demonstrator                      ;
 ; Family                ; Cyclone IV E                          ;
@@ -77,39 +77,39 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------+
-; Assembler Generated Files ;
-+---------------------------+
-; File Name                 ;
-+---------------------------+
-; esl_demonstrator.sof      ;
-+---------------------------+
++------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                ;
++------------------------------------------------------------------------------------------+
+; File Name                                                                                ;
++------------------------------------------------------------------------------------------+
+; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/output_files/esl_demonstrator.sof ;
++------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------+
-; Assembler Device Options: esl_demonstrator.sof ;
-+----------------+-------------------------------+
-; Option         ; Setting                       ;
-+----------------+-------------------------------+
-; Device         ; EP4CE22F17C6                  ;
-; JTAG usercode  ; 0x0013676A                    ;
-; Checksum       ; 0x0013676A                    ;
-+----------------+-------------------------------+
++--------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/output_files/esl_demonstrator.sof ;
++----------------+---------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                           ;
++----------------+---------------------------------------------------------------------------------------------------+
+; Device         ; EP4CE22F17C6                                                                                      ;
+; JTAG usercode  ; 0x00135264                                                                                        ;
+; Checksum       ; 0x00135264                                                                                        ;
++----------------+---------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
 ; Assembler Messages ;
 +--------------------+
 Info: *******************************************************************
-Info: Running Quartus II 32-bit Assembler
+Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Mon May  7 13:39:52 2018
+    Info: Processing started: Thu May 17 11:36:34 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off esl_demonstrator -c esl_demonstrator
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
-Info: Quartus II 32-bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 386 megabytes
-    Info: Processing ended: Mon May  7 13:39:54 2018
+Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 531 megabytes
+    Info: Processing ended: Thu May 17 11:36:36 2018
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
