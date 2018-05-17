@@ -15,7 +15,7 @@ entity PWM is
 	C		: Out std_logic;	--PWM input of the H-Bridge.
 	
 	
-	GPIO_0		: inout std_logic_vector(wl -1 downto 0);
+	GPIO_0		: in std_logic_vector(wl -1 downto 0);
 	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
 
 	);
@@ -61,8 +61,10 @@ begin
 			--Reset the counted cycles.
 			if cyclecount = 2500 then
 				cyclecount <= 0;
+			else
+				cyclecount <= cyclecount + 1;
 			end if;
-			cyclecount <= cyclecount + 1;
+
 		end if;
 	
 	end process;

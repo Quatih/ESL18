@@ -1,0 +1,99 @@
+m255
+K3
+13
+cModel Technology
+dC:\altera\13.0sp1
+Epwm
+Z0 w1526560412
+Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dC:\Users\hvati\source\ESL21\Test1
+Z5 8C:/Users/hvati/source/ESL21/esl_demonstrator/PWM.vhd
+Z6 FC:/Users/hvati/source/ESL21/esl_demonstrator/PWM.vhd
+l0
+L5
+VTLP@PI1CMO0J0Ii6LS?YQ1
+!s100 _M>NZa2_6kIzVI6IG^:HT1
+Z7 OV;C;10.1d;51
+32
+!i10b 1
+Z8 !s108 1526560781.523000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/hvati/source/ESL21/esl_demonstrator/PWM.vhd|
+Z10 !s107 C:/Users/hvati/source/ESL21/esl_demonstrator/PWM.vhd|
+Z11 o-work work -2002 -explicit -O0
+Z12 tExplicit 1
+Abehavior
+R1
+R2
+R3
+Z13 DEx4 work 3 pwm 0 22 TLP@PI1CMO0J0Ii6LS?YQ1
+l38
+L30
+Z14 VT5?DY:9lGFc4_mB5Wo]d=2
+Z15 !s100 ?NIEC9fLFN_N^bGlV0Jj11
+R7
+32
+!i10b 1
+R8
+R9
+R10
+R11
+R12
+Etestbench
+w1526559123
+R1
+R2
+R3
+R4
+8C:\Users\hvati\source\ESL21\esl_demonstrator\testbench.vhd
+FC:\Users\hvati\source\ESL21\esl_demonstrator\testbench.vhd
+l0
+L5
+VOmh88:`DRF6MS__FQB4mE3
+R7
+32
+R11
+R12
+!s100 [5h0KY0286gES;<2VS8C03
+!i10b 1
+!s108 1526559125.320000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|C:\Users\hvati\source\ESL21\esl_demonstrator\testbench.vhd|
+!s107 C:\Users\hvati\source\ESL21\esl_demonstrator\testbench.vhd|
+Etestbench_pwm
+Z16 w1526560778
+R1
+R2
+R3
+R4
+Z17 8C:/Users/hvati/source/ESL21/esl_demonstrator/testbenchpwm.vhd
+Z18 FC:/Users/hvati/source/ESL21/esl_demonstrator/testbenchpwm.vhd
+l0
+L4
+VbaIcmQX_`a9:DfQ8@P`Ea3
+R7
+32
+Z19 !s108 1526560781.352000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/hvati/source/ESL21/esl_demonstrator/testbenchpwm.vhd|
+Z21 !s107 C:/Users/hvati/source/ESL21/esl_demonstrator/testbenchpwm.vhd|
+R11
+R12
+!s100 @Z;z4F[1AC7I]0O05oF2D0
+!i10b 1
+Atb
+R1
+R2
+R3
+DEx4 work 13 testbench_pwm 0 22 baIcmQX_`a9:DfQ8@P`Ea3
+l36
+L9
+VT1nIS^4PC8_Q6zfHUnk713
+R7
+32
+R19
+R20
+R21
+R11
+R12
+!s100 i6b0ORTAH@I@T=RHLF42C0
+!i10b 1

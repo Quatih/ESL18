@@ -10,12 +10,13 @@ end testbench;
 architecture tb of testbench is
 
 component QuadratureEncoder is
+ generic (wl : natural := 32);
  port ( 
 	clk   : in std_logic;
 	reset  : in std_logic;
 	enable : in std_logic;
 	GPIO_0		: inout std_logic_vector(wl -1 downto 0);
-	GPIO_0_IN	: in    std_logic_vector(1 downto 0);
+	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
 
 	);
 end component QuadratureEncoder;
