@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
-
-entity esl_demonstrator_entity is
+-- IPFILE
+entity esl_demonstrator is
 generic (
 		DATA_WIDTH : natural := 32	-- word size of each input and output register
 	);
@@ -20,10 +20,10 @@ generic (
 
 	inputs			: in std_logic_vector(1 downto 0)
 	);
-end esl_demonstrator_entity;
+end esl_demonstrator;
 
 
-architecture behavior of esl_demonstrator_entity is
+architecture behavior of esl_demonstrator is
 	signal enable			: std_logic := '1';
 	signal mem        	: std_logic_vector(31 downto 0);
 begin
@@ -46,15 +46,15 @@ begin
 	-- Communication with the bus
 	p_avalon : process(clk, reset)
 	begin
-		if (reset = '1') then
-			mem <= (others => '0');
-		elsif (rising_edge(clk)) then
+		--if (reset = '1') then
+			--mem <= (others => '0');
+		if (rising_edge(clk)) then
 			if (slave_read = '1') then
 				slave_readdata <= mem;
 			end if;
 			
 			if (slave_write = '1') then
-				mem <= slave_writedata;
+			--	mem <= slave_writedata;
 				
 			end if;
 		end if;

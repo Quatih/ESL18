@@ -1,6 +1,6 @@
 EDA Netlist Writer report for esl_demonstrator
-Thu May 17 11:36:44 2018
-Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Thu May 17 16:23:21 2018
+Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
 ---------------------
@@ -36,9 +36,9 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu May 17 11:36:44 2018 ;
+; EDA Netlist Writer Status ; Successful - Thu May 17 16:23:21 2018 ;
 ; Revision Name             ; esl_demonstrator                      ;
-; Top-level Entity Name     ; esl_demonstrator                      ;
+; Top-level Entity Name     ; Quad_Dec                              ;
 ; Family                    ; Cyclone IV E                          ;
 ; Simulation Files Creation ; Successful                            ;
 +---------------------------+---------------------------------------+
@@ -66,42 +66,42 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                             ;
-+------------------------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                                        ;
-+------------------------------------------------------------------------------------------------------------------------+
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_85c_slow.vho      ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_0c_slow.vho       ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_min_1200mv_0c_fast.vho     ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator.vho                        ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_85c_vhd_slow.sdo  ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_0c_vhd_slow.sdo   ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_min_1200mv_0c_vhd_fast.sdo ;
-; C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_vhd.sdo                    ;
-+------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                         ;
++----------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                    ;
++----------------------------------------------------------------------------------------------------+
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_85c_slow.vho      ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_0c_slow.vho       ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_min_1200mv_0c_fast.vho     ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator.vho                        ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_85c_vhd_slow.sdo  ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_0c_vhd_slow.sdo   ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_min_1200mv_0c_vhd_fast.sdo ;
+; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_vhd.sdo                    ;
++----------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
 ; EDA Netlist Writer Messages ;
 +-----------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 64-Bit EDA Netlist Writer
+Info: Running Quartus II 32-bit EDA Netlist Writer
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Thu May 17 11:36:43 2018
+    Info: Processing started: Thu May 17 16:23:16 2018
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off esl_demonstrator -c esl_demonstrator
-Info (204019): Generated file esl_demonstrator_6_1200mv_85c_slow.vho in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_6_1200mv_0c_slow.vho in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_min_1200mv_0c_fast.vho in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator.vho in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_6_1200mv_85c_vhd_slow.sdo in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_6_1200mv_0c_vhd_slow.sdo in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_min_1200mv_0c_vhd_fast.sdo in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_vhd.sdo in folder "C:/Users/reinv/Documents/GitHub/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 482 megabytes
-    Info: Processing ended: Thu May 17 11:36:44 2018
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+Info (204019): Generated file esl_demonstrator_6_1200mv_85c_slow.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator_6_1200mv_0c_slow.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator_min_1200mv_0c_fast.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator_6_1200mv_85c_vhd_slow.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator_6_1200mv_0c_vhd_slow.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator_min_1200mv_0c_vhd_fast.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file esl_demonstrator_vhd.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
+Info: Quartus II 32-bit EDA Netlist Writer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 382 megabytes
+    Info: Processing ended: Thu May 17 16:23:21 2018
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:04
 
 

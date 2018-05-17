@@ -6,6 +6,7 @@
    <connections preferredWidth="127" />
    <irq preferredWidth="34" />
    <export preferredWidth="296" />
+   <name preferredWidth="195" />
   </columns>
  </systemtable>
  <clocktable>
@@ -15,6 +16,7 @@
    <frequency preferredWidth="292" />
   </columns>
  </clocktable>
- <window width="1680" height="1030" x="108" y="10" />
- <library expandedCategories="Project,Library,Project/ESL21" />
+ <window width="1700" height="979" x="-9" y="-8" />
+ <library expandedCategories="Project/ESL21,Project,Library" />
+ <generation simulation="NONE" synthesis="VHDL" />
 </preferences>

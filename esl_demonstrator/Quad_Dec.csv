@@ -1,0 +1,25 @@
+# system info Quad_Dec on 2018.05.17.15:42:37
+system_info:
+name,value
+DEVICE,EP4CE22F17C6
+DEVICE_FAMILY,Cyclone IV E
+GENERATION_ID,1526564551
+#
+#
+# Files generated for Quad_Dec on 2018.05.17.15:42:37
+files:
+filepath,kind,attributes,module,is_top
+Quad_Dec/simulation/Quad_Dec.vhd,VHDL,,Quad_Dec,true
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+Quad_Dec.Quad_dec,Quad_Dec_Quad_dec
+Quad_Dec.onchip_mem,Quad_Dec_onchip_mem
+Quad_Dec.cpu,Quad_Dec_cpu
+Quad_Dec.jtag_uart,Quad_Dec_jtag_uart
+Quad_Dec.sys_clk_timer,Quad_Dec_sys_clk_timer
+Quad_Dec.sysid,Quad_Dec_sysid
+Quad_Dec.mm_interconnect_0,Quad_Dec_mm_interconnect_0
+Quad_Dec.irq_mapper,Quad_Dec_irq_mapper
+Quad_Dec.rst_controller,altera_reset_controller

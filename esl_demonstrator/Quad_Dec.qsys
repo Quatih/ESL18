@@ -6,14 +6,17 @@
    version="1.0"
    description=""
    tags=""
-   categories="" />
+   categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
-   element Quad_dec
+   element $${FILENAME}
+   {
+   }
+   element QuadratureDecoder
    {
       datum _sortIndex
       {
-         value = "1";
+         value = "6";
          type = "int";
       }
    }
@@ -21,7 +24,15 @@
    {
       datum baseAddress
       {
-         value = "69672";
+         value = "70696";
+         type = "String";
+      }
+   }
+   element QuadratureDecoder.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "69632";
          type = "String";
       }
    }
@@ -37,7 +48,7 @@
    {
       datum baseAddress
       {
-         value = "69664";
+         value = "70688";
          type = "String";
       }
    }
@@ -45,7 +56,7 @@
    {
       datum _sortIndex
       {
-         value = "3";
+         value = "2";
          type = "int";
       }
    }
@@ -61,7 +72,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "3";
          type = "int";
       }
    }
@@ -69,16 +80,8 @@
    {
       datum _sortIndex
       {
-         value = "2";
+         value = "1";
          type = "int";
-      }
-   }
-   element sys_clk_timer.s1
-   {
-      datum baseAddress
-      {
-         value = "69632";
-         type = "String";
       }
    }
    element onchip_mem.s1
@@ -89,11 +92,19 @@
          type = "String";
       }
    }
+   element sys_clk_timer.s1
+   {
+      datum baseAddress
+      {
+         value = "70656";
+         type = "String";
+      }
+   }
    element sys_clk_timer
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "4";
          type = "int";
       }
    }
@@ -101,7 +112,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "5";
          type = "int";
       }
    }
@@ -117,7 +128,7 @@
  <parameter name="globalResetBus" value="false" />
  <parameter name="hdlLanguage" value="VERILOG" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="" />
+ <parameter name="projectName">esl_demonstrator.qpf</parameter>
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="0" />
  <parameter name="timeStamp" value="0" />
@@ -126,8 +137,8 @@
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <interface
-   name="quadrature_decoder_0_inputs"
-   internal="Quad_dec.Inputs"
+   name="quadraturedecoder_inputs"
+   internal="QuadratureDecoder.Inputs"
    type="conduit"
    dir="end" />
  <module kind="clock_source" version="13.1" enabled="1" name="clk_0">
@@ -135,10 +146,6 @@
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
- </module>
- <module kind="Quadrature_Decoder" version="1.0" enabled="1" name="Quad_dec">
-  <parameter name="DATA_WIDTH" value="32" />
-  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
  <module
    kind="altera_avalon_onchip_memory2"
@@ -278,7 +285,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='Quad_dec.avalon_slave_0' start='0x0' end='0x400' /><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /><slave name='sys_clk_timer.s1' start='0x11000' end='0x11020' /><slave name='sysid.control_slave' start='0x11020' end='0x11028' /><slave name='jtag_uart.avalon_jtag_slave' start='0x11028' end='0x11030' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /><slave name='QuadratureDecoder.avalon_slave_0' start='0x11000' end='0x11400' /><slave name='sys_clk_timer.s1' start='0x11400' end='0x11420' /><slave name='sysid.control_slave' start='0x11420' end='0x11428' /><slave name='jtag_uart.avalon_jtag_slave' start='0x11428' end='0x11430' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="65538" />
@@ -336,12 +343,13 @@
   <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
  </module>
- <connection kind="clock" version="13.1" start="clk_0.clk" end="Quad_dec.clock" />
- <connection
-   kind="reset"
-   version="13.1"
-   start="clk_0.clk_reset"
-   end="Quad_dec.reset" />
+ <module
+   kind="QuadratureDecoder"
+   version="1.0"
+   enabled="1"
+   name="QuadratureDecoder">
+  <parameter name="DATA_WIDTH" value="32" />
+ </module>
  <connection
    kind="avalon"
    version="13.1"
@@ -388,7 +396,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011028" />
+  <parameter name="baseAddress" value="0x00011428" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -397,7 +405,7 @@
    start="cpu.data_master"
    end="sys_clk_timer.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011000" />
+  <parameter name="baseAddress" value="0x00011400" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -406,7 +414,7 @@
    start="cpu.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011020" />
+  <parameter name="baseAddress" value="0x00011420" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -438,12 +446,22 @@
   <parameter name="irqNumber" value="1" />
  </connection>
  <connection
+   kind="clock"
+   version="13.1"
+   start="clk_0.clk"
+   end="QuadratureDecoder.clock" />
+ <connection
+   kind="reset"
+   version="13.1"
+   start="clk_0.clk_reset"
+   end="QuadratureDecoder.reset" />
+ <connection
    kind="avalon"
    version="13.1"
    start="cpu.data_master"
-   end="Quad_dec.avalon_slave_0">
+   end="QuadratureDecoder.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="baseAddress" value="0x00011000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />

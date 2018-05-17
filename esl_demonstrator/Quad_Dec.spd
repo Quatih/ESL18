@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file path="Quad_Dec/simulation/Quad_Dec.vhd" type="VHDL" />
+ <topLevel name="Quad_Dec" />
+ <deviceFamily name="cycloneive" />
+ <modelMap controllerPath="Quad_Dec.onchip_mem" modelPath="Quad_Dec.onchip_mem" />
+</simPackage>

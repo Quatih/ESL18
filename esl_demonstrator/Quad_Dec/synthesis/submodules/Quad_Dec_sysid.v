@@ -36,7 +36,7 @@ module Quad_Dec_sysid (
 
   wire    [ 31: 0] readdata;
   //control_slave, which is an e_avalon_slave
-  assign readdata = address ? 1525701563 : 0;
+  assign readdata = address ? 1526566770 : 0;
 
 endmodule
 
