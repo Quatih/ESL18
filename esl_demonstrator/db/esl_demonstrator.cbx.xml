@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="esl_demonstrator">
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_cjd1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_72h1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_ae81.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_bog1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_onchip_mem:onchip_mem|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_0kc1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_aog1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_cpu:cpu|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_qvi.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_onchip_mem:onchip_mem|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_0kc1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_cjd1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_72h1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_ae81.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_aog1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_bog1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_qvi.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

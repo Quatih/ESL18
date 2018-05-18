@@ -1,4 +1,10 @@
-|Quad_Dec
+|esl_as4
+CLOCK_50 => Quad_Dec:inst.clk_clk
+Quad_input1 => Quad_Dec:inst.quadraturedecoder_inputs_export[1]
+Quad_input2 => Quad_Dec:inst.quadraturedecoder_inputs_export[0]
+
+
+|esl_as4|Quad_Dec:inst
 clk_clk => Quad_Dec_onchip_mem:onchip_mem.clk
 clk_clk => Quad_Dec_cpu:cpu.clk
 clk_clk => Quad_Dec_jtag_uart:jtag_uart.clk
@@ -13,7 +19,7 @@ quadraturedecoder_inputs_export[0] => esl_demonstrator:quadraturedecoder.inputs[
 quadraturedecoder_inputs_export[1] => esl_demonstrator:quadraturedecoder.inputs[1]
 
 
-|Quad_Dec|Quad_Dec_onchip_mem:onchip_mem
+|esl_as4|Quad_Dec:inst|Quad_Dec_onchip_mem:onchip_mem
 address[0] => address[0].IN1
 address[1] => address[1].IN1
 address[2] => address[2].IN1
@@ -103,7 +109,7 @@ readdata[30] <= altsyncram:the_altsyncram.q_a
 readdata[31] <= altsyncram:the_altsyncram.q_a
 
 
-|Quad_Dec|Quad_Dec_onchip_mem:onchip_mem|altsyncram:the_altsyncram
+|esl_as4|Quad_Dec:inst|Quad_Dec_onchip_mem:onchip_mem|altsyncram:the_altsyncram
 wren_a => altsyncram_0kc1:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -208,7 +214,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_onchip_mem:onchip_mem|altsyncram:the_altsyncram|altsyncram_0kc1:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_onchip_mem:onchip_mem|altsyncram:the_altsyncram|altsyncram_0kc1:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -819,7 +825,7 @@ wren_a => ram_block1a30.PORTAWE
 wren_a => ram_block1a31.PORTAWE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu
 clk => clk.IN6
 d_irq[0] => ~NO_FANOUT~
 d_irq[1] => M_ipending_reg_irq1_nxt.IN1
@@ -1084,7 +1090,7 @@ jtag_debug_module_waitrequest <= Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_o
 no_ci_readra <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_test_bench:the_Quad_Dec_cpu_test_bench
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_test_bench:the_Quad_Dec_cpu_test_bench
 E_src1[0] => ~NO_FANOUT~
 E_src1[1] => ~NO_FANOUT~
 E_src1[2] => ~NO_FANOUT~
@@ -1389,7 +1395,7 @@ M_wr_data_filtered[31] <= M_wr_data_unfiltered[31].DB_MAX_OUTPUT_PORT_TYPE
 test_has_ended <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data
 clock => clock.IN1
 data[0] => ram_data[0].IN1
 data[1] => ram_data[1].IN1
@@ -1479,7 +1485,7 @@ q[30] <= altsyncram:the_altsyncram.q_b
 q[31] <= altsyncram:the_altsyncram.q_b
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data|altsyncram:the_altsyncram
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data|altsyncram:the_altsyncram
 wren_a => altsyncram_cjd1:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -1649,7 +1655,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data|altsyncram:the_altsyncram|altsyncram_cjd1:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_data_module:Quad_Dec_cpu_ic_data|altsyncram:the_altsyncram|altsyncram_cjd1:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -2519,7 +2525,7 @@ wren_a => ram_block1a31.PORTAWE
 wren_a => ram_block1a31.ENA0
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag
 clock => clock.IN1
 data[0] => ram_data[0].IN1
 data[1] => ram_data[1].IN1
@@ -2565,7 +2571,7 @@ q[11] <= altsyncram:the_altsyncram.q_b
 q[12] <= altsyncram:the_altsyncram.q_b
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag|altsyncram:the_altsyncram
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag|altsyncram:the_altsyncram
 wren_a => altsyncram_72h1:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -2653,7 +2659,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag|altsyncram:the_altsyncram|altsyncram_72h1:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_ic_tag_module:Quad_Dec_cpu_ic_tag|altsyncram:the_altsyncram|altsyncram_72h1:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -2903,7 +2909,7 @@ wren_a => ram_block1a11.PORTAWE
 wren_a => ram_block1a12.PORTAWE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a
 clock => clock.IN1
 data[0] => ram_data[0].IN1
 data[1] => ram_data[1].IN1
@@ -2983,7 +2989,7 @@ q[30] <= altsyncram:the_altsyncram.q_b
 q[31] <= altsyncram:the_altsyncram.q_b
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a|altsyncram:the_altsyncram
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a|altsyncram:the_altsyncram
 wren_a => altsyncram_aog1:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -3143,7 +3149,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a|altsyncram:the_altsyncram|altsyncram_aog1:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_a_module:Quad_Dec_cpu_register_bank_a|altsyncram:the_altsyncram|altsyncram_aog1:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -3626,7 +3632,7 @@ wren_a => ram_block1a30.PORTAWE
 wren_a => ram_block1a31.PORTAWE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b
 clock => clock.IN1
 data[0] => ram_data[0].IN1
 data[1] => ram_data[1].IN1
@@ -3706,7 +3712,7 @@ q[30] <= altsyncram:the_altsyncram.q_b
 q[31] <= altsyncram:the_altsyncram.q_b
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b|altsyncram:the_altsyncram
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b|altsyncram:the_altsyncram
 wren_a => altsyncram_bog1:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -3866,7 +3872,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b|altsyncram:the_altsyncram|altsyncram_bog1:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_register_bank_b_module:Quad_Dec_cpu_register_bank_b|altsyncram:the_altsyncram|altsyncram_bog1:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -4349,7 +4355,7 @@ wren_a => ram_block1a30.PORTAWE
 wren_a => ram_block1a31.PORTAWE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci
 D_en => D_en.IN1
 E_en => E_en.IN1
 E_valid => E_valid.IN1
@@ -4612,7 +4618,7 @@ resetrequest <= Quad_Dec_cpu_nios2_oci_debug:the_Quad_Dec_cpu_nios2_oci_debug.re
 waitrequest <= Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem.waitrequest
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_debug:the_Quad_Dec_cpu_nios2_oci_debug
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_debug:the_Quad_Dec_cpu_nios2_oci_debug
 clk => clk.IN1
 dbrk_break => oci_hbreak_req.IN1
 debugreq => always0.IN0
@@ -4680,7 +4686,7 @@ resetlatch <= resetlatch~reg0.DB_MAX_OUTPUT_PORT_TYPE
 resetrequest <= resetrequest~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_debug:the_Quad_Dec_cpu_nios2_oci_debug|altera_std_synchronizer:the_altera_std_synchronizer
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_debug:the_Quad_Dec_cpu_nios2_oci_debug|altera_std_synchronizer:the_altera_std_synchronizer
 clk => dreg[0].CLK
 clk => din_s1.CLK
 reset_n => dreg[0].ACLR
@@ -4689,7 +4695,7 @@ din => din_s1.DATAIN
 dout <= dout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem
 address[0] => ociram_addr.DATAA
 address[1] => ociram_addr.DATAA
 address[2] => ociram_addr.DATAA
@@ -5043,7 +5049,7 @@ ociram_readdata[31] <= Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_
 waitrequest <= waitrequest~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram
 address[0] => address[0].IN1
 address[1] => address[1].IN1
 address[2] => address[2].IN1
@@ -5125,7 +5131,7 @@ q[30] <= altsyncram:the_altsyncram.q_a
 q[31] <= altsyncram:the_altsyncram.q_a
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram|altsyncram:the_altsyncram
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram|altsyncram:the_altsyncram
 wren_a => altsyncram_ae81:auto_generated.wren_a
 rden_a => ~NO_FANOUT~
 wren_b => ~NO_FANOUT~
@@ -5225,7 +5231,7 @@ eccstatus[1] <= <GND>
 eccstatus[2] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram|altsyncram:the_altsyncram|altsyncram_ae81:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_ocimem:the_Quad_Dec_cpu_nios2_ocimem|Quad_Dec_cpu_ociram_sp_ram_module:Quad_Dec_cpu_ociram_sp_ram|altsyncram:the_altsyncram|altsyncram_ae81:auto_generated
 address_a[0] => ram_block1a0.PORTAADDR
 address_a[0] => ram_block1a1.PORTAADDR
 address_a[0] => ram_block1a2.PORTAADDR
@@ -5676,7 +5682,7 @@ wren_a => ram_block1a30.PORTAWE
 wren_a => ram_block1a31.PORTAWE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_avalon_reg:the_Quad_Dec_cpu_nios2_avalon_reg
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_avalon_reg:the_Quad_Dec_cpu_nios2_avalon_reg
 address[0] => Equal0.IN8
 address[0] => Equal1.IN1
 address[1] => Equal0.IN7
@@ -5869,7 +5875,7 @@ ocireg_mrs <= writedata[0].DB_MAX_OUTPUT_PORT_TYPE
 take_action_ocireg <= take_action_ocireg.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_break:the_Quad_Dec_cpu_nios2_oci_break
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_break:the_Quad_Dec_cpu_nios2_oci_break
 clk => trigger_state.CLK
 clk => break_readreg[0]~reg0.CLK
 clk => break_readreg[1]~reg0.CLK
@@ -6217,7 +6223,7 @@ xbrk_ctrl3[6] <= <GND>
 xbrk_ctrl3[7] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_xbrk:the_Quad_Dec_cpu_nios2_oci_xbrk
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_xbrk:the_Quad_Dec_cpu_nios2_oci_xbrk
 D_en => ~NO_FANOUT~
 E_en => xbrk_break~reg0.ENA
 E_en => E_xbrk_traceon.ENA
@@ -6299,7 +6305,7 @@ xbrk_traceon <= xbrk_traceon.DB_MAX_OUTPUT_PORT_TYPE
 xbrk_trigout <= xbrk_trigout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_dbrk:the_Quad_Dec_cpu_nios2_oci_dbrk
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_dbrk:the_Quad_Dec_cpu_nios2_oci_dbrk
 M_ctrl_ld => cpu_d_read.IN0
 M_ctrl_st => cpu_d_write.IN0
 M_en => cpu_d_wait.DATAIN
@@ -6496,7 +6502,7 @@ dbrk_traceon <= dbrk_traceon~reg0.DB_MAX_OUTPUT_PORT_TYPE
 dbrk_trigout <= dbrk_trigout~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_itrace:the_Quad_Dec_cpu_nios2_oci_itrace
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_itrace:the_Quad_Dec_cpu_nios2_oci_itrace
 M_cmp_result => ~NO_FANOUT~
 M_ctrl_exception => ~NO_FANOUT~
 M_en => ~NO_FANOUT~
@@ -6817,7 +6823,7 @@ trc_ctrl[15] <= <GND>
 trc_on <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_dtrace:the_Quad_Dec_cpu_nios2_oci_dtrace
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_dtrace:the_Quad_Dec_cpu_nios2_oci_dtrace
 clk => dtm[0]~reg0.CLK
 clk => dtm[1]~reg0.CLK
 clk => dtm[2]~reg0.CLK
@@ -7136,7 +7142,7 @@ dtm[34] <= dtm[34]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 dtm[35] <= dtm[35]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_dtrace:the_Quad_Dec_cpu_nios2_oci_dtrace|Quad_Dec_cpu_nios2_oci_td_mode:Quad_Dec_cpu_nios2_oci_trc_ctrl_td_mode
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_dtrace:the_Quad_Dec_cpu_nios2_oci_dtrace|Quad_Dec_cpu_nios2_oci_td_mode:Quad_Dec_cpu_nios2_oci_trc_ctrl_td_mode
 ctrl[0] => ~NO_FANOUT~
 ctrl[1] => ~NO_FANOUT~
 ctrl[2] => ~NO_FANOUT~
@@ -7156,7 +7162,7 @@ td_mode[2] <= ctrl[6].DB_MAX_OUTPUT_PORT_TYPE
 td_mode[3] <= ctrl[5].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo
 atm[0] => ~NO_FANOUT~
 atm[1] => ~NO_FANOUT~
 atm[2] => ~NO_FANOUT~
@@ -7358,7 +7364,7 @@ tw[34] <= itm[34].DB_MAX_OUTPUT_PORT_TYPE
 tw[35] <= itm[35].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_nios2_oci_compute_input_tm_cnt:the_Quad_Dec_cpu_nios2_oci_compute_input_tm_cnt
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_nios2_oci_compute_input_tm_cnt:the_Quad_Dec_cpu_nios2_oci_compute_input_tm_cnt
 atm_valid => Decoder0.IN1
 dtm_valid => Decoder0.IN2
 itm_valid => Decoder0.IN0
@@ -7366,7 +7372,7 @@ compute_input_tm_cnt[0] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
 compute_input_tm_cnt[1] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_nios2_oci_fifo_wrptr_inc:the_Quad_Dec_cpu_nios2_oci_fifo_wrptr_inc
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_nios2_oci_fifo_wrptr_inc:the_Quad_Dec_cpu_nios2_oci_fifo_wrptr_inc
 ge2_free => always0.IN1
 ge3_free => always0.IN1
 input_tm_cnt[0] => LessThan0.IN4
@@ -7381,7 +7387,7 @@ fifo_wrptr_inc[2] <= <GND>
 fifo_wrptr_inc[3] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_nios2_oci_fifo_cnt_inc:the_Quad_Dec_cpu_nios2_oci_fifo_cnt_inc
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_nios2_oci_fifo_cnt_inc:the_Quad_Dec_cpu_nios2_oci_fifo_cnt_inc
 empty => fifo_cnt_inc.OUTPUTSELECT
 empty => fifo_cnt_inc.OUTPUTSELECT
 empty => fifo_cnt_inc.OUTPUTSELECT
@@ -7404,7 +7410,7 @@ fifo_cnt_inc[3] <= fifo_cnt_inc.DB_MAX_OUTPUT_PORT_TYPE
 fifo_cnt_inc[4] <= fifo_cnt_inc.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_oci_test_bench:the_Quad_Dec_cpu_oci_test_bench
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_fifo:the_Quad_Dec_cpu_nios2_oci_fifo|Quad_Dec_cpu_oci_test_bench:the_Quad_Dec_cpu_oci_test_bench
 dct_buffer[0] => ~NO_FANOUT~
 dct_buffer[1] => ~NO_FANOUT~
 dct_buffer[2] => ~NO_FANOUT~
@@ -7443,7 +7449,7 @@ test_ending => ~NO_FANOUT~
 test_has_ended => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_pib:the_Quad_Dec_cpu_nios2_oci_pib
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_pib:the_Quad_Dec_cpu_nios2_oci_pib
 clk => ~NO_FANOUT~
 clkx2 => ~NO_FANOUT~
 jrst_n => ~NO_FANOUT~
@@ -7504,7 +7510,7 @@ tr_data[16] <= <GND>
 tr_data[17] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_im:the_Quad_Dec_cpu_nios2_oci_im
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_nios2_oci_im:the_Quad_Dec_cpu_nios2_oci_im
 clk => trc_wrap~reg0.CLK
 clk => trc_im_addr[0]~reg0.CLK
 clk => trc_im_addr[1]~reg0.CLK
@@ -7667,7 +7673,7 @@ trc_wrap <= trc_wrap~reg0.DB_MAX_OUTPUT_PORT_TYPE
 xbrk_wrap_traceoff <= xbrk_wrap_traceoff.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper
 MonDReg[0] => MonDReg[0].IN1
 MonDReg[1] => MonDReg[1].IN1
 MonDReg[2] => MonDReg[2].IN1
@@ -7846,7 +7852,7 @@ take_no_action_ocimem_a <= Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cp
 take_no_action_tracemem_a <= Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk.take_no_action_tracemem_a
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_tck:the_Quad_Dec_cpu_jtag_debug_module_tck
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_tck:the_Quad_Dec_cpu_jtag_debug_module_tck
 MonDReg[0] => Mux36.IN0
 MonDReg[1] => Mux35.IN0
 MonDReg[2] => Mux34.IN0
@@ -8182,7 +8188,7 @@ st_ready_test_idle <= jtag_state_rti.DB_MAX_OUTPUT_PORT_TYPE
 tdo <= tdo.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_tck:the_Quad_Dec_cpu_jtag_debug_module_tck|altera_std_synchronizer:the_altera_std_synchronizer1
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_tck:the_Quad_Dec_cpu_jtag_debug_module_tck|altera_std_synchronizer:the_altera_std_synchronizer1
 clk => dreg[0].CLK
 clk => din_s1.CLK
 reset_n => dreg[0].ACLR
@@ -8191,7 +8197,7 @@ din => din_s1.DATAIN
 dout <= dout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_tck:the_Quad_Dec_cpu_jtag_debug_module_tck|altera_std_synchronizer:the_altera_std_synchronizer2
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_tck:the_Quad_Dec_cpu_jtag_debug_module_tck|altera_std_synchronizer:the_altera_std_synchronizer2
 clk => dreg[0].CLK
 clk => din_s1.CLK
 reset_n => dreg[0].ACLR
@@ -8200,7 +8206,7 @@ din => din_s1.DATAIN
 dout <= dout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk
 clk => clk.IN2
 ir_in[0] => ir[0].DATAIN
 ir_in[1] => ir[1].DATAIN
@@ -8297,7 +8303,7 @@ take_no_action_ocimem_a <= take_no_action_ocimem_a.DB_MAX_OUTPUT_PORT_TYPE
 take_no_action_tracemem_a <= take_no_action_tracemem_a.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk|altera_std_synchronizer:the_altera_std_synchronizer3
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk|altera_std_synchronizer:the_altera_std_synchronizer3
 clk => dreg[0].CLK
 clk => din_s1.CLK
 reset_n => dreg[0].ACLR
@@ -8306,7 +8312,7 @@ din => din_s1.DATAIN
 dout <= dout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk|altera_std_synchronizer:the_altera_std_synchronizer4
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|Quad_Dec_cpu_jtag_debug_module_sysclk:the_Quad_Dec_cpu_jtag_debug_module_sysclk|altera_std_synchronizer:the_altera_std_synchronizer4
 clk => dreg[0].CLK
 clk => din_s1.CLK
 reset_n => dreg[0].ACLR
@@ -8315,7 +8321,7 @@ din => din_s1.DATAIN
 dout <= dout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|sld_virtual_jtag_basic:Quad_Dec_cpu_jtag_debug_module_phy
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|sld_virtual_jtag_basic:Quad_Dec_cpu_jtag_debug_module_phy
 tck <= sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst.usr_tck
 tdi <= sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst.usr_tdi
 ir_in[0] <= sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst.usr_ir_in
@@ -8350,7 +8356,7 @@ jtag_state_e2ir <= sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst.usr_jtag_sta
 jtag_state_uir <= sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst.usr_jtag_state_uir
 
 
-|Quad_Dec|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|sld_virtual_jtag_basic:Quad_Dec_cpu_jtag_debug_module_phy|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst
+|esl_as4|Quad_Dec:inst|Quad_Dec_cpu:cpu|Quad_Dec_cpu_nios2_oci:the_Quad_Dec_cpu_nios2_oci|Quad_Dec_cpu_jtag_debug_module_wrapper:the_Quad_Dec_cpu_jtag_debug_module_wrapper|sld_virtual_jtag_basic:Quad_Dec_cpu_jtag_debug_module_phy|sld_virtual_jtag_impl:sld_virtual_jtag_impl_inst
 usr_tck <= raw_tck.DB_MAX_OUTPUT_PORT_TYPE
 usr_tdi <= tdi.DB_MAX_OUTPUT_PORT_TYPE
 usr_ir_in[0] <= ir_in[0].DB_MAX_OUTPUT_PORT_TYPE
@@ -8422,7 +8428,7 @@ ir_out[0] <= usr_ir_out[0].DB_MAX_OUTPUT_PORT_TYPE
 ir_out[1] <= usr_ir_out[1].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart
 av_address => ien_AF.OUTPUTSELECT
 av_address => ien_AE.OUTPUTSELECT
 av_address => ac.OUTPUTSELECT
@@ -8512,7 +8518,7 @@ dataavailable <= dataavailable~reg0.DB_MAX_OUTPUT_PORT_TYPE
 readyfordata <= readyfordata~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w
 clk => clk.IN1
 fifo_clear => fifo_clear.IN1
 fifo_wdata[0] => fifo_wdata[0].IN1
@@ -8543,7 +8549,7 @@ wfifo_used[4] <= scfifo:wfifo.usedw
 wfifo_used[5] <= scfifo:wfifo.usedw
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo
 data[0] => scfifo_jr21:auto_generated.data[0]
 data[1] => scfifo_jr21:auto_generated.data[1]
 data[2] => scfifo_jr21:auto_generated.data[2]
@@ -8577,7 +8583,7 @@ usedw[4] <= scfifo_jr21:auto_generated.usedw[4]
 usedw[5] <= scfifo_jr21:auto_generated.usedw[5]
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated
 aclr => a_dpfifo_q131:dpfifo.aclr
 clock => a_dpfifo_q131:dpfifo.clock
 data[0] => a_dpfifo_q131:dpfifo.data[0]
@@ -8608,7 +8614,7 @@ usedw[5] <= a_dpfifo_q131:dpfifo.usedw[5]
 wrreq => a_dpfifo_q131:dpfifo.wreq
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo
 aclr => a_fefifo_7cf:fifo_state.aclr
 aclr => cntr_1ob:rd_ptr_count.aclr
 aclr => cntr_1ob:wr_ptr.aclr
@@ -8654,7 +8660,7 @@ wreq => dpram_nl21:FIFOram.wren
 wreq => cntr_1ob:wr_ptr.cnt_en
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state
 aclr => b_full.IN0
 aclr => b_non_empty.IN0
 aclr => cntr_do7:count_usedw.aclr
@@ -8686,7 +8692,7 @@ wreq => _.IN0
 wreq => cntr_do7:count_usedw.updown
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state|cntr_do7:count_usedw
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state|cntr_do7:count_usedw
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -8712,7 +8718,7 @@ updown => counter_comb_bita4.DATAB
 updown => counter_comb_bita5.DATAB
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram
 data[0] => altsyncram_r1m1:altsyncram1.data_a[0]
 data[1] => altsyncram_r1m1:altsyncram1.data_a[1]
 data[2] => altsyncram_r1m1:altsyncram1.data_a[2]
@@ -8747,7 +8753,7 @@ wraddress[5] => altsyncram_r1m1:altsyncram1.address_a[5]
 wren => altsyncram_r1m1:altsyncram1.wren_a
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram|altsyncram_r1m1:altsyncram1
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram|altsyncram_r1m1:altsyncram1
 address_a[0] => ram_block2a0.PORTAADDR
 address_a[0] => ram_block2a1.PORTAADDR
 address_a[0] => ram_block2a2.PORTAADDR
@@ -8902,7 +8908,7 @@ wren_a => ram_block2a7.PORTAWE
 wren_a => ram_block2a7.ENA0
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:rd_ptr_count
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:rd_ptr_count
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -8922,7 +8928,7 @@ sclr => _.IN0
 sclr => _.IN0
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:wr_ptr
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_w:the_Quad_Dec_jtag_uart_scfifo_w|scfifo:wfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:wr_ptr
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -8942,7 +8948,7 @@ sclr => _.IN0
 sclr => _.IN0
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r
 clk => clk.IN1
 fifo_clear => fifo_clear.IN1
 fifo_rd => fifo_rd.IN1
@@ -8974,7 +8980,7 @@ rfifo_used[4] <= scfifo:rfifo.usedw
 rfifo_used[5] <= scfifo:rfifo.usedw
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo
 data[0] => scfifo_jr21:auto_generated.data[0]
 data[1] => scfifo_jr21:auto_generated.data[1]
 data[2] => scfifo_jr21:auto_generated.data[2]
@@ -9008,7 +9014,7 @@ usedw[4] <= scfifo_jr21:auto_generated.usedw[4]
 usedw[5] <= scfifo_jr21:auto_generated.usedw[5]
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated
 aclr => a_dpfifo_q131:dpfifo.aclr
 clock => a_dpfifo_q131:dpfifo.clock
 data[0] => a_dpfifo_q131:dpfifo.data[0]
@@ -9039,7 +9045,7 @@ usedw[5] <= a_dpfifo_q131:dpfifo.usedw[5]
 wrreq => a_dpfifo_q131:dpfifo.wreq
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo
 aclr => a_fefifo_7cf:fifo_state.aclr
 aclr => cntr_1ob:rd_ptr_count.aclr
 aclr => cntr_1ob:wr_ptr.aclr
@@ -9085,7 +9091,7 @@ wreq => dpram_nl21:FIFOram.wren
 wreq => cntr_1ob:wr_ptr.cnt_en
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state
 aclr => b_full.IN0
 aclr => b_non_empty.IN0
 aclr => cntr_do7:count_usedw.aclr
@@ -9117,7 +9123,7 @@ wreq => _.IN0
 wreq => cntr_do7:count_usedw.updown
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state|cntr_do7:count_usedw
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|a_fefifo_7cf:fifo_state|cntr_do7:count_usedw
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -9143,7 +9149,7 @@ updown => counter_comb_bita4.DATAB
 updown => counter_comb_bita5.DATAB
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram
 data[0] => altsyncram_r1m1:altsyncram1.data_a[0]
 data[1] => altsyncram_r1m1:altsyncram1.data_a[1]
 data[2] => altsyncram_r1m1:altsyncram1.data_a[2]
@@ -9178,7 +9184,7 @@ wraddress[5] => altsyncram_r1m1:altsyncram1.address_a[5]
 wren => altsyncram_r1m1:altsyncram1.wren_a
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram|altsyncram_r1m1:altsyncram1
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|dpram_nl21:FIFOram|altsyncram_r1m1:altsyncram1
 address_a[0] => ram_block2a0.PORTAADDR
 address_a[0] => ram_block2a1.PORTAADDR
 address_a[0] => ram_block2a2.PORTAADDR
@@ -9333,7 +9339,7 @@ wren_a => ram_block2a7.PORTAWE
 wren_a => ram_block2a7.ENA0
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:rd_ptr_count
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:rd_ptr_count
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -9353,7 +9359,7 @@ sclr => _.IN0
 sclr => _.IN0
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:wr_ptr
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|Quad_Dec_jtag_uart_scfifo_r:the_Quad_Dec_jtag_uart_scfifo_r|scfifo:rfifo|scfifo_jr21:auto_generated|a_dpfifo_q131:dpfifo|cntr_1ob:wr_ptr
 aclr => counter_reg_bit[5].IN0
 clock => counter_reg_bit[5].CLK
 clock => counter_reg_bit[4].CLK
@@ -9373,7 +9379,7 @@ sclr => _.IN0
 sclr => _.IN0
 
 
-|Quad_Dec|Quad_Dec_jtag_uart:jtag_uart|alt_jtag_atlantic:Quad_Dec_jtag_uart_alt_jtag_atlantic
+|esl_as4|Quad_Dec:inst|Quad_Dec_jtag_uart:jtag_uart|alt_jtag_atlantic:Quad_Dec_jtag_uart_alt_jtag_atlantic
 raw_tck => write_stalled.CLK
 raw_tck => wdata[0].CLK
 raw_tck => wdata[1].CLK
@@ -9595,7 +9601,7 @@ t_dat[7] <= t_dat[7].DB_MAX_OUTPUT_PORT_TYPE
 t_pause <= t_pause~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_sys_clk_timer:sys_clk_timer
+|esl_as4|Quad_Dec:inst|Quad_Dec_sys_clk_timer:sys_clk_timer
 address[0] => Equal1.IN30
 address[0] => Equal2.IN60
 address[0] => Equal3.IN30
@@ -9913,7 +9919,7 @@ readdata[14] <= readdata[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 readdata[15] <= readdata[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_sysid:sysid
+|esl_as4|Quad_Dec:inst|Quad_Dec_sysid:sysid
 address => readdata[30].DATAIN
 address => readdata[28].DATAIN
 address => readdata[27].DATAIN
@@ -9970,7 +9976,7 @@ readdata[30] <= address.DB_MAX_OUTPUT_PORT_TYPE
 readdata[31] <= <GND>
 
 
-|Quad_Dec|esl_demonstrator:quadraturedecoder
+|esl_as4|Quad_Dec:inst|esl_demonstrator:quadraturedecoder
 clk => quadraturedecoder:encoder.clk
 clk => slave_readdata[0]~reg0.CLK
 clk => slave_readdata[1]~reg0.CLK
@@ -10118,7 +10124,7 @@ inputs[0] => quadraturedecoder:encoder.GPIO_0_IN[0]
 inputs[1] => quadraturedecoder:encoder.GPIO_0_IN[1]
 
 
-|Quad_Dec|esl_demonstrator:quadraturedecoder|QuadratureDecoder:encoder
+|esl_as4|Quad_Dec:inst|esl_demonstrator:quadraturedecoder|QuadratureDecoder:encoder
 clk => GPIO_0[0]~reg0.CLK
 clk => GPIO_0[1]~reg0.CLK
 clk => GPIO_0[2]~reg0.CLK
@@ -10220,7 +10226,7 @@ GPIO_0_IN[0] => ~NO_FANOUT~
 GPIO_0_IN[1] => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0
 clk_0_clk_clk => clk_0_clk_clk.IN47
 cpu_reset_n_reset_bridge_in_reset_reset => cpu_reset_n_reset_bridge_in_reset_reset.IN47
 cpu_data_master_address[0] => cpu_data_master_address[0].IN1
@@ -10748,7 +10754,7 @@ sysid_control_slave_readdata[30] => sysid_control_slave_readdata[30].IN1
 sysid_control_slave_readdata[31] => sysid_control_slave_readdata[31].IN1
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_translator:cpu_instruction_master_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_translator:cpu_instruction_master_translator
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 uav_write <= <GND>
@@ -10952,7 +10958,7 @@ av_writeresponserequest => ~NO_FANOUT~
 av_writeresponsevalid <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_translator:cpu_data_master_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_translator:cpu_data_master_translator
 clk => read_accepted.CLK
 reset => read_accepted.ACLR
 uav_write <= av_write.DB_MAX_OUTPUT_PORT_TYPE
@@ -11161,7 +11167,7 @@ av_writeresponserequest => ~NO_FANOUT~
 av_writeresponsevalid <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:cpu_jtag_debug_module_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:cpu_jtag_debug_module_translator
 clk => in_transfer.CLK
 clk => end_beginbursttransfer.CLK
 clk => end_begintransfer.CLK
@@ -11458,7 +11464,7 @@ av_writeresponserequest <= uav_writeresponserequest.DB_MAX_OUTPUT_PORT_TYPE
 av_writeresponsevalid => uav_writeresponsevalid.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:onchip_mem_s1_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:onchip_mem_s1_translator
 clk => in_transfer.CLK
 clk => end_beginbursttransfer.CLK
 clk => end_begintransfer.CLK
@@ -11693,7 +11699,7 @@ av_writeresponserequest <= uav_writeresponserequest.DB_MAX_OUTPUT_PORT_TYPE
 av_writeresponsevalid => uav_writeresponsevalid.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:jtag_uart_avalon_jtag_slave_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:jtag_uart_avalon_jtag_slave_translator
 clk => in_transfer.CLK
 clk => end_beginbursttransfer.CLK
 clk => end_begintransfer.CLK
@@ -11970,7 +11976,7 @@ av_writeresponserequest <= uav_writeresponserequest.DB_MAX_OUTPUT_PORT_TYPE
 av_writeresponsevalid => uav_writeresponsevalid.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:sys_clk_timer_s1_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:sys_clk_timer_s1_translator
 clk => in_transfer.CLK
 clk => end_beginbursttransfer.CLK
 clk => end_begintransfer.CLK
@@ -12187,7 +12193,7 @@ av_writeresponserequest <= uav_writeresponserequest.DB_MAX_OUTPUT_PORT_TYPE
 av_writeresponsevalid => uav_writeresponsevalid.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:sysid_control_slave_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:sysid_control_slave_translator
 clk => in_transfer.CLK
 clk => end_beginbursttransfer.CLK
 clk => end_begintransfer.CLK
@@ -12478,7 +12484,7 @@ av_writeresponserequest <= uav_writeresponserequest.DB_MAX_OUTPUT_PORT_TYPE
 av_writeresponsevalid => uav_writeresponsevalid.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:quadraturedecoder_avalon_slave_0_translator
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_translator:quadraturedecoder_avalon_slave_0_translator
 clk => in_transfer.CLK
 clk => end_beginbursttransfer.CLK
 clk => end_begintransfer.CLK
@@ -12776,7 +12782,7 @@ av_writeresponserequest <= uav_writeresponserequest.DB_MAX_OUTPUT_PORT_TYPE
 av_writeresponsevalid => uav_writeresponsevalid.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_agent:cpu_instruction_master_translator_avalon_universal_master_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_agent:cpu_instruction_master_translator_avalon_universal_master_0_agent
 clk => hold_waitrequest.CLK
 reset => hold_waitrequest.PRESET
 av_address[0] => ~NO_FANOUT~
@@ -13084,7 +13090,7 @@ rp_endofpacket => ~NO_FANOUT~
 rp_ready <= <VCC>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_agent:cpu_data_master_translator_avalon_universal_master_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_master_agent:cpu_data_master_translator_avalon_universal_master_0_agent
 clk => hold_waitrequest.CLK
 reset => hold_waitrequest.PRESET
 av_address[0] => ~NO_FANOUT~
@@ -13392,7 +13398,7 @@ rp_endofpacket => ~NO_FANOUT~
 rp_ready <= <VCC>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent
 clk => clk.IN1
 reset => reset.IN1
 m0_address[0] <= <GND>
@@ -14007,7 +14013,7 @@ rp_startofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_startof
 rp_endofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_endofpacket
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
 clk => burst_uncompress_address_offset[0].CLK
 clk => burst_uncompress_address_offset[1].CLK
 clk => burst_uncompress_address_offset[2].CLK
@@ -14233,7 +14239,7 @@ source_burstsize[1] <= sink_burstsize[1].DB_MAX_OUTPUT_PORT_TYPE
 source_burstsize[2] <= sink_burstsize[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo
 clk => csr_readdata[0]~reg0.CLK
 clk => csr_readdata[1]~reg0.CLK
 clk => csr_readdata[2]~reg0.CLK
@@ -14992,7 +14998,7 @@ almost_full_data <= <GND>
 almost_empty_data <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:onchip_mem_s1_translator_avalon_universal_slave_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:onchip_mem_s1_translator_avalon_universal_slave_0_agent
 clk => clk.IN1
 reset => reset.IN1
 m0_address[0] <= <GND>
@@ -15607,7 +15613,7 @@ rp_startofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_startof
 rp_endofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_endofpacket
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:onchip_mem_s1_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:onchip_mem_s1_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
 clk => burst_uncompress_address_offset[0].CLK
 clk => burst_uncompress_address_offset[1].CLK
 clk => burst_uncompress_address_offset[2].CLK
@@ -15833,7 +15839,7 @@ source_burstsize[1] <= sink_burstsize[1].DB_MAX_OUTPUT_PORT_TYPE
 source_burstsize[2] <= sink_burstsize[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:onchip_mem_s1_translator_avalon_universal_slave_0_agent_rsp_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:onchip_mem_s1_translator_avalon_universal_slave_0_agent_rsp_fifo
 clk => csr_readdata[0]~reg0.CLK
 clk => csr_readdata[1]~reg0.CLK
 clk => csr_readdata[2]~reg0.CLK
@@ -16592,7 +16598,7 @@ almost_full_data <= <GND>
 almost_empty_data <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:jtag_uart_avalon_jtag_slave_translator_avalon_universal_slave_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:jtag_uart_avalon_jtag_slave_translator_avalon_universal_slave_0_agent
 clk => clk.IN1
 reset => reset.IN1
 m0_address[0] <= <GND>
@@ -17207,7 +17213,7 @@ rp_startofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_startof
 rp_endofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_endofpacket
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:jtag_uart_avalon_jtag_slave_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:jtag_uart_avalon_jtag_slave_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
 clk => burst_uncompress_address_offset[0].CLK
 clk => burst_uncompress_address_offset[1].CLK
 clk => burst_uncompress_address_offset[2].CLK
@@ -17433,7 +17439,7 @@ source_burstsize[1] <= sink_burstsize[1].DB_MAX_OUTPUT_PORT_TYPE
 source_burstsize[2] <= sink_burstsize[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:jtag_uart_avalon_jtag_slave_translator_avalon_universal_slave_0_agent_rsp_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:jtag_uart_avalon_jtag_slave_translator_avalon_universal_slave_0_agent_rsp_fifo
 clk => csr_readdata[0]~reg0.CLK
 clk => csr_readdata[1]~reg0.CLK
 clk => csr_readdata[2]~reg0.CLK
@@ -18192,7 +18198,7 @@ almost_full_data <= <GND>
 almost_empty_data <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sys_clk_timer_s1_translator_avalon_universal_slave_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sys_clk_timer_s1_translator_avalon_universal_slave_0_agent
 clk => clk.IN1
 reset => reset.IN1
 m0_address[0] <= <GND>
@@ -18807,7 +18813,7 @@ rp_startofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_startof
 rp_endofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_endofpacket
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sys_clk_timer_s1_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sys_clk_timer_s1_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
 clk => burst_uncompress_address_offset[0].CLK
 clk => burst_uncompress_address_offset[1].CLK
 clk => burst_uncompress_address_offset[2].CLK
@@ -19033,7 +19039,7 @@ source_burstsize[1] <= sink_burstsize[1].DB_MAX_OUTPUT_PORT_TYPE
 source_burstsize[2] <= sink_burstsize[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:sys_clk_timer_s1_translator_avalon_universal_slave_0_agent_rsp_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:sys_clk_timer_s1_translator_avalon_universal_slave_0_agent_rsp_fifo
 clk => csr_readdata[0]~reg0.CLK
 clk => csr_readdata[1]~reg0.CLK
 clk => csr_readdata[2]~reg0.CLK
@@ -19792,7 +19798,7 @@ almost_full_data <= <GND>
 almost_empty_data <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sysid_control_slave_translator_avalon_universal_slave_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sysid_control_slave_translator_avalon_universal_slave_0_agent
 clk => clk.IN1
 reset => reset.IN1
 m0_address[0] <= <GND>
@@ -20407,7 +20413,7 @@ rp_startofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_startof
 rp_endofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_endofpacket
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sysid_control_slave_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:sysid_control_slave_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
 clk => burst_uncompress_address_offset[0].CLK
 clk => burst_uncompress_address_offset[1].CLK
 clk => burst_uncompress_address_offset[2].CLK
@@ -20633,7 +20639,7 @@ source_burstsize[1] <= sink_burstsize[1].DB_MAX_OUTPUT_PORT_TYPE
 source_burstsize[2] <= sink_burstsize[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:sysid_control_slave_translator_avalon_universal_slave_0_agent_rsp_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:sysid_control_slave_translator_avalon_universal_slave_0_agent_rsp_fifo
 clk => csr_readdata[0]~reg0.CLK
 clk => csr_readdata[1]~reg0.CLK
 clk => csr_readdata[2]~reg0.CLK
@@ -21392,7 +21398,7 @@ almost_full_data <= <GND>
 almost_empty_data <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:quadraturedecoder_avalon_slave_0_translator_avalon_universal_slave_0_agent
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:quadraturedecoder_avalon_slave_0_translator_avalon_universal_slave_0_agent
 clk => clk.IN1
 reset => reset.IN1
 m0_address[0] <= <GND>
@@ -22007,7 +22013,7 @@ rp_startofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_startof
 rp_endofpacket <= altera_merlin_burst_uncompressor:uncompressor.source_endofpacket
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:quadraturedecoder_avalon_slave_0_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_slave_agent:quadraturedecoder_avalon_slave_0_translator_avalon_universal_slave_0_agent|altera_merlin_burst_uncompressor:uncompressor
 clk => burst_uncompress_address_offset[0].CLK
 clk => burst_uncompress_address_offset[1].CLK
 clk => burst_uncompress_address_offset[2].CLK
@@ -22233,7 +22239,7 @@ source_burstsize[1] <= sink_burstsize[1].DB_MAX_OUTPUT_PORT_TYPE
 source_burstsize[2] <= sink_burstsize[2].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:quadraturedecoder_avalon_slave_0_translator_avalon_universal_slave_0_agent_rsp_fifo
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_avalon_sc_fifo:quadraturedecoder_avalon_slave_0_translator_avalon_universal_slave_0_agent_rsp_fifo
 clk => csr_readdata[0]~reg0.CLK
 clk => csr_readdata[1]~reg0.CLK
 clk => csr_readdata[2]~reg0.CLK
@@ -22992,7 +22998,7 @@ almost_full_data <= <GND>
 almost_empty_data <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router:addr_router
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router:addr_router
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -23205,7 +23211,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router:addr_router|Quad_Dec_mm_interconnect_0_addr_router_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router:addr_router|Quad_Dec_mm_interconnect_0_addr_router_default_decode:the_default_decode
 default_destination_id[0] <= <VCC>
 default_destination_id[1] <= <VCC>
 default_destination_id[2] <= <GND>
@@ -23229,7 +23235,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router_001:addr_router_001
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router_001:addr_router_001
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -23490,7 +23496,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router_001:addr_router_001|Quad_Dec_mm_interconnect_0_addr_router_001_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_addr_router_001:addr_router_001|Quad_Dec_mm_interconnect_0_addr_router_001_default_decode:the_default_decode
 default_destination_id[0] <= <VCC>
 default_destination_id[1] <= <VCC>
 default_destination_id[2] <= <GND>
@@ -23514,7 +23520,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -23726,7 +23732,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router|Quad_Dec_mm_interconnect_0_id_router_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router|Quad_Dec_mm_interconnect_0_id_router_default_decode:the_default_decode
 default_destination_id[0] <= <VCC>
 default_destination_id[1] <= <GND>
 default_destination_id[2] <= <GND>
@@ -23750,7 +23756,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router_001
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router_001
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -23962,7 +23968,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router_001|Quad_Dec_mm_interconnect_0_id_router_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router:id_router_001|Quad_Dec_mm_interconnect_0_id_router_default_decode:the_default_decode
 default_destination_id[0] <= <VCC>
 default_destination_id[1] <= <GND>
 default_destination_id[2] <= <GND>
@@ -23986,7 +23992,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_002
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_002
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -24194,7 +24200,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_002|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_002|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
 default_destination_id[0] <= <GND>
 default_destination_id[1] <= <GND>
 default_destination_id[2] <= <GND>
@@ -24218,7 +24224,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_003
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_003
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -24426,7 +24432,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_003|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_003|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
 default_destination_id[0] <= <GND>
 default_destination_id[1] <= <GND>
 default_destination_id[2] <= <GND>
@@ -24450,7 +24456,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_004
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_004
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -24658,7 +24664,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_004|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_004|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
 default_destination_id[0] <= <GND>
 default_destination_id[1] <= <GND>
 default_destination_id[2] <= <GND>
@@ -24682,7 +24688,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_005
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_005
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 sink_valid => src_valid.DATAIN
@@ -24890,7 +24896,7 @@ src_endofpacket <= sink_endofpacket.DB_MAX_OUTPUT_PORT_TYPE
 src_ready => sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_005|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_id_router_002:id_router_005|Quad_Dec_mm_interconnect_0_id_router_002_default_decode:the_default_decode
 default_destination_id[0] <= <GND>
 default_destination_id[1] <= <GND>
 default_destination_id[2] <= <GND>
@@ -24914,7 +24920,7 @@ default_src_channel[4] <= <GND>
 default_src_channel[5] <= <GND>
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_traffic_limiter:limiter
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|altera_merlin_traffic_limiter:limiter
 clk => has_pending_responses.CLK
 clk => pending_response_count[0].CLK
 clk => last_channel[0].CLK
@@ -25389,7 +25395,7 @@ rsp_src_ready => response_sink_accepted.IN1
 rsp_src_ready => rsp_sink_ready.DATAIN
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_demux:cmd_xbar_demux
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_demux:cmd_xbar_demux
 sink_valid[0] => src0_valid.IN0
 sink_valid[1] => src1_valid.IN0
 sink_valid[2] => ~NO_FANOUT~
@@ -25809,7 +25815,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001:cmd_xbar_demux_001
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_demux_001:cmd_xbar_demux_001
 sink_valid[0] => src0_valid.IN0
 sink_valid[0] => src1_valid.IN0
 sink_valid[0] => src2_valid.IN0
@@ -27021,7 +27027,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux
 sink0_valid => request.IN1
 sink0_valid => src_valid.IN1
 sink0_data[0] => src_payload.IN1
@@ -27341,7 +27347,7 @@ clk => clk.IN1
 reset => reset.IN1
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux|altera_merlin_arbitrator:arb
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux|altera_merlin_arbitrator:arb
 clk => top_priority_reg[0].CLK
 clk => top_priority_reg[1].CLK
 reset => top_priority_reg[0].PRESET
@@ -27363,7 +27369,7 @@ increment_top_priority => top_priority_reg.OUTPUTSELECT
 save_top_priority => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
 a[0] => sum.IN0
 a[0] => full_adder.cout[0].IN0
 a[1] => cout.IN0
@@ -27384,7 +27390,7 @@ sum[2] <= sum.DB_MAX_OUTPUT_PORT_TYPE
 sum[3] <= sum.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux_001
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux_001
 sink0_valid => request.IN1
 sink0_valid => src_valid.IN1
 sink0_data[0] => src_payload.IN1
@@ -27704,7 +27710,7 @@ clk => clk.IN1
 reset => reset.IN1
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux_001|altera_merlin_arbitrator:arb
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux_001|altera_merlin_arbitrator:arb
 clk => top_priority_reg[0].CLK
 clk => top_priority_reg[1].CLK
 reset => top_priority_reg[0].PRESET
@@ -27726,7 +27732,7 @@ increment_top_priority => top_priority_reg.OUTPUTSELECT
 save_top_priority => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux_001|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux:cmd_xbar_mux_001|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
 a[0] => sum.IN0
 a[0] => full_adder.cout[0].IN0
 a[1] => cout.IN0
@@ -27747,7 +27753,7 @@ sum[2] <= sum.DB_MAX_OUTPUT_PORT_TYPE
 sum[3] <= sum.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_002
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_002
 sink0_valid => src_valid.DATAIN
 sink0_data[0] => src_data[0].DATAIN
 sink0_data[1] => src_data[1].DATAIN
@@ -27958,7 +27964,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_003
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_003
 sink0_valid => src_valid.DATAIN
 sink0_data[0] => src_data[0].DATAIN
 sink0_data[1] => src_data[1].DATAIN
@@ -28169,7 +28175,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_004
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_004
 sink0_valid => src_valid.DATAIN
 sink0_data[0] => src_data[0].DATAIN
 sink0_data[1] => src_data[1].DATAIN
@@ -28380,7 +28386,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_005
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_cmd_xbar_mux_002:cmd_xbar_mux_005
 sink0_valid => src_valid.DATAIN
 sink0_data[0] => src_data[0].DATAIN
 sink0_data[1] => src_data[1].DATAIN
@@ -28591,7 +28597,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux:rsp_xbar_demux
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux:rsp_xbar_demux
 sink_valid[0] => src0_valid.IN0
 sink_valid[0] => src1_valid.IN0
 sink_data[0] => src1_data[0].DATAIN
@@ -29007,7 +29013,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux:rsp_xbar_demux_001
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux:rsp_xbar_demux_001
 sink_valid[0] => src0_valid.IN0
 sink_valid[0] => src1_valid.IN0
 sink_data[0] => src1_data[0].DATAIN
@@ -29423,7 +29429,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_002
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_002
 sink_valid[0] => src0_valid.IN0
 sink_data[0] => src0_data[0].DATAIN
 sink_data[1] => src0_data[1].DATAIN
@@ -29635,7 +29641,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_003
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_003
 sink_valid[0] => src0_valid.IN0
 sink_data[0] => src0_data[0].DATAIN
 sink_data[1] => src0_data[1].DATAIN
@@ -29847,7 +29853,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_004
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_004
 sink_valid[0] => src0_valid.IN0
 sink_data[0] => src0_data[0].DATAIN
 sink_data[1] => src0_data[1].DATAIN
@@ -30059,7 +30065,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_005
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_demux_002:rsp_xbar_demux_005
 sink_valid[0] => src0_valid.IN0
 sink_data[0] => src0_data[0].DATAIN
 sink_data[1] => src0_data[1].DATAIN
@@ -30271,7 +30277,7 @@ clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux:rsp_xbar_mux
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux:rsp_xbar_mux
 sink0_valid => request[0].IN1
 sink0_data[0] => src_payload.IN1
 sink0_data[1] => src_payload.IN1
@@ -30589,7 +30595,7 @@ clk => clk.IN1
 reset => reset.IN1
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux:rsp_xbar_mux|altera_merlin_arbitrator:arb
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux:rsp_xbar_mux|altera_merlin_arbitrator:arb
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 request[0] => grant[0].DATAIN
@@ -30604,7 +30610,7 @@ increment_top_priority => ~NO_FANOUT~
 save_top_priority => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux:rsp_xbar_mux|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux:rsp_xbar_mux|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
 a[0] => sum.IN0
 a[0] => full_adder.cout[0].IN0
 a[1] => cout.IN0
@@ -30625,7 +30631,7 @@ sum[2] <= sum.DB_MAX_OUTPUT_PORT_TYPE
 sum[3] <= sum.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001:rsp_xbar_mux_001
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001:rsp_xbar_mux_001
 sink0_valid => request[0].IN1
 sink0_data[0] => src_payload.IN1
 sink0_data[1] => src_payload.IN1
@@ -31363,7 +31369,7 @@ clk => clk.IN1
 reset => reset.IN1
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001:rsp_xbar_mux_001|altera_merlin_arbitrator:arb
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001:rsp_xbar_mux_001|altera_merlin_arbitrator:arb
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 request[0] => grant[0].DATAIN
@@ -31394,7 +31400,7 @@ increment_top_priority => ~NO_FANOUT~
 save_top_priority => ~NO_FANOUT~
 
 
-|Quad_Dec|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001:rsp_xbar_mux_001|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
+|esl_as4|Quad_Dec:inst|Quad_Dec_mm_interconnect_0:mm_interconnect_0|Quad_Dec_mm_interconnect_0_rsp_xbar_mux_001:rsp_xbar_mux_001|altera_merlin_arbitrator:arb|altera_merlin_arb_adder:adder
 a[0] => Add0.IN12
 a[1] => Add0.IN11
 a[2] => Add0.IN10
@@ -31433,7 +31439,7 @@ sum[10] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
 sum[11] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|Quad_Dec_irq_mapper:irq_mapper
+|esl_as4|Quad_Dec:inst|Quad_Dec_irq_mapper:irq_mapper
 clk => ~NO_FANOUT~
 reset => ~NO_FANOUT~
 receiver0_irq => sender_irq[16].DATAIN
@@ -31472,7 +31478,7 @@ sender_irq[30] <= <GND>
 sender_irq[31] <= <GND>
 
 
-|Quad_Dec|altera_reset_controller:rst_controller
+|esl_as4|Quad_Dec:inst|altera_reset_controller:rst_controller
 reset_in0 => merged_reset.IN0
 reset_in1 => merged_reset.IN1
 reset_in2 => merged_reset.IN1
@@ -31510,7 +31516,7 @@ reset_out <= r_sync_rst.DB_MAX_OUTPUT_PORT_TYPE
 reset_req <= r_early_rst.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|altera_reset_controller:rst_controller|altera_reset_synchronizer:alt_rst_sync_uq1
+|esl_as4|Quad_Dec:inst|altera_reset_controller:rst_controller|altera_reset_synchronizer:alt_rst_sync_uq1
 reset_in => altera_reset_synchronizer_int_chain_out.PRESET
 reset_in => altera_reset_synchronizer_int_chain[0].PRESET
 reset_in => altera_reset_synchronizer_int_chain[1].PRESET
@@ -31520,7 +31526,7 @@ clk => altera_reset_synchronizer_int_chain[1].CLK
 reset_out <= altera_reset_synchronizer_int_chain_out.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Quad_Dec|altera_reset_controller:rst_controller|altera_reset_synchronizer:alt_rst_req_sync_uq1
+|esl_as4|Quad_Dec:inst|altera_reset_controller:rst_controller|altera_reset_synchronizer:alt_rst_req_sync_uq1
 reset_in => altera_reset_synchronizer_int_chain[1].DATAIN
 clk => altera_reset_synchronizer_int_chain_out.CLK
 clk => altera_reset_synchronizer_int_chain[0].CLK

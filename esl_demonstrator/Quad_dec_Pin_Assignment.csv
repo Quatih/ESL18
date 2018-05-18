@@ -13,8 +13,8 @@
 # applicable agreement for further details.
 
 # Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-# File: C:\Users\reinv\Documents\School\Master\Master\Quartile 2B1\Embedded Systems Laboratory\Project1\esl_demonstrator\Quad_dec_Pin_Assignment.csv
-# Generated on: Fri May 18 13:42:52 2018
+# File: C:\Users\reinv\Documents\GitHub\ESL21\esl_demonstrator\Quad_dec_Pin_Assignment.csv
+# Generated on: Fri May 18 14:35:35 2018
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
@@ -23,7 +23,6 @@ altera_reserved_tck,Input,,,,PIN_H3,,,,,
 altera_reserved_tdi,Input,,,,PIN_H4,,,,,
 altera_reserved_tdo,Output,,,,PIN_J4,,,,,
 altera_reserved_tms,Input,,,,PIN_J5,,,,,
-clk_clk,Input,PIN_R8,3,B3_N0,PIN_R8,,,,,
-quadraturedecoder_inputs_export[1],Input,PIN_E1,1,B1_N0,PIN_E1,3.3-V LVTTL,,,,
-quadraturedecoder_inputs_export[0],Input,PIN_J15,5,B5_N0,PIN_J15,3.3-V LVTTL,,,,
-reset_reset_n,Input,PIN_M1,2,B2_N0,PIN_M1,3.3-V LVTTL,,,,
+CLOCK_50,Input,PIN_R8,3,B3_N0,PIN_R8,,,,,
+Quad_input2,Input,PIN_E1,1,B1_N0,PIN_D5,,,,,
+Quad_input1,Input,PIN_J15,5,B5_N0,PIN_R4,,,,,
