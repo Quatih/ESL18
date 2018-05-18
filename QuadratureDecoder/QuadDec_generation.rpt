@@ -1,0 +1,31 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: ip-generate --project-directory=C:/Users/hvati/source/ESL21/QuadratureDecoder/ --output-directory=C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec/ --report-file=bsf:C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec.bsf --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE22F17C6 --system-info=DEVICE_SPEEDGRADE=6 --component-file=C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec.qsys
+Progress: Loading QuadratureDecoder/QuadDec.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 13.0]
+Progress: Parameterizing module clk_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: ip-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: ip-generate --project-directory=C:/Users/hvati/source/ESL21/QuadratureDecoder/ --output-directory=C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec/synthesis/ --file-set=QUARTUS_SYNTH --report-file=sopcinfo:C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec.sopcinfo --report-file=html:C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec.html --report-file=qip:C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec/synthesis/QuadDec.qip --report-file=cmp:C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec.cmp --report-file=svd --system-info=DEVICE_FAMILY="Cyclone IV E" --system-info=DEVICE=EP4CE22F17C6 --system-info=DEVICE_SPEEDGRADE=6 --component-file=C:/Users/hvati/source/ESL21/QuadratureDecoder/QuadDec.qsys --language=VHDL
+Progress: Loading QuadratureDecoder/QuadDec.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 13.0]
+Progress: Parameterizing module clk_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: QuadDec: Generating QuadDec "QuadDec" for QUARTUS_SYNTH
+Info: pipeline_bridge_swap_transform: After transform: 1 modules, 0 connections
+Info: No custom instruction connections, skipping transform 
+Info: No Avalon connections, skipping transform 
+Info: merlin_translator_transform: After transform: 1 modules, 0 connections
+Info: QuadDec: Done QuadDec" with 1 modules, 1 files, 402 bytes
+Info: ip-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

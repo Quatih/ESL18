@@ -1,0 +1,10 @@
+set_global_assignment -entity "QuadDec" -library "QuadDec" -name IP_TOOL_NAME "Qsys"
+set_global_assignment -entity "QuadDec" -library "QuadDec" -name IP_TOOL_VERSION "13.0sp1"
+set_global_assignment -entity "QuadDec" -library "QuadDec" -name IP_TOOL_ENV "Qsys"
+set_global_assignment -library "QuadDec" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../QuadDec.sopcinfo"]
+set_instance_assignment -entity "QuadDec" -library "QuadDec" -name SLD_INFO "QSYS_NAME QuadDec HAS_SOPCINFO 1 GENERATION_ID 1526645725"
+set_global_assignment -library "QuadDec" -name MISC_FILE [file join $::quartus(qip_path) "../../QuadDec.cmp"]
+set_global_assignment -name SYNTHESIS_ONLY_QIP ON
+set_global_assignment -library "QuadDec" -name MISC_FILE [file join $::quartus(qip_path) "../../QuadDec.qsys"]
+
+set_global_assignment -library "QuadDec" -name VHDL_FILE [file join $::quartus(qip_path) "QuadDec.vhd"]
