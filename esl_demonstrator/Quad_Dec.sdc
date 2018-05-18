@@ -1,8 +1,8 @@
 #Update -period with clock period (in nanoseconds) of the clock driving the fpga
-create_clock -name sopc_clk -period 20 [get_ports PLD_CLOCKINPUT]
+create_clock -period 20 [get_ports {clk_clk}]
 
 #Setting LED outputs as false path, since no timing requirement
-set_false_path -from * -to [get_ports LEDG[*]]
+#set_false_path -from * -to [get_ports LEDG[*]]
 
 #Constraining JTAG interface
 #TCK port

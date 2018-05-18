@@ -1,6 +1,6 @@
 EDA Netlist Writer report for esl_demonstrator
-Thu May 17 16:23:21 2018
-Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Thu May 17 19:23:14 2018
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
 ---------------------
@@ -8,9 +8,7 @@ Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 ---------------------
   1. Legal Notice
   2. EDA Netlist Writer Summary
-  3. Simulation Settings
-  4. Simulation Generated Files
-  5. EDA Netlist Writer Messages
+  3. EDA Netlist Writer Messages
 
 
 
@@ -33,75 +31,34 @@ applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------+
-; EDA Netlist Writer Summary                                        ;
-+---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu May 17 16:23:21 2018 ;
-; Revision Name             ; esl_demonstrator                      ;
-; Top-level Entity Name     ; Quad_Dec                              ;
-; Family                    ; Cyclone IV E                          ;
-; Simulation Files Creation ; Successful                            ;
-+---------------------------+---------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------+
-; Simulation Settings                                                                                                        ;
-+---------------------------------------------------------------------------------------------------+------------------------+
-; Option                                                                                            ; Setting                ;
-+---------------------------------------------------------------------------------------------------+------------------------+
-; Tool Name                                                                                         ; ModelSim-Altera (VHDL) ;
-; Generate netlist for functional simulation only                                                   ; Off                    ;
-; Time scale                                                                                        ; 1 ps                   ;
-; Truncate long hierarchy paths                                                                     ; Off                    ;
-; Map illegal HDL characters                                                                        ; Off                    ;
-; Flatten buses into individual nodes                                                               ; Off                    ;
-; Maintain hierarchy                                                                                ; Off                    ;
-; Bring out device-wide set/reset signals as ports                                                  ; Off                    ;
-; Enable glitch filtering                                                                           ; Off                    ;
-; Do not write top level VHDL entity                                                                ; Off                    ;
-; Disable detection of setup and hold time violations in the input registers of bi-directional pins ; Off                    ;
-; Architecture name in VHDL output netlist                                                          ; structure              ;
-; Generate third-party EDA tool command script for RTL functional simulation                        ; Off                    ;
-; Generate third-party EDA tool command script for gate-level simulation                            ; Off                    ;
-+---------------------------------------------------------------------------------------------------+------------------------+
-
-
-+----------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                         ;
-+----------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                    ;
-+----------------------------------------------------------------------------------------------------+
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_85c_slow.vho      ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_0c_slow.vho       ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_min_1200mv_0c_fast.vho     ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator.vho                        ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_85c_vhd_slow.sdo  ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_6_1200mv_0c_vhd_slow.sdo   ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_min_1200mv_0c_vhd_fast.sdo ;
-; /home/esl21/ESL21/esl_demonstrator/simulation/modelsim/esl_demonstrator_vhd.sdo                    ;
-+----------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------+
+; EDA Netlist Writer Summary                                    ;
++---------------------------+-----------------------------------+
+; EDA Netlist Writer Status ; Failed - Thu May 17 19:23:14 2018 ;
+; Revision Name             ; esl_demonstrator                  ;
+; Top-level Entity Name     ; Quad_Dec                          ;
+; Family                    ; Cyclone IV E                      ;
++---------------------------+-----------------------------------+
 
 
 +-----------------------------+
 ; EDA Netlist Writer Messages ;
 +-----------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 32-bit EDA Netlist Writer
+Info: Running Quartus II 64-Bit EDA Netlist Writer
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Thu May 17 16:23:16 2018
+    Info: Processing started: Thu May 17 19:23:14 2018
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off esl_demonstrator -c esl_demonstrator
-Info (204019): Generated file esl_demonstrator_6_1200mv_85c_slow.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_6_1200mv_0c_slow.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_min_1200mv_0c_fast.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator.vho in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_6_1200mv_85c_vhd_slow.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_6_1200mv_0c_vhd_slow.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_min_1200mv_0c_vhd_fast.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file esl_demonstrator_vhd.sdo in folder "/home/esl21/ESL21/esl_demonstrator/simulation/modelsim/" for EDA simulation tool
-Info: Quartus II 32-bit EDA Netlist Writer was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 382 megabytes
-    Info: Processing ended: Thu May 17 16:23:21 2018
-    Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:04
+Error (204012): Can't generate netlist output files because the file "C:/Users/reinv/Documents/School/Master/Master/Quartile 2B1/Embedded Systems Laboratory/Project1/esl_demonstrator/Quad_Dec/synthesis/submodules/Quad_Dec_cpu.v" is an OpenCore Plus time-limited file
+Error (204009): Can't generate netlist output files because the license for encrypted file "C:/Users/reinv/Documents/School/Master/Master/Quartile 2B1/Embedded Systems Laboratory/Project1/esl_demonstrator/Quad_Dec/synthesis/submodules/Quad_Dec_cpu.v" is not available
+Error (204012): Can't generate netlist output files because the file "C:/Users/reinv/Documents/School/Master/Master/Quartile 2B1/Embedded Systems Laboratory/Project1/esl_demonstrator/Quad_Dec/synthesis/submodules/Quad_Dec_cpu.v" is an OpenCore Plus time-limited file
+Error (204009): Can't generate netlist output files because the license for encrypted file "C:/Users/reinv/Documents/School/Master/Master/Quartile 2B1/Embedded Systems Laboratory/Project1/esl_demonstrator/Quad_Dec/synthesis/submodules/Quad_Dec_cpu.v" is not available
+Error (204012): Can't generate netlist output files because the file "C:/Users/reinv/Documents/School/Master/Master/Quartile 2B1/Embedded Systems Laboratory/Project1/esl_demonstrator/Quad_Dec/synthesis/submodules/Quad_Dec_cpu.v" is an OpenCore Plus time-limited file
+Error (204009): Can't generate netlist output files because the license for encrypted file "C:/Users/reinv/Documents/School/Master/Master/Quartile 2B1/Embedded Systems Laboratory/Project1/esl_demonstrator/Quad_Dec/synthesis/submodules/Quad_Dec_cpu.v" is not available
+Error: Quartus II 64-Bit EDA Netlist Writer was unsuccessful. 6 errors, 0 warnings
+    Error: Peak virtual memory: 504 megabytes
+    Error: Processing ended: Thu May 17 19:23:15 2018
+    Error: Elapsed time: 00:00:01
+    Error: Total CPU time (on all processors): 00:00:01
 
 
