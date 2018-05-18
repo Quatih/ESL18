@@ -17,31 +17,32 @@ end QuadratureDecoder;
 
 architecture behavior of QuadratureDecoder is
 	--variable counter : std_logic_vector(wl -1  downto 0) := (others => '0');
-	signal counter : std_logic_vector(wl -1  downto 0) := (others => '0');
+	signal counter : signed(wl -1  downto 0) := (others => '0');
 	signal GPIO_0_IN_old : std_logic_vector(1 downto 0) := (others => '0');
+	signal high : std_logic := '0';
 begin
 
-process(GPIO_0_IN)
-begin
-	--if (enable = '1') and (rising_edge(GPIO_0_IN(0)) or rising_edge(GPIO_0_IN(1))) then
-	if ((enable = '1') and ((GPIO_0_IN_old(0) = '0' and GPIO_0_IN(0) = '1') or (GPIO_0_IN_old(1) = '0' and GPIO_0_IN(1) = '1'))) then
-		case GPIO_0_IN is
-			when "10" => counter <= std_logic_vector(signed(counter) + 1);
-			when "01" => counter <= std_logic_vector(signed(counter) - 1);
-			when others => -- nothing
-		end case;
-	end if;
-	GPIO_0_IN_old <= GPIO_0_IN;
-end process;
-
+GPIO_0 <= std_logic_vector(counter);
 
 process(clk, reset) 
 begin
 	if reset = '1' then
-		--counter <= (others => '0');
-		GPIO_0 <= (others => '0');
+		counter <= (others => '0');
+		GPIO_0_IN_old <= (others => '0');
+		high <= '0';
 	elsif  rising_edge(clk) then
-		GPIO_0 <= counter;
+	  if high = '0' and (not(GPIO_0_IN = GPIO_0_IN_old)) and GPIO_0_IN_old = "00" then
+		 	case GPIO_0_IN is
+	  		when "10" => counter <= counter + 1;
+	   		when "01" => counter <= counter - 1;
+	   		when others => 
+	   	end case;
+			high <= '1';
+		else
+			high <= '0';
+		end if;
+		
+		GPIO_0_IN_old <= GPIO_0_IN;
 	end if;
 end process;	
 

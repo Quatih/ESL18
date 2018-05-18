@@ -9,7 +9,7 @@ end testbench;
 
 architecture tb of testbench is
 
-component QuadratureEncoder is
+component QuadratureDecoder is
  generic (wl : natural := 32);
  port ( 
 	clk   : in std_logic;
@@ -19,18 +19,20 @@ component QuadratureEncoder is
 	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
 
 	);
-end component QuadratureEncoder;
+end component QuadratureDecoder;
 
 signal clk : std_logic := '0';
-
-signal GPIO_0 : std_logic_vector(33 downto 0);
+signal enable : std_logic := '1';
+signal reset : std_logic;
+signal GPIO_0 : std_logic_vector(31 downto 0);
 signal GPIO_0_in : std_logic_vector(1 downto 0) := (others => '0');
 begin
-
+  
+reset <= '1', '0' after 100 ns;
 clk <= not clk after 10 ns;
 
-enc : QuadratureEncoder 
-	port map(clk, LED, KEY, SW, GPIO_0, GPIO_0_in, GPIO_1, GPIO_1_in);
+enc : QuadratureDecoder 
+	port map(clk,reset, enable, GPIO_0, GPIO_0_in);
 
 
 process

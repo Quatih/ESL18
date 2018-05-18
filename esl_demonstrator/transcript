@@ -1,68 +1,96 @@
 # Loading project test
-# Compile of QuadratureEncoder.vhd failed.
-# Compile of testbench.vhd failed.
 # Compile of testbench.vhd failed with 1 errors.
-# Compile of testbench.vhd failed with 1 errors.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 1 failed with 1 error. 
 # Compile of testbench.vhd was successful.
-# Compile of QuadratureEncoder.vhd failed with 1 errors.
-# Compile of QuadratureEncoder.vhd failed with 1 errors.
-# Compile of QuadratureEncoder.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
 vsim work.testbench
 # vsim work.testbench 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.testbench(tb)
 # Loading ieee.numeric_std(body)
+# Loading work.testbench(tb)
 # Loading work.quadratureencoder(behavior)
-# ** Warning: (vsim-8683) Uninitialized out port /testbench/enc/LED(7 downto 0) has no driver.
-# This port will contribute value (UUUUUUUU) to the signal network.
-# ** Warning: (vsim-8683) Uninitialized inout port /testbench/enc/GPIO_1(33 downto 0) has no driver.
-# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
-run 1000ns
-add wave -position insertpoint  \
-sim:/testbench/clk \
-sim:/testbench/LED \
-sim:/testbench/KEY \
-sim:/testbench/SW \
-sim:/testbench/GPIO_0 \
-sim:/testbench/GPIO_1 \
-sim:/testbench/GPIO_0_in \
-sim:/testbench/GPIO_1_in
-restart -f
-# ** Warning: (vsim-8683) Uninitialized out port /testbench/enc/LED(7 downto 0) has no driver.
-# This port will contribute value (UUUUUUUU) to the signal network.
-# ** Warning: (vsim-8683) Uninitialized inout port /testbench/enc/GPIO_1(33 downto 0) has no driver.
-# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
-run 1000ns
-# Compile of QuadratureEncoder.vhd was successful.
+# ** Fatal: (vsim-3348) Port length (32) does not match actual length (34) for port '/testbench/enc/GPIO_0'.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/enc File: /home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd Line: 12
+# FATAL ERROR while loading design
+# Error loading design
+# Compile of testbench.vhd failed with 1 errors.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 1 failed with 1 error. 
 # Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim work.testbench
+# vsim work.testbench 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.testbench(tb)
+# Loading work.quadraturedecoder(behavior)
+# ** Fatal: (vsim-3348) Port length (32) does not match actual length (34) for port '/testbench/enc/GPIO_0'.
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/enc File: /home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/QuadratureDecoder.vhd Line: 11
+# FATAL ERROR while loading design
+# Error loading design
+# Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim work.testbench
+# vsim work.testbench 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.testbench(tb)
+# Loading work.quadraturedecoder(behavior)
+add wave *
+run 5000ns
+add wave -position insertpoint  \
+sim:/testbench/enc/clk \
+sim:/testbench/enc/reset \
+sim:/testbench/enc/enable \
+sim:/testbench/enc/GPIO_0 \
+sim:/testbench/enc/GPIO_0_IN \
+sim:/testbench/enc/counter \
+sim:/testbench/enc/GPIO_0_IN_old
+restart -f
+run 5000ns
+# Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
 # 2 compiles, 0 failed with no errors. 
 restart -f
 # Loading work.testbench(tb)
-# Loading work.quadratureencoder(behavior)
-# ** Warning: (vsim-8683) Uninitialized out port /testbench/enc/LED(7 downto 0) has no driver.
-# This port will contribute value (UUUUUUUU) to the signal network.
-# ** Warning: (vsim-8683) Uninitialized inout port /testbench/enc/GPIO_1(33 downto 0) has no driver.
-# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
-run -all
-# Break key hit 
-# Simulation stop requested.
-# Compile of testbench.vhd failed with 1 errors.
-# Compile of testbench.vhd failed with 1 errors.
-# Compile of testbench.vhd failed with 1 errors.
+# Loading work.quadraturedecoder(behavior)
+run 1000ns
 # Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
 restart -f
 # Loading work.testbench(tb)
-# ** Warning: (vsim-8683) Uninitialized out port /testbench/enc/LED(7 downto 0) has no driver.
-# This port will contribute value (UUUUUUUU) to the signal network.
-# ** Warning: (vsim-8683) Uninitialized inout port /testbench/enc/GPIO_1(33 downto 0) has no driver.
-# This port will contribute value (UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) to the signal network.
+# Loading work.quadraturedecoder(behavior)
 run 1000ns
+# Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+restart -f
+# Loading work.testbench(tb)
+# Loading work.quadraturedecoder(behavior)
 run 1000ns
+# Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+restart -f
+# Loading work.testbench(tb)
+# Loading work.quadraturedecoder(behavior)
 run 1000ns
-# Compile of QuadratureEncoder.vhd failed with 1 errors.
-# Compile of QuadratureEncoder.vhd failed with 1 errors.
-# Compile of QuadratureEncoder.vhd failed with 1 errors.
-# Compile of QuadratureEncoder.vhd failed with 1 errors.
-# Compile of QuadratureEncoder.vhd was successful.
+# Compile of testbench.vhd was successful.
+# Compile of QuadratureDecoder.vhd was successful.
+# 2 compiles, 0 failed with no errors. 
+restar t-f
+# Loading work.testbench(tb)
+# Loading work.quadraturedecoder(behavior)
+run 1000ns
+run 10000ns

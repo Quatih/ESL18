@@ -2,7 +2,7 @@ set_global_assignment -entity "Quad_Dec" -library "Quad_Dec" -name IP_TOOL_NAME 
 set_global_assignment -entity "Quad_Dec" -library "Quad_Dec" -name IP_TOOL_VERSION "13.1"
 set_global_assignment -entity "Quad_Dec" -library "Quad_Dec" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "Quad_Dec" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../Quad_Dec.sopcinfo"]
-set_global_assignment -entity "Quad_Dec" -library "Quad_Dec" -name SLD_INFO "QSYS_NAME Quad_Dec HAS_SOPCINFO 1 GENERATION_ID 1526566770"
+set_global_assignment -entity "Quad_Dec" -library "Quad_Dec" -name SLD_INFO "QSYS_NAME Quad_Dec HAS_SOPCINFO 1 GENERATION_ID 1526656248"
 set_global_assignment -library "Quad_Dec" -name MISC_FILE [file join $::quartus(qip_path) "../../Quad_Dec.cmp"]
 set_global_assignment -library "Quad_Dec" -name SLD_FILE [file join $::quartus(qip_path) "Quad_Dec.regmap"]
 set_global_assignment -library "Quad_Dec" -name SLD_FILE [file join $::quartus(qip_path) "Quad_Dec.debuginfo"]

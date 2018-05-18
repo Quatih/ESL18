@@ -2,8 +2,8 @@
 create_clock -period 20 [get_ports {CLOCK_50}]
 
 #Setting LED outputs as false path, since no timing requirement
-#set_false_path -from [get_ports Quad_inputs[*]] -to *
-
+set_false_path -from [get_ports Quad_input0[*]] -to *
+set_false_path -from [get_ports Quad_input1[*]] -to *
 #Constraining JTAG interface
 #TCK port
 create_clock -name altera_reserved_tck -period 100 [get_ports altera_reserved_tck]

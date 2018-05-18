@@ -3,35 +3,35 @@ K3
 13
 cModel Technology
 d/home/esl21
-Equadratureencoder
-Z0 w1525100147
+Equadraturedecoder
+Z0 w1526650601
 Z1 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
 Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
 Z4 d/home/esl21/ESL21/esl_demonstrator
-Z5 8/home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd
-Z6 F/home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd
+Z5 8/home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/QuadratureDecoder.vhd
+Z6 F/home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/QuadratureDecoder.vhd
 l0
-L6
-VU2W1z>A8U^SlLa]0gD59M2
-!s100 amXhB2PYg0C4KS]Icje>g1
+L5
+VzZ:>I<[`gJ13PETT:1OVM1
+!s100 VfR^;mSMWYhXiPQC[=a5k2
 Z7 OV;C;10.1d;51
 32
 !i10b 1
-Z8 !s108 1525100147.806255
-Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd|
-Z10 !s107 /home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd|
+Z8 !s108 1526650603.908735
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/QuadratureDecoder.vhd|
+Z10 !s107 /home/esl21/ESL21/esl_demonstrator/ip/QuadratureDecoder/QuadratureDecoder.vhd|
 Z11 o-work work -2002 -explicit -O0
 Z12 tExplicit 1
 Abehavior
 R1
 R2
 R3
-DEx4 work 17 quadratureencoder 0 22 U2W1z>A8U^SlLa]0gD59M2
+Z13 DEx4 work 17 quadraturedecoder 0 22 zZ:>I<[`gJ13PETT:1OVM1
 l22
-L19
-ViXgLi3]AEU3k6OHYA5RbW2
-!s100 E0dRkG_O_a>cc5n^3gnP;0
+L18
+V3LkVlloa=[E1HOVVhKF`K1
+!s100 6D0[3[B^M>o?X5jl6Q`6k0
 R7
 32
 !i10b 1
@@ -40,22 +40,59 @@ R9
 R10
 R11
 R12
-Etestbench
-Z13 w1525098907
+Equadratureencoder
+Z14 w1525100147
 R1
 R2
 R3
 R4
-Z14 8/home/esl21/ESL21/esl_demonstrator/testbench.vhd
-Z15 F/home/esl21/ESL21/esl_demonstrator/testbench.vhd
+Z15 8/home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd
+Z16 F/home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd
+l0
+L6
+VU2W1z>A8U^SlLa]0gD59M2
+R7
+32
+Z17 !s108 1525100147.806255
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd|
+Z19 !s107 /home/esl21/ESL21/esl_demonstrator/QuadratureEncoder.vhd|
+R11
+R12
+!s100 amXhB2PYg0C4KS]Icje>g1
+!i10b 1
+Abehavior
+R1
+R2
+R3
+DEx4 work 17 quadratureencoder 0 22 U2W1z>A8U^SlLa]0gD59M2
+l22
+L19
+ViXgLi3]AEU3k6OHYA5RbW2
+R7
+32
+R17
+R18
+R19
+R11
+R12
+!s100 E0dRkG_O_a>cc5n^3gnP;0
+!i10b 1
+Etestbench
+Z20 w1526650124
+R1
+R2
+R3
+R4
+Z21 8/home/esl21/ESL21/esl_demonstrator/testbench.vhd
+Z22 F/home/esl21/ESL21/esl_demonstrator/testbench.vhd
 l0
 L5
 VOmh88:`DRF6MS__FQB4mE3
 R7
 32
-Z16 !s108 1525098913.079714
-Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/esl21/ESL21/esl_demonstrator/testbench.vhd|
-Z18 !s107 /home/esl21/ESL21/esl_demonstrator/testbench.vhd|
+Z23 !s108 1526650603.870988
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/esl21/ESL21/esl_demonstrator/testbench.vhd|
+Z25 !s107 /home/esl21/ESL21/esl_demonstrator/testbench.vhd|
 R11
 R12
 !s100 [5h0KY0286gES;<2VS8C03
@@ -65,15 +102,15 @@ R1
 R2
 R3
 DEx4 work 9 testbench 0 22 Omh88:`DRF6MS__FQB4mE3
-l39
+l29
 L10
-VA1ObRUT7?iXzffzK[Mo6C0
+V3Yl7ZVacUiD@ZK52JWHFD2
+!s100 TJA@`T89UQmO36@A_^olH0
 R7
 32
-R16
-R17
-R18
+R23
+R24
+R25
 R11
 R12
-!s100 g;5F@kGmCgCP0_cfZ59iW2
 !i10b 1

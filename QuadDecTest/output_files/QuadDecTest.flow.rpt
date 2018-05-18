@@ -1,5 +1,5 @@
 Flow report for QuadDecTest
-Thu May 17 17:34:48 2018
+Fri May 18 14:57:34 2018
 Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Flow Summary                                                                    ;
 +------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Thu May 17 17:34:48 2018      ;
+; Flow Status                        ; Successful - Fri May 18 14:57:34 2018      ;
 ; Quartus II 32-bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; QuadDecTest                                ;
 ; Top-level Entity Name              ; QuadTest                                   ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/17/2018 17:33:56 ;
+; Start date & time ; 05/18/2018 14:56:41 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; QuadDecTest         ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------+---------------+-----------------------------------------------+----------------+
 ; Assignment Name                     ; Value                                                      ; Default Value ; Entity Name                                   ; Section Id     ;
 +-------------------------------------+------------------------------------------------------------+---------------+-----------------------------------------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 0.152657123620343                                          ; --            ; --                                            ; --             ;
+; COMPILER_SIGNATURE_ID               ; 0.152664820105320                                          ; --            ; --                                            ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                                       ; --            ; --                                            ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                                     ; <None>        ; --                                            ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --            ; QuadTest                                      ; --             ;
@@ -181,12 +181,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:12     ; 1.0                     ; 485 MB              ; 00:00:12                           ;
-; Fitter                    ; 00:00:19     ; 1.5                     ; 728 MB              ; 00:00:23                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 387 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 483 MB              ; 00:00:04                           ;
-; EDA Netlist Writer        ; 00:00:04     ; 1.0                     ; 372 MB              ; 00:00:04                           ;
-; Total                     ; 00:00:42     ; --                      ; --                  ; 00:00:45                           ;
+; Analysis & Synthesis      ; 00:00:12     ; 1.0                     ; 486 MB              ; 00:00:12                           ;
+; Fitter                    ; 00:00:18     ; 1.5                     ; 727 MB              ; 00:00:23                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 395 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:04     ; 1.0                     ; 489 MB              ; 00:00:04                           ;
+; EDA Netlist Writer        ; 00:00:05     ; 1.0                     ; 377 MB              ; 00:00:04                           ;
+; Total                     ; 00:00:41     ; --                      ; --                  ; 00:00:45                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

@@ -12,9 +12,9 @@
 # Altera or its authorized distributors.  Please refer to the 
 # applicable agreement for further details.
 
-# Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-# File: C:\Users\reinv\Documents\GitHub\ESL21\esl_demonstrator\Quad_dec_Pin_Assignment.csv
-# Generated on: Fri May 18 14:35:35 2018
+# Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+# File: /home/esl21/ESL21/esl_demonstrator/Quad_dec_Pin_Assignment.csv
+# Generated on: Fri May 18 16:49:13 2018
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
@@ -24,5 +24,7 @@ altera_reserved_tdi,Input,,,,PIN_H4,,,,,
 altera_reserved_tdo,Output,,,,PIN_J4,,,,,
 altera_reserved_tms,Input,,,,PIN_J5,,,,,
 CLOCK_50,Input,PIN_R8,3,B3_N0,PIN_R8,,,,,
-Quad_input2,Input,PIN_E1,1,B1_N0,PIN_D5,,,,,
-Quad_input1,Input,PIN_J15,5,B5_N0,PIN_R4,,,,,
+Quad_input0[1],Input,PIN_A4,8,B8_N0,PIN_C8,3.3-V LVTTL,,,,
+Quad_input0[0],Input,PIN_B5,8,B8_N0,PIN_D8,3.3-V LVTTL,,,,
+Quad_input1[1],Input,PIN_A5,8,B8_N0,PIN_E9,3.3-V LVTTL,,,,
+Quad_input1[0],Input,PIN_D5,8,B8_N0,PIN_C9,3.3-V LVTTL,,,,
