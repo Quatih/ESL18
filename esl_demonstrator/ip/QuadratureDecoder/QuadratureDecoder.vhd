@@ -38,8 +38,10 @@ begin
 	   		when others => 
 	   	end case;
 			high <= '1';
-		else
+		elsif GPIO_0_IN = "00" then --reset high when GPIO is returned to 0
 			high <= '0';
+		else
+			high <= high; -- maybe should be empty
 		end if;
 		
 		GPIO_0_IN_old <= GPIO_0_IN;
