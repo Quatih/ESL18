@@ -20,9 +20,9 @@ int main()
 
 	  enc0 = IORD_32DIRECT(QUADRATUREDECODER_0_BASE, 0x00);
 	  enc1 = IORD_32DIRECT(QUADRATUREDECODER_1_BASE, 0x00);
+
 	  printf("Read from decoders: %d, %d\n", enc0, enc1);
 	  usleep(100000); //slp 1s
   }
-  return (0);
   return 0;
 }

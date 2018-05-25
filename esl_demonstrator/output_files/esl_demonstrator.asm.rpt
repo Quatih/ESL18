@@ -1,5 +1,5 @@
 Assembler report for esl_demonstrator
-Fri May 25 15:23:54 2018
+Fri May 25 16:34:42 2018
 Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Fri May 25 15:23:54 2018 ;
+; Assembler Status      ; Successful - Fri May 25 16:34:42 2018 ;
 ; Revision Name         ; esl_demonstrator                      ;
 ; Top-level Entity Name ; esl_as4                               ;
 ; Family                ; Cyclone IV E                          ;
@@ -104,8 +104,8 @@ applicable agreement for further details.
 ; Option         ; Setting                       ;
 +----------------+-------------------------------+
 ; Device         ; EP4CE22F17C6                  ;
-; JTAG usercode  ; 0x003143B2                    ;
-; Checksum       ; 0x003143B2                    ;
+; JTAG usercode  ; 0x00326C39                    ;
+; Checksum       ; 0x00326C39                    ;
 +----------------+-------------------------------+
 
 
@@ -115,14 +115,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Assembler
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Fri May 25 15:23:51 2018
+    Info: Processing started: Fri May 25 16:34:40 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off esl_demonstrator -c esl_demonstrator
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 32-bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 379 megabytes
-    Info: Processing ended: Fri May 25 15:23:54 2018
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 383 megabytes
+    Info: Processing ended: Fri May 25 16:34:42 2018
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:03
 
 
