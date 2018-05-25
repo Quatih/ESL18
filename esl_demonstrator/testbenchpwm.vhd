@@ -9,7 +9,8 @@ end testbench_pwm;
 architecture tb of testbench_pwm is
 
 component PWM is
-generic (wl : natural := 32);
+generic (wl : natural := 32;
+	period : natural := 2500);
  port ( 
 	clk   : in std_logic;
 	reset  : in std_logic;
@@ -19,8 +20,7 @@ generic (wl : natural := 32);
 	INB		: out std_logic;	--INB input of the H-bridge.
 	C		: Out std_logic;	--PWM input of the H-Bridge.
 	
-	GPIO_0		: in std_logic_vector(wl -1 downto 0);
-	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
+	GPIO_0		: in std_logic_vector(wl -1 downto 0)
 
 	);
 end component PWM;
@@ -30,7 +30,6 @@ signal reset : std_logic := '0';
 signal enable : std_logic := '1';
 
 signal GPIO_0 : std_logic_vector(wl-1 downto 0) := (others => '0');
-signal GPIO_0_in : std_logic_vector(1 downto 0) := (others => '0');
 signal GPIO : std_logic_vector(wl-1 downto 0) := (others => '0');
 
 signal C : std_logic := '0';
@@ -44,7 +43,8 @@ reset <= '1', '0' after 100 ns;
 GPIO_0 <= GPIO;
 
 PWMmodule : PWM 
-		port map (clk, reset, enable, INA, INB, C, GPIO_0, GPIO_0_in);
+		generic map (wl, 2500);
+		port map (clk, reset, enable, INA, INB, C, GPIO_0);
 
 process 
 begin

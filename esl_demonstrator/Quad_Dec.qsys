@@ -12,6 +12,14 @@
    element $${FILENAME}
    {
    }
+   element Motor_Controller_0
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
    element QuadratureDecoder_0
    {
       datum _sortIndex
@@ -32,19 +40,19 @@
    {
       datum baseAddress
       {
-         value = "71720";
-         type = "String";
-      }
-   }
-   element QuadratureDecoder_1.avalon_slave_0
-   {
-      datum baseAddress
-      {
-         value = "69632";
+         value = "72744";
          type = "String";
       }
    }
    element QuadratureDecoder_0.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "71680";
+         type = "String";
+      }
+   }
+   element QuadratureDecoder_1.avalon_slave_0
    {
       datum baseAddress
       {
@@ -64,7 +72,7 @@
    {
       datum baseAddress
       {
-         value = "71712";
+         value = "72736";
          type = "String";
       }
    }
@@ -100,19 +108,27 @@
          type = "int";
       }
    }
-   element sys_clk_timer.s1
-   {
-      datum baseAddress
-      {
-         value = "71680";
-         type = "String";
-      }
-   }
    element onchip_mem.s1
    {
       datum baseAddress
       {
          value = "32768";
+         type = "String";
+      }
+   }
+   element sys_clk_timer.s1
+   {
+      datum baseAddress
+      {
+         value = "72704";
+         type = "String";
+      }
+   }
+   element Motor_Controller_0.slave
+   {
+      datum baseAddress
+      {
+         value = "69632";
          type = "String";
       }
    }
@@ -160,6 +176,11 @@
  <interface
    name="quadraturedecoder_1_inputs"
    internal="QuadratureDecoder_1.Inputs"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="motor_controller_0_io"
+   internal="Motor_Controller_0.IO"
    type="conduit"
    dir="end" />
  <module kind="clock_source" version="13.1" enabled="1" name="clk_0">
@@ -306,7 +327,7 @@
   <parameter name="tightlyCoupledInstructionMaster2AddrWidth" value="1" />
   <parameter name="tightlyCoupledInstructionMaster3AddrWidth" value="1" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /></address-map>]]></parameter>
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /><slave name='QuadratureDecoder_1.avalon_slave_0' start='0x11000' end='0x11400' /><slave name='QuadratureDecoder_0.avalon_slave_0' start='0x11400' end='0x11800' /><slave name='sys_clk_timer.s1' start='0x11800' end='0x11820' /><slave name='sysid.control_slave' start='0x11820' end='0x11828' /><slave name='jtag_uart.avalon_jtag_slave' start='0x11828' end='0x11830' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_mem.s1' start='0x8000' end='0xD000' /><slave name='cpu.jtag_debug_module' start='0x10800' end='0x11000' /><slave name='Motor_Controller_0.slave' start='0x11000' end='0x11400' /><slave name='QuadratureDecoder_1.avalon_slave_0' start='0x11400' end='0x11800' /><slave name='QuadratureDecoder_0.avalon_slave_0' start='0x11800' end='0x11C00' /><slave name='sys_clk_timer.s1' start='0x11C00' end='0x11C20' /><slave name='sysid.control_slave' start='0x11C20' end='0x11C28' /><slave name='jtag_uart.avalon_jtag_slave' start='0x11C28' end='0x11C30' /></address-map>]]></parameter>
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="deviceFamilyName" value="Cyclone IV E" />
   <parameter name="internalIrqMaskSystemInfo" value="65538" />
@@ -378,6 +399,16 @@
    enabled="1"
    name="QuadratureDecoder_1">
   <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
+ </module>
+ <module
+   kind="Motor_Controller"
+   version="1.0"
+   enabled="1"
+   name="Motor_Controller_0">
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="pwm_frequency" value="20000" />
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
  <connection
    kind="avalon"
@@ -425,7 +456,7 @@
    start="cpu.data_master"
    end="jtag_uart.avalon_jtag_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011828" />
+  <parameter name="baseAddress" value="0x00011c28" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -434,7 +465,7 @@
    start="cpu.data_master"
    end="sys_clk_timer.s1">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011800" />
+  <parameter name="baseAddress" value="0x00011c00" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -443,7 +474,7 @@
    start="cpu.data_master"
    end="sysid.control_slave">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011820" />
+  <parameter name="baseAddress" value="0x00011c20" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -490,7 +521,7 @@
    start="cpu.data_master"
    end="QuadratureDecoder_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011400" />
+  <parameter name="baseAddress" value="0x00011800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -508,6 +539,25 @@
    version="13.1"
    start="cpu.data_master"
    end="QuadratureDecoder_1.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00011400" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="13.1"
+   start="clk_0.clk"
+   end="Motor_Controller_0.clock" />
+ <connection
+   kind="reset"
+   version="13.1"
+   start="clk_0.clk_reset"
+   end="Motor_Controller_0.reset" />
+ <connection
+   kind="avalon"
+   version="13.1"
+   start="cpu.data_master"
+   end="Motor_Controller_0.slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00011000" />
   <parameter name="defaultConnection" value="false" />

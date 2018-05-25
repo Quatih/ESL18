@@ -24,48 +24,54 @@ architecture behavior of QuadratureDecoder is
 	signal GPIO_0_IN_debounced : std_logic_vector(1 downto 0) := (others => '0');
 	signal GPIO_0_IN_debounced_old : std_logic_vector(1 downto 0) := (others => '0');
 	signal bouncecounter : integer range 0 to debouncer + 1;
+	signal flipflop : std_logic_vector(1 downto 0) := (others => '0');
 begin
 
 
+
 GPIO_0 <= std_logic_vector(counter);
+
+process(clk, reset)
+begin
+	if falling_edge(clk) then
+		flipflop <= GPIO_0_IN;
+	end if;
+end process;
 
 process(clk, reset) 
   
 begin
 	if reset = '1' then
 		counter <= (others => '0');
-		GPIO_0_IN_old <= (others => '0');
-	elsif  rising_edge(clk) then
+		GPIO_0_IN_old <= (others => '1');
+	elsif rising_edge(clk) then
 	  
 	  --Debouncing
-	  if(GPIO_0_IN = GPIO_0_IN_old) then
-	   bouncecounter <= bouncecounter + 1;
-	   if(bouncecounter = debouncer) then
-	     bouncecounter <= 0;
-	     GPIO_0_IN_debounced <= GPIO_0_IN;
-	   end if;
-	  else
-	    bouncecounter <= 0;
-	  end if;
+--	  if(GPIO_0_IN = GPIO_0_IN_old) then
+--	   bouncecounter <= bouncecounter + 1;
+--	   if(bouncecounter = debouncer) then
+--	     bouncecounter <= 0;
+--	     GPIO_0_IN_debounced <= GPIO_0_IN;
+--	   end if;
+--	  else
+--	    bouncecounter <= 0;
+--	  end if;
 	  
 	  
 	  
-	  if (not(GPIO_0_IN_debounced = GPIO_0_IN_debounced_old)) and GPIO_0_IN_debounced_old = "00" then
-		 	case GPIO_0_IN is
+	  --if (not(GPIO_0_IN_debounced = GPIO_0_IN_debounced_old)) and GPIO_0_IN_debounced_old = "00" then
+	--if not(GPIO_0_IN = GPIO_0_IN_old) and GPIO_0_IN_old = "00" then
+		if not(flipflop = GPIO_0_IN_old) and GPIO_0_IN_old = "00" then
+		 	case flipflop is
 	  		when "10" => counter <= counter + 1;
 	   		when "01" => counter <= counter - 1;
 	   		when others => 
 	   	end case;
-			high <= '1';
-		elsif GPIO_0_IN = "00" then --reset high when GPIO is returned to 0
-			high <= '0';
-		else
-			high <= high; -- maybe should be empty
 		end if;
 		
-		GPIO_0_IN_debounced_out <= GPIO_0_IN_debounced;
-		GPIO_0_IN_debounced_old <= GPIO_0_IN_debounced;
-		GPIO_0_IN_old <= GPIO_0_IN;
+		--GPIO_0_IN_debounced_out <= GPIO_0_IN_debounced;
+		--GPIO_0_IN_debounced_old <= GPIO_0_IN_debounced;
+		GPIO_0_IN_old <= flipflop;
 	end if;
 end process;	
 

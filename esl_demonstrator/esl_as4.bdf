@@ -40,7 +40,7 @@ applicable agreement for further details.
 	(input)
 	(rect 328 312 512 328)
 	(text "INPUT" (rect 141 0 170 9)(font "Arial" (font_size 6)))
-	(text "Quad_input0[1..0]" (rect 5 0 90 10)(font "Arial" ))
+	(text "Quad_input0[1..0]" (rect 5 0 89 10)(font "Arial" ))
 	(pt 184 8)
 	(drawing
 		(line (pt 100 12)(pt 125 12))
@@ -57,7 +57,7 @@ applicable agreement for further details.
 	(input)
 	(rect 328 352 512 368)
 	(text "INPUT" (rect 141 0 170 9)(font "Arial" (font_size 6)))
-	(text "Quad_input1[1..0]" (rect 5 0 90 10)(font "Arial" ))
+	(text "Quad_input1[1..0]" (rect 5 0 89 10)(font "Arial" ))
 	(pt 184 8)
 	(drawing
 		(line (pt 100 12)(pt 125 12))
@@ -70,25 +70,27 @@ applicable agreement for further details.
 	(text "VCC" (rect 144 7 165 16)(font "Arial" (font_size 6)))
 	(annotation_block (location)(rect 272 368 328 384))
 )
-(symbol
-	(rect 352 256 384 272)
-	(text "VCC" (rect 7 0 28 9)(font "Arial" (font_size 6)))
-	(text "inst2" (rect 3 5 26 15)(font "Arial" )(invisible))
-	(port
-		(pt 16 16)
-		(output)
-		(text "1" (rect 19 7 27 18)(font "Courier New" (bold))(invisible))
-		(text "1" (rect 19 7 27 18)(font "Courier New" (bold))(invisible))
-		(line (pt 16 16)(pt 16 8))
-	)
+(pin
+	(input)
+	(rect 248 272 416 288)
+	(text "INPUT" (rect 125 0 154 9)(font "Arial" (font_size 6)))
+	(text "reset_push" (rect 5 0 60 10)(font "Arial" ))
+	(pt 168 8)
 	(drawing
-		(line (pt 8 8)(pt 24 8))
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
 	)
+	(text "VCC" (rect 128 7 149 16)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 184 288 248 304))
 )
 (symbol
 	(rect 712 168 1224 392)
 	(text "Quad_Dec" (rect 226 -1 301 14)(font "Arial" (font_size 10)))
-	(text "inst" (rect 8 208 25 218)(font "Arial" ))
+	(text "inst1" (rect 8 208 30 218)(font "Arial" ))
 	(port
 		(pt 0 72)
 		(input)
@@ -146,14 +148,6 @@ applicable agreement for further details.
 	)
 )
 (connector
-	(pt 368 272)
-	(pt 368 280)
-)
-(connector
-	(pt 368 280)
-	(pt 712 280)
-)
-(connector
 	(pt 568 248)
 	(pt 568 240)
 )
@@ -174,4 +168,8 @@ applicable agreement for further details.
 	(pt 712 360)
 	(pt 512 360)
 	(bus)
+)
+(connector
+	(pt 712 280)
+	(pt 416 280)
 )

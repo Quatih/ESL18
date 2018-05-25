@@ -17,6 +17,6 @@
   </columns>
  </clocktable>
  <window width="1700" height="979" x="-9" y="-8" />
- <library expandedCategories="Project,Project/ESL21,Library" />
+ <library expandedCategories="Library,Project,Project/ESL21" />
  <generation simulation="NONE" synthesis="VHDL" />
 </preferences>
