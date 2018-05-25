@@ -15,7 +15,7 @@ entity PWM is
 	C		: Out std_logic;	--PWM input of the H-Bridge.
 	
 	
-	GPIO_0		: inout std_logic_vector(wl -1 downto 0);
+	GPIO_0		: in std_logic_vector(wl -1 downto 0);
 	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
 
 	);
@@ -52,7 +52,7 @@ begin
 			INB <= mode(1);
 		
 			pulsehigh <= integer(dc * 10);		--Determine the amount of pulses the signal needs to be high.
-			if cyclecount < pulsehigh then
+			if cyclecount < 250 then
 				C <= '1';
 			else
 				C <= '0';

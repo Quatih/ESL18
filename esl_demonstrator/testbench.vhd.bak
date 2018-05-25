@@ -16,6 +16,7 @@ component QuadratureDecoder is
 	reset  : in std_logic;
 	enable : in std_logic;
 	GPIO_0		: inout std_logic_vector(wl -1 downto 0);
+	GPIO_0_IN_debounced_out : out std_logic_vector(1 downto 0);
 	GPIO_0_IN	: in    std_logic_vector(1 downto 0)
 
 	);
@@ -24,7 +25,8 @@ end component QuadratureDecoder;
 signal clk : std_logic := '0';
 signal enable : std_logic := '1';
 signal reset : std_logic;
-signal GPIO_0 : std_logic_vector(33 downto 0);
+signal GPIO_0 : std_logic_vector(31 downto 0);
+signal GPIO_0_IN_debounced : std_logic_vector(1 downto 0);
 signal GPIO_0_in : std_logic_vector(1 downto 0) := (others => '0');
 begin
   
@@ -32,32 +34,88 @@ reset <= '1', '0' after 100 ns;
 clk <= not clk after 10 ns;
 
 enc : QuadratureDecoder 
-	port map(clk,reset, enable, GPIO_0, GPIO_0_in);
+	port map(clk,reset, enable, GPIO_0, GPIO_0_IN_debounced, GPIO_0_in);
 
 
 process
 begin
 	
 	for count in 0 to 15 loop
+		
+		for bounce in 0 to 5 loop
+		  GPIO_0_in(1) <= '1';
+		  wait for 2 ns;
+		  GPIO_0_in(1) <= '0';
+		  wait for 1 ns;
+		end loop;
 		GPIO_0_in(1) <= '1';
-		wait for 25 ns;
+		wait for 323 ns;
+		
+		for bounce in 0 to 8 loop
+		  GPIO_0_in(0) <= '1';
+		  wait for 1 ns;
+		  GPIO_0_in(0) <= '0';
+		  wait for 1 ns;
+		end loop;
 		GPIO_0_in(0) <= '1';
-		wait for 25 ns;
+		wait for 323 ns;
+		
+		for bounce in 0 to 4 loop
+		  GPIO_0_in(1) <= '1';
+		  wait for 1 ns;
+		  GPIO_0_in(1) <= '0';
+		  wait for 3 ns;
+		end loop;
 		GPIO_0_in(1) <= '0';
-		wait for 25 ns;
+		wait for 323 ns;
+		
+		for bounce in 0 to 7 loop
+		  GPIO_0_in(0) <= '1';
+		  wait for 1 ns;
+		  GPIO_0_in(0) <= '0';
+		  wait for 1 ns;
+		end loop;
 		GPIO_0_in(0) <= '0';
-		wait for 25 ns;
+		wait for 323 ns;
 	end loop;
 
 	for count in 0 to 15 loop
+	  
+	  for bounce in 0 to 5 loop
+		  GPIO_0_in(0) <= '1';
+		  wait for 12 ns;
+		  GPIO_0_in(0) <= '0';
+		  wait for 8 ns;
+		end loop;
 		GPIO_0_in(0) <= '1';
-		wait for 25 ns;
+		wait for 323 ns;
+		
+		for bounce in 0 to 13 loop
+		  GPIO_0_in(1) <= '1';
+		  wait for 2 ns;
+		  GPIO_0_in(1) <= '0';
+		  wait for 1 ns;
+		end loop;
 		GPIO_0_in(1) <= '1';
-		wait for 25 ns;
+		wait for 323 ns;
+		
+		for bounce in 0 to 9 loop
+		  GPIO_0_in(0) <= '1';
+		  wait for 4 ns;
+		  GPIO_0_in(0) <= '0';
+		  wait for 13 ns;
+		end loop;
 		GPIO_0_in(0) <= '0';
-		wait for 25 ns;
+		wait for 323 ns;
+		
+		for bounce in 0 to 6 loop
+		  GPIO_0_in(1) <= '1';
+		  wait for 12 ns;
+		  GPIO_0_in(1) <= '0';
+		  wait for 2 ns;
+		end loop;
 		GPIO_0_in(1) <= '0';
-		wait for 25 ns;
+		wait for 323 ns;
 	end loop;
 end process;
 

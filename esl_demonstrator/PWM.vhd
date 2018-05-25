@@ -30,6 +30,7 @@ end PWM;
 architecture behavior of PWM is
 	--signal dc: std_logic_vector(7 downto 0) := (others => '0');
 	signal dc: integer range 0 to 255 := 0;
+	signal dc_old: integer range 0 to 255 :=0;
 	
 	--signal cyclecount: std_logic_vector(11 downto 0) := (others => '0');	-- 12-bit signal to hold the elapsed pulses.
 	signal cyclecount: integer range 0 to 2500 :=0;							-- 12-bit signal to hold the elapsed pulses.
@@ -45,14 +46,18 @@ begin
 			INB <= '0';
 			C <= '0';
 		elsif rising_edge(clk) then
+		
 			dc <= to_integer(unsigned(GPIO_0(7 downto 0)));
+			if not(dc = dc_old) then
+				pulsehigh <= integer(dc * 10);		--Determine the amount of pulses the signal needs to be high.
+			end if;
 			mode <= GPIO_0(9 downto 8);
 			--Set INA and INB
 			INA <= mode(0);
 			INB <= mode(1);
 		
-			pulsehigh <= integer(dc * 10);		--Determine the amount of pulses the signal needs to be high.
-			if cyclecount < pulsehigh then
+			
+			if ((cyclecount < pulsehigh) and not(mode(0) = mode(1))) then	
 				C <= '1';
 			else
 				C <= '0';
@@ -64,6 +69,8 @@ begin
 			else
 				cyclecount <= cyclecount + 1;
 			end if;
+			
+			dc_old <= dc;
 
 		end if;
 	

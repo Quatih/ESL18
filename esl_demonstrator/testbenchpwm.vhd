@@ -33,11 +33,18 @@ signal GPIO_0 : std_logic_vector(wl-1 downto 0) := (others => '0');
 signal GPIO_0_in : std_logic_vector(1 downto 0) := (others => '0');
 signal GPIO : std_logic_vector(wl-1 downto 0) := (others => '0');
 
+signal C : std_logic := '0';
+signal INA: std_logic := '0';
+signal INB: std_logic := '0';
+
 begin
 
 clk <= not clk after 10 ns;
+reset <= '1', '0' after 100 ns; 
 GPIO_0 <= GPIO;
 
+PWMmodule : PWM 
+		port map (clk, reset, enable, INA, INB, C, GPIO_0, GPIO_0_in);
 
 process 
 begin
@@ -48,27 +55,30 @@ begin
 	
 	for count in 0 to 25 loop
 		GPIO(7 downto 0) <= std_logic_vector(to_unsigned(count*10, 8));
-		wait for 50000 ns; -- 2 pwm periods
+		wait for 100000 ns; -- 2 pwm periods
+		
+		if(count = 8) then
+			--Brake
+			GPIO(8) <= '0';
+			GPIO(9) <= '0';
+		end if;
 	end loop;
 	--Continue with counterclockwise
-	--GPIO_0(8) <= '0';
-	--GPIO_0(9) <= '1';
+	GPIO_0(8) <= '0';
+	GPIO_0(9) <= '1';
 	
-	--for count in 0 to 25 loop
-	--	GPIO_0(7 downto 0) <= std_logic_vector(to_unsigned(count*10, 8));
-	--	wait for 5000 ns;
-	--end loop;
+	for count in 0 to 25 loop
+		GPIO_0(7 downto 0) <= std_logic_vector(to_unsigned(count*10, 8));
+		wait for 5000 ns;
+		if(count = 12) then
+			--Brake
+			GPIO(8) <= '1';
+			GPIO(9) <= '1';
+		end if;
+	end loop;
 	
 end process;
 
-PWMmodule : PWM 
-		port map (
-			clk => clk,
-			reset => reset,
-			enable => enable,
-			GPIO_0 => GPIO_0,
-			GPIO_0_IN => GPIO_0_in
-			-- Map your encoder here to the I/O
-		);
+
 end tb;
 
