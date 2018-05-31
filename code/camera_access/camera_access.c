@@ -63,7 +63,7 @@ main (int   argc,
 {
   GMainLoop *loop;
 
-  GstElement *pipeline, *source, *driver, *capsfilter, *mp4mux, *sink;
+  GstElement *pipeline, *driver, *capsfilter, *mp4mux, *sink;
   GstBus *bus;
   guint bus_watch_id;
 
@@ -92,7 +92,7 @@ main (int   argc,
   mp4mux = gst_element_factory_make("mp4mux", "mp4-mux");
   sink     = gst_element_factory_make ("autovideosink", "video-output");
 
-  if (!pipeline || !source || !driver || !caps || !mp4mux || !sink) {
+  if (!pipeline || !driver || !capsfilter || !mp4mux || !sink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -108,7 +108,7 @@ main (int   argc,
 
 
   // set options of driver
-  g_object_set (G_Object(driver), "device", argv[1], NULL);
+  g_object_set (G_OBJECT(driver), "device", argv[1], NULL);
 
   // create the capabilities filter structure
   GstCaps *caps = gst_caps_new_simple ("image/jpeg", //viceo/x-raw
@@ -120,9 +120,9 @@ main (int   argc,
    NULL);
 
   // set the capabilities
-  g_object_set(G_Object(capsfilter), "caps", &caps,NULL);
+  g_object_set(G_OBJECT(capsfilter), "caps", &caps,NULL);
 
-  g_object_set(G_Object(sink), "location", argv[2])
+  g_object_set(G_OBJECT(sink), "location", argv[2])
   /* we add all elements into the pipeline */
   /* file-source | ogg-demuxer | vorbis-decoder | converter | alsa-output */
   gst_bin_add_many (GST_BIN (pipeline),
