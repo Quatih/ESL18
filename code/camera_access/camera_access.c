@@ -63,7 +63,7 @@ main (int   argc,
 {
   GMainLoop *loop;
 
-  GstElement *pipeline, *source, *driver, *capsfilter, *avimux, *sink;
+  GstElement *pipeline, *source, *driver, *capsfilter, *mp4mux, *sink;
   GstBus *bus;
   guint bus_watch_id;
 
@@ -92,7 +92,7 @@ main (int   argc,
   mp4mux = gst_element_factory_make("mp4mux", "mp4-mux");
   sink     = gst_element_factory_make ("autovideosink", "video-output");
 
-  if (!pipeline || !source || !driver || !caps || !avimux || !sink) {
+  if (!pipeline || !source || !driver || !caps || !mp4mux || !sink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -122,17 +122,17 @@ main (int   argc,
   // set the capabilities
   g_object_set(G_Object(capsfilter), "caps", &caps,NULL);
 
-  g_object_set(G_Object(sink), "location", argv[3])
+  g_object_set(G_Object(sink), "location", argv[2])
   /* we add all elements into the pipeline */
   /* file-source | ogg-demuxer | vorbis-decoder | converter | alsa-output */
   gst_bin_add_many (GST_BIN (pipeline),
-                    source, driver, capsfilter, avimux, sink, NULL);
+                    source, driver, capsfilter, mp4mux, sink, NULL);
 
   /* we link the elements together */
   /* file-source -> ogg-demuxer ~> vorbis-decoder -> converter -> alsa-output */
-  gst_element_link (source, driver);
-  gst_element_link_many (driver, capsfilter, avimux, sink, NULL);
-  g_signal_connect (demuxer, "pad-added", G_CALLBACK (on_pad_added), decoder);
+  // gst_element_link (source, driver);
+  gst_element_link_many (driver, capsfilter, mp4mux, sink, NULL);
+  // g_signal_connect (demuxer, "pad-added", G_CALLBACK (on_pad_added), decoder);
 
   /* note that the demuxer will be linked to the decoder dynamically.
      The reason is that Ogg may contain various streams (for example
@@ -143,7 +143,7 @@ main (int   argc,
 
 
   /* Set the pipeline to "playing" state*/
-  g_print ("Now playing: %s\n", argv[1]);
+  // g_print ("Now playing: %s\n", argv[1]);
   gst_element_set_state (pipeline, GST_STATE_PLAYING);
 
   /* Iterate */
