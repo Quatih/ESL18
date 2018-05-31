@@ -56,14 +56,14 @@ on_pad_added (GstElement *element,
 }
 
 
-
+// 
 int
 main (int   argc,
       char *argv[])
 {
   GMainLoop *loop;
 
-  GstElement *pipeline, *source, *demuxer, *decoder, *conv, *sink;
+  GstElement *pipeline, *source, *driver, *capsfilter, *avimux, *sink;
   GstBus *bus;
   guint bus_watch_id;
 
@@ -74,7 +74,7 @@ main (int   argc,
 
 
   /* Check input arguments */
-  if (argc != 2) {
+  if (argc != 3) {
     g_printerr ("Usage: %s <Ogg/Vorbis filename>\n", argv[0]);
     return -1;
   }
@@ -83,14 +83,16 @@ main (int   argc,
   /* Create gstreamer elements */
   // pipeline = gst_pipeline_new ("audio-player");
   pipeline = gst_pipeline_new("Webcam-stream");
-  source   = gst_element_factory_make ("filesrc",       "file-source");
-  
+  // source   = gst_element_factory_make ("filesrc",       "file-source");
+  driver = gst_element_factory_make("v4l2src", "Video4linux2source");
+  capsfilter = gst_elemegnt_factory_make("capsfilter", "caps-filter");
   // demuxer  = gst_element_factory_make ("oggdemux",      "ogg-demuxer");
   // decoder  = gst_element_factory_make ("vorbisdec",     "vorbis-decoder");
   // conv     = gst_element_factory_make ("audioconvert",  "converter");
-  // sink     = gst_element_factory_make ("autoaudiosink", "audio-output");
+  mp4mux = gst_element_factory_make("mp4mux", "mp4-mux");
+  sink     = gst_element_factory_make ("autovideosink", "video-output");
 
-  if (!pipeline || !source || !demuxer || !decoder || !conv || !sink) {
+  if (!pipeline || !source || !driver || !caps || !avimux || !sink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -98,22 +100,38 @@ main (int   argc,
   /* Set up the pipeline */
 
   /* we set the input filename to the source element */
-  g_object_set (G_OBJECT (source), "location", argv[1], NULL);
 
   /* we add a message handler */
   bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
   bus_watch_id = gst_bus_add_watch (bus, bus_call, loop);
   gst_object_unref (bus);
 
+
+  // set options of driver
+  g_object_set (G_Object(driver), "device", argv[1], NULL);
+
+  // create the capabilities filter structure
+  GstCaps *caps = gst_caps_new_simple ("image/jpeg", //viceo/x-raw
+  //  "format", G_TYPE_STRING, "YUV2",
+   "framerate", GST_TYPE_FRACTION, 15, 1,
+   "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
+   "width", G_TYPE_INT, 320,
+   "height", G_TYPE_INT, 240,
+   NULL);
+
+  // set the capabilities
+  g_object_set(G_Object(capsfilter), "caps", &caps,NULL);
+
+  g_object_set(G_Object(sink), "location", argv[3])
   /* we add all elements into the pipeline */
   /* file-source | ogg-demuxer | vorbis-decoder | converter | alsa-output */
   gst_bin_add_many (GST_BIN (pipeline),
-                    source, demuxer, decoder, conv, sink, NULL);
+                    source, driver, capsfilter, avimux, sink, NULL);
 
   /* we link the elements together */
   /* file-source -> ogg-demuxer ~> vorbis-decoder -> converter -> alsa-output */
-  gst_element_link (source, demuxer);
-  gst_element_link_many (decoder, conv, sink, NULL);
+  gst_element_link (source, driver);
+  gst_element_link_many (driver, capsfilter, avimux, sink, NULL);
   g_signal_connect (demuxer, "pad-added", G_CALLBACK (on_pad_added), decoder);
 
   /* note that the demuxer will be linked to the decoder dynamically.
@@ -127,7 +145,6 @@ main (int   argc,
   /* Set the pipeline to "playing" state*/
   g_print ("Now playing: %s\n", argv[1]);
   gst_element_set_state (pipeline, GST_STATE_PLAYING);
-
 
   /* Iterate */
   g_print ("Running...\n");
