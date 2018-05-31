@@ -85,14 +85,14 @@ main (int   argc,
   pipeline = gst_pipeline_new("Webcam-stream");
   // source   = gst_element_factory_make ("filesrc",       "file-source");
   driver = gst_element_factory_make("v4l2src", "Video4linux2source");
-  capsfilter = gst_elemegnt_factory_make("capsfilter", "caps-filter");
+  capsfilter = gst_element_factory_make("capsfilter", "caps-filter");
   // demuxer  = gst_element_factory_make ("oggdemux",      "ogg-demuxer");
   // decoder  = gst_element_factory_make ("vorbisdec",     "vorbis-decoder");
   // conv     = gst_element_factory_make ("audioconvert",  "converter");
   mp4mux = gst_element_factory_make("mp4mux", "mp4-mux");
   sink     = gst_element_factory_make ("autovideosink", "video-output");
 
-  if (!pipeline || !driver || !capsfilter || !mp4mux || !sink) {
+  if (!pipeline || !driver ||s !capsfilter || !mp4mux || !sink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -122,7 +122,7 @@ main (int   argc,
   // set the capabilities
   g_object_set(G_OBJECT(capsfilter), "caps", &caps,NULL);
 
-  g_object_set(G_OBJECT(sink), "location", argv[2])
+  g_object_set(G_OBJECT(sink), "location", argv[2]);
   /* we add all elements into the pipeline */
   /* file-source | ogg-demuxer | vorbis-decoder | converter | alsa-output */
   gst_bin_add_many (GST_BIN (pipeline),
