@@ -36,7 +36,7 @@ bus_call (GstBus     *bus,
   return TRUE;
 }
 
-
+/*
 static void
 on_pad_added (GstElement *element,
               GstPad     *pad,
@@ -45,7 +45,7 @@ on_pad_added (GstElement *element,
   GstPad *sinkpad;
   GstElement *decoder = (GstElement *) data;
 
-  /* We can now link this pad with the vorbis-decoder sink pad */
+  // We can now link this pad with the vorbis-decoder sink pad
   g_print ("Dynamic pad created, linking demuxer/decoder\n");
 
   sinkpad = gst_element_get_static_pad (decoder, "sink");
@@ -53,7 +53,7 @@ on_pad_added (GstElement *element,
   gst_pad_link (pad, sinkpad);
 
   gst_object_unref (sinkpad);
-}
+}*/
 
 
 // 
@@ -92,7 +92,7 @@ main (int   argc,
   mp4mux = gst_element_factory_make("mp4mux", "mp4-mux");
   sink     = gst_element_factory_make ("autovideosink", "video-output");
 
-  if (!pipeline || !driver ||s !capsfilter || !mp4mux || !sink) {
+  if (!pipeline || !driver || !capsfilter || !mp4mux || !sink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -120,13 +120,13 @@ main (int   argc,
    NULL);
 
   // set the capabilities
-  g_object_set(G_OBJECT(capsfilter), "caps", &caps,NULL);
+  g_object_set(G_OBJECT(capsfilter), "caps", &caps, NULL);
 
-  g_object_set(G_OBJECT(sink), "location", argv[2]);
+  g_object_set(G_OBJECT(sink), "location", argv[2], NULL);
   /* we add all elements into the pipeline */
   /* file-source | ogg-demuxer | vorbis-decoder | converter | alsa-output */
   gst_bin_add_many (GST_BIN (pipeline),
-                    source, driver, capsfilter, mp4mux, sink, NULL);
+                    driver, capsfilter, mp4mux, sink, NULL);
 
   /* we link the elements together */
   /* file-source -> ogg-demuxer ~> vorbis-decoder -> converter -> alsa-output */
