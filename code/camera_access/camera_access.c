@@ -1,5 +1,23 @@
 #include <gst/gst.h>
 #include <glib.h>
+#include <gst/app/gstappsink.h>
+
+static GstFlowReturn new_sample (GstElement *sink) {
+  GstSample *sample;
+  GstFlowReturn ret;
+  /* Retrieve the buffer */
+  g_signal_emit_by_name (sink, "pull-sample", &sample);
+  if (sample) {
+    /* The only thing we do in this example is print a * to indicate a received buffer */
+    g_print ("*");
+    gst_sample_unref (sample);
+    ret = GST_FLOW_OK;
+  }
+  else{
+    ret = GST_FLOW_ERROR;
+  }
+  return ret;
+}
 
 
 static gboolean
@@ -63,7 +81,7 @@ main (int   argc,
 {
   GMainLoop *loop;
 
-  GstElement *pipeline, *driver, *capsfilter, *mp4mux, *sink;
+  GstElement *pipeline, *driver, *capsfilter, *mux, *queue, *sink;
   GstBus *bus;
   guint bus_watch_id;
 
@@ -74,10 +92,10 @@ main (int   argc,
 
 
   /* Check input arguments */
-  if (argc != 3) {
-    g_printerr ("Usage: %s <Ogg/Vorbis filename>\n", argv[0]);
-    return -1;
-  }
+ // if (argc != 3) {
+  //  g_printerr ("Usage: %s <Ogg/Vorbis filename>\n", argv[0]);
+  //  return -1;
+  //}
 
 
   /* Create gstreamer elements */
@@ -89,10 +107,10 @@ main (int   argc,
   // demuxer  = gst_element_factory_make ("oggdemux",      "ogg-demuxer");
   // decoder  = gst_element_factory_make ("vorbisdec",     "vorbis-decoder");
   // conv     = gst_element_factory_make ("audioconvert",  "converter");
-  mp4mux = gst_element_factory_make("mp4mux", "mp4-mux");
-  sink     = gst_element_factory_make ("autovideosink", "video-output");
+  mux = gst_element_factory_make("avimux", "avi-mux");
+  sink     = gst_element_factory_make ("appsink", "video-output");
 
-  if (!pipeline || !driver || !capsfilter || !mp4mux || !sink) {
+  if (!pipeline || !driver || !capsfilter || !mux || !sink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -111,35 +129,43 @@ main (int   argc,
   g_object_set (G_OBJECT(driver), "device", argv[1], NULL);
 
   // create the capabilities filter structure
-  GstCaps *caps = gst_caps_new_simple ("image/jpeg", //viceo/x-raw
-  //  "format", G_TYPE_STRING, "YUV2",
-   "framerate", GST_TYPE_FRACTION, 15, 1,
+  GstCaps *caps = gst_caps_new_simple ("video/x-raw", //viceo/x-raw
+   "format", G_TYPE_STRING, "YUY2",
+   "framerate", GST_TYPE_FRACTION, 30, 1,
    "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
-   "width", G_TYPE_INT, 320,
-   "height", G_TYPE_INT, 240,
+   "width", G_TYPE_INT, 160,
+   "height", G_TYPE_INT, 120,
    NULL);
 
   // set the capabilities
-  g_object_set(G_OBJECT(capsfilter), "caps", &caps, NULL);
+  g_object_set(G_OBJECT(capsfilter), "caps", caps, NULL);
 
-  g_object_set(G_OBJECT(sink), "location", argv[2], NULL);
+  //g_object_set(G_OBJECT(sink), "location", argv[2], NULL);
+
+ /* Configure appsink */
+  g_object_set (sink, "emit-signals", TRUE, "caps", caps, NULL);
+  g_signal_connect (sink, "new-sample", G_CALLBACK (new_sample), NULL);
+
+  gst_caps_unref (caps);
+
+
   /* we add all elements into the pipeline */
   /* file-source | ogg-demuxer | vorbis-decoder | converter | alsa-output */
   gst_bin_add_many (GST_BIN (pipeline),
-                    driver, capsfilter, mp4mux, sink, NULL);
+                    driver, capsfilter, sink, NULL);
 
   /* we link the elements together */
   /* file-source -> ogg-demuxer ~> vorbis-decoder -> converter -> alsa-output */
   // gst_element_link (source, driver);
-  gst_element_link_many (driver, capsfilter, mp4mux, sink, NULL);
-  // g_signal_connect (demuxer, "pad-added", G_CALLBACK (on_pad_added), decoder);
-
+  gst_element_link_many (driver, capsfilter, sink, NULL);
+  
   /* note that the demuxer will be linked to the decoder dynamically.
      The reason is that Ogg may contain various streams (for example
      audio and video). The source pad(s) will be created at run time,
      by the demuxer when it detects the amount and nature of streams.
      Therefore we connect a callback function which will be executed
      when the "pad-added" is emitted.*/
+
 
 
   /* Set the pipeline to "playing" state*/
