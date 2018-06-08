@@ -26,14 +26,15 @@ int main(int argc, char* argv[])
     return 1;
   }
   
-  // Read a value from idx 0
-  long value = Device.getValue(0);
-  std::cout << "Read value from idx 0, result: " << value << std::endl;
-  
   // Write value to idx 2
   std::cout << "Set value to idx 2." << std::endl;
-  value = 200;
+  long value = 200;
   Device.setValue(value, 2);
+
+  // Read a value from idx 0
+  value = Device.getValue(0);
+  std::cout << "Read value from idx 0, result: " << value << std::endl;
+  
   
   std::cout << "Exiting..." << std::endl;
   return 0;

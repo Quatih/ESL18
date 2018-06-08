@@ -23,21 +23,22 @@ int main(int argc, char* argv[])
   
   // open connection to device.
   printf("Opening gpmc_fpga...\n");
-  fd = open(argv[1], 0);
+  fd = open(argv[1], 2);
   if (0 > fd)
   {
     printf("Error, could not open device: %s.\n", argv[1]);
     return 1;
-  }
+  } 
+ // Write value to idx 2
+  printf("Set value to idx 2.\n");
+  unsigned int value = 200;
+  setGPMCValue(fd, value, 2);
   
   // Read a value from idx 0
-  long value = getGPMCValue(fd, 0);
+  value = getGPMCValue(fd, 0);
   printf("Read value from idx 0, result: %li\n", value);
   
-  // Write value to idx 2
-  printf("Set value to idx 2.\n");
-  value = 200;
-  setGPMCValue(fd, value, 2);
+
   
   printf("Exiting...\n");
   // close connection to free resources.

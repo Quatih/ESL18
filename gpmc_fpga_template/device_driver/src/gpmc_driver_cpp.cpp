@@ -15,7 +15,7 @@
 
 gpmc_driver::gpmc_driver(char* device)
 {
-  m_fd = open(device, 0);
+  m_fd = open(device, 2);
   if (0 > m_fd)
   {
     m_fd = INVALID_DEVICE;

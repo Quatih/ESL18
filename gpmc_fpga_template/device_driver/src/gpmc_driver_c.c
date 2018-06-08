@@ -6,6 +6,8 @@
 
 #include "gpmc_driver_c.h"
 
+#include "stdio.h"
+
 // GPMC kernel module with definitions.
 #include "rt_gpmc_user/rt_gpmc_fpga.h"
 
@@ -18,7 +20,8 @@ unsigned long getGPMCValue(int fd, int idx)
   // Read from specified address.
   struct gpmc_fpga_data temp;
   temp.offset = idx;
-  ioctl(fd, IOCTL_GET_U32, &temp);
+  int a = ioctl(fd, IOCTL_GET_U32, &temp);
+  printf("%d\n",a);
   return temp.data;
 }
 
@@ -30,5 +33,6 @@ void setGPMCValue(int fd, unsigned int value, int idx)
   temp.data = value;
   temp.offset = idx;
   // Set value.
-  ioctl(fd, IOCTL_SET_U32, &temp);
+  int a = ioctl(fd, IOCTL_SET_U32, &temp);
+  printf("%d\n",a);
 }
