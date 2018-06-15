@@ -1,5 +1,5 @@
 Flow report for esl_demonstrator
-Fri May 25 16:34:50 2018
+Fri Jun 15 13:54:42 2018
 Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -40,18 +40,18 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Flow Summary                                                                    ;
 +------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Fri May 25 16:34:42 2018      ;
+; Flow Status                        ; Successful - Fri Jun 15 13:54:34 2018      ;
 ; Quartus II 32-bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; esl_demonstrator                           ;
 ; Top-level Entity Name              ; esl_as4                                    ;
 ; Family                             ; Cyclone IV E                               ;
 ; Device                             ; EP4CE22F17C6                               ;
 ; Timing Models                      ; Final                                      ;
-; Total logic elements               ; 2,591 / 22,320 ( 12 % )                    ;
-;     Total combinational functions  ; 2,304 / 22,320 ( 10 % )                    ;
-;     Dedicated logic registers      ; 1,627 / 22,320 ( 7 % )                     ;
-; Total registers                    ; 1627                                       ;
-; Total pins                         ; 9 / 154 ( 6 % )                            ;
+; Total logic elements               ; 2,747 / 22,320 ( 12 % )                    ;
+;     Total combinational functions  ; 2,451 / 22,320 ( 11 % )                    ;
+;     Dedicated logic registers      ; 1,740 / 22,320 ( 8 % )                     ;
+; Total registers                    ; 1740                                       ;
+; Total pins                         ; 11 / 154 ( 7 % )                           ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 209,536 / 608,256 ( 34 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 0 / 132 ( 0 % )                            ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/25/2018 16:33:56 ;
+; Start date & time ; 06/15/2018 13:53:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; esl_demonstrator    ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+------------------------------------------------------------+------------------+-----------------------------------------------+----------------+
 ; Assignment Name                     ; Value                                                      ; Default Value    ; Entity Name                                   ; Section Id     ;
 +-------------------------------------+------------------------------------------------------------+------------------+-----------------------------------------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 0.152725883614071                                          ; --               ; --                                            ; --             ;
+; COMPILER_SIGNATURE_ID               ; 0.152906362717858                                          ; --               ; --                                            ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; None                                                       ; --               ; --                                            ; eda_simulation ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; Quad_Dec                                      ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; Quad_Dec_cpu                                  ; --             ;
@@ -97,6 +97,7 @@ applicable agreement for further details.
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; Quad_Dec_onchip_mem                           ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; Quad_Dec_sys_clk_timer                        ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; Quad_Dec_sysid                                ; --             ;
+; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; Quad_Dec_uart_0                               ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; altera_avalon_sc_fifo                         ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; altera_merlin_master_agent                    ; --             ;
 ; IP_TOOL_ENV                         ; Qsys                                                       ; --               ; altera_merlin_master_translator               ; --             ;
@@ -124,6 +125,7 @@ applicable agreement for further details.
 ; IP_TOOL_NAME                        ; altera_avalon_onchip_memory2                               ; --               ; Quad_Dec_onchip_mem                           ; --             ;
 ; IP_TOOL_NAME                        ; altera_avalon_timer                                        ; --               ; Quad_Dec_sys_clk_timer                        ; --             ;
 ; IP_TOOL_NAME                        ; altera_avalon_sysid_qsys                                   ; --               ; Quad_Dec_sysid                                ; --             ;
+; IP_TOOL_NAME                        ; altera_avalon_uart                                         ; --               ; Quad_Dec_uart_0                               ; --             ;
 ; IP_TOOL_NAME                        ; altera_avalon_sc_fifo                                      ; --               ; altera_avalon_sc_fifo                         ; --             ;
 ; IP_TOOL_NAME                        ; altera_merlin_master_agent                                 ; --               ; altera_merlin_master_agent                    ; --             ;
 ; IP_TOOL_NAME                        ; altera_merlin_master_translator                            ; --               ; altera_merlin_master_translator               ; --             ;
@@ -151,6 +153,7 @@ applicable agreement for further details.
 ; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; Quad_Dec_onchip_mem                           ; --             ;
 ; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; Quad_Dec_sys_clk_timer                        ; --             ;
 ; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; Quad_Dec_sysid                                ; --             ;
+; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; Quad_Dec_uart_0                               ; --             ;
 ; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; altera_avalon_sc_fifo                         ; --             ;
 ; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; altera_merlin_master_agent                    ; --             ;
 ; IP_TOOL_VERSION                     ; 13.1                                                       ; --               ; altera_merlin_master_translator               ; --             ;
@@ -171,7 +174,7 @@ applicable agreement for further details.
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                                               ; --               ; --                                            ; --             ;
 ; SLD_FILE                            ; Quad_Dec/synthesis/Quad_Dec.regmap                         ; --               ; --                                            ; --             ;
 ; SLD_FILE                            ; Quad_Dec/synthesis/Quad_Dec.debuginfo                      ; --               ; --                                            ; --             ;
-; SLD_INFO                            ; QSYS_NAME Quad_Dec HAS_SOPCINFO 1 GENERATION_ID 1527257753 ; --               ; Quad_Dec                                      ; --             ;
+; SLD_INFO                            ; QSYS_NAME Quad_Dec HAS_SOPCINFO 1 GENERATION_ID 1529059747 ; --               ; Quad_Dec                                      ; --             ;
 ; SOPCINFO_FILE                       ; Quad_Dec/synthesis/../../Quad_Dec.sopcinfo                 ; --               ; --                                            ; --             ;
 ; SYNTHESIS_ONLY_QIP                  ; On                                                         ; --               ; --                                            ; --             ;
 ; TOP_LEVEL_ENTITY                    ; esl_as4                                                    ; esl_demonstrator ; --                                            ; --             ;
@@ -183,11 +186,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:14     ; 1.0                     ; 493 MB              ; 00:00:14                           ;
-; Fitter                    ; 00:00:24     ; 1.7                     ; 734 MB              ; 00:00:30                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 383 MB              ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:06     ; 1.8                     ; 511 MB              ; 00:00:07                           ;
-; Total                     ; 00:00:46     ; --                      ; --                  ; 00:00:54                           ;
+; Analysis & Synthesis      ; 00:00:15     ; 1.0                     ; 506 MB              ; 00:00:14                           ;
+; Fitter                    ; 00:00:24     ; 1.3                     ; 741 MB              ; 00:00:30                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 379 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:05     ; 1.8                     ; 503 MB              ; 00:00:07                           ;
+; Total                     ; 00:00:46     ; --                      ; --                  ; 00:00:53                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

@@ -16,7 +16,7 @@
 -- PROGRAM "Quartus II 32-bit"
 -- VERSION "Version 13.1.0 Build 162 10/23/2013 SJ Web Edition"
 
--- DATE "06/06/2018 16:17:07"
+-- DATE "06/08/2018 09:31:00"
 
 -- 
 -- Device: Altera EP3C40Q240C8 Package PQFP240
@@ -36,7 +36,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY 	setup_control IS
     PORT (
 	CLOCK_50 : IN std_logic;
-	GPMC_DATA : INOUT std_logic_vector(15 DOWNTO 0);
+	GPMC_DATA : BUFFER std_logic_vector(15 DOWNTO 0);
 	GPMC_ADDR : IN std_logic_vector(10 DOWNTO 1);
 	GPMC_nPWE : IN std_logic;
 	GPMC_nOE : IN std_logic;
@@ -44,13 +44,13 @@ ENTITY 	setup_control IS
 	GPMC_nCS6 : IN std_logic;
 	GPMC_CLK : IN std_logic;
 	F_IN : IN std_logic_vector(15 DOWNTO 0);
-	F_OUT : OUT std_logic_vector(15 DOWNTO 0);
-	PWM1A : OUT std_logic;
-	PWM1B : OUT std_logic;
-	PWM1C : OUT std_logic;
-	PWM2A : OUT std_logic;
-	PWM2B : OUT std_logic;
-	PWM2C : OUT std_logic;
+	F_OUT : BUFFER std_logic_vector(15 DOWNTO 0);
+	PWM1A : BUFFER std_logic;
+	PWM1B : BUFFER std_logic;
+	PWM1C : BUFFER std_logic;
+	PWM2A : BUFFER std_logic;
+	PWM2B : BUFFER std_logic;
+	PWM2C : BUFFER std_logic;
 	ENC1A : IN std_logic;
 	ENC1B : IN std_logic;
 	ENC1I : IN std_logic;
@@ -150,6 +150,7 @@ SIGNAL ww_devoe : std_logic;
 SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
 SIGNAL ww_CLOCK_50 : std_logic;
+SIGNAL ww_GPMC_DATA : std_logic_vector(15 DOWNTO 0);
 SIGNAL ww_GPMC_ADDR : std_logic_vector(10 DOWNTO 1);
 SIGNAL ww_GPMC_nPWE : std_logic;
 SIGNAL ww_GPMC_nOE : std_logic;
@@ -1783,6 +1784,7 @@ SIGNAL \ALT_INV_CLOCK_50~inputclkctrl_outclk\ : std_logic;
 BEGIN
 
 ww_CLOCK_50 <= CLOCK_50;
+GPMC_DATA <= ww_GPMC_DATA;
 ww_GPMC_ADDR <= GPMC_ADDR;
 ww_GPMC_nPWE <= GPMC_nPWE;
 ww_GPMC_nOE <= GPMC_nOE;

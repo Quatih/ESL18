@@ -69,8 +69,8 @@ CHIP  "esl_demonstrator"  ASSIGNED TO AN: EP4CE22F17C6
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
 VCCIO8                       : A1        : power  :                   : 3.3V    : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : A2        :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : A3        :        :                   :         : 8         :                
+uart_tx                      : A2        : output : 3.3-V LVTTL       :         : 8         : Y              
+uart_rx                      : A3        : input  : 3.3-V LVTTL       :         : 8         : Y              
 Quad_input0[1]               : A4        : input  : 3.3-V LVTTL       :         : 8         : Y              
 Quad_input1[1]               : A5        : input  : 3.3-V LVTTL       :         : 8         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : A6        :        :                   :         : 8         :                
