@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
  // Write value to idx 2
   printf("Set value to idx 2.\n");
   unsigned int value = 200;
-  setGPMCValue(fd, value, 2);
+  setGPMCValue(fd, value, 4);
   
   // Read a value from idx 0
   value = getGPMCValue(fd, 0);

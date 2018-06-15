@@ -133,7 +133,9 @@ architecture structure of setup_control is
   signal MC2_in : std_logic_vector(31 downto 0);
   signal QD1_out : std_logic_vector(31 downto 0);
   signal QD2_out : std_logic_vector(31 downto 0);
-  
+  signal reg_comm : std_logic_vector(31 downto 0);
+  signal reg_comm2 : std_logic_vector(31 downto 0);
+  constant bla : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(1, 32));
 begin
   -- Map GPMC controller to I/O.
   gpmc_driver : ramstix_gpmc_driver generic map(
@@ -145,16 +147,16 @@ begin
     port map (
       clk           => CLOCK_50,
       -- Linux offset: idx 0
-      reg0_in       => QD1_out(15 downto 0),       -- LSB
-      reg1_in       => QD1_out(31 downto 16),       -- MSB
+      reg0_in       => reg_comm(15 downto 0),       -- LSB
+      reg1_in       => reg_comm(31 downto 16),       -- MSB
       
       -- Linux offset: idx 1
       reg2_in       => QD2_out(15 downto 0),  -- LSB
       reg3_in       => QD2_out(31 downto 16),  -- MSB
       
       -- Linux offset: idx 2
-      reg4_out      => MC1_in(15 downto 0),      -- LSB
-      reg5_out      => MC1_in(31 downto 16),      -- MSB
+      reg4_out      => reg_comm2(15 downto 0),      -- LSB
+      reg5_out      => reg_comm2(31 downto 16),      -- MSB
       
       -- Linux offset: idx 3
       reg6_out      => MC2_in(15 downto 0),  -- LSB
@@ -216,4 +218,10 @@ begin
       ENC2A,
       ENC2B
     );
+	 process(CLOCK_50)
+	 begin
+		if(falling_edge(CLOCK_50)) then
+			reg_comm <= reg_comm2;
+		end if;
+	 end process;
 end architecture;

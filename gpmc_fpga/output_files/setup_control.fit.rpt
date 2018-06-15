@@ -1,0 +1,1968 @@
+Fitter report for setup_control
+Fri Jun  8 09:49:00 2018
+Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Fitter Summary
+  3. Fitter Settings
+  4. Parallel Compilation
+  5. Ignored Assignments
+  6. Incremental Compilation Preservation Summary
+  7. Incremental Compilation Partition Settings
+  8. Fitter Resource Usage Summary
+  9. Input Pins
+ 10. Output Pins
+ 11. Bidir Pins
+ 12. Dual Purpose and Dedicated Pins
+ 13. I/O Bank Usage
+ 14. All Package Pins
+ 15. Fitter Resource Utilization by Entity
+ 16. Delay Chain Summary
+ 17. Pad To Core Delay Chain Fanout
+ 18. Control Signals
+ 19. Non-Global High Fan-Out Signals
+ 20. I/O Rules Details
+ 21. Fitter Device Options
+ 22. Operating Settings and Conditions
+ 23. Fitter Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Fitter Summary                                                                  ;
++------------------------------------+--------------------------------------------+
+; Fitter Status                      ; Failed - Fri Jun  8 09:49:00 2018          ;
+; Quartus II 32-bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Revision Name                      ; setup_control                              ;
+; Top-level Entity Name              ; setup_control                              ;
+; Family                             ; Cyclone III                                ;
+; Device                             ; EP3C40Q240C8                               ;
+; Timing Models                      ; Final                                      ;
+; Total logic elements               ; 1,147 / 39,600 ( 3 % )                     ;
+;     Total combinational functions  ; 602 / 39,600 ( 2 % )                       ;
+;     Dedicated logic registers      ; 721 / 39,600 ( 2 % )                       ;
+; Total registers                    ; 721                                        ;
+; Total pins                         ; 76 / 129 ( 59 % )                          ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0 / 1,161,216 ( 0 % )                      ;
+; Embedded Multiplier 9-bit elements ; 0 / 252 ( 0 % )                            ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                              ;
++------------------------------------+--------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Settings                                                                                                                                            ;
++----------------------------------------------------------------------------+---------------------------------------+---------------------------------------+
+; Option                                                                     ; Setting                               ; Default Value                         ;
++----------------------------------------------------------------------------+---------------------------------------+---------------------------------------+
+; Device                                                                     ; EP3C40Q240C8                          ;                                       ;
+; Nominal Core Supply Voltage                                                ; 1.2V                                  ;                                       ;
+; Minimum Core Junction Temperature                                          ; 0                                     ;                                       ;
+; Maximum Core Junction Temperature                                          ; 85                                    ;                                       ;
+; Fit Attempts to Skip                                                       ; 0                                     ; 0.0                                   ;
+; Use smart compilation                                                      ; Off                                   ; Off                                   ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                                    ; On                                    ;
+; Enable compact report table                                                ; Off                                   ; Off                                   ;
+; Auto Merge PLLs                                                            ; On                                    ; On                                    ;
+; Router Timing Optimization Level                                           ; Normal                                ; Normal                                ;
+; Perform Clocking Topology Analysis During Routing                          ; Off                                   ; Off                                   ;
+; Placement Effort Multiplier                                                ; 1.0                                   ; 1.0                                   ;
+; Router Effort Multiplier                                                   ; 1.0                                   ; 1.0                                   ;
+; Optimize Hold Timing                                                       ; All Paths                             ; All Paths                             ;
+; Optimize Multi-Corner Timing                                               ; On                                    ; On                                    ;
+; PowerPlay Power Optimization                                               ; Normal compilation                    ; Normal compilation                    ;
+; SSN Optimization                                                           ; Off                                   ; Off                                   ;
+; Optimize Timing                                                            ; Normal compilation                    ; Normal compilation                    ;
+; Optimize Timing for ECOs                                                   ; Off                                   ; Off                                   ;
+; Regenerate full fit report during ECO compiles                             ; Off                                   ; Off                                   ;
+; Optimize IOC Register Placement for Timing                                 ; Normal                                ; Normal                                ;
+; Limit to One Fitting Attempt                                               ; Off                                   ; Off                                   ;
+; Final Placement Optimizations                                              ; Automatically                         ; Automatically                         ;
+; Fitter Aggressive Routability Optimizations                                ; Automatically                         ; Automatically                         ;
+; Fitter Initial Placement Seed                                              ; 1                                     ; 1                                     ;
+; PCI I/O                                                                    ; Off                                   ; Off                                   ;
+; Weak Pull-Up Resistor                                                      ; Off                                   ; Off                                   ;
+; Enable Bus-Hold Circuitry                                                  ; Off                                   ; Off                                   ;
+; Auto Packed Registers                                                      ; Auto                                  ; Auto                                  ;
+; Auto Delay Chains                                                          ; On                                    ; On                                    ;
+; Auto Delay Chains for High Fanout Input Pins                               ; Off                                   ; Off                                   ;
+; Allow Single-ended Buffer for Differential-XSTL Input                      ; Off                                   ; Off                                   ;
+; Treat Bidirectional Pin as Output Pin                                      ; Off                                   ; Off                                   ;
+; Perform Physical Synthesis for Combinational Logic for Fitting             ; Off                                   ; Off                                   ;
+; Perform Physical Synthesis for Combinational Logic for Performance         ; Off                                   ; Off                                   ;
+; Perform Register Duplication for Performance                               ; Off                                   ; Off                                   ;
+; Perform Logic to Memory Mapping for Fitting                                ; Off                                   ; Off                                   ;
+; Perform Register Retiming for Performance                                  ; Off                                   ; Off                                   ;
+; Perform Asynchronous Signal Pipelining                                     ; Off                                   ; Off                                   ;
+; Fitter Effort                                                              ; Auto Fit                              ; Auto Fit                              ;
+; Physical Synthesis Effort Level                                            ; Normal                                ; Normal                                ;
+; Logic Cell Insertion - Logic Duplication                                   ; Auto                                  ; Auto                                  ;
+; Auto Register Duplication                                                  ; Auto                                  ; Auto                                  ;
+; Auto Global Clock                                                          ; On                                    ; On                                    ;
+; Auto Global Register Control Signals                                       ; On                                    ; On                                    ;
+; Reserve all unused pins                                                    ; As input tri-stated with weak pull-up ; As input tri-stated with weak pull-up ;
+; Synchronizer Identification                                                ; Off                                   ; Off                                   ;
+; Enable Beneficial Skew Optimization                                        ; On                                    ; On                                    ;
+; Optimize Design for Metastability                                          ; On                                    ; On                                    ;
+; Force Fitter to Avoid Periphery Placement Warnings                         ; Off                                   ; Off                                   ;
+; RAM Bit Reservation (Cyclone III)                                          ; Off                                   ; Off                                   ;
+; Enable input tri-state on active configuration pins in user mode           ; Off                                   ; Off                                   ;
++----------------------------------------------------------------------------+---------------------------------------+---------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-8         ;   0.0%      ;
++----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------+
+; Ignored Assignments                                                                        ;
++--------------+----------------+--------------+------------+---------------+----------------+
+; Name         ; Ignored Entity ; Ignored From ; Ignored To ; Ignored Value ; Ignored Source ;
++--------------+----------------+--------------+------------+---------------+----------------+
+; Location     ;                ;              ; AD1_CONV   ; PIN_83        ; QSF Assignment ;
+; Location     ;                ;              ; AD1_SCK    ; PIN_82        ; QSF Assignment ;
+; Location     ;                ;              ; AD1_SDO    ; PIN_81        ; QSF Assignment ;
+; Location     ;                ;              ; AD2_CONV   ; PIN_88        ; QSF Assignment ;
+; Location     ;                ;              ; AD2_SCK    ; PIN_87        ; QSF Assignment ;
+; Location     ;                ;              ; AD2_SDO    ; PIN_84        ; QSF Assignment ;
+; Location     ;                ;              ; DA1_RELAY  ; PIN_21        ; QSF Assignment ;
+; Location     ;                ;              ; DA1_SCK    ; PIN_68        ; QSF Assignment ;
+; Location     ;                ;              ; DA1_SDI    ; PIN_69        ; QSF Assignment ;
+; Location     ;                ;              ; DA1_nCS    ; PIN_63        ; QSF Assignment ;
+; Location     ;                ;              ; DA1_nLDAC  ; PIN_70        ; QSF Assignment ;
+; Location     ;                ;              ; DA2_RELAY  ; PIN_22        ; QSF Assignment ;
+; Location     ;                ;              ; DA2_SCK    ; PIN_76        ; QSF Assignment ;
+; Location     ;                ;              ; DA2_SDI    ; PIN_78        ; QSF Assignment ;
+; Location     ;                ;              ; DA2_nCS    ; PIN_73        ; QSF Assignment ;
+; Location     ;                ;              ; DA2_nLDAC  ; PIN_80        ; QSF Assignment ;
+; Location     ;                ;              ; ENC3A      ; PIN_169       ; QSF Assignment ;
+; Location     ;                ;              ; ENC3B      ; PIN_171       ; QSF Assignment ;
+; Location     ;                ;              ; ENC3I      ; PIN_13        ; QSF Assignment ;
+; Location     ;                ;              ; ENC4A      ; PIN_173       ; QSF Assignment ;
+; Location     ;                ;              ; ENC4B      ; PIN_177       ; QSF Assignment ;
+; Location     ;                ;              ; ENC4I      ; PIN_18        ; QSF Assignment ;
+; Location     ;                ;              ; PWM3A      ; PIN_45        ; QSF Assignment ;
+; Location     ;                ;              ; PWM3B      ; PIN_46        ; QSF Assignment ;
+; Location     ;                ;              ; PWM3C      ; PIN_49        ; QSF Assignment ;
+; Location     ;                ;              ; PWM4A      ; PIN_50        ; QSF Assignment ;
+; Location     ;                ;              ; PWM4B      ; PIN_51        ; QSF Assignment ;
+; Location     ;                ;              ; PWM4C      ; PIN_52        ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; AD1_CONV   ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; AD1_SCK    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; AD1_SDO    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; AD2_CONV   ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; AD2_SCK    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; AD2_SDO    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA1_RELAY  ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA1_SCK    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA1_SDI    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA1_nCS    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA1_nLDAC  ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA2_RELAY  ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA2_SCK    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA2_SDI    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA2_nCS    ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; DA2_nLDAC  ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; ENC3A      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; ENC3B      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; ENC3I      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; ENC4A      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; ENC4B      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; ENC4I      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; PWM3A      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; PWM3B      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; PWM3C      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; PWM4A      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; PWM4B      ; 3.3-V LVTTL   ; QSF Assignment ;
+; I/O Standard ; setup_control  ;              ; PWM4C      ; 3.3-V LVTTL   ; QSF Assignment ;
++--------------+----------------+--------------+------------+---------------+----------------+
+
+
++------------------------------------------------------------------------------------------------+
+; Incremental Compilation Preservation Summary                                                   ;
++---------------------+------------------+----------------------------+--------------------------+
+; Type                ; Total [A + B]    ; From Design Partitions [A] ; From Rapid Recompile [B] ;
++---------------------+------------------+----------------------------+--------------------------+
+; Placement (by node) ;                  ;                            ;                          ;
+;     -- Requested    ; 0.00 % ( 0 / 0 ) ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
+;     -- Achieved     ; 0.00 % ( 0 / 0 ) ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
+;                     ;                  ;                            ;                          ;
+; Routing (by net)    ;                  ;                            ;                          ;
+;     -- Requested    ; 0.00 % ( 0 / 0 ) ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
+;     -- Achieved     ; 0.00 % ( 0 / 0 ) ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
++---------------------+------------------+----------------------------+--------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Incremental Compilation Partition Settings                                                                                                                                             ;
++--------------------------------+----------------+-------------------+-------------------------+------------------------+------------------------------+--------------------------------+
+; Partition Name                 ; Partition Type ; Netlist Type Used ; Preservation Level Used ; Netlist Type Requested ; Preservation Level Requested ; Contents                       ;
++--------------------------------+----------------+-------------------+-------------------------+------------------------+------------------------------+--------------------------------+
+; Top                            ; User-created   ; Source File       ; N/A                     ; Source File            ; N/A                          ;                                ;
+; hard_block:auto_generated_inst ; Auto-generated ; Source File       ; N/A                     ; Source File            ; N/A                          ; hard_block:auto_generated_inst ;
++--------------------------------+----------------+-------------------+-------------------------+------------------------+------------------------------+--------------------------------+
+
+
++----------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                        ;
++---------------------------------------------+------------------------+
+; Resource                                    ; Usage                  ;
++---------------------------------------------+------------------------+
+; Total logic elements                        ; 1,147 / 39,600 ( 3 % ) ;
+;     -- Combinational with no register       ; 426                    ;
+;     -- Register only                        ; 545                    ;
+;     -- Combinational with a register        ; 176                    ;
+;                                             ;                        ;
+; Logic element usage by number of LUT inputs ;                        ;
+;     -- 4 input functions                    ; 408                    ;
+;     -- 3 input functions                    ; 168                    ;
+;     -- <=2 input functions                  ; 26                     ;
+;     -- Register only                        ; 545                    ;
+;                                             ;                        ;
+; Logic elements by mode                      ;                        ;
+;     -- normal mode                          ; 493                    ;
+;     -- arithmetic mode                      ; 109                    ;
+;                                             ;                        ;
+; Total registers*                            ; 721 / 40,170 ( 2 % )   ;
+;     -- Dedicated logic registers            ; 721 / 39,600 ( 2 % )   ;
+;     -- I/O registers                        ; 0 / 570 ( 0 % )        ;
+;                                             ;                        ;
+; Total LABs                                  ; Not available          ;
+; Virtual pins                                ; 0                      ;
+; I/O pins                                    ; 76 / 129 ( 59 % )      ;
+;     -- Clock pins                           ; 0 / 8 ( 0 % )          ;
+;     -- Dedicated input pins                 ; 0 / 9 ( 0 % )          ;
+;                                             ;                        ;
+; Global signals                              ; 0                      ;
+; M9Ks                                        ; 0 / 126 ( 0 % )        ;
+; Total block memory bits                     ; 0 / 1,161,216 ( 0 % )  ;
+; Total block memory implementation bits      ; 0 / 1,161,216 ( 0 % )  ;
+; Embedded Multiplier 9-bit elements          ; 0 / 252 ( 0 % )        ;
+; PLLs                                        ; 0 / 4 ( 0 % )          ;
+; Global clocks                               ; 0 / 20 ( 0 % )         ;
+; JTAGs                                       ; 0 / 1 ( 0 % )          ;
+; CRC blocks                                  ; 0 / 1 ( 0 % )          ;
+; ASMI blocks                                 ; 0 / 1 ( 0 % )          ;
+; Impedance control blocks                    ; 0 / 4 ( 0 % )          ;
+; Maximum fan-out                             ; 721                    ;
+; Highest non-global fan-out                  ; 721                    ;
+; Total fan-out                               ; 4392                   ;
+; Average fan-out                             ; 2.93                   ;
++---------------------------------------------+------------------------+
+*  Register count does not include registers inside RAM blocks or DSP blocks.
+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Input Pins                                                                                                                                                                                                                                 ;
++---------------+------------+----------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+
+; Name          ; Pin #      ; I/O Bank ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ;
++---------------+------------+----------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+
+; CLOCK_50      ; Unassigned ; --       ; 721                   ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; ENC1A         ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; ENC1B         ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; ENC1I         ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; ENC2A         ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; ENC2B         ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; ENC2I         ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[0]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[10]      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[11]      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[12]      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[13]      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[14]      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[15]      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[1]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[2]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[3]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[4]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[5]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[6]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[7]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[8]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; F_IN[9]       ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[10] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[1]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[2]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[3]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[4]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[5]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[6]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[7]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[8]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_ADDR[9]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_CLK      ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_FPGA_IRQ ; Unassigned ; --       ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_nCS6     ; Unassigned ; --       ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_nOE      ; Unassigned ; --       ; 2                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
+; GPMC_nPWE     ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; None         ; --                        ; User                 ;
++---------------+------------+----------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Output Pins                                                                                                                                                                                                                                                                                                                                                                                  ;
++-----------+------------+----------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
+; Name      ; Pin #      ; I/O Bank ; Output Register ; Output Enable Register ; Power Up High ; Slew Rate ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Termination Control Block ; Output Buffer Pre-emphasis ; Voltage Output Differential ; Location assigned by ; Output Enable Source ; Output Enable Group ;
++-----------+------------+----------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
+; F_OUT[0]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[10] ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[11] ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[12] ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[13] ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[14] ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[15] ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[1]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[2]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[3]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[4]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[5]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[6]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[7]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[8]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; F_OUT[9]  ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; PWM1A     ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; PWM1B     ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; PWM1C     ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; PWM2A     ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; PWM2B     ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
+; PWM2C     ; Unassigned ; --       ; no              ; no                     ; no            ; no        ; no              ; no         ; no            ; no       ; Off          ; None         ; Default          ; Off         ; --                        ; no                         ; no                          ; User                 ; -                    ; -                   ;
++-----------+------------+----------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Bidir Pins                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
++---------------+------------+----------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------+-----------------+------------+----------+--------------+--------------+------------------+--------------------+---------------------------+----------------------+------+---------------------------------------------------------+---------------------+
+; Name          ; Pin #      ; I/O Bank ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Output Register ; Output Enable Register ; Power Up High ; Slew Rate ; PCI I/O Enabled ; Open Drain ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Output Termination ; Termination Control Block ; Location assigned by ; Load ; Output Enable Source                                    ; Output Enable Group ;
++---------------+------------+----------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------+-----------------+------------+----------+--------------+--------------+------------------+--------------------+---------------------------+----------------------+------+---------------------------------------------------------+---------------------+
+; GPMC_DATA[0]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[10] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[11] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[12] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[13] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[14] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[15] ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[1]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[2]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[3]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[4]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[5]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[6]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[7]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[8]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
+; GPMC_DATA[9]  ; Unassigned ; --       ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no        ; no              ; no         ; no       ; Off          ; None         ; Default          ; Off                ; --                        ; User                 ; 0 pF ; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16 (inverted) ; -                   ;
++---------------+------------+----------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------+-----------------+------------+----------+--------------+--------------+------------------+--------------------+---------------------------+----------------------+------+---------------------------------------------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------+
+; Dual Purpose and Dedicated Pins                                                   ;
++----------+-----------+-------------+------------------+---------------------------+
+; Location ; Pin Name  ; Reserved As ; User Signal Name ; Pin Type                  ;
++----------+-----------+-------------+------------------+---------------------------+
+; 17       ; nSTATUS   ; -           ; -                ; Dedicated Programming Pin ;
+; 25       ; nCONFIG   ; -           ; -                ; Dedicated Programming Pin ;
+; 30       ; nCE       ; -           ; -                ; Dedicated Programming Pin ;
+; 153      ; CONF_DONE ; -           ; -                ; Dedicated Programming Pin ;
+; 155      ; MSEL0     ; -           ; -                ; Dedicated Programming Pin ;
+; 157      ; MSEL1     ; -           ; -                ; Dedicated Programming Pin ;
+; 158      ; MSEL2     ; -           ; -                ; Dedicated Programming Pin ;
+; 158      ; MSEL3     ; -           ; -                ; Dedicated Programming Pin ;
++----------+-----------+-------------+------------------+---------------------------+
+
+
++----------------------------------------------------------+
+; I/O Bank Usage                                           ;
++----------+----------------+---------------+--------------+
+; I/O Bank ; Usage          ; VCCIO Voltage ; VREF Voltage ;
++----------+----------------+---------------+--------------+
+; 1        ; 0 / 12 ( 0 % ) ; --            ; --           ;
+; 2        ; 0 / 17 ( 0 % ) ; --            ; --           ;
+; 3        ; 0 / 16 ( 0 % ) ; --            ; --           ;
+; 4        ; 0 / 18 ( 0 % ) ; --            ; --           ;
+; 5        ; 0 / 17 ( 0 % ) ; --            ; --           ;
+; 6        ; 0 / 13 ( 0 % ) ; --            ; --           ;
+; 7        ; 0 / 18 ( 0 % ) ; --            ; --           ;
+; 8        ; 0 / 18 ( 0 % ) ; --            ; --           ;
+; Unknown  ; 81             ; --            ;              ;
++----------+----------------+---------------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; All Package Pins                                                                                                                                              ;
++----------+------------+----------+---------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
+; Location ; Pad Number ; I/O Bank ; Pin Name/Usage                  ; Dir.   ; I/O Standard ; Voltage ; I/O Type   ; User Assignment ; Bus Hold ; Weak Pull Up ;
++----------+------------+----------+---------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
+; 1        ;            ;          ; VCCD_PLL3                       ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 2        ;            ;          ; GNDA3                           ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 3        ;            ; --       ; VCCA3                           ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 4        ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 5        ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 6        ; 5          ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 7        ;            ; 1        ; VCCIO1                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 8        ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 9        ; 14         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 10       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 11       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 12       ; 17         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 13       ; 18         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 14       ; 21         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 15       ;            ; 1        ; VCCIO1                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 16       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 17       ; 41         ; 1        ; ^nSTATUS                        ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 18       ; 42         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 19       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 20       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 21       ; 50         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 22       ; 53         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 23       ; 58         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; On           ;
+; 24       ; 59         ; 1        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 25       ; 60         ; 1        ; ^nCONFIG                        ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 26       ; 61         ; 1        ; #TDI                            ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 27       ; 62         ; 1        ; #TCK                            ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 28       ; 63         ; 1        ; #TMS                            ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 29       ; 64         ; 1        ; #TDO                            ; output ;              ;         ; --         ;                 ; --       ; --           ;
+; 30       ; 65         ; 1        ; ^nCE                            ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 31       ; 66         ; 1        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 32       ; 67         ; 1        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 33       ; 68         ; 2        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 34       ; 69         ; 2        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 35       ;            ; 2        ; VCCIO2                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 36       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 37       ; 74         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 38       ; 75         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 39       ; 80         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 40       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 41       ; 83         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 42       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 43       ; 86         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 44       ; 88         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 45       ; 89         ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 46       ; 103        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 47       ;            ; 2        ; VCCIO2                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 48       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 49       ; 110        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 50       ; 121        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 51       ; 129        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 52       ; 130        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 53       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 54       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 55       ; 134        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 56       ; 135        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 57       ; 136        ; 2        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 58       ;            ; --       ; VCCA1                           ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 59       ;            ;          ; GNDA1                           ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 60       ;            ;          ; VCCD_PLL1                       ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 61       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 62       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 63       ; 147        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 64       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 65       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 66       ;            ; 3        ; VCCIO3                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 67       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 68       ; 152        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 69       ; 154        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 70       ; 155        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 71       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 72       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 73       ; 159        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 74       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 75       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 76       ; 178        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 77       ;            ; 3        ; VCCIO3                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 78       ; 179        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 79       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 80       ; 182        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 81       ; 183        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 82       ; 184        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 83       ; 190        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 84       ; 191        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 85       ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 86       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 87       ; 202        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 88       ; 203        ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 89       ; 204        ; 3        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 90       ; 205        ; 3        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 91       ; 206        ; 4        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 92       ; 207        ; 4        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 93       ; 208        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 94       ; 209        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 95       ; 213        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 96       ;            ; 4        ; VCCIO4                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 97       ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 98       ; 218        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 99       ; 219        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 100      ; 222        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 101      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 102      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 103      ; 224        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 104      ;            ; 4        ; VCCIO4                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 105      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 106      ; 228        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 107      ; 229        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 108      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 109      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 110      ; 245        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 111      ; 252        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 112      ; 253        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 113      ; 258        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 114      ; 261        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 115      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 116      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 117      ; 266        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 118      ; 267        ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 119      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 120      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 121      ;            ;          ; VCCD_PLL4                       ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 122      ;            ;          ; GNDA4                           ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 123      ;            ; --       ; VCCA4                           ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 124      ;            ; 5        ; VCCIO5                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 125      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 126      ; 277        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 127      ; 278        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 128      ; 280        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 129      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 130      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 131      ; 283        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 132      ; 284        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 133      ; 285        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 134      ; 288        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 135      ; 289        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 136      ;            ; 5        ; VCCIO5                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 137      ; 299        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 138      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 139      ; 301        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 140      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 141      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 142      ; 317        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 143      ; 330        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 144      ; 331        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 145      ; 332        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 146      ; 337        ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 147      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 148      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 149      ; 342        ; 5        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 150      ; 343        ; 5        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 151      ; 344        ; 6        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 152      ; 345        ; 6        ; GND+                            ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 153      ; 346        ; 6        ; ^CONF_DONE                      ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 154      ;            ; 6        ; VCCIO6                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 155      ; 347        ; 6        ; ^MSEL0                          ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 156      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 157      ; 348        ; 6        ; ^MSEL1                          ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 158      ; 349        ; 6        ; ^MSEL2                          ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 158      ; 350        ; 6        ; ^MSEL3                          ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 159      ; 353        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 160      ; 354        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 161      ; 357        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 162      ; 360        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 163      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 164      ; 361        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 165      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 166      ; 362        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 167      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 168      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 169      ; 374        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 170      ;            ; 6        ; VCCIO6                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 171      ; 387        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 172      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 173      ; 391        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 174      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 175      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 176      ; 405        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; 177      ; 407        ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 178      ;            ; --       ; VCCA2                           ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 179      ;            ;          ; GNDA2                           ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 180      ;            ;          ; VCCD_PLL2                       ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 181      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 182      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 183      ; 423        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 184      ; 426        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 185      ; 430        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 186      ; 431        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 187      ; 434        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 188      ; 435        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 189      ; 439        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 190      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 191      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 192      ;            ; 7        ; VCCIO7                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 193      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 194      ; 447        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 195      ; 450        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 196      ; 453        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 197      ; 454        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 198      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 199      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 200      ; 457        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 201      ; 458        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 202      ; 459        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 203      ; 468        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 204      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 205      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 206      ;            ; 7        ; VCCIO7                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 207      ; 474        ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 208      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 209      ; 479        ; 7        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 210      ; 480        ; 7        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 211      ; 481        ; 8        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 212      ; 482        ; 8        ; GND+                            ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 213      ;            ; 8        ; VCCIO8                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 214      ; 488        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 215      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 216      ; 491        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 217      ; 492        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 218      ; 497        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 219      ; 498        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 220      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 221      ; 500        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 222      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 223      ; 506        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 224      ; 507        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 225      ;            ; 8        ; VCCIO8                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 226      ; 518        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 227      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 228      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 229      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 230      ; 523        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 231      ; 525        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 232      ; 526        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 233      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 234      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 235      ; 536        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; 236      ; 539        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 237      ;            ;          ; VCCINT                          ; power  ;              ;         ; --         ;                 ; --       ; --           ;
+; 238      ;            ;          ; GND                             ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 239      ; 545        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 240      ; 546        ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
++----------+------------+----------+---------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
+Note: Pin directions (input, output or bidir) are based on device operating in user mode.
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                         ;
++--------------------------------------+-------------+---------------------------+---------------+-------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------------------+--------------+
+; Compilation Hierarchy Node           ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                            ; Library Name ;
++--------------------------------------+-------------+---------------------------+---------------+-------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------------------+--------------+
+; |setup_control                       ; 0 (0)       ; 721 (0)                   ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 76   ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |setup_control                                 ; work         ;
+;    |Motor_Controller:MC1|            ; 0 (0)       ; 42 (42)                   ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |setup_control|Motor_Controller:MC1            ; work         ;
+;    |Motor_Controller:MC2|            ; 0 (0)       ; 30 (30)                   ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |setup_control|Motor_Controller:MC2            ; work         ;
+;    |QuadratureDecoder:QD1|           ; 0 (0)       ; 36 (36)                   ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |setup_control|QuadratureDecoder:QD1           ; work         ;
+;    |QuadratureDecoder:QD2|           ; 0 (0)       ; 36 (36)                   ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |setup_control|QuadratureDecoder:QD2           ; work         ;
+;    |ramstix_gpmc_driver:gpmc_driver| ; 0 (0)       ; 577 (577)                 ; 0 (0)         ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |setup_control|ramstix_gpmc_driver:gpmc_driver ; work         ;
++--------------------------------------+-------------+---------------------------+---------------+-------------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------+
+; Delay Chain Summary                                                                           ;
++---------------+----------+---------------+---------------+-----------------------+-----+------+
+; Name          ; Pin Type ; Pad to Core 0 ; Pad to Core 1 ; Pad to Input Register ; TCO ; TCOE ;
++---------------+----------+---------------+---------------+-----------------------+-----+------+
+; GPMC_FPGA_IRQ ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; GPMC_CLK      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[0]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[1]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[2]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[3]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[4]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[5]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[6]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[7]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[8]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[9]       ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[10]      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[11]      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[12]      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[13]      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[14]      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_IN[15]      ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[0]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[1]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[2]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[3]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[4]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[5]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[6]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[7]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[8]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[9]      ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[10]     ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[11]     ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[12]     ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[13]     ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[14]     ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; F_OUT[15]     ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; PWM1A         ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; PWM1B         ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; PWM1C         ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; PWM2A         ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; PWM2B         ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; PWM2C         ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; ENC1I         ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; ENC2I         ; Input    ; --            ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[0]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[1]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[2]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[3]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[4]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[5]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[6]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[7]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[8]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[9]  ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[10] ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[11] ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[12] ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[13] ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[14] ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_DATA[15] ; Bidir    ; 0             ; --            ; --                    ; --  ; --   ;
+; CLOCK_50      ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_nOE      ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_nCS6     ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[1]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[2]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[3]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[4]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[10] ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[6]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[7]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[8]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[9]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_nPWE     ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; GPMC_ADDR[5]  ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; ENC2A         ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; ENC2B         ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; ENC1A         ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
+; ENC1B         ; Input    ; 0             ; --            ; --                    ; --  ; --   ;
++---------------+----------+---------------+---------------+-----------------------+-----+------+
+
+
++---------------------------------------------------+
+; Pad To Core Delay Chain Fanout                    ;
++---------------------+-------------------+---------+
+; Source Pin / Fanout ; Pad To Core Index ; Setting ;
++---------------------+-------------------+---------+
+; GPMC_FPGA_IRQ       ;                   ;         ;
+; GPMC_CLK            ;                   ;         ;
+; F_IN[0]             ;                   ;         ;
+; F_IN[1]             ;                   ;         ;
+; F_IN[2]             ;                   ;         ;
+; F_IN[3]             ;                   ;         ;
+; F_IN[4]             ;                   ;         ;
+; F_IN[5]             ;                   ;         ;
+; F_IN[6]             ;                   ;         ;
+; F_IN[7]             ;                   ;         ;
+; F_IN[8]             ;                   ;         ;
+; F_IN[9]             ;                   ;         ;
+; F_IN[10]            ;                   ;         ;
+; F_IN[11]            ;                   ;         ;
+; F_IN[12]            ;                   ;         ;
+; F_IN[13]            ;                   ;         ;
+; F_IN[14]            ;                   ;         ;
+; F_IN[15]            ;                   ;         ;
+; ENC1I               ;                   ;         ;
+; ENC2I               ;                   ;         ;
+; GPMC_DATA[0]        ;                   ;         ;
+; GPMC_DATA[1]        ;                   ;         ;
+; GPMC_DATA[2]        ;                   ;         ;
+; GPMC_DATA[3]        ;                   ;         ;
+; GPMC_DATA[4]        ;                   ;         ;
+; GPMC_DATA[5]        ;                   ;         ;
+; GPMC_DATA[6]        ;                   ;         ;
+; GPMC_DATA[7]        ;                   ;         ;
+; GPMC_DATA[8]        ;                   ;         ;
+; GPMC_DATA[9]        ;                   ;         ;
+; GPMC_DATA[10]       ;                   ;         ;
+; GPMC_DATA[11]       ;                   ;         ;
+; GPMC_DATA[12]       ;                   ;         ;
+; GPMC_DATA[13]       ;                   ;         ;
+; GPMC_DATA[14]       ;                   ;         ;
+; GPMC_DATA[15]       ;                   ;         ;
+; CLOCK_50            ;                   ;         ;
+; GPMC_nOE            ;                   ;         ;
+; GPMC_nCS6           ;                   ;         ;
+; GPMC_ADDR[1]        ;                   ;         ;
+; GPMC_ADDR[2]        ;                   ;         ;
+; GPMC_ADDR[3]        ;                   ;         ;
+; GPMC_ADDR[4]        ;                   ;         ;
+; GPMC_ADDR[10]       ;                   ;         ;
+; GPMC_ADDR[6]        ;                   ;         ;
+; GPMC_ADDR[7]        ;                   ;         ;
+; GPMC_ADDR[8]        ;                   ;         ;
+; GPMC_ADDR[9]        ;                   ;         ;
+; GPMC_nPWE           ;                   ;         ;
+; GPMC_ADDR[5]        ;                   ;         ;
+; ENC2A               ;                   ;         ;
+; ENC2B               ;                   ;         ;
+; ENC1A               ;                   ;         ;
+; ENC1B               ;                   ;         ;
++---------------------+-------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                           ;
++-----------------------------------------------------+------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+; Name                                                ; Location   ; Fan-Out ; Usage         ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++-----------------------------------------------------+------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+; CLOCK_50                                            ; Unassigned ; 721     ; Clock         ; no     ; --                   ; --               ; --                        ;
+; Motor_Controller:MC1|Equal0~4                       ; Unassigned ; 11      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; Motor_Controller:MC2|Equal0~4                       ; Unassigned ; 11      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; QuadratureDecoder:QD1|counter[0]~66                 ; Unassigned ; 32      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; QuadratureDecoder:QD2|counter[0]~34                 ; Unassigned ; 32      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16        ; Unassigned ; 16      ; Output enable ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out[0]~21 ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_ncs            ; Unassigned ; 100     ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][15]~42       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][0]~29       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][0]~33       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][0]~48       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][0]~45       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][0]~47       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][0]~49       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][0]~22       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][0]~16       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][0]~11       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][0]~26       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][3]~40        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][0]~20       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][0]~14       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][0]~7        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][0]~25       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][0]~21       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][0]~13       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][0]~10       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][0]~24       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][0]~23       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][0]~18       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][2]~38        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][0]~12       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][0]~27       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][12]~44       ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][8]~1         ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][0]~34        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][8]~3         ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][0]~35        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][0]~32        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][0]~30        ; Unassigned ; 16      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
++-----------------------------------------------------+------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+
+
++---------------------------------------------------------------+
+; Non-Global High Fan-Out Signals                               ;
++-----------------------------------------------------+---------+
+; Name                                                ; Fan-Out ;
++-----------------------------------------------------+---------+
+; CLOCK_50~input                                      ; 721     ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_addr_in[3]     ; 138     ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_addr_in[2]     ; 138     ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_addr_in[1]     ; 138     ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_addr_in[0]     ; 138     ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_ncs            ; 100     ;
+; QuadratureDecoder:QD1|flipflop[0]                   ; 33      ;
+; QuadratureDecoder:QD2|flipflop[0]                   ; 33      ;
+; ramstix_gpmc_driver:gpmc_driver|LessThan0~0         ; 33      ;
+; QuadratureDecoder:QD1|counter[0]~66                 ; 32      ;
+; QuadratureDecoder:QD2|counter[0]~34                 ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[15]    ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[14]    ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[13]    ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[12]    ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[11]    ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[10]    ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[7]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[6]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[5]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[4]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[3]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[2]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[1]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[0]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[9]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_in[8]     ; 32      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][0]~5        ; 17      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][0]~49       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][0]~48       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][0]~47       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][0]~45       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][12]~44       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][15]~42       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][3]~40        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][2]~38        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][0]~35        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][0]~34        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][0]~33       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][0]~32        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][0]~30        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][0]~29       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][0]~27       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][0]~26       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][0]~25       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][0]~24       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][0]~23       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][0]~22       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][0]~21       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][0]~20       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][0]~18       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][0]~16       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][0]~14       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][0]~13       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][0]~12       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][0]~11       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][0]~10       ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][0]~7        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out[0]~21 ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][0]~4        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][8]~3         ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][8]~1         ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|GPMC_DATA~16        ; 16      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_nwe            ; 15      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_addr_in[9]     ; 15      ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_addr_in[4]     ; 14      ;
+; Motor_Controller:MC2|Equal0~4                       ; 11      ;
+; Motor_Controller:MC1|Equal0~4                       ; 11      ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][8]~0         ; 7       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][0]~6        ; 6       ;
+; Motor_Controller:MC1|Equal1~2                       ; 6       ;
+; Motor_Controller:MC1|Equal1~1                       ; 6       ;
+; Motor_Controller:MC1|Equal1~0                       ; 6       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][0]~19       ; 5       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][0]~9        ; 5       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][2]~37        ; 4       ;
+; Motor_Controller:MC2|dc[0]                          ; 4       ;
+; Motor_Controller:MC2|dc[1]                          ; 4       ;
+; Motor_Controller:MC2|dc[2]                          ; 4       ;
+; Motor_Controller:MC2|dc[3]                          ; 4       ;
+; Motor_Controller:MC2|dc[4]                          ; 4       ;
+; Motor_Controller:MC2|dc[5]                          ; 4       ;
+; Motor_Controller:MC2|dc[6]                          ; 4       ;
+; Motor_Controller:MC2|dc[7]                          ; 4       ;
+; Motor_Controller:MC1|dc[0]                          ; 4       ;
+; Motor_Controller:MC1|dc[1]                          ; 4       ;
+; Motor_Controller:MC1|dc[2]                          ; 4       ;
+; Motor_Controller:MC1|dc[3]                          ; 4       ;
+; Motor_Controller:MC1|dc[4]                          ; 4       ;
+; Motor_Controller:MC1|dc[5]                          ; 4       ;
+; Motor_Controller:MC1|dc[6]                          ; 4       ;
+; Motor_Controller:MC1|dc[7]                          ; 4       ;
+; Motor_Controller:MC1|cyclecount[1]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[2]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[3]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[4]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[5]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[6]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[7]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[8]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[9]                  ; 4       ;
+; Motor_Controller:MC1|cyclecount[10]                 ; 4       ;
+; Motor_Controller:MC1|cyclecount[11]                 ; 4       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][8]~2         ; 3       ;
+; GPMC_nCS6~input                                     ; 2       ;
+; GPMC_nOE~input                                      ; 2       ;
+; QuadratureDecoder:QD1|flipflop[1]                   ; 2       ;
+; QuadratureDecoder:QD2|flipflop[1]                   ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~12         ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~11         ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~10         ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~9          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~8          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~7          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~6          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][0]~17       ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][0]~15       ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~5          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~4          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~2          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][7]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][7]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][6]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][6]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][5]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][5]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][4]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][4]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][3]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][3]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][2]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][2]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][1]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][1]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][0]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][0]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~1          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~0          ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][9]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][8]           ; 2       ;
+; Motor_Controller:MC1|cyclecount[0]                  ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][9]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][8]           ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|reg6_out[9]         ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|reg6_out[8]         ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|reg4_out[9]         ; 2       ;
+; ramstix_gpmc_driver:gpmc_driver|reg4_out[8]         ; 2       ;
+; QuadratureDecoder:QD2|counter[31]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[15]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[15]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[31]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[30]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[14]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[30]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[14]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[29]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[13]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[13]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[29]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[28]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[12]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[28]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[12]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[27]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[11]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[11]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[27]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[26]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[10]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[26]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[10]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[25]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[9]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[9]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[25]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[24]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[8]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[24]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[8]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[23]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[7]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[7]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[23]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[22]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[6]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[22]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[6]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[21]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[5]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[5]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[21]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[20]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[4]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[20]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[4]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[19]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[3]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[3]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[19]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[18]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[2]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[18]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[2]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[17]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[1]                    ; 2       ;
+; QuadratureDecoder:QD2|counter[1]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[17]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[16]                   ; 2       ;
+; QuadratureDecoder:QD1|counter[0]                    ; 2       ;
+; QuadratureDecoder:QD1|counter[16]                   ; 2       ;
+; QuadratureDecoder:QD2|counter[0]                    ; 2       ;
+; ENC1B~input                                         ; 1       ;
+; ENC1A~input                                         ; 1       ;
+; ENC2B~input                                         ; 1       ;
+; ENC2A~input                                         ; 1       ;
+; GPMC_ADDR[5]~input                                  ; 1       ;
+; GPMC_nPWE~input                                     ; 1       ;
+; GPMC_ADDR[9]~input                                  ; 1       ;
+; GPMC_ADDR[8]~input                                  ; 1       ;
+; GPMC_ADDR[7]~input                                  ; 1       ;
+; GPMC_ADDR[6]~input                                  ; 1       ;
+; GPMC_ADDR[10]~input                                 ; 1       ;
+; GPMC_ADDR[4]~input                                  ; 1       ;
+; GPMC_ADDR[3]~input                                  ; 1       ;
+; GPMC_ADDR[2]~input                                  ; 1       ;
+; GPMC_ADDR[1]~input                                  ; 1       ;
+; GPMC_DATA[15]~input                                 ; 1       ;
+; GPMC_DATA[14]~input                                 ; 1       ;
+; GPMC_DATA[13]~input                                 ; 1       ;
+; GPMC_DATA[12]~input                                 ; 1       ;
+; GPMC_DATA[11]~input                                 ; 1       ;
+; GPMC_DATA[10]~input                                 ; 1       ;
+; GPMC_DATA[9]~input                                  ; 1       ;
+; GPMC_DATA[8]~input                                  ; 1       ;
+; GPMC_DATA[7]~input                                  ; 1       ;
+; GPMC_DATA[6]~input                                  ; 1       ;
+; GPMC_DATA[5]~input                                  ; 1       ;
+; GPMC_DATA[4]~input                                  ; 1       ;
+; GPMC_DATA[3]~input                                  ; 1       ;
+; GPMC_DATA[2]~input                                  ; 1       ;
+; GPMC_DATA[1]~input                                  ; 1       ;
+; GPMC_DATA[0]~input                                  ; 1       ;
+; QuadratureDecoder:QD1|GPIO_0_IN_old[1]              ; 1       ;
+; QuadratureDecoder:QD1|GPIO_0_IN_old[0]              ; 1       ;
+; QuadratureDecoder:QD2|GPIO_0_IN_old[1]              ; 1       ;
+; QuadratureDecoder:QD2|GPIO_0_IN_old[0]              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~109             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~108             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~107             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~106             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~105             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~104             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~103             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~102             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~101             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~100             ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~99              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~98              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~97              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~96              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~95              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~94              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~93              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~92              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~91              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~90              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~89              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~88              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~87              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~86              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~85              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~84              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~83              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~82              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~81              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~80              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~79              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~78              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~77              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~76              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~75              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~74              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~73              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~72              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~71              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~70              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~69              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~68              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~67              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~66              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~65              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~64              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~63              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~62              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~61              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~60              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~59              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~58              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~57              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~56              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~55              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~54              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~53              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~52              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~51              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~50              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][0]~46       ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~43              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~41              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~39              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram~36              ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][0]~31        ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][0]~28       ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|Decoder0~3          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][0]~8        ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~336   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~335   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~334   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~333   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~332   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~331   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~330   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~329   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~328   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~327   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~326   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][15]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~325   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~324   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~323   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~322   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~321   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~320   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~319   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~318   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~317   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~316   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][15]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~315   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~314   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~313   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~312   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~311   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~310   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~309   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~308   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~307   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~306   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~305   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][14]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~304   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~303   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~302   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~301   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~300   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~299   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~298   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~297   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~296   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~295   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][14]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~294   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~293   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~292   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~291   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~290   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~289   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~288   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~287   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~286   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~285   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~284   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][13]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~283   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~282   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~281   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~280   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~279   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~278   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~277   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~276   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~275   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~274   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][13]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~273   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~272   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~271   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~270   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~269   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~268   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~267   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~266   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~265   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~264   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~263   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][12]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~262   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~261   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~260   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~259   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~258   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~257   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~256   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~255   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~254   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~253   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][12]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~252   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~251   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~250   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~249   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~248   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~247   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~246   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~245   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~244   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~243   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~242   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][11]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~241   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~240   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~239   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~238   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~237   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~236   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~235   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~234   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~233   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~232   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][11]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~231   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~230   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~229   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~228   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~227   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~226   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~225   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~224   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~223   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[4][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[6][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~222   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~221   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][10]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~220   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~219   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~218   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~217   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~216   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~215   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~214   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~213   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~212   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~211   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][10]         ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~210   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~209   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~208   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~207   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~206   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~205   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~204   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~203   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~202   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~201   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~200   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][9]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~199   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~198   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~197   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~196   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~195   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~194   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~193   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~192   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~191   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~190   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][9]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~189   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~188   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~187   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~186   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~185   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~184   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~183   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~182   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~181   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~180   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~179   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][8]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~178   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~177   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~176   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~175   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~174   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~173   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~172   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~171   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~170   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~169   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][8]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~168   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~167   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~166   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~165   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~164   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~163   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~162   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~161   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~160   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~159   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~158   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][7]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~157   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~156   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~155   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~154   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~153   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~152   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~151   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~150   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~149   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~148   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][7]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~147   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~146   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~145   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~144   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~143   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~142   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~141   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~140   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~139   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~138   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~137   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][6]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~136   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~135   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~134   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~133   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~132   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~131   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~130   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~129   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~128   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~127   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][6]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~126   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~125   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~124   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~123   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~122   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~121   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~120   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~119   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~118   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~117   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~116   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][5]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~115   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~114   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~113   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~112   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~111   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~110   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~109   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~108   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~107   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~106   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][5]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~105   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~104   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~103   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~102   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~101   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~100   ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~99    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~98    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~97    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~96    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~95    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][4]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~94    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~93    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~92    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~91    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~90    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~89    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~88    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~87    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~86    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~85    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][4]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~84    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~83    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~82    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~81    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~80    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~79    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[3][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~78    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[0][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[2][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[1][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~77    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[11][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~76    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[8][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[10][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[9][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~75    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[7][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~74    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[5][3]           ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~73    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~72    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[31][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~71    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[19][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[27][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[23][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~70    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~69    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[28][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~68    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[16][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[20][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[24][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~67    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[30][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~66    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[18][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[22][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[26][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~65    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[29][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~64    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[17][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[25][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[21][3]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~63    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~62    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~61    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[15][2]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~60    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[12][2]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[14][2]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|ram[13][2]          ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~59    ; 1       ;
+; ramstix_gpmc_driver:gpmc_driver|gpmc_data_out~58    ; 1       ;
++-----------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; I/O Rules Details                                                                                                             ;
++--------+------+------------+----------------------------------------------+----------+-------------+------+-------------------+
+; Status ; ID   ; Category   ; Rule Description                             ; Severity ; Information ; Area ; Extra Information ;
++--------+------+------------+----------------------------------------------+----------+-------------+------+-------------------+
+; ----   ; ---- ; Disclaimer ; Errors were found before rules were checked. ; None     ; ----        ;      ;                   ;
++--------+------+------------+----------------------------------------------+----------+-------------+------+-------------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Fitter Device Options                                                                       ;
++------------------------------------------------------------------+--------------------------+
+; Option                                                           ; Setting                  ;
++------------------------------------------------------------------+--------------------------+
+; Enable user-supplied start-up clock (CLKUSR)                     ; Off                      ;
+; Enable device-wide reset (DEV_CLRn)                              ; Off                      ;
+; Enable device-wide output enable (DEV_OE)                        ; Off                      ;
+; Enable INIT_DONE output                                          ; Off                      ;
+; Configuration scheme                                             ; Active Serial            ;
+; Error detection CRC                                              ; Off                      ;
+; Enable open drain on CRC_ERROR pin                               ; Off                      ;
+; Enable input tri-state on active configuration pins in user mode ; Off                      ;
+; Configuration Voltage Level                                      ; Auto                     ;
+; Force Configuration Voltage Level                                ; Off                      ;
+; nCEO                                                             ; As output driving ground ;
+; Data[0]                                                          ; As input tri-stated      ;
+; Data[1]/ASDO                                                     ; As input tri-stated      ;
+; Data[7..2]                                                       ; Unreserved               ;
+; FLASH_nCE/nCSO                                                   ; As input tri-stated      ;
+; Other Active Parallel pins                                       ; Unreserved               ;
+; DCLK                                                             ; As output driving ground ;
+; Base pin-out file on sameframe device                            ; Off                      ;
++------------------------------------------------------------------+--------------------------+
+
+
++------------------------------------+
+; Operating Settings and Conditions  ;
++---------------------------+--------+
+; Setting                   ; Value  ;
++---------------------------+--------+
+; Nominal Core Voltage      ; 1.20 V ;
+; Low Junction Temperature  ; 0 °C   ;
+; High Junction Temperature ; 85 °C  ;
++---------------------------+--------+
+
+
++-----------------+
+; Fitter Messages ;
++-----------------+
+Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
+Info (119006): Selected device EP3C40Q240C8 for design "setup_control"
+Info (21077): Core supply voltage is 1.2V
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (171003): Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
+Info (176444): Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
+    Info (176445): Device EP3C16Q240C8 is compatible
+    Info (176445): Device EP3C25Q240C8 is compatible
+Info (169124): Fitter converted 5 user pins into dedicated programming pins
+    Info (169125): Pin ~ALTERA_ASDO_DATA1~ is reserved at location 12
+    Info (169125): Pin ~ALTERA_FLASH_nCE_nCSO~ is reserved at location 14
+    Info (169125): Pin ~ALTERA_DCLK~ is reserved at location 23
+    Info (169125): Pin ~ALTERA_DATA0~ is reserved at location 24
+    Info (169125): Pin ~ALTERA_nCEO~ is reserved at location 162
+Error (176310): Can't place multiple pins assigned to pin location Pin_162 (IOPAD_X67_Y27_N21)
+    Info (176311): Pin ENC1B is assigned to pin location Pin_162 (IOPAD_X67_Y27_N21)
+    Info (176311): Pin ~ALTERA_nCEO~ is assigned to pin location Pin_162 (IOPAD_X67_Y27_N21)
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
+Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
+Error (171000): Can't fit design in device
+Error: Quartus II 32-bit Fitter was unsuccessful. 2 errors, 1 warning
+    Error: Peak virtual memory: 416 megabytes
+    Error: Processing ended: Fri Jun  8 09:49:00 2018
+    Error: Elapsed time: 00:00:02
+    Error: Total CPU time (on all processors): 00:00:02
+
+

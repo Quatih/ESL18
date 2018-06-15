@@ -180,10 +180,10 @@ set_global_assignment -name SMART_RECOMPILE ON
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "08:30:26  DECEMBER 11, 2004"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.1
-set_global_assignment -name BDF_FILE nios2_quartus2_project.bdf
+set_global_assignment -name BDF_FILE setup_control.bdf
 set_global_assignment -name EDA_DESIGN_ENTRY_SYNTHESIS_TOOL "<None>"
 set_global_assignment -name FAMILY "Cyclone III"
-set_global_assignment -name TOP_LEVEL_ENTITY nios2_quartus2_project
+set_global_assignment -name TOP_LEVEL_ENTITY setup_control
 set_global_assignment -name DEVICE EP3C40Q240C8
 set_global_assignment -name STRATIX_CONFIGURATION_SCHEME "FAST PASSIVE PARALLEL"
 set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
