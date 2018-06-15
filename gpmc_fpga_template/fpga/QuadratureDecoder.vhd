@@ -3,7 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity QuadratureDecoder is
- generic (wl : natural := 32);
+ generic (wl : natural := 32;
+ 				  debounce_cycles : natural := 50);
 
  port ( 
 	clk   : in std_logic;
@@ -24,7 +25,7 @@ architecture behavior of QuadratureDecoder is
 	--signal GPIO_0_IN_debounced_old : std_logic_vector(1 downto 0) := (others => '0');
 	--signal bouncecounter : integer range 0 to debouncer + 1;
 	signal flipflop : std_logic_vector(1 downto 0) := (others => '0');
-	
+	signal debounce_counter : integer range 0 to debounce_cycles;
 begin
 
 
@@ -46,23 +47,33 @@ begin
 	if reset = '1' then
 		counter <= (others => '0');
 		GPIO_0_IN_old <= (others => '1');
+		debounce_counter <= 0;
 	elsif rising_edge(clk) then
 
   
 	  
 	  --if (not(GPIO_0_IN_debounced = GPIO_0_IN_debounced_old)) and GPIO_0_IN_debounced_old = "00" then
 	--if not(GPIO_0_IN = GPIO_0_IN_old) and GPIO_0_IN_old = "00" then
+		
 		if not(flipflop = GPIO_0_IN_old) and GPIO_0_IN_old = "00" then
-		 	case flipflop is
-	  		when "10" => counter <= counter + 1;
-			when "01" => counter <= counter - 1;
-			when others => 
-	   	end case;
+			if debounce_counter = debounce_cycles then
+				case flipflop is
+					when "10" => counter <= counter + 1;
+					when "01" => counter <= counter - 1;
+				when others => 
+				end case;
+				GPIO_0_IN_old <= flipflop;
+			else
+				debounce_counter <= debounce_counter + 1;
+			end if;
+		else
+			debounce_counter <= 0;
+			GPIO_0_IN_old <= flipflop; 	
 		end if;
 		
 		--GPIO_0_IN_debounced_out <= GPIO_0_IN_debounced;
 		--GPIO_0_IN_debounced_old <= GPIO_0_IN_debounced;
-		GPIO_0_IN_old <= flipflop;
+		
 	end if;
 end process;	
 
