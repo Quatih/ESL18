@@ -73,19 +73,19 @@ GNDA3                        : 2         : gnd    :                   :         
 VCCA3                        : 3         : power  :                   : 2.5V    :           :                
 VCCINT                       : 4         : power  :                   : 1.2V    :           :                
 GND                          : 5         : gnd    :                   :         :           :                
-ENC1I                        : 6         : input  : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 6         :        :                   :         : 1         :                
 VCCIO1                       : 7         : power  :                   : 3.3V    : 1         :                
 GND                          : 8         : gnd    :                   :         :           :                
-ENC2I                        : 9         : input  : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 9         :        :                   :         : 1         :                
 VCCINT                       : 10        : power  :                   : 1.2V    :           :                
 GND                          : 11        : gnd    :                   :         :           :                
 ~ALTERA_ASDO_DATA1~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 12        : input  : 3.3-V LVTTL       :         : 1         : N              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 13        :        :                   :         : 1         :                
+ENC3I                        : 13        : input  : 3.3-V LVTTL       :         : 1         : Y              
 ~ALTERA_FLASH_nCE_nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP : 14        : input  : 3.3-V LVTTL       :         : 1         : N              
 VCCIO1                       : 15        : power  :                   : 3.3V    : 1         :                
 GND                          : 16        : gnd    :                   :         :           :                
 nSTATUS                      : 17        :        :                   :         : 1         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 18        :        :                   :         : 1         :                
+ENC4I                        : 18        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 19        : power  :                   : 1.2V    :           :                
 GND                          : 20        : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 21        :        :                   :         : 1         :                
@@ -104,22 +104,22 @@ CLOCK_50                     : 33        : input  : 3.3-V LVTTL       :         
 GND+                         : 34        :        :                   :         : 2         :                
 VCCIO2                       : 35        : power  :                   : 3.3V    : 2         :                
 GND                          : 36        : gnd    :                   :         :           :                
-PWM1A                        : 37        : output : 3.3-V LVTTL       :         : 2         : Y              
-PWM1B                        : 38        : output : 3.3-V LVTTL       :         : 2         : Y              
-PWM1C                        : 39        : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 37        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 38        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 39        :        :                   :         : 2         :                
 VCCINT                       : 40        : power  :                   : 1.2V    :           :                
-PWM2A                        : 41        : output : 3.3-V LVTTL       :         : 2         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 41        :        :                   :         : 2         :                
 GND                          : 42        : gnd    :                   :         :           :                
-PWM2B                        : 43        : output : 3.3-V LVTTL       :         : 2         : Y              
-PWM2C                        : 44        : output : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 45        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 46        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 43        :        :                   :         : 2         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 44        :        :                   :         : 2         :                
+PWM3A                        : 45        : output : 3.3-V LVTTL       :         : 2         : Y              
+PWM3B                        : 46        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCIO2                       : 47        : power  :                   : 3.3V    : 2         :                
 GND                          : 48        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 49        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 50        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 51        :        :                   :         : 2         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 52        :        :                   :         : 2         :                
+PWM3C                        : 49        : output : 3.3-V LVTTL       :         : 2         : Y              
+PWM4A                        : 50        : output : 3.3-V LVTTL       :         : 2         : Y              
+PWM4B                        : 51        : output : 3.3-V LVTTL       :         : 2         : Y              
+PWM4C                        : 52        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : 53        : power  :                   : 1.2V    :           :                
 GND                          : 54        : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 55        :        :                   :         : 2         :                
@@ -228,23 +228,23 @@ MSEL1                        : 157       :        :                   :         
 MSEL2                        : 158       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 159       :        :                   :         : 6         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 160       :        :                   :         : 6         :                
-ENC1A                        : 161       : input  : 3.3-V LVTTL       :         : 6         : Y              
-ENC1B                        : 162       : input  : 3.3-V LVTTL       :         : 6         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 161       :        :                   :         : 6         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 162       :        :                   :         : 6         :                
 VCCINT                       : 163       : power  :                   : 1.2V    :           :                
-ENC2A                        : 164       : input  : 3.3-V LVTTL       :         : 6         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 164       :        :                   :         : 6         :                
 GND                          : 165       : gnd    :                   :         :           :                
-ENC2B                        : 166       : input  : 3.3-V LVTTL       :         : 6         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 166       :        :                   :         : 6         :                
 VCCINT                       : 167       : power  :                   : 1.2V    :           :                
 GND                          : 168       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 169       :        :                   :         : 6         :                
+ENC3A                        : 169       : input  : 3.3-V LVTTL       :         : 6         : Y              
 VCCIO6                       : 170       : power  :                   : 3.3V    : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 171       :        :                   :         : 6         :                
+ENC3B                        : 171       : input  : 3.3-V LVTTL       :         : 6         : Y              
 GND                          : 172       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 173       :        :                   :         : 6         :                
+ENC4A                        : 173       : input  : 3.3-V LVTTL       :         : 6         : Y              
 VCCINT                       : 174       : power  :                   : 1.2V    :           :                
 GND                          : 175       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 176       :        :                   :         : 6         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 177       :        :                   :         : 6         :                
+ENC4B                        : 177       : input  : 3.3-V LVTTL       :         : 6         : Y              
 VCCA2                        : 178       : power  :                   : 2.5V    :           :                
 GNDA2                        : 179       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 180       : power  :                   : 1.2V    :           :                

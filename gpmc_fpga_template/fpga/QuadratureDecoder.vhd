@@ -33,7 +33,7 @@ GPIO_0 <= std_logic_vector(counter);
 process(clk, reset)
 	variable GPIO_0_IN : std_logic_vector(1 downto 0);
 begin
-	if falling_edge(clk) then
+	if rising_edge(clk) then
 	  GPIO_0_IN(0) := ENC_A;
 	  GPIO_0_IN(1) := ENC_B;
 	  flipflop <= GPIO_0_IN;
@@ -55,8 +55,8 @@ begin
 		if not(flipflop = GPIO_0_IN_old) and GPIO_0_IN_old = "00" then
 		 	case flipflop is
 	  		when "10" => counter <= counter + 1;
-	   		when "01" => counter <= counter - 1;
-	   		when others => 
+			when "01" => counter <= counter - 1;
+			when others => 
 	   	end case;
 		end if;
 		

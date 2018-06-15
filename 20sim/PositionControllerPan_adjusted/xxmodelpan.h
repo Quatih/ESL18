@@ -25,14 +25,14 @@
 #include "xxtypes.h"
 
 /* Simulation variables */
-extern XXDouble xx_start_time;
-extern XXDouble xx_finish_time;
-extern XXDouble xx_step_size;
-extern XXDouble xx_time;
-extern XXInteger xx_steps;
-extern XXBoolean xx_initialize;
-extern XXBoolean xx_major;
-extern XXBoolean xx_stop_simulation;
+extern XXDouble xx_start_timepan;
+extern XXDouble xx_finish_timepan;
+extern XXDouble xx_step_sizepan;
+extern XXDouble xx_timepan;
+extern XXInteger xx_stepspan;
+extern XXBoolean xx_initializepan;
+extern XXBoolean xx_majorpan;
+extern XXBoolean xx_stop_simulationpan;
 
 /* Model size constants */
 #define xx_constants_size 0
@@ -42,11 +42,11 @@ extern XXBoolean xx_stop_simulation;
 #define xx_states_size 3
 
 /* Variable arrays */
-extern XXDouble xx_P[];
-extern XXDouble xx_I[];
-extern XXDouble xx_V[];
-extern XXDouble xx_s[];
-extern XXDouble xx_R[];
+extern XXDouble xx_Ppan[];
+extern XXDouble xx_Ipan[];
+extern XXDouble xx_Vpan[];
+extern XXDouble xx_span[];
+extern XXDouble xx_Rpan[];
 
 
 /* The names of the variables as used in the arrays above
@@ -60,21 +60,21 @@ extern XXString xx_rate_names[];
 
 /* Initialization methods */
 /* Initialize complete model */
-void XXModelInitialize (void);
+void XXModelInitializepan (void);
 /* Initialize specific model values */
-void XXModelInitialize_parameters(void);
-void XXModelInitialize_initialvalues(void);
-void XXModelInitialize_states(void);
-void XXModelInitialize_variables(void);
-void XXModelTerminate (void);
+void XXModelInitialize_parameterspan(void);
+void XXModelInitialize_initialvaluespan(void);
+void XXModelInitialize_statespan(void);
+void XXModelInitialize_variablespan(void);
+void XXModelTerminatepan (void);
 
 /* Computation methods */
-void XXCalculateInitial (void);
-void XXCalculateStatic (void);
-void XXCalculateInput (void);
-void XXCalculateDynamic (void);
-void XXCalculateOutput (void);
-void XXCalculateFinal (void);
+void XXCalculateInitialpan (void);
+void XXCalculateStaticpan (void);
+void XXCalculateInputpan (void);
+void XXCalculateDynamicpan (void);
+void XXCalculateOutputpan (void);
+void XXCalculateFinalpan (void);
 
 
 #endif

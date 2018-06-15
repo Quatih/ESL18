@@ -18,27 +18,27 @@
    The model itself is the xxmodel.c file
 */
 
-#ifndef XX_SUBMOD_H
-#define XX_SUBMOD_H
+#ifndef XX_SUBMODPAN_H
+#define XX_SUBMODPAN_H
 
 /* Our own include files */
-#include "xxmodel.h"
+#include "xxmodelpan.h"
 
 /* Submodel I/O variables */
-extern XXInteger xx_number_of_inputs;
-extern XXInteger xx_number_of_outputs;
+extern XXInteger xx_number_of_inputspan;
+extern XXInteger xx_number_of_outputspan;
 
 /* The names of the variables as used in the arrays above */
-extern XXString xx_input_names[];
-extern XXString xx_output_names[];
+extern XXString xx_input_namespan[];
+extern XXString xx_output_namespan[];
 
 
 /* The submodel functions */
-void XXInitializeSubmodel (XXDouble *u, XXDouble *y, XXDouble t);
-void XXCalculateSubmodel (XXDouble *u, XXDouble *y, XXDouble t);
-void XXTerminateSubmodel (XXDouble *u, XXDouble *y, XXDouble t);
-void XXCopyInputsToVariables (XXDouble *u);
-void XXCopyVariablesToOutputs (XXDouble *y);
+void XXInitializeSubmodelpan (XXDouble *upan, XXDouble *ypan, XXDouble tpan);
+void XXCalculateSubmodelpan (XXDouble *upan, XXDouble *ypan, XXDouble tpan);
+void XXTerminateSubmodelpan (XXDouble *upan, XXDouble *ypan, XXDouble tpan);
+void XXCopyInputsToVariablespan (XXDouble *upan);
+void XXCopyVariablesToOutputspan (XXDouble *ypan);
 
 #endif
 

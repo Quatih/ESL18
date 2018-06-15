@@ -16,14 +16,8 @@
    <frequency preferredWidth="292" />
   </columns>
  </clocktable>
-<<<<<<< HEAD
- <window width="1700" height="979" x="-9" y="-8" />
+ <window width="1700" height="1042" x="-9" y="-8" />
  <library
    expandedCategories="Project,Library,Library/Interface Protocols/Serial,Library/Interface Protocols" />
-=======
- <window width="1938" height="1048" x="-9" y="-9" />
- <library
-   expandedCategories="Library/Interface Protocols,Library/Interface Protocols/Serial,Project,Library" />
->>>>>>> dfb288e9008739636f65f69bad10a08a1edf0dc4
  <generation simulation="NONE" synthesis="VHDL" />
 </preferences>

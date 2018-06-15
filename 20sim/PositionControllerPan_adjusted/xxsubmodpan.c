@@ -16,16 +16,16 @@
 #include <stdlib.h>
 
 /* 20-sim include files */
-#include "xxmodel.h"
+#include "xxmodelpan.h"
 #include "xxinteg.h"
 #include "xxfuncs.h"
-#include "xxsubmod.h"
+#include "xxsubmodpan.h"
 #include "motionprofiles.h"
 #include "EulerAngles.h"
 
 /* The submodel I/O variables */
-XXInteger xx_number_of_inputs = 2;
-XXInteger xx_number_of_outputs = 2;
+XXInteger xx_number_of_inputspan = 2;
+XXInteger xx_number_of_outputspan = 2;
 
 /* the names of the submodel io variables
    uncomment this part if you need these names
@@ -44,8 +44,8 @@ XXString xx_output_names[] = {
 void XXCopyInputsToVariables (XXDouble *u)
 {
 	/* Copy the input vector to the input variables */
-	xx_V[7] = u[0];		/* in */
-	xx_V[8] = u[1];		/* position */
+	xx_V[7] = upan[0];		/* in */
+	xx_Vpan[8] = upan[1];		/* position */
 
 }
 
@@ -53,8 +53,8 @@ void XXCopyInputsToVariables (XXDouble *u)
 void XXCopyVariablesToOutputs (XXDouble *y)
 {
 	/* Copy the output variables to the output vector */
-	y[0] = 	xx_V[6];		/* corr */
-	y[1] = 	xx_V[9];		/* out */
+	ypan[0] = 	xx_Vpan[6];		/* corr */
+	ypan[1] = 	xx_Vpan[9];		/* out */
 
 }
 
@@ -62,60 +62,60 @@ void XXCopyVariablesToOutputs (XXDouble *y)
 void XXInitializeSubmodel (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Initialization phase (allocating memory) */
-	xx_initialize = XXTRUE;
-	xx_steps = 0;
-	XXModelInitialize ();
-	XXDiscreteInitialize ();
+	xx_initializepan = XXTRUE;
+	xx_stepspan = 0;
+	XXModelInitializepanpan ();
+	XXDiscreteInitializepan ();
 
 	/* Copy the inputs */
-	xx_time = t;
-	XXCopyInputsToVariables (u);
+	xx_timepan = t;
+	XXCopyInputsToVariablespan (u);
 
 	/* Calculate the model for the first time */
-	XXCalculateInitial ();
-	XXCalculateStatic ();
-	XXCalculateInput ();
-	XXCalculateDynamic ();
-	XXCalculateOutput ();
+	XXCalculateInitialpan ();
+	XXCalculateStaticpan ();
+	XXCalculateInputpan ();
+	XXCalculateDynamicpan ();
+	XXCalculateOutputpan ();
 
 	/* Set the outputs */
-	XXCopyVariablesToOutputs (y);
+	XXCopyVariablesToOutputspan (y);
 
 	/* End of initialization phase */
-	xx_initialize = XXFALSE;
+	xx_initializepan = XXFALSE;
 }
 
 /* The function that calculates the submodel */
 void XXCalculateSubmodel (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Copy the inputs */
-	xx_time = t;
-	XXCopyInputsToVariables (u);
+	xx_timepan = t;
+	XXCopyInputsToVariablespan (u);
 
 	/* Calculate the model */
-	XXCalculateInput ();
-	XXDiscreteStep ();
-	XXCalculateOutput ();
+	XXCalculateInputpan ();
+	XXDiscreteSteppan ();
+	XXCalculateOutputpan ();
 
 	/* Copy the outputs */
-	XXCopyVariablesToOutputs (y);
+	XXCopyVariablesToOutputspan (y);
 }
 
 /* The termination function for submodel */
 void XXTerminateSubmodel (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Copy the inputs */
-	xx_time = t;
-	XXCopyInputsToVariables (u);
+	xx_timepan = t;
+	XXCopyInputsToVariablespan (u);
 
 	/* Calculate the final model equations */
-	XXCalculateFinal ();
+	XXCalculateFinalpan ();
 
 	/* Set the outputs */
-	XXCopyVariablesToOutputs (y);
+	XXCopyVariablesToOutputspan (y);
 
 	/* and terminate the model itself (releasing memory) */
-	XXModelTerminate ();
-	XXDiscreteTerminate ();
+	XXModelTerminatepan ();
+	XXDiscreteTerminatepan ();
 }
 

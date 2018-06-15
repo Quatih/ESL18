@@ -1,5 +1,5 @@
 Analysis & Synthesis report for setup_control
-Fri Jun 15 11:53:00 2018
+Fri Jun 15 17:50:36 2018
 Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -21,10 +21,10 @@ Quartus II 32-bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
  13. Parameter Settings for User Entity Instance: ramstix_gpmc_driver:gpmc_driver
  14. Parameter Settings for User Entity Instance: Motor_Controller:MC1
  15. Parameter Settings for User Entity Instance: Motor_Controller:MC2
- 16. Parameter Settings for User Entity Instance: QuadratureDecoder:QD1
+ 16. Parameter Settings for User Entity Instance: quadrature_decoder:qd1
  17. Parameter Settings for User Entity Instance: QuadratureDecoder:QD2
  18. Port Connectivity Checks: "QuadratureDecoder:QD2"
- 19. Port Connectivity Checks: "QuadratureDecoder:QD1"
+ 19. Port Connectivity Checks: "quadrature_decoder:qd1"
  20. Port Connectivity Checks: "Motor_Controller:MC2"
  21. Port Connectivity Checks: "Motor_Controller:MC1"
  22. Elapsed Time Per Partition
@@ -54,15 +54,15 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                    ;
 +------------------------------------+--------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jun 15 11:53:00 2018      ;
+; Analysis & Synthesis Status        ; Successful - Fri Jun 15 17:50:36 2018      ;
 ; Quartus II 32-bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; setup_control                              ;
 ; Top-level Entity Name              ; setup_control                              ;
 ; Family                             ; Cyclone III                                ;
-; Total logic elements               ; 1,117                                      ;
-;     Total combinational functions  ; 542                                        ;
-;     Dedicated logic registers      ; 709                                        ;
-; Total registers                    ; 709                                        ;
+; Total logic elements               ; 1,243                                      ;
+;     Total combinational functions  ; 696                                        ;
+;     Dedicated logic registers      ; 737                                        ;
+; Total registers                    ; 737                                        ;
 ; Total pins                         ; 76                                         ;
 ; Total virtual pins                 ; 0                                          ;
 ; Total memory bits                  ; 0                                          ;
@@ -185,6 +185,7 @@ applicable agreement for further details.
 ; ../fpga/ramstix_gpmc_driver.vhd  ; yes             ; User VHDL File  ; /home/esl21/ESL21/gpmc_fpga_template/fpga/ramstix_gpmc_driver.vhd ;         ;
 ; ../fpga/QuadratureDecoder.vhd    ; yes             ; User VHDL File  ; /home/esl21/ESL21/gpmc_fpga_template/fpga/QuadratureDecoder.vhd   ;         ;
 ; ../fpga/Motor_Controller.vhd     ; yes             ; User VHDL File  ; /home/esl21/ESL21/gpmc_fpga_template/fpga/Motor_Controller.vhd    ;         ;
+; ../../quad2.vhd                  ; yes             ; User VHDL File  ; /home/esl21/ESL21/quad2.vhd                                       ;         ;
 +----------------------------------+-----------------+-----------------+-------------------------------------------------------------------+---------+
 
 
@@ -193,28 +194,28 @@ applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 1,117          ;
+; Estimated Total logic elements              ; 1,243          ;
 ;                                             ;                ;
-; Total combinational functions               ; 542            ;
+; Total combinational functions               ; 696            ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 401            ;
-;     -- 3 input functions                    ; 122            ;
-;     -- <=2 input functions                  ; 19             ;
+;     -- 4 input functions                    ; 426            ;
+;     -- 3 input functions                    ; 132            ;
+;     -- <=2 input functions                  ; 138            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 482            ;
-;     -- arithmetic mode                      ; 60             ;
+;     -- normal mode                          ; 543            ;
+;     -- arithmetic mode                      ; 153            ;
 ;                                             ;                ;
-; Total registers                             ; 709            ;
-;     -- Dedicated logic registers            ; 709            ;
+; Total registers                             ; 737            ;
+;     -- Dedicated logic registers            ; 737            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 76             ;
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 709            ;
-; Total fan-out                               ; 4163           ;
-; Average fan-out                             ; 2.93           ;
+; Maximum fan-out                             ; 737            ;
+; Total fan-out                               ; 4732           ;
+; Average fan-out                             ; 2.96           ;
 +---------------------------------------------+----------------+
 
 
@@ -223,73 +224,55 @@ applicable agreement for further details.
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
 ; Compilation Hierarchy Node           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                            ; Library Name ;
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
-; |setup_control                       ; 542 (0)           ; 709 (32)     ; 0           ; 0            ; 0       ; 0         ; 76   ; 0            ; |setup_control                                 ; work         ;
-;    |Motor_Controller:MC1|            ; 21 (21)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|Motor_Controller:MC1            ; work         ;
+; |setup_control                       ; 696 (0)           ; 737 (0)      ; 0           ; 0            ; 0       ; 0         ; 76   ; 0            ; |setup_control                                 ; work         ;
+;    |Motor_Controller:MC1|            ; 47 (47)           ; 42 (42)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|Motor_Controller:MC1            ; work         ;
 ;    |Motor_Controller:MC2|            ; 26 (26)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|Motor_Controller:MC2            ; work         ;
 ;    |QuadratureDecoder:QD2|           ; 33 (33)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|QuadratureDecoder:QD2           ; work         ;
-;    |ramstix_gpmc_driver:gpmc_driver| ; 462 (462)         ; 599 (599)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|ramstix_gpmc_driver:gpmc_driver ; work         ;
+;    |quadrature_decoder:qd1|          ; 137 (137)         ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|quadrature_decoder:qd1          ; work         ;
+;    |ramstix_gpmc_driver:gpmc_driver| ; 453 (453)         ; 577 (577)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |setup_control|ramstix_gpmc_driver:gpmc_driver ; work         ;
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                       ;
-+----------------------------------------+-------------------------------------------------+
-; Register name                          ; Reason for Removal                              ;
-+----------------------------------------+-------------------------------------------------+
-; Motor_Controller:MC2|pulsehigh[0]      ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|pulsehigh[0]      ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC2|cyclecount[11]    ; Merged with Motor_Controller:MC1|cyclecount[11] ;
-; Motor_Controller:MC2|cyclecount[10]    ; Merged with Motor_Controller:MC1|cyclecount[10] ;
-; Motor_Controller:MC2|cyclecount[9]     ; Merged with Motor_Controller:MC1|cyclecount[9]  ;
-; Motor_Controller:MC2|cyclecount[8]     ; Merged with Motor_Controller:MC1|cyclecount[8]  ;
-; Motor_Controller:MC2|cyclecount[7]     ; Merged with Motor_Controller:MC1|cyclecount[7]  ;
-; Motor_Controller:MC2|cyclecount[6]     ; Merged with Motor_Controller:MC1|cyclecount[6]  ;
-; Motor_Controller:MC2|cyclecount[5]     ; Merged with Motor_Controller:MC1|cyclecount[5]  ;
-; Motor_Controller:MC2|cyclecount[4]     ; Merged with Motor_Controller:MC1|cyclecount[4]  ;
-; Motor_Controller:MC2|cyclecount[3]     ; Merged with Motor_Controller:MC1|cyclecount[3]  ;
-; Motor_Controller:MC2|cyclecount[2]     ; Merged with Motor_Controller:MC1|cyclecount[2]  ;
-; Motor_Controller:MC2|cyclecount[1]     ; Merged with Motor_Controller:MC1|cyclecount[1]  ;
-; Motor_Controller:MC2|cyclecount[0]     ; Merged with Motor_Controller:MC1|cyclecount[0]  ;
-; Motor_Controller:MC1|INA               ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|INB               ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|C                 ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|dc[0..7]          ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|dc_old[0..7]      ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|pulsehigh[1,2]    ; Stuck at GND due to stuck port data_in          ;
-; Motor_Controller:MC1|pulsehigh[3..11]  ; Stuck at GND due to stuck port clock_enable     ;
-; Total Number of Removed Registers = 44 ;                                                 ;
-+----------------------------------------+-------------------------------------------------+
++------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                             ;
++----------------------------------------------+-------------------------------------------------+
+; Register name                                ; Reason for Removal                              ;
++----------------------------------------------+-------------------------------------------------+
+; quadrature_decoder:qd1|set_origin_n_new[0,1] ; Stuck at VCC due to stuck port data_in          ;
+; quadrature_decoder:qd1|set_origin_n_int      ; Stuck at VCC due to stuck port data_in          ;
+; Motor_Controller:MC2|pulsehigh[0]            ; Stuck at GND due to stuck port data_in          ;
+; Motor_Controller:MC1|pulsehigh[0]            ; Stuck at GND due to stuck port data_in          ;
+; quadrature_decoder:qd1|set_origin_cnt[0..18] ; Lost fanout                                     ;
+; Motor_Controller:MC2|cyclecount[11]          ; Merged with Motor_Controller:MC1|cyclecount[11] ;
+; Motor_Controller:MC2|cyclecount[10]          ; Merged with Motor_Controller:MC1|cyclecount[10] ;
+; Motor_Controller:MC2|cyclecount[9]           ; Merged with Motor_Controller:MC1|cyclecount[9]  ;
+; Motor_Controller:MC2|cyclecount[8]           ; Merged with Motor_Controller:MC1|cyclecount[8]  ;
+; Motor_Controller:MC2|cyclecount[7]           ; Merged with Motor_Controller:MC1|cyclecount[7]  ;
+; Motor_Controller:MC2|cyclecount[6]           ; Merged with Motor_Controller:MC1|cyclecount[6]  ;
+; Motor_Controller:MC2|cyclecount[5]           ; Merged with Motor_Controller:MC1|cyclecount[5]  ;
+; Motor_Controller:MC2|cyclecount[4]           ; Merged with Motor_Controller:MC1|cyclecount[4]  ;
+; Motor_Controller:MC2|cyclecount[3]           ; Merged with Motor_Controller:MC1|cyclecount[3]  ;
+; Motor_Controller:MC2|cyclecount[2]           ; Merged with Motor_Controller:MC1|cyclecount[2]  ;
+; Motor_Controller:MC2|cyclecount[1]           ; Merged with Motor_Controller:MC1|cyclecount[1]  ;
+; Motor_Controller:MC2|cyclecount[0]           ; Merged with Motor_Controller:MC1|cyclecount[0]  ;
+; Total Number of Removed Registers = 36       ;                                                 ;
++----------------------------------------------+-------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                            ;
-+-----------------------------------+---------------------------+------------------------------------------------------------------------+
-; Register name                     ; Reason for Removal        ; Registers Removed due to This Register                                 ;
-+-----------------------------------+---------------------------+------------------------------------------------------------------------+
-; Motor_Controller:MC1|dc[7]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[7], Motor_Controller:MC1|pulsehigh[2],     ;
-;                                   ; due to stuck port data_in ; Motor_Controller:MC1|pulsehigh[1], Motor_Controller:MC1|pulsehigh[11], ;
-;                                   ;                           ; Motor_Controller:MC1|pulsehigh[10], Motor_Controller:MC1|pulsehigh[9], ;
-;                                   ;                           ; Motor_Controller:MC1|pulsehigh[8], Motor_Controller:MC1|pulsehigh[7],  ;
-;                                   ;                           ; Motor_Controller:MC1|pulsehigh[6], Motor_Controller:MC1|pulsehigh[5],  ;
-;                                   ;                           ; Motor_Controller:MC1|pulsehigh[4], Motor_Controller:MC1|pulsehigh[3]   ;
-; Motor_Controller:MC1|pulsehigh[0] ; Stuck at GND              ; Motor_Controller:MC1|C                                                 ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[6]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[6]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[5]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[5]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[4]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[4]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[3]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[3]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[2]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[2]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[1]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[1]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-; Motor_Controller:MC1|dc[0]        ; Stuck at GND              ; Motor_Controller:MC1|dc_old[0]                                         ;
-;                                   ; due to stuck port data_in ;                                                                        ;
-+-----------------------------------+---------------------------+------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                  ;
++--------------------------------------------+---------------------------+-------------------------------------------------------------------------------------+
+; Register name                              ; Reason for Removal        ; Registers Removed due to This Register                                              ;
++--------------------------------------------+---------------------------+-------------------------------------------------------------------------------------+
+; quadrature_decoder:qd1|set_origin_n_new[0] ; Stuck at VCC              ; quadrature_decoder:qd1|set_origin_n_int, quadrature_decoder:qd1|set_origin_cnt[3],  ;
+;                                            ; due to stuck port data_in ; quadrature_decoder:qd1|set_origin_cnt[4], quadrature_decoder:qd1|set_origin_cnt[6], ;
+;                                            ;                           ; quadrature_decoder:qd1|set_origin_cnt[7], quadrature_decoder:qd1|set_origin_cnt[9], ;
+;                                            ;                           ; quadrature_decoder:qd1|set_origin_cnt[10],                                          ;
+;                                            ;                           ; quadrature_decoder:qd1|set_origin_cnt[11],                                          ;
+;                                            ;                           ; quadrature_decoder:qd1|set_origin_cnt[12],                                          ;
+;                                            ;                           ; quadrature_decoder:qd1|set_origin_cnt[14]                                           ;
++--------------------------------------------+---------------------------+-------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -297,12 +280,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 709   ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Total registers                              ; 737   ;
+; Number of registers using Synchronous Clear  ; 46    ;
+; Number of registers using Synchronous Load   ; 32    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 613   ;
+; Number of registers using Clock Enable       ; 650   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -312,12 +295,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
-; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |setup_control|QuadratureDecoder:QD2|counter[24]                ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[3][8]        ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[2][14]       ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[1][3]        ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[0][4]        ;
-; 33:1               ; 16 bits   ; 352 LEs       ; 352 LEs              ; 0 LEs                  ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|gpmc_data_out[0] ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |setup_control|quadrature_decoder:qd1|debounce_cnt[4]           ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |setup_control|QuadratureDecoder:QD2|counter[31]                ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[3][4]        ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[2][5]        ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[1][1]        ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|ram[0][9]        ;
+; 5:1                ; 32 bits   ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; Yes        ; |setup_control|quadrature_decoder:qd1|position[23]              ;
+; 33:1               ; 16 bits   ; 352 LEs       ; 352 LEs              ; 0 LEs                  ; Yes        ; |setup_control|ramstix_gpmc_driver:gpmc_driver|gpmc_data_out[1] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------+
 
 
@@ -369,13 +354,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: QuadratureDecoder:QD1 ;
-+----------------+-------+-------------------------------------------+
-; Parameter Name ; Value ; Type                                      ;
-+----------------+-------+-------------------------------------------+
-; wl             ; 32    ; Signed Integer                            ;
-+----------------+-------+-------------------------------------------+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: quadrature_decoder:qd1 ;
++--------------------------+--------+---------------------------------+
+; Parameter Name           ; Value  ; Type                            ;
++--------------------------+--------+---------------------------------+
+; positions                ; 20000  ; Signed Integer                  ;
+; debounce_time            ; 10000  ; Signed Integer                  ;
+; set_origin_debounce_time ; 500000 ; Signed Integer                  ;
++--------------------------+--------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -399,15 +386,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+-------+----------+-----------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "QuadratureDecoder:QD1"                                                               ;
-+--------+-------+----------+-------------------------------------------------------------------------------------+
-; Port   ; Type  ; Severity ; Details                                                                             ;
-+--------+-------+----------+-------------------------------------------------------------------------------------+
-; reset  ; Input ; Info     ; Stuck at GND                                                                        ;
-; enable ; Input ; Info     ; Stuck at VCC                                                                        ;
-; gpio_0 ; Bidir ; Warning  ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------+-------+----------+-------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "quadrature_decoder:qd1"                                                                     ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; set_origin_n ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; direction    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------+
@@ -445,7 +431,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Fri Jun 15 11:52:55 2018
+    Info: Processing started: Fri Jun 15 17:50:32 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off setup_control -c setup_control
 Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
 Info (12021): Found 2 design units, including 1 entities, in source file /home/esl21/ESL21/gpmc_fpga_template/fpga/setup_control.vhd
@@ -460,16 +446,18 @@ Info (12021): Found 2 design units, including 1 entities, in source file /home/e
 Info (12021): Found 2 design units, including 1 entities, in source file /home/esl21/ESL21/gpmc_fpga_template/fpga/Motor_Controller.vhd
     Info (12022): Found design unit 1: Motor_Controller-behavior
     Info (12023): Found entity 1: Motor_Controller
+Info (12021): Found 2 design units, including 1 entities, in source file /home/esl21/ESL21/quad2.vhd
+    Info (12022): Found design unit 1: quadrature_decoder-logic
+    Info (12023): Found entity 1: quadrature_decoder
 Info (12127): Elaborating entity "setup_control" for the top level hierarchy
 Warning (10541): VHDL Signal Declaration warning at setup_control.vhd(34): used implicit default value for signal "F_OUT" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10540): VHDL Signal Declaration warning at setup_control.vhd(130): used explicit default value for signal "enable" because signal was never assigned a value
-Warning (10540): VHDL Signal Declaration warning at setup_control.vhd(131): used explicit default value for signal "reset" because signal was never assigned a value
-Warning (10541): VHDL Signal Declaration warning at setup_control.vhd(132): used implicit default value for signal "MC1_in" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10540): VHDL Signal Declaration warning at setup_control.vhd(144): used explicit default value for signal "enable" because signal was never assigned a value
+Warning (10540): VHDL Signal Declaration warning at setup_control.vhd(145): used explicit default value for signal "reset" because signal was never assigned a value
 Info (12128): Elaborating entity "ramstix_gpmc_driver" for hierarchy "ramstix_gpmc_driver:gpmc_driver"
 Warning (10492): VHDL Process Statement warning at ramstix_gpmc_driver.vhd(84): signal "gpmc_addr_in" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "Motor_Controller" for hierarchy "Motor_Controller:MC1"
-Info (12128): Elaborating entity "QuadratureDecoder" for hierarchy "QuadratureDecoder:QD1"
-Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (12128): Elaborating entity "quadrature_decoder" for hierarchy "quadrature_decoder:qd1"
+Info (12128): Elaborating entity "QuadratureDecoder" for hierarchy "QuadratureDecoder:QD2"
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "F_OUT[0]" is stuck at GND
     Warning (13410): Pin "F_OUT[1]" is stuck at GND
@@ -487,13 +475,11 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "F_OUT[13]" is stuck at GND
     Warning (13410): Pin "F_OUT[14]" is stuck at GND
     Warning (13410): Pin "F_OUT[15]" is stuck at GND
-    Warning (13410): Pin "PWM1A" is stuck at GND
-    Warning (13410): Pin "PWM1B" is stuck at GND
-    Warning (13410): Pin "PWM1C" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
+Info (17049): 19 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 22 input pin(s) that do not drive logic
+Warning (21074): Design contains 20 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "GPMC_FPGA_IRQ"
     Warning (15610): No output dependent on input pin "GPMC_CLK"
     Warning (15610): No output dependent on input pin "F_IN[0]"
@@ -512,19 +498,17 @@ Warning (21074): Design contains 22 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "F_IN[13]"
     Warning (15610): No output dependent on input pin "F_IN[14]"
     Warning (15610): No output dependent on input pin "F_IN[15]"
-    Warning (15610): No output dependent on input pin "ENC1A"
-    Warning (15610): No output dependent on input pin "ENC1B"
-    Warning (15610): No output dependent on input pin "ENC1I"
-    Warning (15610): No output dependent on input pin "ENC2I"
-Info (21057): Implemented 1193 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "ENC3I"
+    Warning (15610): No output dependent on input pin "ENC4I"
+Info (21057): Implemented 1319 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 38 input pins
     Info (21059): Implemented 22 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 1117 logic cells
-Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 49 warnings
-    Info: Peak virtual memory: 433 megabytes
-    Info: Processing ended: Fri Jun 15 11:53:00 2018
-    Info: Elapsed time: 00:00:05
+    Info (21061): Implemented 1243 logic cells
+Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 42 warnings
+    Info: Peak virtual memory: 437 megabytes
+    Info: Processing ended: Fri Jun 15 17:50:36 2018
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 
 

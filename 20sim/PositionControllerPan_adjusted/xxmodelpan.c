@@ -187,7 +187,7 @@ void XXCalculateInputpan (void)
 void XXCalculateDynamicpan (void)
 {
 	/* PID1\factor = 1 / (sampletime + PID1\tauD * PID1\beta); */
-	xx_V[2] = 1.0 / (xx_step_size + xx_P[2] * xx_P[3]);
+	xx_Vpan[2] = 1.0 / (xx_step_sizepan + xx_Ppan[2] * xx_Ppan[3]);
 
 	/* PlusMinus1\plus1 = in; */
 	xx_V[3] = xx_V[7];

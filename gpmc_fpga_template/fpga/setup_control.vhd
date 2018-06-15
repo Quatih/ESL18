@@ -34,22 +34,22 @@ entity setup_control is
     F_OUT         : out   std_logic_vector(15 downto 0);
     
     -- Pulse width modulators
-    PWM1A         : out   std_logic;
-    PWM1B         : out   std_logic;
-    PWM1C         : out   std_logic;
+    PWM3A         : out   std_logic;
+    PWM3B         : out   std_logic;
+    PWM3C         : out   std_logic;
     
-    PWM2A         : out   std_logic;
-    PWM2B         : out   std_logic;
-    PWM2C         : out   std_logic;
+    PWM4A         : out   std_logic;
+    PWM4B         : out   std_logic;
+    PWM4C         : out   std_logic;
 
     -- Encoders
-    ENC1A         : in    std_logic;
-    ENC1B         : in    std_logic;
-    ENC1I         : in    std_logic;
+    ENC3A         : in    std_logic;
+    ENC3B         : in    std_logic;
+    ENC3I         : in    std_logic;
     
-    ENC2A         : in    std_logic;
-    ENC2B         : in    std_logic;
-    ENC2I         : in    std_logic
+    ENC4A         : in    std_logic;
+    ENC4B         : in    std_logic;
+    ENC4I         : in    std_logic
   );
 end setup_control;
 
@@ -121,6 +121,20 @@ architecture structure of setup_control is
 
 	  );
   end component;
+  
+  component quadrature_decoder  is
+   generic (positions : integer := 256; debounce_time : integer := 10000 );
+   port ( 
+		clk   : in std_logic;
+		set_origin_n	: std_logic;
+		a : in std_logic;
+		b : in std_logic;
+		direction : out std_logic;
+		position : BUFFER integer
+	  );
+  end component;
+  
+  
 
   -- Define signals to connect the component to the gpmc_driver
   signal msb_buffer_out   : std_logic_vector(DATA_WIDTH - 1 downto 0);
@@ -133,10 +147,11 @@ architecture structure of setup_control is
   signal MC2_in : std_logic_vector(31 downto 0);
   signal QD1_out : std_logic_vector(31 downto 0);
   signal QD2_out : std_logic_vector(31 downto 0);
-  signal reg_comm : std_logic_vector(31 downto 0);
-  signal reg_comm2 : std_logic_vector(31 downto 0);
-  constant bla : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(1, 32));
-begin
+	signal qd1_counter : integer := 0;
+  
+  begin
+
+
   -- Map GPMC controller to I/O.
   gpmc_driver : ramstix_gpmc_driver generic map(
       DATA_WIDTH           => DATA_WIDTH,
@@ -147,16 +162,16 @@ begin
     port map (
       clk           => CLOCK_50,
       -- Linux offset: idx 0
-      reg0_in       => reg_comm(15 downto 0),       -- LSB
-      reg1_in       => reg_comm(31 downto 16),       -- MSB
+      reg0_in       => QD1_out(15 downto 0),       -- LSB
+      reg1_in       => QD1_out(31 downto 16),       -- MSB
       
       -- Linux offset: idx 1
       reg2_in       => QD2_out(15 downto 0),  -- LSB
       reg3_in       => QD2_out(31 downto 16),  -- MSB
       
       -- Linux offset: idx 2
-      reg4_out      => reg_comm2(15 downto 0),      -- LSB
-      reg5_out      => reg_comm2(31 downto 16),      -- MSB
+      reg4_out      => MC1_in(15 downto 0),      -- LSB
+      reg5_out      => MC1_in(31 downto 16),      -- MSB
       
       -- Linux offset: idx 3
       reg6_out      => MC2_in(15 downto 0),  -- LSB
@@ -179,9 +194,9 @@ begin
       CLOCK_50,
       reset,
       enable,
-      PWM1A,
-      PWM1B,
-      PWM1C,
+      PWM3A,
+      PWM3B,
+      PWM3C,
       MC1_in
     );
   MC2 : Motor_Controller 
@@ -192,22 +207,39 @@ begin
       CLOCK_50,
       reset,
       enable,
-      PWM2A,
-      PWM2B,
-      PWM2C,
+      PWM4A,
+      PWM4B,
+      PWM4C,
       MC2_in
     );
+--
+--  QD1 : QuadratureDecoder 
+--    generic map(32)
+--    port map(
+--      CLOCK_50,
+--      reset,
+--      enable,
+--      QD1_out,
+--      ENC3A,
+--      ENC3B
+--    );
 
-  QD1 : QuadratureDecoder 
-    generic map(32)
-    port map(
-      CLOCK_50,
-      reset,
-      enable,
-      QD1_out,
-      ENC1A,
-      ENC1B
-    );
+	qd1 : quadrature_decoder
+		generic map(positions => 20000, debounce_time => 10000)
+		port map(
+			clk   => CLOCK_50,
+			set_origin_n	=> '1',
+		a => ENC3A,
+		b => ENC3B,
+		direction =>  open,
+		position => qd1_counter
+		
+		);
+		
+		QD1_out <= std_logic_vector(to_signed(qd1_counter,32));
+
+		
+
   QD2 : QuadratureDecoder 
     generic map(32)
     port map(
@@ -215,13 +247,7 @@ begin
       reset,       
       enable,
       QD2_out,
-      ENC2A,
-      ENC2B
+      ENC4A,
+      ENC4B
     );
-	 process(CLOCK_50)
-	 begin
-		if(falling_edge(CLOCK_50)) then
-			reg_comm <= reg_comm2;
-		end if;
-	 end process;
 end architecture;
