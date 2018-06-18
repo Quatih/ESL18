@@ -20,11 +20,11 @@ end QuadratureDecoder;
 
 architecture behavior of QuadratureDecoder is
 	signal counter : signed(wl -1  downto 0) := (others => '0');
-	signal GPIO_0_IN_old : std_logic_vector(1 downto 0) := (others => '0');
+	signal GPIO_0_IN_old : std_logic_vector(1 downto 0) := (others => '1');
 	--signal GPIO_0_IN_debounced : std_logic_vector(1 downto 0) := (others => '0');
 	--signal GPIO_0_IN_debounced_old : std_logic_vector(1 downto 0) := (others => '0');
 	--signal bouncecounter : integer range 0 to debouncer + 1;
-	signal flipflop : std_logic_vector(1 downto 0) := (others => '0');
+	signal flipflop : std_logic_vector(1 downto 0) := (others => '1');
 	signal debounce_counter : integer range 0 to debounce_cycles;
 begin
 
@@ -34,7 +34,7 @@ GPIO_0 <= std_logic_vector(counter);
 process(clk, reset)
 	variable GPIO_0_IN : std_logic_vector(1 downto 0);
 begin
-	if rising_edge(clk) then
+	if falling_edge(clk) then
 	  GPIO_0_IN(0) := ENC_A;
 	  GPIO_0_IN(1) := ENC_B;
 	  flipflop <= GPIO_0_IN;
