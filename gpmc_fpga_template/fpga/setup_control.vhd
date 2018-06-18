@@ -92,7 +92,7 @@ architecture structure of setup_control is
   -- INSERT YOUR COMPONENTS HERE
     
   component Motor_Controller is
-    generic (wl : natural := 32;
+    generic (wl : natural := 10;
 	    period : natural := 2500);
     port ( 
 	    clk    : in std_logic;		--System clock, 50 MHz
@@ -142,7 +142,7 @@ architecture structure of setup_control is
   signal msb_buffer_in    : std_logic_vector(DATA_WIDTH - 1 downto 0);
   signal lsb_buffer_in    : std_logic_vector(DATA_WIDTH - 1 downto 0);
   signal enable : std_logic := '1';
-  signal reset  : std_logic := '0';
+  signal reset  : std_logic := '1';
   signal MC1_in : std_logic_vector(31 downto 0);
   signal MC2_in : std_logic_vector(31 downto 0);
   signal QD1_out : std_logic_vector(31 downto 0);
@@ -151,7 +151,13 @@ architecture structure of setup_control is
   
   begin
 
-
+    process(clk) is
+    begin
+      if rising_edge(clk) then
+        reset <= MC2_in(16); -- the LSB of reg7_out
+      end if;
+    end process;
+    
   -- Map GPMC controller to I/O.
   gpmc_driver : ramstix_gpmc_driver generic map(
       DATA_WIDTH           => DATA_WIDTH,
@@ -165,15 +171,15 @@ architecture structure of setup_control is
       reg0_in       => QD1_out(15 downto 0),       -- LSB
       reg1_in       => QD1_out(31 downto 16),       -- MSB
       
-      -- Linux offset: idx 1
+      -- Linux offset: idx 2
       reg2_in       => QD2_out(15 downto 0),  -- LSB
       reg3_in       => QD2_out(31 downto 16),  -- MSB
       
-      -- Linux offset: idx 2
+      -- Linux offset: idx 4
       reg4_out      => MC1_in(15 downto 0),      -- LSB
       reg5_out      => MC1_in(31 downto 16),      -- MSB
       
-      -- Linux offset: idx 3
+      -- Linux offset: idx 6
       reg6_out      => MC2_in(15 downto 0),  -- LSB
       reg7_out      => MC2_in(31 downto 16),  -- MSB
 
@@ -188,7 +194,7 @@ architecture structure of setup_control is
     
   MC1 : Motor_Controller 
     generic map(
-      32, 2500
+      10, 2500
     )
     port map ( 
       CLOCK_50,
@@ -197,11 +203,11 @@ architecture structure of setup_control is
       PWM3A,
       PWM3B,
       PWM3C,
-      MC1_in
+      MC1_in(9 downto 0)
     );
   MC2 : Motor_Controller 
     generic map(
-      32, 2500
+      10, 2500
     )
     port map ( 
       CLOCK_50,
@@ -210,33 +216,32 @@ architecture structure of setup_control is
       PWM4A,
       PWM4B,
       PWM4C,
-      MC2_in
+      MC2_in(9 downto 0)
     );
---
---  QD1 : QuadratureDecoder 
---    generic map(32)
---    port map(
---      CLOCK_50,
---      reset,
---      enable,
---      QD1_out,
---      ENC3A,
---      ENC3B
---    );
 
-	qd1 : quadrature_decoder
-		generic map(positions => 20000, debounce_time => 10000)
-		port map(
-			clk   => CLOCK_50,
-			set_origin_n	=> '1',
-		a => ENC3A,
-		b => ENC3B,
-		direction =>  open,
-		position => qd1_counter
+  QD1 : QuadratureDecoder 
+    generic map(32)
+    port map(
+      CLOCK_50,
+      reset,
+      enable,
+      QD1_out,
+      ENC3A,
+      ENC3B
+    );
+
+	--qd1 : quadrature_decoder
+	--	generic map(positions => 20000, debounce_time => 10000)
+	--	port map(
+	--		clk   => CLOCK_50,
+	--		set_origin_n	=> '1',
+	--	a => ENC3A,
+	--	b => ENC3B,
+	--	direction =>  open,
+	--	position => qd1_counter
+	--);
 		
-		);
-		
-		QD1_out <= std_logic_vector(to_signed(qd1_counter,32));
+		--QD1_out <= std_logic_vector(to_signed(qd1_counter,32));
 
 		
 
