@@ -9,7 +9,6 @@
 #include <opencv/cv.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
-#include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <thread>
 #include <iostream>
@@ -124,9 +123,9 @@ g_print("*");
 //g_print("Size: %d\r\n", strlen((const char *)info.data));
 /*Image processing part*/
 Mat img_rgb, img_th, img_hsv, img1, img2;
-Mat img(HEIGHT, WIDTH, CV_8UC3, info.data);
+Mat img(HEIGHT, WIDTH, CV_8UC2, info.data);
 
-cvtColor(img, img_rgb, CV_RGB2BGR);
+cvtColor(img, img_rgb, CV_YUV2BGR_YUY2);
 cvtColor(img_rgb, img_hsv, CV_BGR2HSV);
 
 vector<vector<Point>> contours;
@@ -138,7 +137,7 @@ inRange(img_hsv, Scalar(90, 130, 130), Scalar(140, 255,  255), img1);
 
 Mat Elem = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
 morphologyEx(img1, img1, MORPH_OPEN, Elem);
-
+g_print("*");
 findContours(img1, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 
 int largest_area=0;
@@ -334,7 +333,7 @@ queue_init(&frames, 5, FRAMESIZE);
 
   // create the capabilities filter structure
   GstCaps *caps = gst_caps_new_simple ("video/x-raw", //viceo/x-raw
-   "format", G_TYPE_STRING, "RGB",
+   "format", G_TYPE_STRING, "YUY2",
    "framerate", GST_TYPE_FRACTION, FRAMERATE, 1,
    "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
    "width", G_TYPE_INT, WIDTH,

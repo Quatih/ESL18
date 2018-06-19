@@ -31,11 +31,11 @@
 #include <unistd.h>     // close()
 #include <stdint.h>
 #include <stdlib.h>
-
+#include <time.h>
 /* The pan encoder spans 1110 values which correspond to approximately Pi radians. */
-double ConvertRad(uint32_t val)
+double ConvertRad(int32_t val)
 {
-	return (val/2000) * M_PI;
+	return ((double)val/2000.0) * M_PI;
 }
 
 /* According to 20SIM, the output is a signal between -20 and 20. 
@@ -48,9 +48,11 @@ uint32_t ConvertPWM(double val)
 		return 0;
 	
 	uint32_t ret_val = 0;
-	ret_val = abs(val/20) * 250;
+	double ch = abs(val * 250.0);
+	//printf("%f, %f\n", val, ch);
+	ret_val = (uint32_t) (ch);
 	//Clockwise
-	if(val < 0)
+	if(val > 0)
 	{
 		//INA = 1;
 		//INB = 0;
@@ -63,12 +65,16 @@ uint32_t ConvertPWM(double val)
 		//INB = 1;
 		ret_val |= 0x02 << 8;
 	}
+	return ret_val;
 }
 
 uint32_t CheckOutput(uint32_t val)
 {
-	
-	
+	return val;
+}
+
+void reset(int fd) {
+    setGPMCValue(fd, 1, 7);
 }
 
 /* The main function */
@@ -111,7 +117,7 @@ int main(int argc, char* argv[])
 
 /* Initialize the inputs and outputs with correct initial values */
 	utilt[0] = 0.0;		/* corr */
-	utilt[1] = 0.0;		/* in */
+	utilt[1] = 0.15;		/* in */
 	utilt[2] = 0.0;		/* position */
 
 	ytilt[0] = 0.0;		/* out */
@@ -120,35 +126,52 @@ int main(int argc, char* argv[])
 	/* Initialize the submodel itself */
 	XXInitializeSubmodeltilt (utilt, ytilt, xx_timetilt);
 
-	int a, b;
+	/*int a, b;
 	while(1){
 		a = getGPMCValue(fd, 0);
 		b = getGPMCValue(fd, 2);
-		printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
-		printf("RAW: %d %d\n", a,b); 
-	}
-
-	
+		setGPMCValue(fd,0,6);
+		//printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
+		printf("RAW: %7d %7d\r", a,b); 
+		usleep(1000);
+		if(b >100 || b < -100) {
+		  setGPMCValue(fd, 1, 7);
+		}
+	}*/
+/*
+	Mpan = ConvertPWM(10);
+	Mtilt = ConvertPWM(10);
+	setGPMCValue(fd, Mpan, 4);		
+	setGPMCValue(fd, Mtilt, 6);
+	usleep(1000000);
+	setGPMCValue(fd, 0, 4);		
+	setGPMCValue(fd, 0, 6);*/
+	//return 0;
 	/* Simple loop, the time is incremented by the integration method */
-	while ( (xx_timepan < xx_finish_timepan))
+	reset(fd);
+
+	while (1)
 	{
+		time = localtime(
+		timediff = time - lasttime;
+		if (timediff >= 0.01){
+			//Get and convert the decoder readings. 
+			upan[1] = ConvertRad(getGPMCValue(fd, 2)); 		
+			utilt[2] = ConvertRad(getGPMCValue(fd, 0)); 
+	
+			/* Call the submodel to calculate the output */
+			XXCalculateSubmodelpan (upan, ypan, xx_timepan);
+			XXCalculateSubmodeltilt (utilt, ytilt, xx_timetilt);
 
-		//Get and convert the decoder readings. 
-		upan[0] = ConvertRad(getGPMCValue(fd, 0)); 		
-		utilt[0] = ConvertRad(getGPMCValue(fd, 2)); 
-
-		/* Call the submodel to calculate the output */
-		XXCalculateSubmodelpan (upan, ypan, xx_timepan);
-		XXCalculateSubmodeltilt (utilt, ytilt, xx_timetilt);
-
-
-		//Convert, check and send the Motor steering values
-		Mpan = CheckOutput(ConvertPWM(ypan[1]));
-		Mtilt = CheckOutput(ConvertPWM(ytilt[1]));
-		//setGPMCValue(fd, Mpan, 4);		
-		//setGPMCValue(fd, Mtilt, 6);
-
-		printf("Timestep: %f\n", xx_timepan);
+			//Convert, check and send the Motor steering values
+			//Mpan = CheckOutput(ConvertPWM(ypan[1]));
+			Mtilt = CheckOutput(ConvertPWM(ytilt[0]));
+			setGPMCValue(fd, Mtilt, 4);		
+			setGPMCValue(fd, Mtilt, 6);
+			//printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
+			//printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
+			//usleep(1000);
+		}
 	}
 
 	/* Perform the final calculations */

@@ -151,10 +151,20 @@ architecture structure of setup_control is
   
   begin
 
-    process(clk) is
+    process(CLOCK_50) is
+		variable set: std_logic := '0';
     begin
-      if rising_edge(clk) then
-        reset <= MC2_in(16); -- the LSB of reg7_out
+      if rising_edge(CLOCK_50) then
+			if MC2_in(16) = '1' and set = '0' then
+				reset <= '1';
+				set := '1';
+			elsif MC2_in(16) = '1' and set = '1' then
+				reset <= '0';
+				set := '1';
+			else
+				set := '0';
+				reset <= '0';
+			end if;
       end if;
     end process;
     
@@ -198,7 +208,7 @@ architecture structure of setup_control is
     )
     port map ( 
       CLOCK_50,
-      reset,
+      '0',
       enable,
       PWM3A,
       PWM3B,
@@ -211,7 +221,7 @@ architecture structure of setup_control is
     )
     port map ( 
       CLOCK_50,
-      reset,
+      '0',
       enable,
       PWM4A,
       PWM4B,
