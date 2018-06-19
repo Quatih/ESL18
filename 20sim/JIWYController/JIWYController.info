@@ -1,0 +1,97 @@
+JIWYController
+=============================================================
+
+INPUTS & OUTPUTS INDICES
+------------------------
+ 
+*** INPUTS ***
+
+	m_V[14] = u[0];		/* Enc_Pan */
+	m_V[16] = u[1];		/* Enc_Tilt */
+
+ 
+*** OUTPUTS ***
+
+	y[0] = 	m_V[15];		/* Motor_Pan */
+	y[1] = 	m_V[17];		/* Motor_Tilt */
+
+ 
+
+
+
+
+NAMES
+-----
+
+[CONSTANTS]
+	NULL
+[PARAMETERS]
+	"ControllerPan\\ControllerPan\\PID_Pan\\kp",
+	"ControllerPan\\ControllerPan\\PID_Pan\\tauD",
+	"ControllerPan\\ControllerPan\\PID_Pan\\beta",
+	"ControllerPan\\ControllerPan\\PID_Pan\\tauI",
+	"ControllerPan\\MA_Pan\\Conversion\\K",
+	"ControllerPan\\MA_Pan\\Limit\\maximum",
+	"ControllerPan\\MA_Pan\\Limit\\minimum",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\kp",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\tauD",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\beta",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\tauI",
+	"ControllerTilt\\MA_Tilt\\Conversion\\K",
+	"ControllerTilt\\MA_Tilt\\Limit\\maximum",
+	"ControllerTilt\\MA_Tilt\\Limit\\minimum",
+	"JoyStick\\PulsePan\\start_time",
+	"JoyStick\\PulsePan\\stop_time",
+	"JoyStick\\PulsePan\\amplitude",
+	"JoyStick\\PulseTilt\\start_time",
+	"JoyStick\\PulseTilt\\stop_time",
+	"JoyStick\\PulseTilt\\amplitude"
+
+[VARIABLES]
+	"ControllerPan\\ControllerPan\\PID_Pan\\output",
+	"",
+	"ControllerPan\\MA_Pan\\Conversion\\output",
+	"ControllerPan\\MA_Pan\\Limit\\output",
+	"ControllerPan\\measIO",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\output",
+	"",
+	"ControllerTilt\\MA_Tilt\\Conversion\\output",
+	"ControllerTilt\\MA_Tilt\\Limit\\output",
+	"ControllerTilt\\measIO",
+	"JoyStick\\PulsePan\\output",
+	"",
+	"JoyStick\\PulseTilt\\output",
+	"",
+	"Enc_Pan",
+	"Motor_Pan",
+	"Enc_Tilt",
+	"Motor_Tilt"
+
+[STATES]
+	"ControllerPan\\ControllerPan\\PID_Pan\\uD_previous",
+	"ControllerPan\\ControllerPan\\PID_Pan\\error_previous",
+	"ControllerPan\\ControllerPan\\PID_Pan\\uI_previous",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\uD_previous",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\error_previous",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\uI_previous",
+	"",
+	"",
+	"",
+	""
+
+[RATES]
+	"",
+	"ControllerPan\\ControllerPan\\PID_Pan\\error",
+	"",
+	"",
+	"ControllerTilt\\ControllerTilt\\PID_Tilt\\error",
+	"",
+	"",
+	"",
+	"",
+	""
+
+[MATRICES]
+	NULL
+
+

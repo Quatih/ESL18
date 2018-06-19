@@ -1,0 +1,68 @@
+IO_Pan
+=============================================================
+
+INPUTS & OUTPUTS INDICES
+------------------------
+ 
+*** INPUTS ***
+
+	m_V[16] = u[0];		/* angleCT */
+	m_V[19] = u[1];		/* steerDT */
+
+ 
+*** OUTPUTS ***
+
+	y[0] = 	m_V[18];		/* angleDT */
+	y[1] = 	m_V[17];		/* steerCT */
+
+ 
+
+
+
+
+NAMES
+-----
+
+[CONSTANTS]
+	NULL
+[PARAMETERS]
+	"Encoder\\K",
+	"Hold\\bits",
+	"Hold\\minimum",
+	"Hold\\maximum",
+	"PowAmp\\K",
+	"Sample\\bits",
+	"Sample\\minimum",
+	"Sample\\maximum",
+	"Sample\\initial"
+
+[VARIABLES]
+	"Encoder\\input",
+	"Encoder\\output",
+	"Hold\\input",
+	"Hold\\output",
+	"Hold\\windowed_signal",
+	"Hold\\quantisized_signal",
+	"Hold\\rounded_signal",
+	"Hold\\lsb",
+	"Hold\\half_lsb",
+	"PowAmp\\output",
+	"Sample\\output",
+	"Sample\\hold_signal",
+	"Sample\\windowed_signal",
+	"Sample\\quantisized_signal",
+	"Sample\\lsb",
+	"Sample\\half_lsb",
+	"angleCT",
+	"steerCT",
+	"angleDT",
+	"steerDT"
+
+[STATES]
+	NULL
+[RATES]
+	NULL
+[MATRICES]
+	NULL
+
+
