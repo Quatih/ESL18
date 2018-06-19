@@ -20,8 +20,6 @@
 #include "xxintegtilt.h"
 #include "xxfuncs.h"
 #include "xxsubmodtilt.h"
-#include "motionprofiles.h"
-#include "EulerAngles.h"
 
 /* The submodel I/O variables */
 XXInteger xx_number_of_inputstilt = 3;

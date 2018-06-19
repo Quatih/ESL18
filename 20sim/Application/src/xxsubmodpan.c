@@ -20,8 +20,6 @@
 #include "xxintegpan.h"
 #include "xxfuncs.h"
 #include "xxsubmodpan.h"
-#include "motionprofiles.h"
-#include "EulerAngles.h"
 
 /* The submodel I/O variables */
 XXInteger xx_number_of_inputspan = 2;
