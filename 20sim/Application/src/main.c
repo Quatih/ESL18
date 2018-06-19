@@ -35,7 +35,7 @@
 /* The pan encoder spans 1110 values which correspond to approximately Pi radians. */
 double ConvertRad(uint32_t val)
 {
-	return (val/1110) * M_PI;
+	return (val/2000) * M_PI;
 }
 
 /* According to 20SIM, the output is a signal between -20 and 20. 
@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
 	while(1){
 		a = getGPMCValue(fd, 0);
 		b = getGPMCValue(fd, 2);
-		printf("Radians: %f %f\n", (float)a/397 * M_PI,(float) b/1585 * M_PI); 
+		printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
 		printf("RAW: %d %d\n", a,b); 
 	}
 
@@ -134,8 +134,8 @@ int main(int argc, char* argv[])
 	{
 
 		//Get and convert the decoder readings. 
-		upan[0] = getGPMCValue(fd, 0)/1110 * M_PI; 		
-		utilt[0] = getGPMCValue(fd, 2)/304 * M_PI; 
+		upan[0] = ConvertRad(getGPMCValue(fd, 0)); 		
+		utilt[0] = ConvertRad(getGPMCValue(fd, 2)); 
 
 		/* Call the submodel to calculate the output */
 		XXCalculateSubmodelpan (upan, ypan, xx_timepan);
@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 		//setGPMCValue(fd, Mpan, 4);		
 		//setGPMCValue(fd, Mtilt, 6);
 
-		//printf("Timestep: %f\n", xx_timepan);
+		printf("Timestep: %f\n", xx_timepan);
 	}
 
 	/* Perform the final calculations */
