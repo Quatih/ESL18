@@ -7,13 +7,13 @@
 #include <stdbool.h>
 #include "queue.h"
 #include <opencv/cv.h>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <thread>
-#include <iostream>
+#include <opencv/imgproc.h>
+#include <opencv/core.h>
+#include <opencv/imgcodecs.h>
+#include <opencv/highgui.h>
 #include <unistd.h>
+#include <pthread.h>
+#include <types_c.h>
 
 #define WIDTH 320
 #define HEIGHT 240
@@ -23,10 +23,6 @@
 
 #define MARGIN 50
 
-using namespace cv;
-using namespace std;
-
-
 Mat imtoshow, imtoshow1;
 bool LOCK;
 
@@ -34,8 +30,8 @@ bool LOCK;
 
 /* Structure to contain all our information, so we can pass it to callbacks */
 typedef struct _CustomData {
-  GstElement *pipeline, *driver, *capsfilter, *mux, *appsink;
-GstElement *pipeline1, *appsource, *capsfilter1,  *queue, *videoconvert, *fpssink;
+  GstElement *pipeline, *driver, *capsfilter, *mux, *appsink, *queue;
+
 
   guint64 num_samples;   /* Number of samples generated so far (for timestamp generation) */
 	GstBuffer *buffer;
@@ -51,60 +47,20 @@ queue_descr_t frames;
 
 
 
-/* This method is called by the idle GSource in the mainloop, to feed CHUNK_SIZE bytes into appsrc.
- * The ide handler is added to the mainloop when appsrc requests us to start sending data (need-data signal)
- * and is removed when appsrc has enough data (enough-data signal).
- */
-static gboolean push_data (CustomData *data) {
-  GstBuffer *buffer;
-  GstFlowReturn ret;
-  int i;
-  GstMapInfo map;
-
-  static GstClockTime timestamp = 0;
-
-	guint size;
-
-  size= FRAMESIZE;
-	uint16_t frame[WIDTH*HEIGHT];
-	queue_pop(&frames, &frame);
-  buffer = gst_buffer_new_wrapped_full((GstMemoryFlags) 0, frame, size, 0, size, NULL, NULL );
-
-
-  GST_BUFFER_PTS (buffer) = timestamp;
-  GST_BUFFER_DURATION (buffer) = gst_util_uint64_scale_int (1, GST_SECOND, FRAMERATE);
-
-  timestamp += GST_BUFFER_DURATION (buffer);
-
-   g_signal_emit_by_name (data->appsource, "push-buffer", buffer, &ret);
-
-  
-  gst_buffer_unref (buffer);
-
-  if (ret != GST_FLOW_OK) {
-g_print("Error\n");
-   
-    return FALSE;
-  }
-
-  return TRUE;
-}
 
 void showfeed(void)
 {
-  //namedWindow("window");
-  //namedWindow("window1");
-  //usleep(5000000);
+  cvNamedWindow("window");
+  cvNamedWindow("window1");
+  usleep(5000000);
 
   while(1)
   {
     while(LOCK);
-    imshow("window", imtoshow);
-    imshow("window1", imtoshow1);
-imwrite("test.png", imtoshow);
-    //waitKey(1);
+    cvShowImage("window", imtoshow);
+    cvShowImage("window1", imtoshow1);
     LOCK = true;
-    //waitKey(33);
+    //cvWaitKey(33);
   }
 }
 
@@ -117,54 +73,64 @@ uint16_t d[WIDTH*HEIGHT];
   /* Retrieve the buffer */
   g_signal_emit_by_name (sink, "pull-sample", &sample);
   if (sample) {
-g_print("*");
 
   buffer = gst_sample_get_buffer(sample);
     gst_buffer_map(buffer, &info, GST_MAP_READ);
 //g_print("Size: %d\r\n", strlen((const char *)info.data));
 /*Image processing part*/
-Mat img_rgb, img_th, img_hsv, img1, img2;
-Mat img(HEIGHT, WIDTH, CV_8UC3, info.data);
+IPlimage *img, *img_rgb, *img_th, *img_hsv, *img1, *img2;
 
-cvtColor(img, img_rgb, CV_RGB2BGR);
-cvtColor(img_rgb, img_hsv, CV_BGR2HSV);
+//Fill buffer of img with info.data
+img->imageData = &info.data;
 
-vector<vector<Point>> contours;
-vector<Vec4i> hierarchy;
-Point Center;
+cvCvtColor(img, img_rgb, CV_RGB2BGR);
+cvCvtColor(img_rgb, img_hsv, CV_BGR2HSV);
+
+//vector<vector<Point>> contours;
+//vector<Vec4i> hierarchy;
+CvMemStorage *storage = cvCreateMemStorage(0);
+cvMemStorage *largest_contour = cvCreateMemStorage(0);
+cvSeq *contours = cvCreateSeq(CV_FLAG_SIMPE | CV_FLAG_KIND_SET | CV_TYPE_ELTYPE_POINT, sizeof(cvSeq), sizeof(cvPoint), storage);
+cvPoint Center;
+cvPoint offset = {0,0};
 
 
-inRange(img_hsv, Scalar(90, 130, 130), Scalar(140, 255,  255), img1);
 
-Mat Elem = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
-morphologyEx(img1, img1, MORPH_OPEN, Elem);
+cvInRange(img_hsv, cvScalar(90, 130, 130), cvScalar(140, 255,  255), img1);
 
-findContours(img1, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+IPlImage *Elem = cvGetStructuringElement(MORPH_ELLIPSE, Size(10, 10));
+cvMorphologyEx(img1, img1, MORPH_OPEN, Elem);
+
+cvFindContours(img1, storage, &contours, sizeof(CvContour), CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, offset);
 
 int largest_area=0;
  int largest_contour_index=0;
   Rect bounding_rect;
-for( int i = 0; i< contours.size(); i++ ) // iterate through each contour. 
-      {
-       double a=contourArea( contours[i],false);  //  Find the area of contour
-       if(a>largest_area){
-       largest_area=a;
-       largest_contour_index=i;                //Store the index of largest contour
-       bounding_rect=boundingRect(contours[i]); // Find the bounding rectangle for biggest contour
-     }
-   }
 
-Rect r = boundingRect(contours[largest_contour_index]);
+
+
+for(; contrours != 0; contours = contours->h_next)
+{
+	double a=cvContourArea(contour->storage, CV_WHOLE_SEQ, 0);
+	if(a>largest_area){
+       		largest_area=a;
+		largest_contour = contour->storage;
+		break;
+	}
+}
+
+cvRect r = cvBoundingRect(largest_contour, 0);
 Center.x = r.x+r.width/2;
 Center.y = r.y+r.height/2;
 
-Scalar color( 255,255,255);
-drawContours(img_rgb, contours,largest_contour_index, color, 1, 8, hierarchy);
-circle(img_rgb, Center, 2, color, -1, 8, 0);
+cvScalar color( 255,255,255);
+cvScalar hole_color(0, 0, 0);
+cvDrawContours(img_rgb, contours, color, hole_color, 0, 1, 8, cvPoint(0,0));
+cvCircle(img_rgb, Center, 2, color, -1, 8, 0);
 
 //Determine motor directions
 if(Center.x < WIDTH/2 - MARGIN)
-	printf("Turn Pan left\r\n");
+	print("Turn Pan left\r\n");
 else if(Center.x > WIDTH/2 + MARGIN)
 	printf("Turn Pan right\r\n");
 else
@@ -177,10 +143,10 @@ else
 	printf("Stop turning Tilt\r\n"); 
 
 
-imwrite("img1.png", img_rgb);
-cvtColor(img1, img1, CV_GRAY2BGR);
-bitwise_and(img_rgb, img1, img2);
-g_print("*");
+//imwrite("img1.png", img_rgb);
+cvCvtColor(img1, img1, CV_GRAY2BGR);
+cvBitwise_and(img_rgb, img1, img2, NULL);
+
 
 while(!LOCK);
 imtoshow = img_rgb;
@@ -214,29 +180,6 @@ g_print("*");
   return ret;
 
 
-}
-
-
-/* This signal callback triggers when appsrc needs data. Here, we add an idle handler
- * to the mainloop to start pushing data into the appsrc */
-static void start_feed (GstElement *source, guint size, CustomData *data) {
-  if (data->sourceid == 0) {
-    g_print ("Start feeding\n");
-    data->sourceid = g_idle_add ((GSourceFunc) push_data, data);
-  }
-}
-
-/* This callback triggers when appsrc has enough data and we can stop sending.
- * We remove the idle handler from the mainloop */
-
-
-
-static void stop_feed (GstElement *source, CustomData *data) {
-  if (data->sourceid != 0) {
-    g_print ("Stop feeding %d\n", data->sourceid);
-    g_source_remove (data->sourceid);
-    data->sourceid = 0;
-  }
 }
 
 
@@ -277,41 +220,36 @@ bus_call (GstBus     *bus,
 int main (int   argc,
       char *argv[])
 {
-  GMainLoop *loop, *loop1;
+  GMainLoop *loop;
 	CustomData data;
 	data.sourceid = 0;
 
-  GstBus *bus, *bus1;
-  guint bus_watch_id, bus_watch_id1;
+  GstBus *bus;
+  guint bus_watch_id;
 
   /* Initialisation */
   gst_init (&argc, &argv);
 
   loop = g_main_loop_new (NULL, FALSE);
-	loop1 = g_main_loop_new (NULL, FALSE);
-
 LOCK = true;
 
-std::thread feed(showfeed);
+
+pthread_t t;
+pthread_create(&t, NULL, showfeed, NULL);
 
 // Init queue's
 queue_init(&frames, 5, FRAMESIZE);
 
   /* Create gstreamer elements */
 	data.pipeline = gst_pipeline_new("Webcam-stream");
-  data.pipeline1 = gst_pipeline_new("Webcam-stream");
   data.driver = gst_element_factory_make("v4l2src", "Video4linux2source");
-	data.queue = gst_element_factory_make ("queue", "video_queue");
+data.queue = gst_element_factory_make ("queue", "video_queue");
   data.capsfilter = gst_element_factory_make("capsfilter", "caps-filter");
-	data.capsfilter1 = gst_element_factory_make("capsfilter", "caps-filter");
   data.mux = gst_element_factory_make("avimux", "avi-mux");
   data.appsink = gst_element_factory_make ("appsink", "video-output");
-	data.appsource = gst_element_factory_make ("appsrc", "video-input");
-  data.videoconvert = gst_element_factory_make("videoconvert", "vid-conv");
-	data.fpssink = gst_element_factory_make("fpsdisplaysink", "output");
 	
 
-  if (!data.pipeline || !data.pipeline1 || !data.queue || !data.driver || !data.capsfilter || !data.mux || !data.appsink) {
+  if (!data.pipeline ||  !data.queue || !data.driver || !data.capsfilter || !data.mux || !data.appsink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -322,12 +260,8 @@ queue_init(&frames, 5, FRAMESIZE);
 
   /* we add a message handler */
   bus = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline));
-	bus1 = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline1)); 
  bus_watch_id = gst_bus_add_watch (bus, bus_call, loop);
-	bus_watch_id1 = gst_bus_add_watch (bus1, bus_call, loop1);
   gst_object_unref (bus);
-  gst_object_unref (bus1);
-
 
   // set options of driver
   g_object_set (G_OBJECT(data.driver), "device", "/dev/video0", NULL);
@@ -345,12 +279,6 @@ queue_init(&frames, 5, FRAMESIZE);
 
   // set the capabilities
   g_object_set(G_OBJECT(data.capsfilter), "caps", caps, NULL);
- g_object_set(G_OBJECT(data.capsfilter1), "caps", caps, NULL);
-
-	/*Configure the appsource*/
- // g_object_set (data.appsource, "caps", caps, NULL);
-//g_signal_connect (data.appsource, "need-data", G_CALLBACK (start_feed), &data);
-//  g_signal_connect (data.appsource, "enough-data", G_CALLBACK (stop_feed), &data);
 
   /* Configure appsink */
   g_object_set (data.appsink, "emit-signals", TRUE, "caps", caps, NULL);
@@ -360,36 +288,24 @@ queue_init(&frames, 5, FRAMESIZE);
 
   gst_bin_add_many (GST_BIN (data.pipeline), data.driver, data.capsfilter, data.queue, data.appsink, NULL);
   gst_element_link_many (data.driver, data.capsfilter, data.appsink, NULL); 
-  //gst_bin_add_many (GST_BIN (data.pipeline1), data.appsource, data.capsfilter1, data.fpssink, NULL);
-  //gst_element_link_many ( data.appsource, data.capsfilter1, data.fpssink, NULL);
 
 
 
- // namedWindow("window");
-  //namedWindow("window1");
-  /* Set the pipeline to "playing" state*/
-  // g_print ("Now playing: %s\n", argv[1]);
+ 
   gst_element_set_state (data.pipeline, GST_STATE_PLAYING);
-	//gst_element_set_state (data.pipeline1, GST_STATE_PLAYING);
-
   /* Iterate */
   g_print ("Running...\n");
   g_main_loop_run (loop);
-	//g_main_loop_run (loop1);
 
 
   /* Out of the main loop, clean up nicely */
   g_print ("Returned, stopping playback\n");
   gst_element_set_state (data.pipeline, GST_STATE_NULL);
-	//gst_element_set_state (data.pipeline1, GST_STATE_NULL);
 
   g_print ("Deleting pipeline\n");
   gst_object_unref (GST_OBJECT (data.pipeline));
-	//gst_object_unref (GST_OBJECT (data.pipeline1));
   g_source_remove (bus_watch_id);
   g_main_loop_unref (loop);
 
-	//g_source_remove (bus_watch_id1);
-  //g_main_loop_unref (loop1);
   return 0;
 }
