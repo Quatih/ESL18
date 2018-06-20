@@ -67,7 +67,7 @@ void XXDiscreteSteptilt (void)
 		xx_stilt [index] = xx_Rtilt [index];
 	}
 	/* increment the simulation time */
-	xx_timetilt += xx_step_sizetilt;
+	// xx_timetilt += xx_step_sizetilt;
 
 	xx_majortilt = XXTRUE;
 

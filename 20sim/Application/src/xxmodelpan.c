@@ -196,7 +196,7 @@ void XXCalculateDynamicpan (void)
 	xx_Vpan[5] = xx_Vpan[8];
 
 	/* corrGain\corr = corrGain\K * Splitter1\input; */
-	xx_Vpan[0] = xx_Ppan[0] * xx_Vpan[5];
+	// xx_Vpan[0] = xx_Ppan[0] * xx_Vpan[5];
 
 	/* PID1\error = PlusMinus1\plus1 - Splitter1\input; */
 	xx_Rpan[1] = xx_Vpan[3] - xx_Vpan[5];
@@ -239,7 +239,7 @@ void XXCalculateDynamicpan (void)
 void XXCalculateOutputpan (void)
 {
 	/* corr = corrGain\corr; */
-	xx_Vpan[6] = xx_Vpan[0];
+	// xx_Vpan[6] = xx_Vpan[0];
 
 	/* out = SignalLimiter2\output; */
 	xx_Vpan[9] = xx_Vpan[4];

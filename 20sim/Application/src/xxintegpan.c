@@ -67,7 +67,7 @@ void XXDiscreteSteppan (void)
 		xx_span [index] = xx_Rpan [index];
 	}
 	/* increment the simulation time */
-	xx_timepan += xx_step_sizepan;
+	// xx_timepan += xx_step_sizepan;
 
 	xx_majorpan = XXTRUE;
 

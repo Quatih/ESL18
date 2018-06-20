@@ -32,7 +32,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
-/* The pan encoder spans 1110 values which correspond to approximately Pi radians. */
+
+
+/* The pan encoder spans 2000 values which correspond to approximately Pi radians. */
 double ConvertRad(int32_t val)
 {
 	return ((double)val/2000.0) * M_PI;
@@ -73,6 +75,37 @@ uint32_t CheckOutput(uint32_t val)
 	return val;
 }
 
+
+
+void move2end(int fd){ 
+	reset();
+	printf("moving to end\n");
+	int32_t pan, tilt;
+	int32_t lp = 3000, lt = 3000; // defined out of range of encoders
+	bool pend = FALSE, tend = FALSE;
+	setGPMCValue(fd, ConvertPwm(-0.5), 4);
+	setGPMCValue(fd, ConvertPwm(-0.5), 6);
+
+	while(!(pend && tend)){ // terminate when both have gone to the end
+		usleep(2000);
+		pan = getGPMCValue(fd, 0);
+		tilt = getGPMCValue(fd, 2);
+		if (pan == lp) {
+			setGPMCValue(fd, 0, 4);
+			pend = TRUE;
+		}
+		if (tilt == lt) {
+			setGPMCValue(fd, 0, 6);
+			tend = TRUE;
+		}
+		lp = pan;
+		lt = tilt;
+	}
+	reset();
+}
+
+
+
 void reset(int fd) {
     setGPMCValue(fd, 1, 7);
 }
@@ -86,16 +119,15 @@ int main(int argc, char* argv[])
 	XXDouble utilt [3 + 1];
 	XXDouble ytilt [1 + 1];
 
-	int fd; // File descriptor.
-	if (2 != argc)
-	{
-	printf("Usage: %s <device_name>\n", argv[0]);
-	return 1;
-	}
-
+	// if (2 != argc)
+	// {
+	// printf("Usage: %s <device_name>\n", argv[0]);
+	// return 1;
+	// }
+	int fd;
 	// open connection to device.
 	printf("Opening gpmc_fpga...\n");
-	fd = open(argv[1], 0);
+	fd = open("/dev/gpmc_fpga", 0);
 	if (0 > fd)
 	{
 	printf("Error, could not open device: %s.\n", argv[1]);
@@ -111,8 +143,7 @@ int main(int argc, char* argv[])
 	ypan[1] = 0.0;		/* out */
 
 
-	/* Initialize the submodel itself */
-	XXInitializeSubmodelpan (upan, ypan, xx_timepan);
+
 
 
 /* Initialize the inputs and outputs with correct initial values */
@@ -122,9 +153,6 @@ int main(int argc, char* argv[])
 
 	ytilt[0] = 0.0;		/* out */
 
-
-	/* Initialize the submodel itself */
-	XXInitializeSubmodeltilt (utilt, ytilt, xx_timetilt);
 
 	/*int a, b;
 	while(1){
@@ -147,39 +175,50 @@ int main(int argc, char* argv[])
 	setGPMCValue(fd, 0, 4);		
 	setGPMCValue(fd, 0, 6);*/
 	//return 0;
-	/* Simple loop, the time is incremented by the integration method */
 	reset(fd);
+	move2end(fd);
+
+	
+	clock_t lastclk = clock()
+	clock_t clockdiff;
+	clock_t clk;
+	
+	
+	/* Initialize the submodel itself */
+	XXInitializeSubmodelpan (upan, ypan, (double)clock()/CLOCKS_PER_SEC);
+	/* Initialize the submodel itself */
+	XXInitializeSubmodeltilt (utilt, ytilt, (double)clock()/CLOCKS_PER_SEC);
 
 	while (1)
 	{
-		time = localtime(
-		timediff = time - lasttime;
-		if (timediff >= 0.01){
-			//Get and convert the decoder readings. 
-			upan[1] = ConvertRad(getGPMCValue(fd, 2)); 		
-			utilt[2] = ConvertRad(getGPMCValue(fd, 0)); 
-	
-			/* Call the submodel to calculate the output */
-			XXCalculateSubmodelpan (upan, ypan, xx_timepan);
-			XXCalculateSubmodeltilt (utilt, ytilt, xx_timetilt);
+		clk = clock();
+		// clockdiff = clk - lastclk;
+		// if (clockdiff >= (clock_t)((double)CLOCKS_PER_SEC*0.01)){
+		//Get and convert the decoder readings. 
+		upan[1] = ConvertRad(getGPMCValue(fd, 2)); 		
+		utilt[2] = ConvertRad(getGPMCValue(fd, 0)); 
 
-			//Convert, check and send the Motor steering values
-			//Mpan = CheckOutput(ConvertPWM(ypan[1]));
-			Mtilt = CheckOutput(ConvertPWM(ytilt[0]));
-			setGPMCValue(fd, Mtilt, 4);		
-			setGPMCValue(fd, Mtilt, 6);
-			//printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
-			//printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
-			//usleep(1000);
-		}
+		/* Call the submodel to calculate the output */
+		XXCalculateSubmodelpan (upan, ypan, (double)clk/CLOCKS_PER_SEC);
+		XXCalculateSubmodeltilt (utilt, ytilt, (double)clk/CLOCKS_PER_SEC);
+
+		//Convert, check and send the Motor steering values
+		Mpan = CheckOutput(ConvertPWM(ypan[1]));
+		Mtilt = CheckOutput(ConvertPWM(ytilt[0]));
+		setGPMCValue(fd, Mpan, 4);		
+		setGPMCValue(fd, Mtilt, 6);
+		//printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
+		//printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
+		//usleep(1000);
+	
+		// lastclk = clk;
 	}
 
 	/* Perform the final calculations */
 	XXTerminateSubmodelpan (upan, ypan, xx_timepan);
 	XXTerminateSubmodeltilt (utilt, ytilt, xx_timetilt);
+	close(fd);
 
-
-	/* and we are done */
 	return 0;
 }
 

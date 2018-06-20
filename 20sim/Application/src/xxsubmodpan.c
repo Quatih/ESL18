@@ -87,6 +87,7 @@ void XXInitializeSubmodelpan (XXDouble *u, XXDouble *y, XXDouble t)
 void XXCalculateSubmodelpan (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Copy the inputs */
+	xx_step_sizetilt = t - xx_timepan;
 	xx_timepan = t;
 	XXCopyInputsToVariablespan (u);
 

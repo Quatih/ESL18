@@ -87,6 +87,7 @@ void XXInitializeSubmodeltilt (XXDouble *u, XXDouble *y, XXDouble t)
 void XXCalculateSubmodeltilt (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Copy the inputs */
+	xx_step_sizetilt = t - xx_timetilt;
 	xx_timetilt = t;
 	XXCopyInputsToVariablestilt (u);
 

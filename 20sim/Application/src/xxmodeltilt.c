@@ -192,7 +192,7 @@ void XXCalculateDynamictilt (void)
 	xx_Vtilt[3] = 1.0 / (xx_step_sizetilt + xx_Ptilt[2] * xx_Ptilt[3]);
 
 	/* corrGain\input = corr; */
-	xx_Vtilt[0] = xx_Vtilt[8];
+	// xx_Vtilt[0] = xx_Vtilt[8];
 
 	/* PlusMinus2\plus1 = in; */
 	xx_Vtilt[5] = xx_Vtilt[9];
@@ -201,7 +201,7 @@ void XXCalculateDynamictilt (void)
 	xx_Vtilt[6] = xx_Vtilt[10];
 
 	/* corrGain\output = corrGain\K * corrGain\input; */
-	xx_Vtilt[1] = xx_Ptilt[0] * xx_Vtilt[0];
+	// xx_Vtilt[1] = xx_Ptilt[0] * xx_Vtilt[0];
 
 	/* PID1\error = PlusMinus2\plus1 - PlusMinus2\minus1; */
 	xx_Rtilt[1] = xx_Vtilt[5] - xx_Vtilt[6];
@@ -216,7 +216,7 @@ void XXCalculateDynamictilt (void)
 	xx_Vtilt[2] = xx_Rtilt[2] + xx_Rtilt[0];
 
 	/* PlusMinus1\output = corrGain\output + PID1\output; */
-	xx_Vtilt[4] = xx_Vtilt[1] + xx_Vtilt[2];
+	xx_Vtilt[4] = xx_Vtilt[2]; // xx_Vtilt[1] + 
 
 	/* SignalLimiter2\output = (if PlusMinus1\output < SignalLimiter2\minimum then SignalLimiter2\minimum else (if PlusMinus1\output > SignalLimiter2\maximum then SignalLimiter2\maximum else PlusMinus1\output end) end); */
 	xx_Vtilt[7] = ((xx_Vtilt[4] < xx_Ptilt[5]) ? 
