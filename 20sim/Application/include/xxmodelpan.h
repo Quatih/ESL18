@@ -35,11 +35,11 @@ extern XXBoolean xx_majorpan;
 extern XXBoolean xx_stop_simulationpan;
 
 /* Model size constants */
-#define xx_constants_size 0
-#define xx_parameters_size 7
-#define xx_initialvalues_size 3
-#define xx_variables_size 10
-#define xx_states_size 3
+#define xx_constants_sizepan 0
+#define xx_parameters_sizepan 7
+#define xx_initialvalues_sizepan 3
+#define xx_variables_sizepan 10
+#define xx_states_sizepan 3
 
 /* Variable arrays */
 extern XXDouble xx_Ppan[];

@@ -21,6 +21,7 @@ unsigned long getGPMCValue(int fd, int idx)
   struct gpmc_fpga_data temp;
   temp.offset = idx;
   int a = ioctl(fd, IOCTL_GET_U32, &temp);
+  if a < 0 printf("Error getting GPMC value\n");
   return temp.data;
 }
 
@@ -33,4 +34,5 @@ void setGPMCValue(int fd, unsigned int value, int idx)
   temp.offset = idx;
   // Set value.
   int a = ioctl(fd, IOCTL_SET_U32, &temp);
+  if a < 0 printf("Error setting GPMC value\n");
 }

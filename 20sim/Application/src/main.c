@@ -109,23 +109,19 @@ void reset() {
 void move2end(){ 
   reset(fd);
   printf("moving to end\n");
-  int32_t pan, tilt;
+  int32_t pan = getPan(), tilt = getTilt();
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-    setGPMCValue(ConvertPwm(-0.5), 4);
-  setGPMCValue(ConvertPwm(-0.5), 6);
+  setPan(ConvertPWM(-0.5));
+  setTilt(ConvertPWM(-0.5));
 
-  while(tilt != lt and pan != lp){ // terminate when both have gone to the end
+  while(tilt != lt && pan != lp){ // terminate when both have gone to the end
     usleep(2000);
-    pan = getPan();
-    tilt = getTilt();
-    if (pan == lp) {
-      pend = TRUE;
-    }
-    if (tilt == lt) {
-      tend = TRUE;
-    }
     lp = pan;
     lt = tilt;
+
+    pan = getPan();
+    tilt = getTilt();
+
   }
   setTilt(0);
   setPan(0);
