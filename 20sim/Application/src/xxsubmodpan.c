@@ -24,7 +24,7 @@
 /* The submodel I/O variables */
 XXInteger xx_number_of_inputspan = 2;
 XXInteger xx_number_of_outputspan = 2;
-
+extern XXDouble xx_step_sizepan;
 /* the names of the submodel io variables
    uncomment this part if you need these names
 XXString xx_input_names[] = {
