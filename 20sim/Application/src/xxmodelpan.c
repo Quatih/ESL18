@@ -52,11 +52,11 @@ XXBoolean xx_majorpan = XXTRUE;
 XXBoolean xx_stop_simulationpan = XXFALSE;
 
 /* the variable arrays */
-XXDouble xx_Ppan[xx_parameters_size];		/* parameters */
-XXDouble xx_Ipan[xx_initialvalues_size];		/* initial values */
-XXDouble xx_Vpan[xx_variables_size];		/* variables */
-XXDouble xx_span[xx_states_size];		/* states */
-XXDouble xx_Rpan[xx_states_size];		/* rates (or new states) */
+XXDouble xx_Ppan[xx_parameters_sizepan];		/* parameters */
+XXDouble xx_Ipan[xx_initialvalues_sizepan];		/* initial values */
+XXDouble xx_Vpan[xx_variables_sizepan];		/* variables */
+XXDouble xx_span[xx_states_sizepan];		/* states */
+XXDouble xx_Rpan[xx_states_sizepan];		/* rates (or new states) */
 
 /* the names of the variables as used in the arrays above
    uncomment this part if these names are needed
@@ -143,7 +143,7 @@ void XXModelInitialize_statespan(void)
 void XXModelInitialize_variablespan(void)
 {
 	/* initialize the variable memory to zero */
-	memset(xx_Vpan, 0, xx_variables_size * sizeof(XXDouble));
+	memset(xx_Vpan, 0, xx_variables_sizepan * sizeof(XXDouble));
 }
 
 /* this method is called before calculation is possible */
