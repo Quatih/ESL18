@@ -27,7 +27,6 @@
 /* Submodel I/O variables */
 extern XXInteger xx_number_of_inputstilt;
 extern XXInteger xx_number_of_outputstilt;
-
 /* The names of the variables as used in the arrays above */
 extern XXString xx_input_namestilt[];
 extern XXString xx_output_namestilt[];
