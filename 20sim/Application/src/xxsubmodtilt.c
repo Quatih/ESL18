@@ -24,6 +24,7 @@
 /* The submodel I/O variables */
 XXInteger xx_number_of_inputstilt = 3;
 XXInteger xx_number_of_outputstilt = 1;
+extern XXDouble xx_step_sizetilt;
 /* the names of the submodel io variables
    uncomment this part if you need these names
 XXString xx_input_namestilt[] = {

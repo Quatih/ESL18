@@ -24,6 +24,7 @@
 /* The submodel I/O variables */
 XXInteger xx_number_of_inputspan = 2;
 XXInteger xx_number_of_outputspan = 2;
+extern XXDouble xx_step_sizetilt;
 /* the names of the submodel io variables
    uncomment this part if you need these names
 XXString xx_input_names[] = {
@@ -86,7 +87,7 @@ void XXInitializeSubmodelpan (XXDouble *u, XXDouble *y, XXDouble t)
 void XXCalculateSubmodelpan (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Copy the inputs */
-	xx_step_sizetilt = t - xx_timepan;
+	xx_step_sizepan = t - xx_timepan;
 	xx_timepan = t;
 	XXCopyInputsToVariablespan (u);
 
