@@ -27,6 +27,7 @@
 /* Submodel I/O variables */
 extern XXInteger xx_number_of_inputspan;
 extern XXInteger xx_number_of_outputspan;
+extern XXDouble xx_step_sizepan;
 
 /* The names of the variables as used in the arrays above */
 extern XXString xx_input_namespan[];
