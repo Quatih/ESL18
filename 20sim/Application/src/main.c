@@ -22,10 +22,22 @@
  */
 
 /* 20-sim include files */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "xxsubmodpan.h"
 #include "xxsubmodtilt.h"
-#include "stdio.h"
+
 #include "gpmc_driver_c.h"
+// all of your legacy C code here
+
+#ifdef __cplusplus
+}
+
+#endif
+
+#include "stdio.h"
 #include <math.h>
 #include <fcntl.h>      // open()
 #include <unistd.h>     // close()
@@ -36,25 +48,39 @@
 #define pan_max 1110.0
 #define tilt_max 309.0
 
-#define getPan(fd) getGPMCValue(fd, 2)
-#define getTilt(fd) getGPMCValue(fd, 0)
-#define setPan(fd, val) getGPMCValue(fd, val, 6)
-#define setTilt(fd, val) getGPMCValue(fd, val, 4)
+// GPMC file descriptor
+int fd; 
 
-#define setPanIn(encval) upan[0] = ConvertRad(pos, pan_max)
-#define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
+#define getPan() getGPMCValue(fd, 2)
+#define getTilt() getGPMCValue(fd, 0)
+#define setPan(val) setGPMCValue(fd, val, 6)
+#define setTilt(val) setGPMCValue(fd, val, 4)
 
-#define setTiltIn(encval) utilt[1] = ConvertRad(pos, pan_max)
-#define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
-
+// returns the current run-time, hopefully
 #define curr_time (double) clock()/CLOCKS_PER_SEC
+
+
+
 /* The pan encoder spans 2000 values which correspond to approximately Pi radians. */
 double ConvertRad(int32_t val, double max)
 {
 	return ((double)val/max) * M_PI;
 }
+void setPanIn(encval) {
+	upan[0] = ConvertRad(encval, pan_max);
+}
+void setPanPos(pos) {
+	upan[1] = ConvertRad(pos, pan_max);
+}
 
-/* According to 20SIM, the output is a signal between -20 and 20. 
+void setTiltIn(encval) {
+	utilt[1] = ConvertRad(encval, pan_max);
+}
+void setTiltPos(pos){ 
+	utilt[2] = ConvertRad(pos, tilt_max);
+}
+
+/* According to 20SIM, the output is a signal between -1.0 and 1.0. 
 This output must be converted to a PWM output between 0 and 250 
 and a direction according to a truthtable. */
 uint32_t ConvertPWM(double val)
@@ -84,37 +110,35 @@ uint32_t ConvertPWM(double val)
 	return ret_val;
 }
 
-void move2end(int fd){ 
-	reset();
+void reset() {
+    setGPMCValue(fd, 1, 7);
+}
+
+void move2end(){ 
+	reset(fd);
 	printf("moving to end\n");
 	int32_t pan, tilt;
 	int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-	bool pend = FALSE, tend = FALSE;
-	setGPMCValue(fd, ConvertPwm(-0.5), 4);
-	setGPMCValue(fd, ConvertPwm(-0.5), 6);
+	bool pend = FALSE, tend = FALSE; // use these to stop either motor after it reaches end
+	setGPMCValue(ConvertPwm(-0.5), 4);
+	setGPMCValue(ConvertPwm(-0.5), 6);
 
 	while(!(pend && tend)){ // terminate when both have gone to the end
 		usleep(2000);
-		pan = getGPMCValue(fd, 2);
-		tilt = getGPMCValue(fd, 0);
+		pan = getPan();
+		tilt = getTilt();
 		if (pan == lp) {
-			setGPMCValue(fd, 0, 6);
+			setPan(fd, 0)
 			pend = TRUE;
 		}
 		if (tilt == lt) {
-			setGPMCValue(fd, 0, 4);
+			setTilt(fd, 0);
 			tend = TRUE;
 		}
 		lp = pan;
 		lt = tilt;
 	}
-	reset();
-}
-
-
-
-void reset(int fd) {
-    setGPMCValue(fd, 1, 7);
+	reset(fd);
 }
 
 /* The main function */
@@ -126,7 +150,6 @@ int main(int argc, char* argv[])
 	XXDouble utilt [3 + 1];
 	XXDouble ytilt [1 + 1];
 
-	int fd;
 	// open connection to device.
 	printf("Opening gpmc_fpga...\n");
 	fd = open("/dev/gpmc_fpga", 0);
@@ -135,7 +158,6 @@ int main(int argc, char* argv[])
 	printf("Error, could not open device: %s.\n", argv[1]);
 	return 1;
 	}
-	
 
 	/* Initialize the inputs and outputs with correct initial values */
 	upan[0] = 0.0;		/* in */
@@ -151,7 +173,6 @@ int main(int argc, char* argv[])
 
 	ytilt[0] = 0.0;		/* out */
 
-
 	/*int a, b;
 	while(1){
 		a = getGPMCValue(fd, 0);
@@ -165,16 +186,16 @@ int main(int argc, char* argv[])
 		}
 	}*/
 
-	reset(fd);
-	move2end(fd);
+	reset();
+	move2end();
 	
 	// set the target to the middle value of the range of motion
 	setPanPos(pan_max/2);
 	setTiltPos(tilt_max/2);
 	
-	clock_t lastclk = clock()
-	clock_t clockdiff;
-	clock_t clk;
+	// clock_t lastclk = clock()
+	// clock_t clockdiff;
+	// clock_t clk;
 	
 	
 	/* Initialize the submodel itself */
@@ -187,8 +208,8 @@ int main(int argc, char* argv[])
 		// clockdiff = clk - lastclk;
 		// if (clockdiff >= (clock_t)((double)CLOCKS_PER_SEC*0.01)){
 		//Get and convert the decoder readings. 
-		setPanIn(getPan(fd)); 		
-		setTiltIn(getTilt(fd)); 
+		setPanIn(getPan()); 		
+		setTiltIn(getTilt()); 
 
 		/* Call the submodel to calculate the output */
 		XXCalculateSubmodelpan (upan, ypan, curr_time);
@@ -197,8 +218,8 @@ int main(int argc, char* argv[])
 		//Convert, check and send the Motor steering values
 		Mpan = ConvertPWM(ypan[1]);
 		Mtilt = ConvertPWM(ytilt[0]);
-		setPan(fd, Mpan);		
-		setTilt(fd, Mtilt);
+		setPan(Mpan);		
+		setTilt(Mtilt);
 
 		//printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
 		//printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
