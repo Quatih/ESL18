@@ -65,21 +65,12 @@ double ConvertRad(int32_t val, double max)
   return ((double)val/max) * M_PI;
 }
 
-void setPanIn(encval) {
-  upan[0] = ConvertRad(encval, pan_max);
-}
+#define setPanIn(encval) upan[0] = ConvertRad(encval, pan_max)
+#define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
 
-void setPanPos(pos) {
-  upan[1] = ConvertRad(pos, pan_max);
-}
+#define setTiltIn(encval) utilt[1] = ConvertRad(encval, pan_max)
+#define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
 
-void setTiltIn(encval) {
-  utilt[1] = ConvertRad(encval, pan_max);
-}
-
-void setTiltPos(pos){ 
-  utilt[2] = ConvertRad(pos, tilt_max);
-}
 
 /* According to 20SIM, the output is a signal between -1.0 and 1.0. 
 This output must be converted to a PWM output between 0 and 250 
@@ -120,25 +111,24 @@ void move2end(){
   printf("moving to end\n");
   int32_t pan, tilt;
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-  bool pend = FALSE, tend = FALSE; // use these to stop either motor after it reaches end
-  setGPMCValue(ConvertPwm(-0.5), 4);
+    setGPMCValue(ConvertPwm(-0.5), 4);
   setGPMCValue(ConvertPwm(-0.5), 6);
 
-  while(!(pend && tend)){ // terminate when both have gone to the end
+  while(tilt != lt and pan != lp){ // terminate when both have gone to the end
     usleep(2000);
     pan = getPan();
     tilt = getTilt();
     if (pan == lp) {
-      setPan(fd, 0)
       pend = TRUE;
     }
     if (tilt == lt) {
-      setTilt(fd, 0);
       tend = TRUE;
     }
     lp = pan;
     lt = tilt;
   }
+  setTilt(0);
+  setPan(0);
   reset(fd);
 }
 
@@ -200,7 +190,7 @@ int main(int argc, char* argv[])
   
   
   /* Initialize the submodel itself */
-  XXInitializeSubmodelpan (upan, ypan, curr_time;
+  XXInitializeSubmodelpan (upan, ypan, curr_time);
   /* Initialize the submodel itself */
   XXInitializeSubmodeltilt (utilt, ytilt, curr_time);
 
