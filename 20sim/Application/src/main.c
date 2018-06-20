@@ -21,11 +21,11 @@
  * NOT WORK CORRECTLY WITH INPUTS THAT ARE ZERO.
  */
 
-/* 20-sim include files */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+/* 20-sim include files */
 #include "xxsubmodpan.h"
 #include "xxsubmodtilt.h"
 
@@ -43,7 +43,7 @@ extern "C" {
 #include <unistd.h>     // close()
 #include <stdint.h>
 #include <stdlib.h>
-#include <time.h>
+#include <time.h> // clock()
 
 #define pan_max 1110.0
 #define tilt_max 309.0
@@ -59,25 +59,26 @@ int fd;
 // returns the current run-time, hopefully
 #define curr_time (double) clock()/CLOCKS_PER_SEC
 
-
-
 /* The pan encoder spans 2000 values which correspond to approximately Pi radians. */
 double ConvertRad(int32_t val, double max)
 {
-	return ((double)val/max) * M_PI;
+  return ((double)val/max) * M_PI;
 }
+
 void setPanIn(encval) {
-	upan[0] = ConvertRad(encval, pan_max);
+  upan[0] = ConvertRad(encval, pan_max);
 }
+
 void setPanPos(pos) {
-	upan[1] = ConvertRad(pos, pan_max);
+  upan[1] = ConvertRad(pos, pan_max);
 }
 
 void setTiltIn(encval) {
-	utilt[1] = ConvertRad(encval, pan_max);
+  utilt[1] = ConvertRad(encval, pan_max);
 }
+
 void setTiltPos(pos){ 
-	utilt[2] = ConvertRad(pos, tilt_max);
+  utilt[2] = ConvertRad(pos, tilt_max);
 }
 
 /* According to 20SIM, the output is a signal between -1.0 and 1.0. 
@@ -85,29 +86,29 @@ This output must be converted to a PWM output between 0 and 250
 and a direction according to a truthtable. */
 uint32_t ConvertPWM(double val)
 {
-	//Brake
-	if(val == 0)
-		return 0;
-	
-	uint32_t ret_val = 0;
-	double ch = abs(val * 250.0);
-	//printf("%f, %f\n", val, ch);
-	ret_val = (uint32_t) (ch);
-	//Clockwise
-	if(val > 0)
-	{
-		//INA = 1;
-		//INB = 0;
-		ret_val |= 0x01 << 8;
-	}
-	//Counterclockwise
-	else
-	{
-		//INA = 0;
-		//INB = 1;
-		ret_val |= 0x02 << 8;
-	}
-	return ret_val;
+  //Brake
+  if(val == 0)
+    return 0;
+  
+  uint32_t ret_val = 0;
+  double ch = abs(val * 250.0);
+  //printf("%f, %f\n", val, ch);
+  ret_val = (uint32_t) (ch);
+  //Clockwise
+  if(val > 0)
+  {
+    //INA = 1;
+    //INB = 0;
+    ret_val |= 0x01 << 8;
+  }
+  //Counterclockwise
+  else
+  {
+    //INA = 0;
+    //INB = 1;
+    ret_val |= 0x02 << 8;
+  }
+  return ret_val;
 }
 
 void reset() {
@@ -115,124 +116,124 @@ void reset() {
 }
 
 void move2end(){ 
-	reset(fd);
-	printf("moving to end\n");
-	int32_t pan, tilt;
-	int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-	bool pend = FALSE, tend = FALSE; // use these to stop either motor after it reaches end
-	setGPMCValue(ConvertPwm(-0.5), 4);
-	setGPMCValue(ConvertPwm(-0.5), 6);
+  reset(fd);
+  printf("moving to end\n");
+  int32_t pan, tilt;
+  int32_t lp = 3000, lt = 3000; // defined out of range of encoders
+  bool pend = FALSE, tend = FALSE; // use these to stop either motor after it reaches end
+  setGPMCValue(ConvertPwm(-0.5), 4);
+  setGPMCValue(ConvertPwm(-0.5), 6);
 
-	while(!(pend && tend)){ // terminate when both have gone to the end
-		usleep(2000);
-		pan = getPan();
-		tilt = getTilt();
-		if (pan == lp) {
-			setPan(fd, 0)
-			pend = TRUE;
-		}
-		if (tilt == lt) {
-			setTilt(fd, 0);
-			tend = TRUE;
-		}
-		lp = pan;
-		lt = tilt;
-	}
-	reset(fd);
+  while(!(pend && tend)){ // terminate when both have gone to the end
+    usleep(2000);
+    pan = getPan();
+    tilt = getTilt();
+    if (pan == lp) {
+      setPan(fd, 0)
+      pend = TRUE;
+    }
+    if (tilt == lt) {
+      setTilt(fd, 0);
+      tend = TRUE;
+    }
+    lp = pan;
+    lt = tilt;
+  }
+  reset(fd);
 }
 
 /* The main function */
 int main(int argc, char* argv[])
 {
-	uint32_t Mpan = 0, Mtilt = 0;
-	XXDouble upan [2 + 1];
-	XXDouble ypan [2 + 1];
-	XXDouble utilt [3 + 1];
-	XXDouble ytilt [1 + 1];
+  uint32_t Mpan = 0, Mtilt = 0;
+  XXDouble upan [2 + 1];
+  XXDouble ypan [2 + 1];
+  XXDouble utilt [3 + 1];
+  XXDouble ytilt [1 + 1];
 
-	// open connection to device.
-	printf("Opening gpmc_fpga...\n");
-	fd = open("/dev/gpmc_fpga", 0);
-	if (0 > fd)
-	{
-	printf("Error, could not open device: %s.\n", argv[1]);
-	return 1;
-	}
+  // open connection to device.
+  printf("Opening gpmc_fpga...\n");
+  fd = open("/dev/gpmc_fpga", 0);
+  if (0 > fd)
+  {
+  printf("Error, could not open device: %s.\n", argv[1]);
+  return 1;
+  }
 
-	/* Initialize the inputs and outputs with correct initial values */
-	upan[0] = 0.0;		/* in */
-	upan[1] = 0.0;		/* position */
+  /* Initialize the inputs and outputs with correct initial values */
+  upan[0] = 0.0;		/* in */
+  upan[1] = 0.0;		/* position */
 
-	ypan[0] = 0.0;		/* corr */
-	ypan[1] = 0.0;		/* out */
+  ypan[0] = 0.0;		/* corr */
+  ypan[1] = 0.0;		/* out */
 
 /* Initialize the inputs and outputs with correct initial values */
-	utilt[0] = 0.0;		/* corr */
-	utilt[1] = 0.0;		/* in */
-	utilt[2] = 0.0;		/* position */
+  utilt[0] = 0.0;		/* corr */
+  utilt[1] = 0.0;		/* in */
+  utilt[2] = 0.0;		/* position */
 
-	ytilt[0] = 0.0;		/* out */
+  ytilt[0] = 0.0;		/* out */
 
-	/*int a, b;
-	while(1){
-		a = getGPMCValue(fd, 0);
-		b = getGPMCValue(fd, 2);
-		setGPMCValue(fd,0,6);
-		//printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
-		printf("RAW: %7d %7d\r", a,b); 
-		usleep(1000);
-		if(b >100 || b < -100) {
-		  setGPMCValue(fd, 1, 7);
-		}
-	}*/
+  /*int a, b;
+  while(1){
+    a = getGPMCValue(fd, 0);
+    b = getGPMCValue(fd, 2);
+    setGPMCValue(fd,0,6);
+    //printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
+    printf("RAW: %7d %7d\r", a,b); 
+    usleep(1000);
+    if(b >100 || b < -100) {
+      setGPMCValue(fd, 1, 7);
+    }
+  }*/
 
-	reset();
-	move2end();
-	
-	// set the target to the middle value of the range of motion
-	setPanPos(pan_max/2);
-	setTiltPos(tilt_max/2);
-	
-	// clock_t lastclk = clock()
-	// clock_t clockdiff;
-	// clock_t clk;
-	
-	
-	/* Initialize the submodel itself */
-	XXInitializeSubmodelpan (upan, ypan, curr_time;
-	/* Initialize the submodel itself */
-	XXInitializeSubmodeltilt (utilt, ytilt, curr_time);
+  reset();
+  move2end();
+  
+  // set the target to the middle value of the range of motion
+  setPanPos(pan_max/2);
+  setTiltPos(tilt_max/2);
+  
+  // clock_t lastclk = clock()
+  // clock_t clockdiff;
+  // clock_t clk;
+  
+  
+  /* Initialize the submodel itself */
+  XXInitializeSubmodelpan (upan, ypan, curr_time;
+  /* Initialize the submodel itself */
+  XXInitializeSubmodeltilt (utilt, ytilt, curr_time);
 
-	while (1)
-	{
-		// clockdiff = clk - lastclk;
-		// if (clockdiff >= (clock_t)((double)CLOCKS_PER_SEC*0.01)){
-		//Get and convert the decoder readings. 
-		setPanIn(getPan()); 		
-		setTiltIn(getTilt()); 
+  while (1)
+  {
+    // clockdiff = clk - lastclk;
+    // if (clockdiff >= (clock_t)((double)CLOCKS_PER_SEC*0.01)){
+    //Get and convert the decoder readings. 
+    setPanIn(getPan()); 		
+    setTiltIn(getTilt()); 
 
-		/* Call the submodel to calculate the output */
-		XXCalculateSubmodelpan (upan, ypan, curr_time);
-		XXCalculateSubmodeltilt (utilt, ytilt, curr_time);
+    /* Call the submodel to calculate the output */
+    XXCalculateSubmodelpan (upan, ypan, curr_time);
+    XXCalculateSubmodeltilt (utilt, ytilt, curr_time);
 
-		//Convert, check and send the Motor steering values
-		Mpan = ConvertPWM(ypan[1]);
-		Mtilt = ConvertPWM(ytilt[0]);
-		setPan(Mpan);		
-		setTilt(Mtilt);
+    //Convert, check and send the Motor steering values
+    Mpan = ConvertPWM(ypan[1]);
+    Mtilt = ConvertPWM(ytilt[0]);
+    setPan(Mpan);		
+    setTilt(Mtilt);
 
-		//printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
-		//printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
-		//usleep(1000);
-	
-		// lastclk = clk;
-	}
+    //printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
+    //printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
+    //usleep(1000);
+  
+    // lastclk = clk;
+  }
 
-	/* Perform the final calculations */
-	XXTerminateSubmodelpan (upan, ypan, xx_timepan);
-	XXTerminateSubmodeltilt (utilt, ytilt, xx_timetilt);
-	close(fd);
+  /* Perform the final calculations */
+  XXTerminateSubmodelpan (upan, ypan, curr_time);
+  XXTerminateSubmodeltilt (utilt, ytilt, curr_time);
+  close(fd);
 
-	return 0;
+  return 0;
 }
 
