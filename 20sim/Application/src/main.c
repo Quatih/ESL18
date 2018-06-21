@@ -28,16 +28,14 @@ extern "C" {
 /* 20-sim include files */
 #include "xxsubmodpan.h"
 #include "xxsubmodtilt.h"
-
 #include "gpmc_driver_c.h"
-// all of your legacy C code here
 
 #ifdef __cplusplus
 }
 
 #endif
 
-#include "stdio.h"
+#include <stdio.h>
 #include <math.h>
 #include <fcntl.h>      // open()
 #include <unistd.h>     // close()
@@ -207,7 +205,12 @@ int main(int argc, char* argv[])
     Mtilt = ConvertPWM(ytilt[0]);
     setPan(Mpan);		
     setTilt(Mtilt);
-
+    if(abs(utilt[2] - utilt[1]) <= 0.05 && abs(upan[1] - upan[0]) <= 0.05){
+      printf("position met");
+      setPan(0);
+      setTilt(0);
+      break;
+    }
     //printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
     //printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
     //usleep(1000);
