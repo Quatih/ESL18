@@ -9,6 +9,7 @@
 #include <opencv/cv.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <thread>
 #include <iostream>
@@ -20,8 +21,6 @@
 
 #define FRAMESIZE 115200//WIDTH*HEIGHT*2
 
-#define MARGIN 50
-
 using namespace cv;
 using namespace std;
 
@@ -30,15 +29,14 @@ Mat imtoshow, imtoshow1;
 bool LOCK;
 
 
-
 /* Structure to contain all our information, so we can pass it to callbacks */
 typedef struct _CustomData {
   GstElement *pipeline, *driver, *capsfilter, *mux, *appsink;
 GstElement *pipeline1, *appsource, *capsfilter1,  *queue, *videoconvert, *fpssink;
 
   guint64 num_samples;   /* Number of samples generated so far (for timestamp generation) */
-	GstBuffer *buffer;
-	uint16_t frame[160*120];
+  GstBuffer *buffer;
+  uint16_t frame[160*120];
 
   guint sourceid;        /* To control the GSource */
 
@@ -62,11 +60,11 @@ static gboolean push_data (CustomData *data) {
 
   static GstClockTime timestamp = 0;
 
-	guint size;
+  guint size;
 
   size= FRAMESIZE;
-	uint16_t frame[WIDTH*HEIGHT];
-	queue_pop(&frames, &frame);
+  uint16_t frame[WIDTH*HEIGHT];
+  queue_pop(&frames, &frame);
   buffer = gst_buffer_new_wrapped_full((GstMemoryFlags) 0, frame, size, 0, size, NULL, NULL );
 
 
@@ -91,16 +89,15 @@ g_print("Error\n");
 
 void showfeed(void)
 {
-  //namedWindow("window");
-  //namedWindow("window1");
-  //usleep(5000000);
+  namedWindow("window");
+  namedWindow("window1");
+  usleep(5000000);
 
   while(1)
   {
     while(LOCK);
     imshow("window", imtoshow);
     imshow("window1", imtoshow1);
-imwrite("test.png", imtoshow);
     //waitKey(1);
     LOCK = true;
     //waitKey(33);
@@ -125,19 +122,21 @@ g_print("*");
 Mat img_rgb, img_th, img_hsv, img1, img2;
 Mat img(HEIGHT, WIDTH, CV_8UC2, info.data);
 
-cvtColor(img, img_rgb, CV_YUV2BGR_YUY2);
-cvtColor(img_rgb, img_hsv, CV_BGR2HSV);
 
+
+cvtColor(img, img_rgb, CV_YUV2BGR_YUY2);
+
+cvtColor(img_rgb, img_hsv, CV_BGR2HSV);
+//imwrite("img1.png", img_rgb);
 vector<vector<Point>> contours;
 vector<Vec4i> hierarchy;
-Point Center;
 
 
-inRange(img_hsv, Scalar(90, 130, 130), Scalar(140, 255,  255), img1);
+inRange(img_hsv, Scalar(90, 100, 100), Scalar(140, 255,  255), img1);
 
 Mat Elem = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
 morphologyEx(img1, img1, MORPH_OPEN, Elem);
-g_print("*");
+
 findContours(img1, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 
 int largest_area=0;
@@ -153,33 +152,13 @@ for( int i = 0; i< contours.size(); i++ ) // iterate through each contour.
      }
    }
 
-Rect r = boundingRect(contours[largest_contour_index]);
-Center.x = r.x+r.width/2;
-Center.y = r.y+r.height/2;
-
 Scalar color( 255,255,255);
-drawContours(img_rgb, contours,largest_contour_index, color, 1, 8, hierarchy);
-circle(img_rgb, Center, 2, color, -1, 8, 0);
+drawContours( img_rgb, contours,largest_contour_index, color, 1, 8, hierarchy );
 
-//Determine motor directions
-if(Center.x < WIDTH/2 - MARGIN)
-	printf("Turn Pan left\r\n");
-else if(Center.x > WIDTH/2 + MARGIN)
-	printf("Turn Pan right\r\n");
-else
-	printf("Stop turning Pan\r\n");
-if(Center.y  < HEIGHT/2 - MARGIN)
-	printf("Turn Tilt up\r\n");
-else if(Center.y > HEIGHT/2 + MARGIN)
-	printf("Turn Tilt down\r\n");
-else
-	printf("Stop turning Tilt\r\n"); 
-
-
-imwrite("img1.png", img_rgb);
+//imwrite("img1.png", img_rgb);
 cvtColor(img1, img1, CV_GRAY2BGR);
 bitwise_and(img_rgb, img1, img2);
-g_print("*");
+
 
 while(!LOCK);
 imtoshow = img_rgb;
@@ -200,10 +179,10 @@ g_print("*");
 /**/
 //g_print("Size: %d\r\n", strlen((const char *)img1.data));
 
-		//queue_push(&frames, img1.data);
+    //queue_push(&frames, img1.data);
     /* The only thing we do in this example is print a * to indicate a received buffer */
     //g_print ("Size %d\n", info.size);
-		
+    
     gst_sample_unref (sample);
     ret = GST_FLOW_OK;
   }
@@ -277,8 +256,8 @@ int main (int   argc,
       char *argv[])
 {
   GMainLoop *loop, *loop1;
-	CustomData data;
-	data.sourceid = 0;
+  CustomData data;
+  data.sourceid = 0;
 
   GstBus *bus, *bus1;
   guint bus_watch_id, bus_watch_id1;
@@ -287,7 +266,7 @@ int main (int   argc,
   gst_init (&argc, &argv);
 
   loop = g_main_loop_new (NULL, FALSE);
-	loop1 = g_main_loop_new (NULL, FALSE);
+  loop1 = g_main_loop_new (NULL, FALSE);
 
 LOCK = true;
 
@@ -297,20 +276,20 @@ std::thread feed(showfeed);
 queue_init(&frames, 5, FRAMESIZE);
 
   /* Create gstreamer elements */
-	data.pipeline = gst_pipeline_new("Webcam-stream");
+  data.pipeline = gst_pipeline_new("Webcam-stream");
   data.pipeline1 = gst_pipeline_new("Webcam-stream");
   data.driver = gst_element_factory_make("v4l2src", "Video4linux2source");
-	data.queue = gst_element_factory_make ("queue", "video_queue");
+  data.queue = gst_element_factory_make ("queue", "video_queue");
   data.capsfilter = gst_element_factory_make("capsfilter", "caps-filter");
-	data.capsfilter1 = gst_element_factory_make("capsfilter", "caps-filter");
+  data.capsfilter1 = gst_element_factory_make("capsfilter", "caps-filter");
   data.mux = gst_element_factory_make("avimux", "avi-mux");
   data.appsink = gst_element_factory_make ("appsink", "video-output");
-	data.appsource = gst_element_factory_make ("appsrc", "video-input");
+  data.appsource = gst_element_factory_make ("appsrc", "video-input");
   data.videoconvert = gst_element_factory_make("videoconvert", "vid-conv");
-	data.fpssink = gst_element_factory_make("fpsdisplaysink", "output");
-	
+  data.fpssink = gst_element_factory_make("fpsdisplaysink", "output");
+  
 
-  if (!data.pipeline || !data.pipeline1 || !data.queue || !data.driver || !data.capsfilter || !data.mux || !data.appsink) {
+  if (!data.pipeline || !data.pipeline1 || !data.queue || !data.driver || !data.capsfilter || !data.mux || !data.appsink || !data.appsource || !data.videoconvert || !data.fpssink) {
     g_printerr ("One element could not be created. Exiting.\n");
     return -1;
   }
@@ -321,9 +300,9 @@ queue_init(&frames, 5, FRAMESIZE);
 
   /* we add a message handler */
   bus = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline));
-	bus1 = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline1)); 
+  bus1 = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline1)); 
  bus_watch_id = gst_bus_add_watch (bus, bus_call, loop);
-	bus_watch_id1 = gst_bus_add_watch (bus1, bus_call, loop1);
+  bus_watch_id1 = gst_bus_add_watch (bus1, bus_call, loop1);
   gst_object_unref (bus);
   gst_object_unref (bus1);
 
@@ -346,10 +325,10 @@ queue_init(&frames, 5, FRAMESIZE);
   g_object_set(G_OBJECT(data.capsfilter), "caps", caps, NULL);
  g_object_set(G_OBJECT(data.capsfilter1), "caps", caps, NULL);
 
-	/*Configure the appsource*/
- // g_object_set (data.appsource, "caps", caps, NULL);
-//g_signal_connect (data.appsource, "need-data", G_CALLBACK (start_feed), &data);
-//  g_signal_connect (data.appsource, "enough-data", G_CALLBACK (stop_feed), &data);
+  /*Configure the appsource*/
+  g_object_set (data.appsource, "caps", caps, NULL);
+g_signal_connect (data.appsource, "need-data", G_CALLBACK (start_feed), &data);
+  g_signal_connect (data.appsource, "enough-data", G_CALLBACK (stop_feed), &data);
 
   /* Configure appsink */
   g_object_set (data.appsink, "emit-signals", TRUE, "caps", caps, NULL);
@@ -359,8 +338,8 @@ queue_init(&frames, 5, FRAMESIZE);
 
   gst_bin_add_many (GST_BIN (data.pipeline), data.driver, data.capsfilter, data.queue, data.appsink, NULL);
   gst_element_link_many (data.driver, data.capsfilter, data.appsink, NULL); 
-  //gst_bin_add_many (GST_BIN (data.pipeline1), data.appsource, data.capsfilter1, data.fpssink, NULL);
-  //gst_element_link_many ( data.appsource, data.capsfilter1, data.fpssink, NULL);
+  gst_bin_add_many (GST_BIN (data.pipeline1), data.appsource, data.capsfilter1, data.fpssink, NULL);
+  gst_element_link_many ( data.appsource, data.capsfilter1, data.fpssink, NULL);
 
 
 
@@ -369,26 +348,26 @@ queue_init(&frames, 5, FRAMESIZE);
   /* Set the pipeline to "playing" state*/
   // g_print ("Now playing: %s\n", argv[1]);
   gst_element_set_state (data.pipeline, GST_STATE_PLAYING);
-	//gst_element_set_state (data.pipeline1, GST_STATE_PLAYING);
+  //gst_element_set_state (data.pipeline1, GST_STATE_PLAYING);
 
   /* Iterate */
   g_print ("Running...\n");
   g_main_loop_run (loop);
-	//g_main_loop_run (loop1);
+  //g_main_loop_run (loop1);
 
 
   /* Out of the main loop, clean up nicely */
   g_print ("Returned, stopping playback\n");
   gst_element_set_state (data.pipeline, GST_STATE_NULL);
-	//gst_element_set_state (data.pipeline1, GST_STATE_NULL);
+  //gst_element_set_state (data.pipeline1, GST_STATE_NULL);
 
   g_print ("Deleting pipeline\n");
   gst_object_unref (GST_OBJECT (data.pipeline));
-	//gst_object_unref (GST_OBJECT (data.pipeline1));
+  //gst_object_unref (GST_OBJECT (data.pipeline1));
   g_source_remove (bus_watch_id);
   g_main_loop_unref (loop);
 
-	//g_source_remove (bus_watch_id1);
+  //g_source_remove (bus_watch_id1);
   //g_main_loop_unref (loop1);
   return 0;
 }
