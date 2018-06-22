@@ -56,6 +56,12 @@ int fd;
 // returns the current run-time, hopefully
 #define curr_time (double) clock()/CLOCKS_PER_SEC
 
+struct modelvars {
+  XXDouble upan [2 + 1];
+  XXDouble ypan [2 + 1];
+  XXDouble utilt [3 + 1];
+  XXDouble ytilt [1 + 1];
+}
 /* The pan encoder spans 2000 values which correspond to approximately Pi radians. */
 double ConvertRad(int32_t val, double max)
 {
@@ -63,8 +69,9 @@ double ConvertRad(int32_t val, double max)
 }
 
 #define setPanIn(encval) upan[0] = ConvertRad(encval, pan_max)
-#define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
-
+void setPanPos(struct modelvars * model, double pos){
+  model.upan[1] = ConvertRad(pos, pan_max);
+} 
 #define setTiltIn(encval) utilt[1] = ConvertRad(encval, pan_max)
 #define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
 
@@ -130,10 +137,7 @@ void stop(){
   setTilt(0);
 }
 
-/* The main function */
-int main(int argc, char* argv[])
-{
-  uint32_t Mpan = 0, Mtilt = 0;
+modelvars initializeModel(){
   XXDouble upan [2 + 1];
   XXDouble ypan [2 + 1];
   XXDouble utilt [3 + 1];
@@ -162,24 +166,22 @@ int main(int argc, char* argv[])
 
   ytilt[0] = 0.0;		/* out */
 
-  /*int a, b;
-  while(1){
-    a = getGPMCValue(fd, 0);
-    b = getGPMCValue(fd, 2);
-    setGPMCValue(fd,0,6);
-    //printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
-    printf("RAW: %7d %7d\r", a,b); 
-    usleep(1000);
-    if(b >100 || b < -100) {
-      setGPMCValue(fd, 1, 7);
-    }
-  }*/
+  move2end();
+  struct modelvars ret = {upan, ypan, utilt, ytilt};
+  return ret; 
+}
+
+/* The main function */
+int main(int argc, char* argv[])
+{
+  uint32_t Mpan = 0, Mtilt = 0;
+  struct modelvars model = initializeModel()
 
   reset();
   move2end();
   
   // set the target to the middle value of the range of motion
-  setPanPos(pan_max/2);
+  setPanPos(struct modelvars * model, pan_max/2);
   setTiltPos(tilt_max/2);
   
   // clock_t lastclk = clock()
