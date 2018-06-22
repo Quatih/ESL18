@@ -30,7 +30,7 @@ public:
   void init();
   void resetEncoders();
   void move2end();
-  
+  void loop(uint32_t xpixels, uint32_t ypixels);
 
   
 }

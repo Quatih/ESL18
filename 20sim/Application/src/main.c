@@ -41,7 +41,7 @@ extern "C" {
 #include <stdint.h>
 #include <stdlib.h>
 #include <time.h> // clock()
-
+#include <stdbool.h>
 #define pan_max 1110.0
 #define tilt_max 309.0
 
@@ -65,7 +65,7 @@ double ConvertRad(int32_t val, double max)
 #define setPanIn(encval) upan[0] = ConvertRad(encval, pan_max)
 #define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
 
-#define setTiltIn(encval) utilt[1] = ConvertRad(encval, pan_max)
+#define setTiltIn(encval) utilt[1] = ConvertRad(encval, tilt_max)
 #define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
 
 
@@ -83,7 +83,7 @@ uint32_t ConvertPWM(double val)
   //printf("%f, %f\n", val, ch);
   ret_val = (uint32_t) (ch);
   //Clockwise
-  if(val > 0)
+  if(val < 0)
   {
     //INA = 1;
     //INB = 0;
@@ -105,24 +105,39 @@ void reset() {
 
 void move2end(){ 
   reset();
+
   printf("moving to end\n");
+  printf("%7d, %7d\r\n", getTilt(), getPan());
   int32_t pan = getPan(), tilt = getTilt();
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-  setPan(ConvertPWM(-0.5));
-  setTilt(ConvertPWM(-0.5));
-
-  while(tilt != lt && pan != lp){ // terminate when both have gone to the end
-    usleep(2000);
+  setPan(ConvertPWM(0.5));
+  setTilt(ConvertPWM(0.5));
+  bool tf = true, pf = true;
+  printf("%7d, %7d\r\n", tilt -lt, pan - lp);
+  while(tf || pf){ // terminate when both have gone to the end
+    usleep(100000);
     lp = pan;
     lt = tilt;
 
     pan = getPan();
     tilt = getTilt();
+    if(( ((tilt - lt) <= 2) && ((tilt-lt) >= -2)) ){
+	setTilt(ConvertPWM(0.0));
+printf("tilt stop\n");
+	pf = false;
+    }
+    if((((pan - lp) <= 5) && ((pan-lp) >= -5))){
+	setPan(ConvertPWM(0.0));
+	printf("pan stop\n");
+	tf = false;
+    }
+    printf("%7d, %7d\r\n", tilt -lt, pan - lp);
 
   }
-  setTilt(0);
-  setPan(0);
-  reset(fd);
+  setTilt(ConvertPWM(0.0));
+  setPan(ConvertPWM(0.0));
+  reset();
+printf("ending\r\n");
 }
 
 /* The main function */
@@ -165,18 +180,17 @@ int main(int argc, char* argv[])
     //printf("Radians: %f %f\n", ConvertRad(a), ConvertRad(b)); 
     printf("RAW: %7d %7d\r", a,b); 
     usleep(1000);
-    if(b >100 || b < -100) {
-      setGPMCValue(fd, 1, 7);
-    }
+    //if(b >100 || b < -100) {
+   //   setGPMCValue(fd, 1, 7);
+    //}
   }*/
-
-  reset();
   move2end();
-  
+usleep(2000000);
+reset();
   // set the target to the middle value of the range of motion
   setPanPos(pan_max/2);
   setTiltPos(tilt_max/2);
-  
+  printf("positions[rad]: %f, %f", upan[1], utilt[2]);
   // clock_t lastclk = clock()
   // clock_t clockdiff;
   // clock_t clk;
@@ -187,8 +201,28 @@ int main(int argc, char* argv[])
   /* Initialize the submodel itself */
   XXInitializeSubmodeltilt (utilt, ytilt, curr_time);
 
+
+printf("%d %d\n", getPan(), getTilt());
+
+  struct timeval time;
+  
+  time.tv_sec = 0;
+  time.tv_usec = 0;
+  gettimeofday(&time, NULL);
+  long timenow = time.tv_usec; 
+  long dur;
+
   while (1)
   {
+    gettimeofday(&time, NULL);  
+    //printf("%lu, %lu, %lu\n", time.tv_sec, time.tv_usec, time.tv_usec - timenow);
+    if (time.tv_usec < timenow){
+	timenow = time.tv_usec;
+    }
+    else if(time.tv_usec - timenow >= 10000){
+	
+    dur = time.tv_usec - timenow;
+	//printf("%f, %lu, %lu, %lu\n", (double)dur/1000000, dur, time.tv_sec, time.tv_usec);
     // clockdiff = clk - lastclk;
     // if (clockdiff >= (clock_t)((double)CLOCKS_PER_SEC*0.01)){
     //Get and convert the decoder readings. 
@@ -196,8 +230,8 @@ int main(int argc, char* argv[])
     setTiltIn(getTilt()); 
 
     /* Call the submodel to calculate the output */
-    XXCalculateSubmodelpan (upan, ypan, curr_time);
-    XXCalculateSubmodeltilt (utilt, ytilt, curr_time);
+    XXCalculateSubmodelpan (upan, ypan, (double)dur/1000000);
+    XXCalculateSubmodeltilt (utilt, ytilt, (double)dur/1000000);
 
     //Convert, check and send the Motor steering values
     Mpan = ConvertPWM(ypan[1]);
@@ -211,12 +245,14 @@ int main(int argc, char* argv[])
       break;
     }
     //printf("err: %7f, %7f\r", utilt[1] - utilt[2], ytilt[0]);
-    //printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_timepan, upan[1], utilt[2], ypan[1], ytilt[0], Mpan,Mtilt);
-    //usleep(1000);
-  
+    printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", xx_step_sizepan, upan[0], utilt[1], ypan[1], ytilt[0], Mpan,Mtilt);
+    
+    timenow = time.tv_usec; 
+    }
     // lastclk = clk;
   }
-
+  printf("%d %d\n", getPan(), getTilt());
+  
   /* Perform the final calculations */
   XXTerminateSubmodelpan (upan, ypan, curr_time);
   XXTerminateSubmodeltilt (utilt, ytilt, curr_time);

@@ -25,9 +25,8 @@ extern "C" {
 
 #define pan_max 1110.0
 #define tilt_max 309.0
-
-
-
+#define panconst 1
+#define tiltconst 1
 // returns the current run-time, hopefully
 #define curr_time (double) clock()/CLOCKS_PER_SEC
 
@@ -166,4 +165,31 @@ void mainModel::initializeModel(){
   /* Initialize the submodel itself */
   XXInitializeSubmodeltilt (utilt, ytilt, curr_time);
 
+}
+
+void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
+  
+  	uint32_t Mpan, Mtilt;
+    
+    setPanPos(xpixels/320*panconst);
+    setTiltPos(ypixels/240*tiltconst);
+    setPanIn(getPan()); 		
+    setTiltIn(getTilt()); 
+
+    /* Call the submodel to calculate the output */
+    XXCalculateSubmodelpan (upan, ypan, curr_time);
+    XXCalculateSubmodeltilt (utilt, ytilt, curr_time);
+
+    //Convert, check and send the Motor steering values
+    Mpan = ConvertPWM(ypan[1]);
+    Mtilt = ConvertPWM(ytilt[0]);
+    setPan(Mpan);		
+    setTilt(Mtilt);
+  /*  if(abs(utilt[2] - utilt[1]) <= 0.05 && abs(upan[1] - upan[0]) <= 0.05){
+      printf("position met");
+      setPan(0);
+      setTilt(0);
+      break;
+    }
+	*/
 }
