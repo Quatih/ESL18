@@ -125,6 +125,11 @@ void move2end(){
   reset(fd);
 }
 
+void stop(){
+  setPan(0);
+  setTilt(0);
+}
+
 /* The main function */
 int main(int argc, char* argv[])
 {
