@@ -22,25 +22,22 @@
 #define HEIGHT 240
 #define FRAMERATE 30
 
-#define FRAMESIZE 115200//WIDTH*HEIGHT*2
-
 #define MARGIN 50
+
+//Threshold values
+#define H_LOW		90
+#define H_HIGH		130
+#define S_LOW		130	
+#define S_HIGH		255
+#define V_LOW		100
+#define V_HIGH		255
 
 using namespace cv;
 using namespace std;
 
-
 /* Structure to contain all our information, so we can pass it to callbacks */
 typedef struct _CustomData {
 	GstElement *pipeline, *driver, *capsfilter, *mux, *appsink, *queue;
-
-	guint64 num_samples;   /* Number of samples generated so far (for timestamp generation) */
-	GstBuffer *buffer;
-
-	guint sourceid;        /* To control the GSource */
-
-	GMainLoop *main_loop;  /* GLib's Main Loop */
-	
 	circ_buffer<Mat> *bufptr;
 } CustomData;
 
@@ -83,13 +80,10 @@ private:
     boost::circular_buffer<T> cb;
 };
 
-
-
 void showfeed(CustomData *data)
 {
 	namedWindow("window");
 	circ_buffer<Mat> *ptr = data->bufptr;
-	usleep(500000);
 
 	Mat im;
 
@@ -103,7 +97,7 @@ void showfeed(CustomData *data)
 
 void processImage(char *data)
 {
-	Mat img_rgb, img_th, img_hsv, img1, img2;
+	Mat img_rgb, img_th, img_hsv;
 	Mat img(HEIGHT, WIDTH, CV_8UC2, data);
 	cvtColor(img, img_rgb, CV_YUV2BGR_YUY2);
 	cvtColor(img_rgb, img_hsv, CV_BGR2HSV);
@@ -111,12 +105,12 @@ void processImage(char *data)
 	vector<Vec4i> hierarchy;
 	Point Center;
 
-	inRange(img_hsv, Scalar(90, 130, 100), Scalar(130, 255,  255), img1);
+	inRange(img_hsv, Scalar(H_LOW, S_LOW, V_LOW), Scalar(H_HIGH, S_HIGH, V_HIGH), img_th);
 
 	Mat Elem = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
-	morphologyEx(img1, img1, MORPH_OPEN, Elem);
+	morphologyEx(img_th, img_th, MORPH_OPEN, Elem);
 
-	findContours(img1, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+	findContours(img_th, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 
 	int largest_area=0;
 	int largest_contour_index=0;
@@ -133,7 +127,6 @@ void processImage(char *data)
 
 	Center.x = bounding_rect.x+bounding_rect.width/2;
 	Center.y = bounding_rect.y+bounding_rect.height/2;
-
 
 	Scalar color( 255,255,255);
 	drawContours(img_rgb, contours,largest_contour_index, color, 1, 8, hierarchy);
@@ -158,8 +151,7 @@ void processImage(char *data)
 			printf("Stop turning Tilt\r\n"); 
 	}
 
-	cvtColor(img1, img1, CV_GRAY2BGR);
-	bitwise_and(img_rgb, img1, img2);
+	cvtColor(img_th, img_th, CV_GRAY2BGR);
 
 	data->bufptr->send(img_rgb);
 }
@@ -174,15 +166,12 @@ static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
 	g_signal_emit_by_name (sink, "pull-sample", &sample);
 	if (sample) 
 	{
-
 		buffer = gst_sample_get_buffer(sample);
 		gst_buffer_map(buffer, &info, GST_MAP_READ);
-		//g_print("Size: %d\r\n", strlen((const char *)info.data));
+		
 		/*Image processing part*/
 		processImage((char *)info.data);
-
 		/*End of image processing part.*/
-		//g_print("*");
 
 		gst_sample_unref (sample);
 		ret = GST_FLOW_OK;
@@ -191,10 +180,7 @@ static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
 		ret = GST_FLOW_ERROR;
 	}
 	return ret;
-
-
 }
-
 
 static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 {
@@ -223,7 +209,6 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 		default:
 		break;
 	}
-
 	return TRUE;
 }
 
@@ -255,16 +240,13 @@ int main (int   argc, char *argv[])
 	data.mux = gst_element_factory_make("avimux", "avi-mux");
 	data.appsink = gst_element_factory_make ("appsink", "video-output");
 
-
 	if (!data.pipeline || !data.queue || !data.driver || !data.capsfilter || !data.mux || !data.appsink ) {
 	g_printerr ("One element could not be created. Exiting.\n");
 	return -1;
 	}
 
 	/* Set up the pipeline */
-
 	/* we set the input filename to the source element */
-
 	/* we add a message handler */
 	bus = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline));
 	bus_watch_id = gst_bus_add_watch (bus, bus_call, loop);
@@ -301,7 +283,6 @@ int main (int   argc, char *argv[])
 	g_print("Running...\n");
 	g_main_loop_run(loop);
 
-
 	/* Out of the main loop, clean up nicely */
 	g_print ("Returned, stopping playback\n");
 	gst_element_set_state (data.pipeline, GST_STATE_NULL);
@@ -314,6 +295,4 @@ int main (int   argc, char *argv[])
 	buf.clear();
 	delete data.bufptr;
 	return 0;
-	
-	
 }
