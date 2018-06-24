@@ -42,16 +42,42 @@ extern "C" {
 #include <stdlib.h>
 #include <time.h> // clock()
 #include <stdbool.h>
+
 #define pan_max 1110.0
 #define tilt_max 309.0
+#define DEBUG
 
 // GPMC file descriptor
 int fd; 
 
+#ifndef DEBUG
 #define getPan() getGPMCValue(fd, 2)
 #define getTilt() getGPMCValue(fd, 0)
 #define setPan(val) setGPMCValue(fd, val, 6)
 #define setTilt(val) setGPMCValue(fd, val, 4)
+
+
+#define setPanIn(encval) upan[0] = ConvertRad(encval, pan_max)
+#define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
+
+#define setTiltIn(encval) utilt[1] = ConvertRad(encval, tilt_max)
+#define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
+
+#else
+
+#define getPan() 0
+#define getTilt() 0
+#define setPan(val) 
+#define setTilt(val) 
+
+
+#define setPanIn(encval) upan[0] = ConvertRad(encval, pan_max)
+#define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
+
+#define setTiltIn(encval) utilt[1] = ConvertRad(encval, tilt_max)
+#define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
+
+#endif
 
 // returns the current run-time, hopefully
 #define curr_time (double) clock()/CLOCKS_PER_SEC
@@ -61,13 +87,6 @@ double ConvertRad(int32_t val, double max)
 {
   return ((double)val/max) * M_PI;
 }
-
-#define setPanIn(encval) upan[0] = ConvertRad(encval, pan_max)
-#define setPanPos(pos) upan[1] = ConvertRad(pos, pan_max)
-
-#define setTiltIn(encval) utilt[1] = ConvertRad(encval, tilt_max)
-#define setTiltPos(pos) utilt[2] = ConvertRad(pos, tilt_max)
-
 
 /* According to 20SIM, the output is a signal between -1.0 and 1.0. 
 This output must be converted to a PWM output between 0 and 250 
@@ -100,10 +119,13 @@ uint32_t ConvertPWM(double val)
 }
 
 void reset() {
+  #ifndef DEBUG
     setGPMCValue(fd, 1, 7);
+  #endif
 }
 
 void move2end(){ 
+  #ifndef DEBUG
   reset();
 
   printf("moving to end\n");
@@ -138,6 +160,7 @@ printf("tilt stop\n");
   setPan(ConvertPWM(0.0));
   reset();
 printf("ending\r\n");
+#endif
 }
 
 /* The main function */
@@ -149,6 +172,7 @@ int main(int argc, char* argv[])
   XXDouble utilt [3 + 1];
   XXDouble ytilt [1 + 1];
 
+  #ifndef DEBUG
   // open connection to device.
   printf("Opening gpmc_fpga...\n");
   fd = open("/dev/gpmc_fpga", 0);
@@ -157,7 +181,7 @@ int main(int argc, char* argv[])
   printf("Error, could not open device: %s.\n", argv[1]);
   return 1;
   }
-
+  #endif
   /* Initialize the inputs and outputs with correct initial values */
   upan[0] = 0.0;		/* in */
   upan[1] = 0.0;		/* position */
@@ -185,8 +209,8 @@ int main(int argc, char* argv[])
     //}
   }*/
   move2end();
-usleep(2000000);
-reset();
+  //usleep(2000000);
+  reset();
   // set the target to the middle value of the range of motion
   setPanPos(pan_max/2);
   setTiltPos(tilt_max/2);
@@ -217,7 +241,7 @@ printf("%d %d\n", getPan(), getTilt());
     gettimeofday(&time, NULL);  
     //printf("%lu, %lu, %lu\n", time.tv_sec, time.tv_usec, time.tv_usec - timenow);
     if (time.tv_usec < timenow){
-	timenow = time.tv_usec;
+	    timenow = time.tv_usec;
     }
     else if(time.tv_usec - timenow >= 10000){
 	
@@ -256,8 +280,9 @@ printf("%d %d\n", getPan(), getTilt());
   /* Perform the final calculations */
   XXTerminateSubmodelpan (upan, ypan, curr_time);
   XXTerminateSubmodeltilt (utilt, ytilt, curr_time);
+  #ifndef DEBUG
   close(fd);
-
+  #endif
   return 0;
 }
 
