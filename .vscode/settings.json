@@ -11,6 +11,7 @@
     "xutility": "c",
     "xlocale": "c",
     "xxsubmodtilt.h": "c",
-    "gpmc_driver_c.h": "c"
+    "gpmc_driver_c.h": "c",
+    "iosfwd": "cpp"
   }
 }

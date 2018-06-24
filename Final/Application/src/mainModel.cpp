@@ -24,11 +24,9 @@ extern "C" {
 #define setiltidx 4
 
 #define pan_max 1110.0
-#define tilt_max 309.0
-#define panconst 1
-#define tiltconst 1
-// returns the current run-time, hopefully
-#define curr_time (double) clock()/CLOCKS_PER_SEC
+#define tilt_max pan_max // 309.0
+#define panconst 1.0/320.0
+#define tiltconst 1.0/240.0
 
 /* The pan encoder spans values which correspond to approximately Pi radians. */
 double ConvertRad(int32_t val, double max)
@@ -66,19 +64,44 @@ uint32_t ConvertPWM(double val)
   return ret_val;
 }
 
-int32_t mainModel::getPan(){
-  return getGPMCValue(fd, readpanidx);
+mainModel::mainModel(){
+  initializeModel();
 }
+mainModel::~mainModel(){
+
+}
+
+int32_t mainModel::getPan(){
+  #ifndef SIMUL
+  int32_t ret = getGPMCValue(fd, readpanidx);
+  #else 
+  int32_t ret = encpan++;
+  #endif
+  return ret;
+}
+
+
 int32_t mainModel::getTilt(){
-   getGPMCValue(fd, readtiltidx);
+  #ifndef SIMUL
+  int32_t ret = getGPMCValue(fd, readtiltidx);
+  #else
+  int32_t ret = enctilt++;
+  #endif
+  return ret;
 }
 
 void mainModel::setPan(uint32_t val){
-   setGPMCValue(fd, val, setpanidx);
+  #ifndef SIMUL
+  setGPMCValue(fd, val, setpanidx);
+  #else
+  #endif
 }
 
 void mainModel::setTilt(uint32_t val){
+  #ifndef SIMUL
   setGPMCValue(fd, val, settiltidx);
+  #else
+  #endif
 } 
 
 void mainModel::setPanPos(double pos){
@@ -98,10 +121,15 @@ void mainModel::setTiltIn(){
 }
 
 void mainModel::resetEncoders() {
+  #ifndef SIMUL
   setGPMCValue(fd, 1, 7);
+  #else
+  encpan = 0;
+  enctilt = 0;
+  #endif
 }
 
-void mainModel::stop(){
+void mainModel::stopMotors(){
   setPan(0);
   setTilt(0);
 }
@@ -123,7 +151,7 @@ void mainModel::move2end(){
     tilt = getTilt();
 
   }
-  stop();
+  stopMotors();
   resetEncoders();
 }
 
@@ -134,7 +162,9 @@ void mainModel::initializeModel(){
   XXDouble ypan [2 + 1];
   XXDouble utilt [3 + 1];
   XXDouble ytilt [1 + 1];
-
+  panpos = true;
+  tiltpos = true;
+  #ifndef SIMUL
   // open connection to device.
   printf("Opening gpmc_fpga...\n");
   fd = open("/dev/gpmc_fpga", 0);
@@ -143,7 +173,7 @@ void mainModel::initializeModel(){
   printf("Error, could not open device: %s.\n", argv[1]);
   return 1;
   }
-
+  #endif
   /* Initialize the inputs and outputs with correct initial values */
   upan[0] = 0.0;		/* in */
   upan[1] = 0.0;		/* position */
@@ -158,38 +188,69 @@ void mainModel::initializeModel(){
 
   ytilt[0] = 0.0;		/* out */
 
-  move2end();
+  //move2end();
 
   /* Initialize the submodel itself */
-  XXInitializeSubmodelpan (upan, ypan, curr_time);
+  XXInitializeSubmodelpan (upan, ypan, 0);
   /* Initialize the submodel itself */
-  XXInitializeSubmodeltilt (utilt, ytilt, curr_time);
-
+  XXInitializeSubmodeltilt (utilt, ytilt, 0);
+  resetEncoders();
 }
 
 void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
   
-  	uint32_t Mpan, Mtilt;
-    
-    setPanPos(xpixels/320*panconst);
-    setTiltPos(ypixels/240*tiltconst);
+  uint32_t Mpan, Mtilt;
+  setPanPos((double)xpixels*panconst);
+  setTiltPos((double)ypixels*tiltconst);
+  setPanIn(getPan()); 		
+  setTiltIn(getTilt()); 
+
+  struct timeval time;
+
+  time.tv_sec = 0;
+  time.tv_usec = 0;
+  gettimeofday(&time, NULL);
+
+  if (time.tv_usec < timenow){
+    timenow = time.tv_usec;
+  }
+  else // if(time.tv_usec - timenow >= 10000)
+  {
+    long dur = time.tv_usec - timenow;
+    timenow = time.tv_usec; 
     setPanIn(getPan()); 		
     setTiltIn(getTilt()); 
 
     /* Call the submodel to calculate the output */
-    XXCalculateSubmodelpan (upan, ypan, curr_time);
-    XXCalculateSubmodeltilt (utilt, ytilt, curr_time);
+    XXCalculateSubmodelpan (upan, ypan, (double)dur/1000000);
+    XXCalculateSubmodeltilt (utilt, ytilt, (double)dur/1000000);
 
-    //Convert, check and send the Motor steering values
-    Mpan = ConvertPWM(ypan[1]);
-    Mtilt = ConvertPWM(ytilt[0]);
-    setPan(Mpan);		
-    setTilt(Mtilt);
-  /*  if(abs(utilt[2] - utilt[1]) <= 0.05 && abs(upan[1] - upan[0]) <= 0.05){
-      printf("position met");
+    double diff;
+    diff = upan[1] - utilt[0];
+    
+    if(panpos && (diff <= 0.05) && (diff >= -0.05)){
+      printf("pan position met\n");
       setPan(0);
-      setTilt(0);
-      break;
+      panpos = false;
     }
-	*/
+    else if (panpos) {     
+      Mpan = ConvertPWM(ypan[1]);
+      setPan(Mpan);
+    }
+
+    diff = utilt[2] - utilt[1];
+    
+    if(tiltpos && (diff <= 0.05) && (diff >= -0.05)){
+      printf("tilt position met\n");
+      setTilt(0);
+      tiltpos = false;
+    }
+    else if (tiltpos) {
+      
+      Mtilt = ConvertPWM(ytilt[0]);
+      setTilt(Mtilt);
+    }
+    printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", dur, upan[0], utilt[1], ypan[1], ytilt[0], Mpan,Mtilt);
+  }
+
 }
