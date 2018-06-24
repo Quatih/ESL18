@@ -20,7 +20,7 @@ OBJECT_FILES=$(patsubst %.c,%.o,$(patsubst $(SOURCE_DIR)/%, $(OBJECT_DIR)/%, $(S
 # Commands
 #
 CROSS_COMPILE=arm-linux-gnueabihf-
-CC=$(CROSS_COMPILE)gcc
+CC=gcc
 RM=rm -f
 MKDIR=mkdir -p
 

@@ -35,8 +35,8 @@ MKDIR=mkdir -p
 #
 LIBS=
 LDFLAGS=
-CFLAGS=-I$(INCLUDE_DIR) -I$(KERNEL_MODULE_DIR)/include -Wall
-CPPFLAGS=
+CFLAGS=-I$(INCLUDE_DIR) -I$(KERNEL_MODULE_DIR)/include -Wall -Wextra -Werror 
+CPPFLAGS=-I$(INCLUDE_DIR) -I$(KERNEL_MODULE_DIR)/include -Wall -Wextra -Werror 
 
 #
 # Targets
@@ -47,7 +47,7 @@ all: cpp c
 # Compile .cpp files to .o (object) files.
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	$(MKDIR) $(BUILD_DIR) $(OBJECT_DIR)
-	$(CXX) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+	$(CXX) -c $(CPPFLAGS) -o $@ $<
 
 # Compile .c files to .o (object) files.
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c

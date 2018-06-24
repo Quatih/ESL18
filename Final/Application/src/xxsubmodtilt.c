@@ -25,7 +25,6 @@
 XXInteger xx_number_of_inputstilt = 3;
 XXInteger xx_number_of_outputstilt = 1;
 extern XXDouble xx_step_sizetilt;
-
 /* the names of the submodel io variables
    uncomment this part if you need these names
 XXString xx_input_namestilt[] = {
@@ -88,8 +87,7 @@ void XXInitializeSubmodeltilt (XXDouble *u, XXDouble *y, XXDouble t)
 void XXCalculateSubmodeltilt (XXDouble *u, XXDouble *y, XXDouble t)
 {
 	/* Copy the inputs */
-	xx_step_sizetilt = t - xx_timetilt;
-	xx_timetilt = t;
+	xx_step_sizetilt = t;
 	XXCopyInputsToVariablestilt (u);
 
 	/* Calculate the model */

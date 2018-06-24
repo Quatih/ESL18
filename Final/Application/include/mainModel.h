@@ -3,25 +3,30 @@
 extern "C" {
   #include "xxtypes.h"
 }
+
 #include <stdint.h>
+#define _BSD_SOURCE
+#include <sys/time.h>
 
 #define SIMUL
 
 class mainModel {
 private:
-  XXDouble upan [2 + 1];
-  XXDouble ypan [2 + 1];
-  XXDouble utilt [3 + 1];
-  XXDouble ytilt [1 + 1];
+  double upan [2 + 1];
+  double ypan [2 + 1];
+  double utilt [3 + 1];
+  double ytilt [1 + 1];
 
-  bool panpos = true, tiltpos = true;
+  bool panpos, tiltpos;
   long timenow;
+  struct timeval time;
+
   int fd;
   #ifdef SIMUL
-  intt32_t encpan, enctilt;
+  int32_t encpan, enctilt;
   #endif
-  void getPan();
-  void getTilt();
+  int32_t getPan();
+  int32_t getTilt();
   void setPan(uint32_t val);
   void setTilt(uint32_t val);
   
@@ -34,10 +39,10 @@ private:
 public:
   mainModel();
   ~mainModel();
-  void init();
+  void initializeModel(uint32_t xpixels, uint32_t ypixels);
   void resetEncoders();
   void move2end();
   void stopMotors();
+  void loop();
   void loop(uint32_t xpixels, uint32_t ypixels);
-
-}
+};

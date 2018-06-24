@@ -1,22 +1,22 @@
 
-
 #include "mainModel.h"
-
+#define _BSD_SOURCE
+#include <sys/time.h>
 extern "C" {
 /* 20-sim include files */
 #include "xxsubmodpan.h"
 #include "xxsubmodtilt.h"
 #include "gpmc_driver_c.h"
 #include "xxtypes.h"
-}
 
+
+}
 #include <stdio.h>
 #include <math.h>
 #include <fcntl.h>      // open()
 #include <unistd.h>     // close()
 #include <stdint.h>
 #include <stdlib.h>
-#include <time.h> // clock()
 
 #define readpanidx 2
 #define readtiltidx 0
@@ -65,7 +65,8 @@ uint32_t ConvertPWM(double val)
 }
 
 mainModel::mainModel(){
-  initializeModel();
+  tiltpos = true;
+  panpos = true;
 }
 mainModel::~mainModel(){
 
@@ -75,7 +76,7 @@ int32_t mainModel::getPan(){
   #ifndef SIMUL
   int32_t ret = getGPMCValue(fd, readpanidx);
   #else 
-  int32_t ret = encpan++;
+  int32_t ret = ++encpan;
   #endif
   return ret;
 }
@@ -85,7 +86,7 @@ int32_t mainModel::getTilt(){
   #ifndef SIMUL
   int32_t ret = getGPMCValue(fd, readtiltidx);
   #else
-  int32_t ret = enctilt++;
+  int32_t ret = ++enctilt;
   #endif
   return ret;
 }
@@ -157,11 +158,11 @@ void mainModel::move2end(){
 
 
 
-void mainModel::initializeModel(){
-  XXDouble upan [2 + 1];
-  XXDouble ypan [2 + 1];
-  XXDouble utilt [3 + 1];
-  XXDouble ytilt [1 + 1];
+void mainModel::initializeModel(uint32_t xpixels, uint32_t ypixels){
+  time.tv_sec = 0;
+  time.tv_usec = 0;
+  gettimeofday(&time, NULL);
+  timenow = time.tv_usec;
   panpos = true;
   tiltpos = true;
   #ifndef SIMUL
@@ -195,40 +196,36 @@ void mainModel::initializeModel(){
   /* Initialize the submodel itself */
   XXInitializeSubmodeltilt (utilt, ytilt, 0);
   resetEncoders();
+
+  upan[1] = (double)xpixels*panconst;
+  utilt[2] = (double)ypixels*tiltconst; 
+  printf("target: %f, %f\n", upan[1], utilt[2]);
 }
 
-void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
+void mainModel::loop(){
   
   uint32_t Mpan, Mtilt;
-  setPanPos((double)xpixels*panconst);
-  setTiltPos((double)ypixels*tiltconst);
-  setPanIn(getPan()); 		
-  setTiltIn(getTilt()); 
-
-  struct timeval time;
-
-  time.tv_sec = 0;
-  time.tv_usec = 0;
+  double diffpan, difftilt;
+ 
   gettimeofday(&time, NULL);
 
   if (time.tv_usec < timenow){
     timenow = time.tv_usec;
   }
-  else // if(time.tv_usec - timenow >= 10000)
+  else if(time.tv_usec - timenow >= 10000)
   {
     long dur = time.tv_usec - timenow;
     timenow = time.tv_usec; 
-    setPanIn(getPan()); 		
-    setTiltIn(getTilt()); 
+    setPanIn(); 		
+    setTiltIn(); 
 
     /* Call the submodel to calculate the output */
     XXCalculateSubmodelpan (upan, ypan, (double)dur/1000000);
     XXCalculateSubmodeltilt (utilt, ytilt, (double)dur/1000000);
 
-    double diff;
-    diff = upan[1] - utilt[0];
+    diffpan = upan[1] - upan[0];
     
-    if(panpos && (diff <= 0.05) && (diff >= -0.05)){
+    if(panpos && (diffpan <= 0.05) && (diffpan >= -0.05)){
       printf("pan position met\n");
       setPan(0);
       panpos = false;
@@ -238,9 +235,9 @@ void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
       setPan(Mpan);
     }
 
-    diff = utilt[2] - utilt[1];
+    difftilt = utilt[2] - utilt[1];
     
-    if(tiltpos && (diff <= 0.05) && (diff >= -0.05)){
+    if(tiltpos && (difftilt <= 0.05) && (difftilt >= -0.05)){
       printf("tilt position met\n");
       setTilt(0);
       tiltpos = false;
@@ -250,7 +247,14 @@ void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
       Mtilt = ConvertPWM(ytilt[0]);
       setTilt(Mtilt);
     }
-    printf("Timestep: %f, %f, %f, %f, %f, %d, %d\n", dur, upan[0], utilt[1], ypan[1], ytilt[0], Mpan,Mtilt);
+
+    printf("Timestep: %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
   }
 
+}
+
+void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
+  upan[1] = (double)xpixels*panconst;
+  utilt[2] = (double)ypixels*tiltconst; 
+  loop();
 }

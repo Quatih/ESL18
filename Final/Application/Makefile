@@ -6,21 +6,26 @@ SOURCE_DIR:=$(PWD)/src
 INCLUDE_DIR:=$(PWD)/include
 BUILD_DIR:=$(PWD)/build
 OBJECT_DIR=$(BUILD_DIR)/obj
-
+KERNEL_MODULE_DIR=$(PWD)/../kernel_module
 #
 # Source files
 #
+
 SOURCE_FILES=$(wildcard $(SOURCE_DIR)/*.cpp)
+CSOURCE_FILES=$(wildcard $(SOURCE_DIR)/*.c)
+
 #
 # Object files
 #
-OBJECT_FILES=$(patsubst %.cpp,%.o,$(patsubst $(SOURCE_DIR)/%, $(OBJECT_DIR)/%, $(SOURCE_FILES)))
 
+OBJECT_FILES=$(patsubst %.cpp,%.o,$(patsubst $(SOURCE_DIR)/%, $(OBJECT_DIR)/%, $(SOURCE_FILES)))
+COBJECT_FILES=$(patsubst %.c,%.o,$(patsubst $(SOURCE_DIR)/%, $(OBJECT_DIR)/%, $(CSOURCE_FILES)))
 #
 # Commands
 #
 CROSS_COMPILE=arm-linux-gnueabihf-
-CC=$(CROSS_COMPILE)g++
+CC=gcc
+CXX=g++
 RM=rm -f
 MKDIR=mkdir -p
 
@@ -29,8 +34,8 @@ MKDIR=mkdir -p
 # You can define your own libraries and flags here.
 #
 LIBS= -lm 
-LDFLAGS= `pkg-config --libs gstreamer-1.0 gstreamer-1.0-app opencv boost`
-CFLAGS=-I$(INCLUDE_DIR) -Wall `pkg-config --cflags gstreamer-1.0 gstreamer-1.0-app opencv boost`
+LDFLAGS=
+CFLAGS=-I$(INCLUDE_DIR) -I$(KERNEL_MODULE_DIR)/include -Wall -Wextra -pedantic
 
 #
 # Targets
@@ -38,14 +43,19 @@ CFLAGS=-I$(INCLUDE_DIR) -Wall `pkg-config --cflags gstreamer-1.0 gstreamer-1.0-a
 .PHONY: all application clean
 all: application
 
-# Compile .cpp files to .o (object) files.
+# Compile cpp files to .opp (object) files.
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.cpp
-	$(MKDIR) $(BUILD_DIR) $(OBJECT_DIR) $(MAKE_DIR)
+	$(MKDIR) $(BUILD_DIR) $(OBJECT_DIR)
+	$(CXX) -c $(CFLAGS) -o $@ $<
+
+# Compile c files to .o (object) files.
+$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
+	$(MKDIR) $(BUILD_DIR) $(OBJECT_DIR)
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-# Compile c-example.	
-application: $(OBJECT_FILES)
-	$(CC) $(LDFLAGS) $^ $(LIBS) -o application
+# linking	
+application: $(OBJECT_FILES) $(COBJECT_FILES)
+	$(CXX) $(LDFLAGS) $^ $(LIBS) -o application
 
 # Remove build directory and compiled applications.
 clean:
