@@ -140,17 +140,30 @@ void mainModel::move2end(){
   printf("moving to end\n");
   int32_t pan = getPan(), tilt = getTilt();
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-  setPan(ConvertPWM(-0.5));
-  setTilt(ConvertPWM(-0.5));
+  int tiltrange = 2, panrange = 5;
+  bool tf = true, pf = true;
+  setPan(ConvertPWM(0.5));
+  setTilt(ConvertPWM(0.5));
 
-  while(tilt != lt && pan != lp){ // terminate when both have gone to the end
-    usleep(2000);
+  while(tf || pf){ // terminate when both have gone to the end
+
     lp = pan;
     lt = tilt;
 
     pan = getPan();
     tilt = getTilt();
-
+    if(( ((tilt - lt) <= tiltrange) && ((tilt-lt) >= -tiltrange)) ){
+      setTilt(ConvertPWM(0.0));
+      printf("tilt stop\n");
+      pf = false;
+    }
+    if((((pan - lp) <= panrange) && ((pan-lp) >= -panrange))){
+      setPan(ConvertPWM(0.0));
+      printf("pan stop\n");
+      tf = false;
+    }
+    printf("%7d, %7d\r\n", tilt -lt, pan - lp);
+    usleep(100000);
   }
   stopMotors();
   resetEncoders();
