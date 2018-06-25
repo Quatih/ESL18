@@ -48,7 +48,7 @@ uint32_t ConvertPWM(double val)
   //printf("%f, %f\n", val, ch);
   ret_val = (uint32_t) (ch);
   //Clockwise
-  if(val > 0)
+  if(val < 0)
   {
     //INA = 1;
     //INB = 0;
