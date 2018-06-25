@@ -9,6 +9,7 @@ extern "C" {
 #include <sys/time.h>
 
 #define SIMUL
+#define STOPTEST
 
 class mainModel {
 private:
@@ -40,12 +41,14 @@ private:
 public:
   mainModel();
   ~mainModel();
-  void initializeModel();
+
   void resetEncoders();
-  void move2end();
+  bool positionMet();
   void stopMotors();
   void setPos(double radpan, double radtilt);
+  void setPos(int32_t xpixels, int32_t ypixels);
+  void move2end();
+  void initializeModel();
   void loop();
-  void loop(uint32_t xpixels, uint32_t ypixels);
-  bool positionMet();
+  void loop(int32_t xpixels, int32_t ypixels);
 };

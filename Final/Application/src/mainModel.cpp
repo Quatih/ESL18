@@ -30,7 +30,7 @@ extern "C" {
 #define panrangeconst 0.03
 #define tiltrangeconst 0.03
 /* The pan encoder spans values which correspond to approximately Pi radians. */
-double inline ConvertRad(int32_t val, double max)
+double inline convertRad(int32_t val, double max)
 {
   return ((double)val/max) * M_PI;
 }
@@ -38,7 +38,7 @@ double inline ConvertRad(int32_t val, double max)
 /* According to 20SIM, the output is a signal between -1.0 and 1.0. 
 This output must be converted to a PWM output between 0 and 250 
 and a direction according to a truthtable. */
-uint32_t ConvertPWM(double val)
+uint32_t convertPWM(double val)
 {
   //Brake
   if(val == 0)
@@ -75,21 +75,21 @@ mainModel::~mainModel(){
 
 int32_t inline mainModel::getPan(){
   #ifndef SIMUL
-  int32_t ret = getGPMCValue(fd, readpanidx);
+  return getGPMCValue(fd, readpanidx);
   #else 
-  int32_t ret = ++encpan;
+  //encpan = encpan - (int32_t)ypan[1];
+  return ++encpan;
   #endif
-  return ret;
 }
 
 
 int32_t inline mainModel::getTilt(){
   #ifndef SIMUL
-  int32_t ret = getGPMCValue(fd, readtiltidx);
+  return getGPMCValue(fd, readtiltidx);
   #else
-  int32_t ret = ++enctilt;
+  //enctilt = enctilt - (int32_t)ytilt[0];
+  return ++enctilt;
   #endif
-  return ret;
 }
 
 void inline mainModel::setPan(uint32_t val){
@@ -111,7 +111,7 @@ void inline mainModel::setPanPos(double radpos){
 } 
 
 void inline mainModel::setPanIn(){
-  upan[0] = ConvertRad(getPan(), pan_max);
+  upan[0] = convertRad(getPan(), pan_max);
 }
 
 void inline mainModel::setTiltPos(double radpos){
@@ -119,7 +119,7 @@ void inline mainModel::setTiltPos(double radpos){
 } 
 
 void inline mainModel::setTiltIn(){
-  utilt[1] = ConvertRad(getTilt(), tilt_max);
+  utilt[1] = convertRad(getTilt(), tilt_max);
 }
 
 void inline mainModel::resetEncoders() {
@@ -136,6 +136,45 @@ void inline mainModel::stopMotors(){
   setTilt(0);
 }
 
+bool mainModel::positionMet(){
+  #ifdef STOPTEST
+  double diffpan = upan[1] - upan[0];
+  double difftilt = utilt[2] - utilt[1];
+  return (diffpan <= panrangeconst) && (diffpan >= -panrangeconst) && (difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst);
+  #else
+  return !(panpos && tiltpos);
+  #endif
+}
+
+
+void mainModel::setPos(double radpan, double radtilt){
+  // double diffpan = convertRad(getPan(), pan_max) - radpan;
+  // double difftilt = convertRad(getTilt(), tilt_max) - radtilt;
+  // if((difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
+  //   //printf("pan position already met\n");
+  // }
+  // else {
+  //   panpos = true;
+  // }
+  // if((difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
+  //   //printf("tilt position already met\n");
+  // }
+  // else {
+  //   tiltpos = true;
+  // }
+  #ifndef STOPTEST 
+  tiltpos = true;
+  panpos = true;
+  #endif
+  setPanPos(radpan);
+  setTiltPos(radtilt);
+  printf("target: %f, %f\n", upan[1], utilt[2]);
+}
+
+void mainModel::setPos(int32_t xpixels, int32_t ypixels){
+  setPos((double)xpixels*panconst, (double)ypixels*tiltconst); 
+}
+
 void mainModel::move2end(){ 
   resetEncoders();
   printf("moving to end\n");
@@ -143,8 +182,8 @@ void mainModel::move2end(){
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
   int tiltrange = 2, panrange = 5;
   bool tf = true, pf = true;
-  setPan(ConvertPWM(0.5));
-  setTilt(ConvertPWM(0.5));
+  setPan(convertPWM(0.5));
+  setTilt(convertPWM(0.5));
 
   while(tf || pf){ // terminate when both have gone to the end
 
@@ -154,12 +193,12 @@ void mainModel::move2end(){
     pan = getPan();
     tilt = getTilt();
     if(( ((tilt - lt) <= tiltrange) && ((tilt-lt) >= -tiltrange)) ){
-      setTilt(ConvertPWM(0.0));
+      setTilt(convertPWM(0.0));
       printf("tilt stop\n");
       pf = false;
     }
     if((((pan - lp) <= panrange) && ((pan-lp) >= -panrange))){
-      setPan(ConvertPWM(0.0));
+      setPan(convertPWM(0.0));
       printf("pan stop\n");
       tf = false;
     }
@@ -169,8 +208,6 @@ void mainModel::move2end(){
   stopMotors();
   resetEncoders();
 }
-
-
 
 void mainModel::initializeModel(){
   time.tv_sec = 0;
@@ -211,36 +248,16 @@ void mainModel::initializeModel(){
   XXInitializeSubmodeltilt (utilt, ytilt, 0);
   resetEncoders();
 
-  upan[1] = (double)xpixels*panconst;
-  utilt[2] = (double)ypixels*tiltconst; 
-  printf("target: %f, %f\n", upan[1], utilt[2]);
-}
-
-void mainModel::setPos(double radpan, double radtilt){
-  double diffpan = convertRad(getPan(), pan_max) - radpan;
-  double difftilt = convertRad(getTilt(), tilt_max) - radtilt;
-  if((difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
-    printf("pan position already met\n");
-  }
-  else {
-    panpos = true;
-  }
-  if((difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
-    printf("tilt position already met\n");
-  }
-  else {
-    tiltpos = true;
-  }
-
-  setPanPos(radpan);
-  setTiltPos(radtilt);
+  setPos(0.0, 0.0);
+  //printf("target: %f, %f\n", upan[1], utilt[2]);
 }
 
 void mainModel::loop(){
   
   uint32_t Mpan, Mtilt;
+  #ifndef STOPTEST 
   double diffpan, difftilt;
-  
+  #endif
   gettimeofday(&time, NULL);
 
   if (time.tv_usec < timenow){
@@ -256,41 +273,45 @@ void mainModel::loop(){
     /* Call the submodel to calculate the output */
     XXCalculateSubmodelpan (upan, ypan, (double)dur/1000000);
     XXCalculateSubmodeltilt (utilt, ytilt, (double)dur/1000000);
-
+    #ifdef STOPTEST
+    Mpan = convertPWM(ypan[1]);
+    setPan(Mpan);
+    #else
     diffpan = upan[1] - upan[0];
-    
     if(panpos && (diffpan <= panrangeconst) && (diffpan >= -panrangeconst)){
       printf("pan position met\n");
       setPan(0);
       panpos = false;
     }
     else if (panpos) {     
-      Mpan = ConvertPWM(ypan[1]);
+      Mpan = convertPWM(ypan[1]);
       setPan(Mpan);
     }
-
-    difftilt = utilt[2] - utilt[1];
+    #endif
     
+    #ifdef STOPTEST
+    Mtilt = convertPWM(ytilt[0]);
+    setTilt(Mtilt);
+    printf("Timestep: %f, %f, %f, %f, %f, %f, %f, %u, %u\n", (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], upan[1], utilt[2], Mpan,Mtilt);
+    #else
+    difftilt = utilt[2] - utilt[1];
     if(tiltpos && (difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
       printf("tilt position met\n");
       setTilt(0);
       tiltpos = false;
     }
     else if (tiltpos) {
-      Mtilt = ConvertPWM(ytilt[0]);
+      Mtilt = convertPWM(ytilt[0]);
       setTilt(Mtilt);
     }
-
     printf("Timestep: %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
+    #endif
+    
   }
 
 }
 
-void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
-  setPos((double)xpixels*panconst, (double)ypixels*tiltconst); 
+void mainModel::loop(int32_t xpixels, int32_t ypixels){
+  setPos(xpixels, ypixels);
   loop();
-}
-
-bool mainModel::positionMet(){
-  return !(panpos && tiltpos);
 }

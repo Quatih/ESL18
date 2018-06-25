@@ -19,7 +19,8 @@ int main(int argc, char * argv[]){
 
   mainModel model;
   model.initializeModel();
-  model.setPanPos(300.0*panconst, 200.0*tiltconst);
+  //model.move2end();
+  model.setPos(300, 200);
   while(1){
     model.loop();
   }
