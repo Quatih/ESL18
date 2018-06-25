@@ -25,24 +25,27 @@ private:
   #ifdef SIMUL
   int32_t encpan, enctilt;
   #endif
-  int32_t getPan();
-  int32_t getTilt();
-  void setPan(uint32_t val);
-  void setTilt(uint32_t val);
   
-  void setPanIn();
-  void setPanPos(double pos);
+  int32_t inline getPan();
+  int32_t inline getTilt();
+  void inline setPan(uint32_t val);
+  void inline setTilt(uint32_t val);
+  
+  void inline setPanIn();
+  void inline setPanPos(double radpos);
 
-  void setTiltIn();
-  void setTiltPos(double pos);
+  void inline setTiltIn();
+  void inline setTiltPos(double radpos);
 
 public:
   mainModel();
   ~mainModel();
-  void initializeModel(uint32_t xpixels, uint32_t ypixels);
+  void initializeModel();
   void resetEncoders();
   void move2end();
   void stopMotors();
+  void setPos(double radpan, double radtilt);
   void loop();
   void loop(uint32_t xpixels, uint32_t ypixels);
+  bool positionMet();
 };

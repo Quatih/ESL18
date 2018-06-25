@@ -1,6 +1,6 @@
 
 #include "mainModel.h"
-#define _BSD_SOURCE
+#define _BSD_SOURCE // for gettimeofday
 #include <sys/time.h>
 extern "C" {
 /* 20-sim include files */
@@ -27,9 +27,10 @@ extern "C" {
 #define tilt_max pan_max // 309.0
 #define panconst 1.0/320.0
 #define tiltconst 1.0/240.0
-
+#define panrangeconst 0.03
+#define tiltrangeconst 0.03
 /* The pan encoder spans values which correspond to approximately Pi radians. */
-double ConvertRad(int32_t val, double max)
+double inline ConvertRad(int32_t val, double max)
 {
   return ((double)val/max) * M_PI;
 }
@@ -72,7 +73,7 @@ mainModel::~mainModel(){
 
 }
 
-int32_t mainModel::getPan(){
+int32_t inline mainModel::getPan(){
   #ifndef SIMUL
   int32_t ret = getGPMCValue(fd, readpanidx);
   #else 
@@ -82,7 +83,7 @@ int32_t mainModel::getPan(){
 }
 
 
-int32_t mainModel::getTilt(){
+int32_t inline mainModel::getTilt(){
   #ifndef SIMUL
   int32_t ret = getGPMCValue(fd, readtiltidx);
   #else
@@ -91,37 +92,37 @@ int32_t mainModel::getTilt(){
   return ret;
 }
 
-void mainModel::setPan(uint32_t val){
+void inline mainModel::setPan(uint32_t val){
   #ifndef SIMUL
   setGPMCValue(fd, val, setpanidx);
   #else
   #endif
 }
 
-void mainModel::setTilt(uint32_t val){
+void inline mainModel::setTilt(uint32_t val){
   #ifndef SIMUL
   setGPMCValue(fd, val, settiltidx);
   #else
   #endif
 } 
 
-void mainModel::setPanPos(double pos){
-  upan[1] = ConvertRad(pos, pan_max);
+void inline mainModel::setPanPos(double radpos){
+  upan[1] = radpos;
 } 
 
-void mainModel::setPanIn(){
+void inline mainModel::setPanIn(){
   upan[0] = ConvertRad(getPan(), pan_max);
 }
 
-void mainModel::setTiltPos(double pos){
-  utilt[2] = ConvertRad(pos, tilt_max);
+void inline mainModel::setTiltPos(double radpos){
+  utilt[2] = radpos;
 } 
 
-void mainModel::setTiltIn(){
+void inline mainModel::setTiltIn(){
   utilt[1] = ConvertRad(getTilt(), tilt_max);
 }
 
-void mainModel::resetEncoders() {
+void inline mainModel::resetEncoders() {
   #ifndef SIMUL
   setGPMCValue(fd, 1, 7);
   #else
@@ -130,7 +131,7 @@ void mainModel::resetEncoders() {
   #endif
 }
 
-void mainModel::stopMotors(){
+void inline mainModel::stopMotors(){
   setPan(0);
   setTilt(0);
 }
@@ -171,7 +172,7 @@ void mainModel::move2end(){
 
 
 
-void mainModel::initializeModel(uint32_t xpixels, uint32_t ypixels){
+void mainModel::initializeModel(){
   time.tv_sec = 0;
   time.tv_usec = 0;
   gettimeofday(&time, NULL);
@@ -215,11 +216,31 @@ void mainModel::initializeModel(uint32_t xpixels, uint32_t ypixels){
   printf("target: %f, %f\n", upan[1], utilt[2]);
 }
 
+void mainModel::setPos(double radpan, double radtilt){
+  double diffpan = convertRad(getPan(), pan_max) - radpan;
+  double difftilt = convertRad(getTilt(), tilt_max) - radtilt;
+  if((difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
+    printf("pan position already met\n");
+  }
+  else {
+    panpos = true;
+  }
+  if((difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
+    printf("tilt position already met\n");
+  }
+  else {
+    tiltpos = true;
+  }
+
+  setPanPos(radpan);
+  setTiltPos(radtilt);
+}
+
 void mainModel::loop(){
   
   uint32_t Mpan, Mtilt;
   double diffpan, difftilt;
- 
+  
   gettimeofday(&time, NULL);
 
   if (time.tv_usec < timenow){
@@ -238,7 +259,7 @@ void mainModel::loop(){
 
     diffpan = upan[1] - upan[0];
     
-    if(panpos && (diffpan <= 0.05) && (diffpan >= -0.05)){
+    if(panpos && (diffpan <= panrangeconst) && (diffpan >= -panrangeconst)){
       printf("pan position met\n");
       setPan(0);
       panpos = false;
@@ -250,13 +271,12 @@ void mainModel::loop(){
 
     difftilt = utilt[2] - utilt[1];
     
-    if(tiltpos && (difftilt <= 0.05) && (difftilt >= -0.05)){
+    if(tiltpos && (difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
       printf("tilt position met\n");
       setTilt(0);
       tiltpos = false;
     }
     else if (tiltpos) {
-      
       Mtilt = ConvertPWM(ytilt[0]);
       setTilt(Mtilt);
     }
@@ -267,7 +287,10 @@ void mainModel::loop(){
 }
 
 void mainModel::loop(uint32_t xpixels, uint32_t ypixels){
-  upan[1] = (double)xpixels*panconst;
-  utilt[2] = (double)ypixels*tiltconst; 
+  setPos((double)xpixels*panconst, (double)ypixels*tiltconst); 
   loop();
+}
+
+bool mainModel::positionMet(){
+  return !(panpos && tiltpos);
 }

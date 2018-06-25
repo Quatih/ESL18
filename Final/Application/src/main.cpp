@@ -18,7 +18,8 @@ extern "C" {
 int main(int argc, char * argv[]){
 
   mainModel model;
-  model.initializeModel(300.0, 200.0);
+  model.initializeModel();
+  model.setPanPos(300.0*panconst, 200.0*tiltconst);
   while(1){
     model.loop();
   }
