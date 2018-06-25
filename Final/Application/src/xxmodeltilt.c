@@ -116,8 +116,8 @@ void XXModelInitialize_parameterstilt(void)
 	xx_Ptilt[2] = 0.05;		/* PID1\tauD */
 	xx_Ptilt[3] = 0.001;		/* PID1\beta */
 	xx_Ptilt[4] = 10.5;		/* PID1\tauI */
-	xx_Ptilt[5] = -0.9899999999999996;		/* SignalLimiter2\minimum */
-	xx_Ptilt[6] = 0.9899999999999996;		/* SignalLimiter2\maximum */
+	xx_Ptilt[5] = -0.5;//-0.9899999999999996;		/* SignalLimiter2\minimum */
+	xx_Ptilt[6] = 0.5;//0.9899999999999996;		/* SignalLimiter2\maximum */
 
 }
 #if (7 > 8192) && defined _MSC_VER

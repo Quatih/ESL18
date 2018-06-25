@@ -66,11 +66,17 @@ uint32_t convertPWM(double val)
 }
 
 mainModel::mainModel(){
+  #ifndef STOPTEST
   tiltpos = true;
   panpos = true;
+  #endif
 }
 mainModel::~mainModel(){
-
+  XXTerminateSubmodelpan (upan, ypan, 0);
+  XXTerminateSubmodeltilt (utilt, ytilt, 0);
+  #ifndef SIMUL
+  close(fd);
+  #endif
 }
 
 int32_t inline mainModel::getPan(){
@@ -292,7 +298,7 @@ void mainModel::loop(){
     #ifdef STOPTEST
     Mtilt = convertPWM(ytilt[0]);
     setTilt(Mtilt);
-    printf("Timestep: %f, %f, %f, %f, %f, %f, %f, %u, %u\n", (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], upan[1], utilt[2], Mpan,Mtilt);
+    printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], upan[1], utilt[2], Mpan,Mtilt);
     #else
     difftilt = utilt[2] - utilt[1];
     if(tiltpos && (difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
@@ -304,7 +310,7 @@ void mainModel::loop(){
       Mtilt = convertPWM(ytilt[0]);
       setTilt(Mtilt);
     }
-    printf("Timestep: %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
+    printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
     #endif
     
   }
