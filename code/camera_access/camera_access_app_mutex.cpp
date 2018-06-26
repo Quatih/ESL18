@@ -332,6 +332,18 @@ int main (int   argc, char *argv[])
 	g_print ("Running...\n");
 	g_main_loop_run (loop);
 
+	/* 
+	// snippet for if our own while loop
+	mainModel model;
+	model.initializeModel();
+	model.move2end();
+	model.setPos(M_PI/2, M_PI/2);
+	// while loop to get consistend call to motor control
+	while (1) {
+			model.loop();
+			g_main_context_iteration(g_main_context_default(), FALSE); // might cause 100% cpu usage
+	}*/
+
 
 	/* Out of the main loop, clean up nicely */
 	g_print ("Returned, stopping playback\n");
