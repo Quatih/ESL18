@@ -11,108 +11,120 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <thread>
 #include <iostream>
+#include <mutex>
+#include <condition_variable>
 #include <unistd.h>
-
-#include <boost/thread/condition.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/thread.hpp>
-#include <boost/circular_buffer.hpp>
 
 #define WIDTH 320
 #define HEIGHT 240
 #define FRAMERATE 30
 
-#define MARGIN 50
+#define FRAMESIZE 115200//WIDTH*HEIGHT*2
 
-//Threshold values
-#define H_LOW		90
-#define H_HIGH		130
-#define S_LOW		130	
-#define S_HIGH		255
-#define V_LOW		100
-#define V_HIGH		255
+#define MARGIN 50
 
 using namespace cv;
 using namespace std;
 
-// Thread safe circular buffer 
-template <typename T>
-class circ_buffer : private boost::noncopyable
-{
-public:
-    typedef boost::mutex::scoped_lock lock;
-    circ_buffer() {}
-    circ_buffer(int n) {cb.set_capacity(n);}
-    void send (T imdata) {
-        lock lk(monitor);
-        cb.push_back(imdata);
-        buffer_not_empty.notify_one();
-    }
-    T receive() {
-        lock lk(monitor);
-        while (cb.empty())
-            buffer_not_empty.wait(lk);
-        T imdata = cb.front();
-        cb.pop_front();
-        return imdata;
-    }
-    void clear() {
-        lock lk(monitor);
-        cb.clear();
-    }
-    int size() {
-        lock lk(monitor);
-        return cb.size();
-    }
-    void set_capacity(int capacity) {
-        lock lk(monitor);
-        cb.set_capacity(capacity);
-    }
-private:
-    boost::condition buffer_not_empty;
-    boost::mutex monitor;
-    boost::circular_buffer<T> cb;
-};
+Mat imtoshow, imtoshow1;
 
+Mat m1,m2,m3;
+bool LOCK;
+bool window;
+
+std::thread t;
+
+std::mutex mtx;
+std::condition_variable c_v;
 
 /* Structure to contain all our information, so we can pass it to callbacks */
 typedef struct _CustomData {
 	GstElement *pipeline, *driver, *capsfilter, *mux, *appsink, *queue;
-	circ_buffer<Mat> *bufptr;
+
+	guint64 num_samples;   /* Number of samples generated so far (for timestamp generation) */
+	GstBuffer *buffer;
+
+	guint sourceid;        /* To control the GSource */
+
+	GMainLoop *main_loop;  /* GLib's Main Loop */
 } CustomData;
 
 
-void showfeed(CustomData *data)
+
+void showfeed(void)
 {
 	namedWindow("window");
-	circ_buffer<Mat> *ptr = data->bufptr;
+	//namedWindow("window1");
+	usleep(500000);
 
-	Mat im;
+	while(LOCK);
+	Mat im = imtoshow;
+
 
 	while(1)
 	{
-		im = ptr->receive();
+		//while(LOCK);
+		//if(!LOCK)
+		
+		/*while(LOCK);
+		im = imtoshow;
+
 		imshow("window", im);
-		waitKey(15);
+		//imshow("window1", imtoshow1);
+		waitKey(20);
+		*/
+		//if(!LOCK)
+		std::unique_lock<std::mutex> lck(mtx);
+		c_v.wait(lck);
+			im=imtoshow;
+
+		imshow("window", im);
+		//imshow("window1", imtoshow1);
+		//waitKey(33);
+		//LOCK = true;
+		//waitKey(33);
+		 c_v.notify_all(); 
 	}
 }
 
-void processImage(char *data, CustomData *obj)
+
+void showFrame(void)
 {
-	Mat img_rgb, img_th, img_hsv;
+	//std::unique_lock<std::mutex> lck(mtx);
+	//c_v.wait(lck);
+	//usleep(10000);
+
+	imshow("window", imtoshow);
+
+	//c_v.notify_all(); 
+	//waitKey(33);
+}
+void processImage(char *data)
+{
+
+	
+
+	Mat img_rgb, img_th, img_hsv, img1, img2;
 	Mat img(HEIGHT, WIDTH, CV_8UC2, data);
 	cvtColor(img, img_rgb, CV_YUV2BGR_YUY2);
 	cvtColor(img_rgb, img_hsv, CV_BGR2HSV);
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
 	Point Center;
+	
 
-	inRange(img_hsv, Scalar(H_LOW, S_LOW, V_LOW), Scalar(H_HIGH, S_HIGH, V_HIGH), img_th);
+	if(!imtoshow.empty())
+	{
+		
+		t = std::thread(showFrame);	//Show previous frame.
+	}
+
+	inRange(img_hsv, Scalar(90, 130, 100), Scalar(130, 255,  255), img1);
 
 	Mat Elem = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
-	morphologyEx(img_th, img_th, MORPH_OPEN, Elem);
+	morphologyEx(img1, img1, MORPH_OPEN, Elem);
 
-	findContours(img_th, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+	findContours(img1, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 
 	int largest_area=0;
 	int largest_contour_index=0;
@@ -129,6 +141,7 @@ void processImage(char *data, CustomData *obj)
 
 	Center.x = bounding_rect.x+bounding_rect.width/2;
 	Center.y = bounding_rect.y+bounding_rect.height/2;
+
 
 	Scalar color( 255,255,255);
 	drawContours(img_rgb, contours,largest_contour_index, color, 1, 8, hierarchy);
@@ -153,9 +166,30 @@ void processImage(char *data, CustomData *obj)
 			printf("Stop turning Tilt\r\n"); 
 	}
 
-	cvtColor(img_th, img_th, CV_GRAY2BGR);
+	cvtColor(img1, img1, CV_GRAY2BGR);
+	bitwise_and(img_rgb, img1, img2);
 
-	obj->bufptr->send(img_rgb);
+
+	//while(!LOCK);
+	//LOCK = true;
+	//imtoshow = img_rgb.clone();
+	//imtoshow1 = img2;
+	//LOCK = false;
+
+
+	//std::unique_lock<std::mutex> lck(mtx);
+	//c_v.wait(lck);
+	//imshow("window", img_rgb);
+	//waitKey(1);
+	//c_v.notify_all();
+	//showFrame();
+	if(t.joinable())
+		t.join();
+	img_rgb.copyTo(imtoshow);
+	//std::unique_lock<std::mutex> lck(mtx);
+//		img_rgb.copyTo(imtoshow);
+//	c_v.notify_all();
+
 }
 
 static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
@@ -168,12 +202,15 @@ static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
 	g_signal_emit_by_name (sink, "pull-sample", &sample);
 	if (sample) 
 	{
+
 		buffer = gst_sample_get_buffer(sample);
 		gst_buffer_map(buffer, &info, GST_MAP_READ);
-		
+		//g_print("Size: %d\r\n", strlen((const char *)info.data));
 		/*Image processing part*/
-		processImage((char *)info.data, data);
+		processImage((char *)info.data);
+
 		/*End of image processing part.*/
+		//g_print("*");
 
 		gst_sample_unref (sample);
 		ret = GST_FLOW_OK;
@@ -182,7 +219,10 @@ static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
 		ret = GST_FLOW_ERROR;
 	}
 	return ret;
+
+
 }
+
 
 static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 {
@@ -211,6 +251,7 @@ static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
 		default:
 		break;
 	}
+
 	return TRUE;
 }
 
@@ -218,13 +259,7 @@ int main (int   argc, char *argv[])
 {
 	GMainLoop *loop;
 	CustomData data;
-	
-	//Circular buffer
-	//circ_buffer<Mat> buf = new circ_buffer<Mat>;
-	circ_buffer<Mat> buf(10);
-	buf.set_capacity(10);
-	data.bufptr = (circ_buffer<Mat> *)&buf;
-	printf("Circular buffer size set to: %d\r\n", buf.size());
+	data.sourceid = 0;
 
 	GstBus *bus;
 	guint bus_watch_id;
@@ -233,7 +268,15 @@ int main (int   argc, char *argv[])
 	gst_init (&argc, &argv);
 
 	loop = g_main_loop_new (NULL, FALSE);
-	std::thread feed(showfeed, &data);
+
+	LOCK = true;
+	window = false;
+	//std::thread feed(showfeed);
+	if(!window)
+	{
+		window=true;
+		namedWindow("window");
+	}
 
 	/* Create gstreamer elements */
 	data.pipeline = gst_pipeline_new("Webcam-stream");
@@ -243,13 +286,16 @@ int main (int   argc, char *argv[])
 	data.mux = gst_element_factory_make("avimux", "avi-mux");
 	data.appsink = gst_element_factory_make ("appsink", "video-output");
 
+
 	if (!data.pipeline || !data.queue || !data.driver || !data.capsfilter || !data.mux || !data.appsink ) {
 	g_printerr ("One element could not be created. Exiting.\n");
 	return -1;
 	}
 
 	/* Set up the pipeline */
+
 	/* we set the input filename to the source element */
+
 	/* we add a message handler */
 	bus = gst_pipeline_get_bus (GST_PIPELINE (data.pipeline));
 	bus_watch_id = gst_bus_add_watch (bus, bus_call, loop);
@@ -283,19 +329,18 @@ int main (int   argc, char *argv[])
 	gst_element_set_state (data.pipeline, GST_STATE_PLAYING);
 
 	/* Iterate */
-	g_print("Running...\n");
-	g_main_loop_run(loop);
+	g_print ("Running...\n");
+	g_main_loop_run (loop);
+
 
 	/* Out of the main loop, clean up nicely */
 	g_print ("Returned, stopping playback\n");
 	gst_element_set_state (data.pipeline, GST_STATE_NULL);
 
-	g_print("Deleting pipeline\n");
-	gst_object_unref(GST_OBJECT (data.pipeline));
-	g_source_remove(bus_watch_id);
-	g_main_loop_unref(loop);
-	
-	buf.clear();
-	delete data.bufptr;
+	g_print ("Deleting pipeline\n");
+	gst_object_unref (GST_OBJECT (data.pipeline));
+	g_source_remove (bus_watch_id);
+	g_main_loop_unref (loop);
 	return 0;
 }
+
