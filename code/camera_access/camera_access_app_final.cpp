@@ -24,10 +24,10 @@
 using namespace cv;
 using namespace std;
 
-Mat imtoshow, imtoshow1;
+Mat imtoshow;
 
-Mat m1,m2,m3;
-bool LOCK;
+std::thread t;
+
 
 /* Structure to contain all our information, so we can pass it to callbacks */
 typedef struct _CustomData {
@@ -41,40 +41,11 @@ typedef struct _CustomData {
 	GMainLoop *main_loop;  /* GLib's Main Loop */
 } CustomData;
 
-
-
-void showfeed(void)
+void showFrame(void)
 {
-	namedWindow("window");
-	namedWindow("window1");
-	usleep(500000);
-
-	while(LOCK);
-	Mat im = imtoshow;
-
-	while(1)
-	{
-		//while(LOCK);
-		//if(!LOCK)
-		
-		/*while(LOCK);
-		im = imtoshow;
-
-		imshow("window", im);
-		//imshow("window1", imtoshow1);
-		waitKey(20);
-		*/
-		if(!LOCK)
-			im=imtoshow;
-
-		imshow("window", im);
-		imshow("window1", imtoshow1);
-		//waitKey(33);
-		//LOCK = true;
-		//waitKey(33);
-	}
+	imshow("window", imtoshow);
+	usleep(10000);
 }
-
 void processImage(char *data)
 {
 	Mat img_rgb, img_th, img_hsv, img1, img2;
@@ -84,6 +55,10 @@ void processImage(char *data)
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
 	Point Center;
+	
+
+	if(!imtoshow.empty())
+		t = std::thread(showFrame);	//Show previous frame.
 
 	inRange(img_hsv, Scalar(90, 130, 100), Scalar(130, 255,  255), img1);
 
@@ -135,12 +110,9 @@ void processImage(char *data)
 	cvtColor(img1, img1, CV_GRAY2BGR);
 	bitwise_and(img_rgb, img1, img2);
 
-
-	//while(!LOCK);
-	LOCK = true;
-	imtoshow = img_rgb;
-	imtoshow1 = img2;
-	LOCK = false;
+	if(t.joinable())
+		t.join();
+	img_rgb.copyTo(imtoshow);
 
 }
 
@@ -157,12 +129,10 @@ static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
 
 		buffer = gst_sample_get_buffer(sample);
 		gst_buffer_map(buffer, &info, GST_MAP_READ);
-		//g_print("Size: %d\r\n", strlen((const char *)info.data));
+
 		/*Image processing part*/
 		processImage((char *)info.data);
-
 		/*End of image processing part.*/
-		//g_print("*");
 
 		gst_sample_unref (sample);
 		ret = GST_FLOW_OK;
@@ -171,8 +141,6 @@ static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
 		ret = GST_FLOW_ERROR;
 	}
 	return ret;
-
-
 }
 
 
@@ -221,9 +189,7 @@ int main (int   argc, char *argv[])
 
 	loop = g_main_loop_new (NULL, FALSE);
 
-	LOCK = true;
-
-	std::thread feed(showfeed);
+	namedWindow("window");
 
 
 	/* Create gstreamer elements */
@@ -279,6 +245,18 @@ int main (int   argc, char *argv[])
 	/* Iterate */
 	g_print ("Running...\n");
 	g_main_loop_run (loop);
+
+	/* 
+	// snippet for if our own while loop
+	mainModel model;
+	model.initializeModel();
+	model.move2end();
+	model.setPos(M_PI/2, M_PI/2);
+	// while loop to get consistend call to motor control
+	while (1) {
+			model.loop();
+			g_main_context_iteration(g_main_context_default(), FALSE); // might cause 100% cpu usage
+	}*/
 
 
 	/* Out of the main loop, clean up nicely */
