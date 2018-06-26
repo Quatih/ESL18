@@ -24,7 +24,7 @@ extern "C" {
 #define setiltidx 4
 
 #define pan_max 1110.0
-#define tilt_max pan_max // 309.0
+#define tilt_max 309.0
 #define panconst 1.0/320.0
 #define tiltconst 1.0/240.0
 #define panrangeconst 0.03
@@ -84,7 +84,7 @@ int32_t inline mainModel::getPan(){
   return getGPMCValue(fd, readpanidx);
   #else 
   //encpan = encpan - (int32_t)ypan[1];
-  return ++encpan;
+  return ++(++encpan);
   #endif
 }
 

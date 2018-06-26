@@ -20,7 +20,7 @@ int main(int argc, char * argv[]){
   mainModel model;
   model.initializeModel();
   //model.move2end();
-  model.setPos(300, 200);
+  model.setPos(M_PI/2, M_PI/2);
   while(1){
     model.loop();
   }
