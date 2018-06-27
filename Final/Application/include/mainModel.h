@@ -46,7 +46,7 @@ public:
   bool positionMet();
   void stopMotors();
   void setPos(double radpan, double radtilt);
-  void setPos(int32_t xpixels, int32_t ypixels);
+  void modPosPixel(int32_t xpixels, int32_t ypixels);
   void move2end();
   void initializeModel();
   void loop();

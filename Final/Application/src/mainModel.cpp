@@ -23,12 +23,23 @@ extern "C" {
 #define setpanidx 6
 #define setiltidx 4
 
-#define pan_max 1110.0
+#define enc_max 1200.0
+#define pan_max 1110.0 // ~333°
 #define tilt_max 309.0
-#define panconst 1.0/320.0
-#define tiltconst 1.0/240.0
+#define panconst 1.0/WIDTH
+#define tiltconst 1.0/HEIGHT
 #define panrangeconst 0.03
 #define tiltrangeconst 0.03
+
+// diagonal field of view of our camera, 63 for the logitech setup
+#define diagFOV 60 
+// diagonal angle of the frame
+static const double diagangle = atan(HEIGHT/WIDTH);
+// ratio of pixel to degrees
+static const double pixelratio = (double)diagFOV*cos(diangle)/WIDTH;
+
+// HELPER FUNCTIONS
+
 /* The pan encoder spans values which correspond to approximately Pi radians. */
 double inline convertRad(int32_t val, double max)
 {
@@ -64,6 +75,25 @@ uint32_t convertPWM(double val)
   }
   return ret_val;
 }
+
+
+// converts pixels to degrees
+double inline pixel2deg(int pixels){
+  /* 63° field of view width-wise, should be same ration with height
+     could be more, or less than 63° for our set-up */
+  return (double)pixels*pixelratio; 
+}
+
+// returns radians with degrees as input
+double inline deg2rad(double deg) {
+  return deg/360.0*M_PI;
+}
+
+double inline pixel2rad(int pixels){
+  return deg2rad(pixel2deg(pixels));
+}
+
+// END HELPER FUNCTIONS
 
 mainModel::mainModel(){
   #ifndef STOPTEST
@@ -177,8 +207,13 @@ void mainModel::setPos(double radpan, double radtilt){
   printf("target: %f, %f\n", upan[1], utilt[2]);
 }
 
-void mainModel::setPos(int32_t xpixels, int32_t ypixels){
-  setPos((double)xpixels*panconst, (double)ypixels*tiltconst); 
+void mainModel::modPosPixel(int32_t xpixels, int32_t ypixels){
+  //setPos((double)xpixels*panconst, (double)ypixels*tiltconst); 
+  // add converted pixels to the current position.
+  double pan = upan[1] + pixel2rad(xpixels);
+  double tilt = utilt[2] + pixel2rad(ypixels);
+  if(pan >= )
+  setPos(pan, tilt); 
 }
 
 void mainModel::move2end(){ 
