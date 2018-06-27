@@ -213,8 +213,26 @@ void mainModel::modPosPixel(int32_t xpixels, int32_t ypixels){
   // add converted pixels to the current position.
   double pan = upan[1] + pixel2rad(xpixels);
   double tilt = utilt[2] + pixel2rad(ypixels);
-  // could add check if the values are within range.
-  setPos(pan, tilt); 
+   // in case we want to check input for correctness 
+  if(pan >= convertRad(pan_max, enc_max)){
+    setPanPos(convertRad(pan_max, enc_max));
+  } 
+  else if (pan < 0.0){
+    setPanPos(0.0);
+  }
+  else{
+    setPanPos(pan);
+  }
+  if (tilt >= convertRad(tilt_max, enc_max/2)){
+    setTiltPos(convertRad(tilt_max, enc_max/2));
+  }
+  else if (tilt < 0.0) {
+    setTiltPos(0.0);
+  }
+  else{
+    setTiltPos(tilt);
+  }
+  // setPos(pan, tilt);
 }
 
 void mainModel::move2end(){ 
