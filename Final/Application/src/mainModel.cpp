@@ -30,13 +30,14 @@ extern "C" {
 #define tiltconst 1.0/HEIGHT
 #define panrangeconst 0.03
 #define tiltrangeconst 0.03
-
+#define HEIGHT 240
+#define WIDTH 320
 // diagonal field of view of our camera, 63 for the logitech setup
 #define diagFOV 60 
 // diagonal angle of the frame
 static const double diagangle = atan(HEIGHT/WIDTH);
 // ratio of pixel to degrees
-static const double pixelratio = (double)diagFOV*cos(diangle)/WIDTH;
+static const double pixelratio = (double)diagFOV*cos(diagangle)/WIDTH;
 
 // HELPER FUNCTIONS
 
@@ -204,7 +205,7 @@ void mainModel::setPos(double radpan, double radtilt){
   #endif
   setPanPos(radpan);
   setTiltPos(radtilt);
-  printf("target: %f, %f\n", upan[1], utilt[2]);
+  //printf("target: %f, %f\n", upan[1], utilt[2]);
 }
 
 void mainModel::modPosPixel(int32_t xpixels, int32_t ypixels){
@@ -212,7 +213,7 @@ void mainModel::modPosPixel(int32_t xpixels, int32_t ypixels){
   // add converted pixels to the current position.
   double pan = upan[1] + pixel2rad(xpixels);
   double tilt = utilt[2] + pixel2rad(ypixels);
-  if(pan >= )
+  // could add check if the values are within range.
   setPos(pan, tilt); 
 }
 
@@ -353,6 +354,61 @@ void mainModel::loop(){
 }
 
 void mainModel::loop(int32_t xpixels, int32_t ypixels){
-  setPos(xpixels, ypixels);
-  loop();
+  
+   
+  uint32_t Mpan, Mtilt;
+  #ifndef STOPTEST 
+  double diffpan, difftilt;
+  #endif
+  gettimeofday(&time, NULL);
+
+  if (time.tv_usec < timenow){
+    timenow = time.tv_usec;
+  }
+  else if(time.tv_usec - timenow >= 10000)
+  {
+    long dur = time.tv_usec - timenow;
+    timenow = time.tv_usec; 
+    modPosPixel(xpixels, ypixels);
+    setPanIn(); 		
+    setTiltIn(); 
+
+    /* Call the submodel to calculate the output */
+    XXCalculateSubmodelpan (upan, ypan, (double)dur/1000000);
+    XXCalculateSubmodeltilt (utilt, ytilt, (double)dur/1000000);
+    #ifdef STOPTEST
+    Mpan = convertPWM(ypan[1]);
+    setPan(Mpan);
+    #else
+    diffpan = upan[1] - upan[0];
+    if(panpos && (diffpan <= panrangeconst) && (diffpan >= -panrangeconst)){
+      printf("pan position met\n");
+      setPan(0);
+      panpos = false;
+    }
+    else if (panpos) {     
+      Mpan = convertPWM(ypan[1]);
+      setPan(Mpan);
+    }
+    #endif
+    
+    #ifdef STOPTEST
+    Mtilt = convertPWM(ytilt[0]);
+    setTilt(Mtilt);
+    printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], upan[1], utilt[2], Mpan,Mtilt);
+    #else
+    difftilt = utilt[2] - utilt[1];
+    if(tiltpos && (difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
+      printf("tilt position met\n");
+      setTilt(0);
+      tiltpos = false;
+    }
+    else if (tiltpos) {
+      Mtilt = convertPWM(ytilt[0]);
+      setTilt(Mtilt);
+    }
+    printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
+    #endif
+    
+  }
 }

@@ -23,9 +23,9 @@ int main(int argc, char * argv[]){
   mainModel model;
   model.initializeModel();
   //model.move2end();
-  model.SetPos(M_PI/2, M_PI/2);
+  model.setPos(M_PI/2, M_PI/2);
   while(1){
-    model.loop();
+    model.loop(1, 1);
   }
   return 0;
 }
