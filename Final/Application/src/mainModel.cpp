@@ -148,7 +148,7 @@ void inline mainModel::setPanPos(double radpos){
 } 
 
 void inline mainModel::setPanIn(){
-  upan[0] = convertRad(getPan(), pan_max);
+  upan[0] = convertRad(getPan(), enc_max);
 }
 
 void inline mainModel::setTiltPos(double radpos){
@@ -156,7 +156,7 @@ void inline mainModel::setTiltPos(double radpos){
 } 
 
 void inline mainModel::setTiltIn(){
-  utilt[1] = convertRad(getTilt(), tilt_max);
+  utilt[1] = convertRad(getTilt(), enc_max/2);
 }
 
 void inline mainModel::resetEncoders() {
