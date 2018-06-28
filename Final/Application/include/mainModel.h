@@ -8,7 +8,7 @@ extern "C" {
 #define _BSD_SOURCE
 #include <sys/time.h>
 
-#define SIMUL
+//#define SIMUL
 #define STOPTEST
 
 class mainModel {
@@ -51,4 +51,5 @@ public:
   void initializeModel();
   void loop();
   void loop(int32_t xpixels, int32_t ypixels);
+  void movetest(double sp, double st);
 };

@@ -20,8 +20,11 @@ extern "C" {
 
 #define readpanidx 2
 #define readtiltidx 0
-#define setpanidx 6
-#define setiltidx 4
+#define setpanidx 4
+#define settiltidx 6
+
+#define TILT
+//#define STOPTEST
 
 #define enc_max 1200.0
 #define pan_max 1110.0 // ~333°
@@ -53,7 +56,7 @@ and a direction according to a truthtable. */
 uint32_t convertPWM(double val)
 {
   //Brake
-  if(val == 0)
+  if(val == 0.0)
     return 0;
   
   uint32_t ret_val = 0;
@@ -61,7 +64,7 @@ uint32_t convertPWM(double val)
   //printf("%f, %f\n", val, ch);
   ret_val = (uint32_t) (ch);
   //Clockwise
-  if(val < 0)
+  if(val < 0.0)
   {
     //INA = 1;
     //INB = 0;
@@ -104,7 +107,10 @@ mainModel::mainModel(){
 }
 mainModel::~mainModel(){
   XXTerminateSubmodelpan (upan, ypan, 0);
+  
+  #ifdef TILT
   XXTerminateSubmodeltilt (utilt, ytilt, 0);
+  #endif
   #ifndef SIMUL
   close(fd);
   #endif
@@ -131,6 +137,9 @@ int32_t inline mainModel::getTilt(){
 
 void inline mainModel::setPan(uint32_t val){
   #ifndef SIMUL
+  
+  setGPMCValue(fd, 0, setpanidx);
+  usleep(1000);
   setGPMCValue(fd, val, setpanidx);
   #else
   #endif
@@ -138,6 +147,9 @@ void inline mainModel::setPan(uint32_t val){
 
 void inline mainModel::setTilt(uint32_t val){
   #ifndef SIMUL
+
+  setGPMCValue(fd, 0, settiltidx);
+  usleep(1000);
   setGPMCValue(fd, val, settiltidx);
   #else
   #endif
@@ -170,7 +182,9 @@ void inline mainModel::resetEncoders() {
 
 void inline mainModel::stopMotors(){
   setPan(0);
+  #ifdef TILT 
   setTilt(0);
+  #endif
 }
 
 bool mainModel::positionMet(){
@@ -240,13 +254,13 @@ void mainModel::move2end(){
   printf("moving to end\n");
   int32_t pan = getPan(), tilt = getTilt();
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
-  int tiltrange = 2, panrange = 5;
+  int tiltrange = 2, panrange = 1;
   bool tf = true, pf = true;
-  setPan(convertPWM(0.5));
-  setTilt(convertPWM(0.5));
+  setPan(convertPWM(-0.5));
+  setTilt(convertPWM(-0.9));
 
   while(tf || pf){ // terminate when both have gone to the end
-
+    usleep(500000);
     lp = pan;
     lt = tilt;
 
@@ -263,7 +277,6 @@ void mainModel::move2end(){
       tf = false;
     }
     printf("%7d, %7d\r\n", tilt -lt, pan - lp);
-    usleep(100000);
   }
   stopMotors();
   resetEncoders();
@@ -282,8 +295,8 @@ void mainModel::initializeModel(){
   fd = open("/dev/gpmc_fpga", 0);
   if (0 > fd)
   {
-  printf("Error, could not open device: %s.\n", argv[1]);
-  return 1;
+  printf("Error, could not open device.\n");
+  return ;
   }
   #endif
   /* Initialize the inputs and outputs with correct initial values */
@@ -372,8 +385,7 @@ void mainModel::loop(){
 }
 
 void mainModel::loop(int32_t xpixels, int32_t ypixels){
-  
-   
+    
   uint32_t Mpan, Mtilt;
   #ifndef STOPTEST 
   double diffpan, difftilt;
@@ -429,4 +441,11 @@ void mainModel::loop(int32_t xpixels, int32_t ypixels){
     #endif
     
   }
+
 }
+
+
+void mainModel::movetest(double sp, double st){
+	setPan(convertPWM(sp));
+	setTilt(convertPWM(st));
+} 

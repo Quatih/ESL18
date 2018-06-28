@@ -57,8 +57,8 @@ void processImage(char *data)
 	Point Center;
 	
 
-	//if(!imtoshow.empty())
-	//	t = std::thread(showFrame);	//Show previous frame.
+	if(!imtoshow.empty())
+		t = std::thread(showFrame);	//Show previous frame.
 
 	inRange(img_hsv, Scalar(90, 130, 100), Scalar(130, 255,  255), img1);
 
@@ -110,11 +110,9 @@ void processImage(char *data)
 	cvtColor(img1, img1, CV_GRAY2BGR);
 	bitwise_and(img_rgb, img1, img2);
 
-	/*if(t.joinable())
+	if(t.joinable())
 		t.join();
 	img_rgb.copyTo(imtoshow);
-
-*/
 
 }
 
