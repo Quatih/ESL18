@@ -27,16 +27,16 @@ extern "C" {
 //#define STOPTEST
 
 #define enc_max 1200.0
-#define pan_max 1110.0 // ~333°
-#define tilt_max 309.0
+#define pan_max 1119.0 // ~333°
+#define tilt_max 284.0
 #define panconst 1.0/WIDTH
 #define tiltconst 1.0/HEIGHT
 #define panrangeconst 0.03
 #define tiltrangeconst 0.03
-#define HEIGHT 240
-#define WIDTH 320
+#define HEIGHT 120
+#define WIDTH 160
 // diagonal field of view of our camera, 63 for the logitech setup
-#define diagFOV 60 
+#define diagFOV 63 
 // diagonal angle of the frame
 static const double diagangle = atan(HEIGHT/WIDTH);
 // ratio of pixel to degrees
@@ -80,6 +80,32 @@ uint32_t convertPWM(double val)
   return ret_val;
 }
 
+uint32_t convertPWMtilt(double val)
+{
+  //Brake
+  if(val == 0.0)
+    return 0;
+  
+  uint32_t ret_val = 0;
+  double ch = abs(val * 250.0);
+  //printf("%f, %f\n", val, ch);
+  ret_val = (uint32_t) (ch);
+  //Clockwise
+  if(val < 0.0)
+  {
+    //INA = 1;
+    //INB = 0;
+    ret_val |= 0x01 << 8;
+  }
+  //Counterclockwise
+  else
+  {
+    //INA = 0;
+    //INB = 1;
+    ret_val |= 0x02 << 8;
+  }
+  return ret_val;
+}
 
 // converts pixels to degrees
 double inline pixel2deg(int pixels){
@@ -228,24 +254,33 @@ void mainModel::modPosPixel(int32_t xpixels, int32_t ypixels){
   double pan = upan[1] + pixel2rad(xpixels);
   double tilt = utilt[2] + pixel2rad(ypixels);
    // in case we want to check input for correctness 
-  if(pan >= convertRad(pan_max, enc_max)){
-    setPanPos(convertRad(pan_max, enc_max));
+  if(pan <= -convertRad(pan_max, enc_max)){
+    setPanPos(-convertRad(pan_max, enc_max));
   } 
-  else if (pan < 0.0){
+  else if (pan > 0.0){
     setPanPos(0.0);
   }
   else{
     setPanPos(pan);
   }
-  if (tilt >= convertRad(tilt_max, enc_max/2)){
-    setTiltPos(convertRad(tilt_max, enc_max/2));
+
+  if (tilt <= -convertRad(tilt_max, enc_max/2)){
+    setTiltPos(-convertRad(tilt_max, enc_max/2));
   }
-  else if (tilt < 0.0) {
+  else if (tilt <= -convertRad(tilt_max/2, enc_max/2)){
+    
+    setTiltPos(-convertRad(tilt_max/2, enc_max/2));
+  }
+  else if (tilt > 0.0) {
     setTiltPos(0.0);
   }
   else{
     setTiltPos(tilt);
   }
+  #ifndef STOPTEST
+  tiltpos = true;
+  panpos = true;
+  #endif
   // setPos(pan, tilt);
 }
 
@@ -256,8 +291,8 @@ void mainModel::move2end(){
   int32_t lp = 3000, lt = 3000; // defined out of range of encoders
   int tiltrange = 2, panrange = 1;
   bool tf = true, pf = true;
-  setPan(convertPWM(-0.5));
-  setTilt(convertPWM(-0.9));
+  setPan(convertPWM(-0.9));
+  setTilt(convertPWMtilt(-0.9));
 
   while(tf || pf){ // terminate when both have gone to the end
     usleep(500000);
@@ -267,7 +302,7 @@ void mainModel::move2end(){
     pan = getPan();
     tilt = getTilt();
     if(( ((tilt - lt) <= tiltrange) && ((tilt-lt) >= -tiltrange)) ){
-      setTilt(convertPWM(0.0));
+      setTilt(convertPWMtilt(0.0));
       printf("tilt stop\n");
       pf = false;
     }
@@ -363,9 +398,9 @@ void mainModel::loop(){
     #endif
     
     #ifdef STOPTEST
-    Mtilt = convertPWM(ytilt[0]);
+    Mtilt = convertPWMtilt(ytilt[0]);
     setTilt(Mtilt);
-    printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], upan[1], utilt[2], Mpan,Mtilt);
+    //printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %u, %u, %d, %d\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], upan[1], utilt[2], Mpan,Mtilt, getPan(), getTilt());
     #else
     difftilt = utilt[2] - utilt[1];
     if(tiltpos && (difftilt <= tiltrangeconst) && (difftilt >= -tiltrangeconst)){
@@ -377,7 +412,7 @@ void mainModel::loop(){
       Mtilt = convertPWM(ytilt[0]);
       setTilt(Mtilt);
     }
-    printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
+    //printf("time: %lu, %f, %f, %f, %f, %f, %f, %f, %f, %f, %u, %u\n", time.tv_sec, (double)dur/1000000, upan[0], utilt[1], ypan[1], ytilt[0], diffpan, difftilt, upan[1], utilt[2], Mpan,Mtilt);
     #endif
     
   }

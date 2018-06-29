@@ -24,8 +24,8 @@ COBJECT_FILES=$(patsubst %.c,%.o,$(patsubst $(SOURCE_DIR)/%, $(OBJECT_DIR)/%, $(
 # Commands
 #
 CROSS_COMPILE=arm-linux-gnueabihf-
-CC=$(CROSS_COMPILE)gcc
-CXX=$(CROSS_COMPILE)g++
+CC=gcc
+CXX=g++
 RM=rm -f
 MKDIR=mkdir -p
 
@@ -34,8 +34,8 @@ MKDIR=mkdir -p
 # You can define your own libraries and flags here.
 #
 LIBS= -lm 
-LDFLAGS=
-CFLAGS=-I$(INCLUDE_DIR) -I$(KERNEL_MODULE_DIR)/include -Wall -Wextra -pedantic
+LDFLAGS= $(shell pkg-config --libs opencv)
+CFLAGS=-I$(INCLUDE_DIR) -I$(KERNEL_MODULE_DIR)/include -Wall $(shell pkg-config --cflags opencv)
 
 #
 # Targets

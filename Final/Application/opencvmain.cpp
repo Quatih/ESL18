@@ -1,8 +1,14 @@
-#include <gst/gst.h>
-#include <glib.h>
-#include <gst/app/gstappsink.h>
-#include <stdint.h>
+
+
+#include "mainModel.h"
 #include <stdio.h>
+#include <math.h>
+#include <fcntl.h>      // open()
+#include <unistd.h>     // close()
+#include <stdint.h>
+#include <stdlib.h>
+#include <time.h> // clock()
+
 #include <string.h>
 #include <stdbool.h>
 #include <opencv/cv.h>
@@ -19,33 +25,12 @@
 
 #define FRAMESIZE 115200//WIDTH*HEIGHT*2
 
-#define MARGIN 50
+#define MARGIN 10
 
 using namespace cv;
 using namespace std;
 
-Mat imtoshow;
-
-std::thread t;
-
-
-/* Structure to contain all our information, so we can pass it to callbacks */
-typedef struct _CustomData {
-	GstElement *pipeline, *driver, *capsfilter, *mux, *appsink, *queue;
-
-	guint64 num_samples;   /* Number of samples generated so far (for timestamp generation) */
-	GstBuffer *buffer;
-
-	guint sourceid;        /* To control the GSource */
-
-	GMainLoop *main_loop;  /* GLib's Main Loop */
-} CustomData;
-
-void showFrame(void)
-{
-	imshow("window", imtoshow);
-	usleep(10000);
-}
+mainModel * model;
 void processImage(Mat *image)
 {
 	//Mat img_rgb, img_th, img_hsv, img1, img2;
@@ -56,10 +41,7 @@ void processImage(Mat *image)
 	vector<vector<Point>> contours;
 	vector<Vec4i> hierarchy;
 	Point Center;
-	
 
-	if(!imtoshow.empty())
-		t = std::thread(showFrame);	//Show previous frame.
 
 	inRange(img_hsv, Scalar(90, 130, 100), Scalar(130, 255,  255), img1);
 
@@ -94,6 +76,7 @@ void processImage(Mat *image)
 		printf("No blob found\r\n");
 	else
 	{
+		model->modPosPixel(Center.x, Center.y);
 		if(Center.x < WIDTH/2 - MARGIN)
 			printf("Turn Pan left\r\n");
 		else if(Center.x > WIDTH/2 + MARGIN)
@@ -111,79 +94,17 @@ void processImage(Mat *image)
 	cvtColor(img1, img1, CV_GRAY2BGR);
 	bitwise_and(img_rgb, img1, img2);
 
-	if(t.joinable())
-		t.join();
-	img_rgb.copyTo(imtoshow);
 
 }
 
-static GstFlowReturn new_sample (GstElement *sink, CustomData *data) {
-	GstSample *sample;
-	GstBuffer *buffer;
-	GstFlowReturn ret;
-	GstMapInfo info;
-	uint16_t d[WIDTH*HEIGHT];
-	/* Retrieve the buffer */
-	g_signal_emit_by_name (sink, "pull-sample", &sample);
-	if (sample) 
-	{
-
-		buffer = gst_sample_get_buffer(sample);
-		gst_buffer_map(buffer, &info, GST_MAP_READ);
-
-		/*Image processing part*/
-		processImage((char *)info.data);
-		/*End of image processing part.*/
-
-		gst_sample_unref (sample);
-		ret = GST_FLOW_OK;
-	}
-	else{
-		ret = GST_FLOW_ERROR;
-	}
-	return ret;
-}
-
-
-static gboolean bus_call (GstBus *bus, GstMessage *msg, gpointer data)
-{
-	GMainLoop *loop = (GMainLoop *) data;
-
-	switch (GST_MESSAGE_TYPE (msg)) {
-
-		case GST_MESSAGE_EOS:
-			g_print ("End of stream\n");
-			g_main_loop_quit (loop);
-		break;
-
-		case GST_MESSAGE_ERROR: {
-			gchar  *debug;
-			GError *error;
-
-			gst_message_parse_error (msg, &error, &debug);
-			g_free (debug);
-
-			g_printerr ("Error: %s\n", error->message);
-			g_error_free (error);
-
-			g_main_loop_quit (loop);
-		break;
-		}
-		default:
-		break;
-	}
-
-	return TRUE;
-}
 
 int main (int   argc, char *argv[])
 {
-	GMainLoop *loop;
-	CustomData data;
-	data.sourceid = 0;
-
-	GstBus *bus;
-	guint bus_watch_id;
+       model = new mainModel();
+	model->initializeModel();
+	model->move2end();
+	model->setPos(M_PI/2, M_PI/4);
+        Mat frame;
 
 	VideoCapture cap(0); // open the default camera
     if(!cap.isOpened())  // check if we succeeded
@@ -194,21 +115,11 @@ int main (int   argc, char *argv[])
 		
 	while(1)
 	{
-		frame << cap;
+		cap >> frame;
 		processImage(&frame);
+                model->loop();
 	}
 
-	/* 
-	// snippet for if our own while loop
-	mainModel model;
-	model.initializeModel();
-	model.move2end();
-	model.setPos(M_PI/2, M_PI/2);
-	// while loop to get consistend call to motor control
-	while (1) {
-			model.loop();
-			g_main_context_iteration(g_main_context_default(), FALSE); // might cause 100% cpu usage
-	}*/
 
 	return 0;
 }

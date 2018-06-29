@@ -9,7 +9,7 @@ extern "C" {
 #include <sys/time.h>
 
 //#define SIMUL
-#define STOPTEST
+//#define STOPTEST
 
 class mainModel {
 private:

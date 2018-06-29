@@ -113,7 +113,7 @@ void XXModelInitialize_parameterspan(void)
 	xx_Ppan[1] = 2.6;		/* PID1\kp */
 	xx_Ppan[2] = 0.05;		/* PID1\tauD */
 	xx_Ppan[3] = 0.17;		/* PID1\beta */
-	xx_Ppan[4] = 9.0;		/* PID1\tauI */
+	xx_Ppan[4] = 5;//9.0;		/* PID1\tauI */
 	xx_Ppan[5] = -0.8;//-0.9899999999999996;		/* SignalLimiter2\minimum */
 	xx_Ppan[6] = 0.8;//0.9899999999999996;		/* SignalLimiter2\maximum */
 
