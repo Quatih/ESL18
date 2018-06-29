@@ -85,7 +85,7 @@ void processImage(Mat *image)
 	{
    		
                 printf("%d, %d\n", -Center.x, Center.y);
-		model->modPosPixel(-Center.x*0.5, Center.y*0.5);
+		model->modPosPixel(-Center.x, Center.y);
 		if(Center.x < WIDTH/2 - MARGIN)
 			printf("Turn Pan left\r\n");
 		else if(Center.x > WIDTH/2 + MARGIN)
